@@ -1,0 +1,101 @@
+<p-toolbar styleClass="mb-6">
+    <ng-template #start>
+        <p-button label="New" icon="pi pi-plus" severity="secondary" class="mr-2" (onClick)="openNew()" />
+        <p-button severity="secondary" label="Delete" icon="pi pi-trash" outlined (onClick)="deleteSelectedUsers()"
+            [disabled]="!selectedUsers || !selectedUsers.length" />
+    </ng-template>
+
+    <ng-template #end>
+        <p-button label="Export" icon="pi pi-upload" severity="secondary" (onClick)="exportCSV()" />
+    </ng-template>
+</p-toolbar>
+
+<p-table #dt [value]="users()" [rows]="10" [paginator]="true"
+    [globalFilterFields]="['name', 'country.name', 'representative.name', 'status']"
+    [tableStyle]="{ 'min-width': '75rem' }" [(selection)]="selectedUsers" [rowHover]="true" dataKey="id"
+    currentPageReportTemplate="Showing {first} to {last} of {totalRecords} usuarios" [showCurrentPageReport]="true"
+    [rowsPerPageOptions]="[10, 20, 30]">
+    <ng-template #caption>
+        <div class="flex items-center justify-between">
+            <h5 class="m-0">Lista de Usuarios</h5>
+            <p-iconfield>
+                <p-inputicon styleClass="pi pi-search" />
+                <input pInputText type="text" (input)="onGlobalFilter(dt, $event)" placeholder="Busqueda..." />
+            </p-iconfield>
+        </div>
+    </ng-template>
+    <ng-template #header>
+        <tr>
+            <th style="width: 3rem">
+                <p-tableHeaderCheckbox />
+            </th>
+            <th style="min-width: 16rem">Avatar</th>
+            <th pSortableColumn="Name" style="min-width:16rem">
+                Nombre
+                <p-sortIcon field="Name" />
+            </th>
+            <th>Email</th>
+            <th pSortableColumn="Seniority" style="min-width: 8rem">
+                Seniority
+                <p-sortIcon field="Seniority" />
+            </th>
+            <th pSortableColumn="EnglishLevel" style="min-width:10rem">
+                Nivel Ingles
+                <p-sortIcon field="EnglishLevel" />
+            </th>
+            <th pSortableColumn="Role" style="min-width: 12rem">
+                Rol
+                <p-sortIcon field="Role" />
+            </th>
+            <th pSortableColumn="Interests" style="min-width: 12rem">
+                Intereses
+                <p-sortIcon field="Interests" />
+            </th>
+            <th style="min-width: 12rem"></th>
+        </tr>
+    </ng-template>
+    <ng-template #body let-user>
+        <tr>
+            <td>
+                <p-tableCheckbox [value]="user" />
+            </td>
+            <td>
+                <img [src]="user.ProfilePicture" [alt]="user.Name" style="width: 64px" class="rounded" />
+            </td>
+            <td style="min-width: 12rem">{{ user.Name }}</td>
+            <td style="min-width: 16rem">{{ user.Email }}</td>
+            <td>{{ user.Seniority }}</td>
+            <td>{{ user.EnglishLevel }}</td>
+            <td>{{ user.Role }} </td>
+            <td>{{ user.Interests }} </td>
+            <td>
+                <p-button icon="pi pi-pencil" class="mr-2" [rounded]="true" [outlined]="true"
+                    (click)="editUser(user)" />
+                <p-button icon="pi pi-trash" severity="danger" [rounded]="true" [outlined]="true"
+                    (click)="deleteUser(user)" />
+            </td>
+        </tr>
+    </ng-template>
+</p-table>
+
+<p-dialog [(visible)]="userDialog" [style]="{ width: '450px' }" header="Usuario" [modal]="true">
+    <ng-template #content>
+        <!-- {{user | json}} -->
+        <div class="flex flex-col gap-6">
+            <input pInputtext class="p-inputtext" type="text" placeholder="Nombre" [(ngModel)]="user.Name" />
+            <input pInputtext class="p-inputtext" type="text" placeholder="Email" [(ngModel)]="user.Email" />
+            <input pInputtext class="p-inputtext" type="text" placeholder="Seniority" [(ngModel)]="user.Seniority" />
+            <input pInputtext class="p-inputtext" type="text" placeholder="EnglishLevel"
+                [(ngModel)]="user.EnglishLevel" />
+            <input pInputtext class="p-inputtext" type="text" placeholder="Role" [(ngModel)]="user.Role" />
+            <input pInputtext class="p-inputtext" type="text" placeholder="Interests" [(ngModel)]="user.Interests" />
+        </div>
+    </ng-template>
+
+    <ng-template #footer>
+        <p-button label="Cancelar" icon="pi pi-times" text (click)="hideDialog()" />
+        <p-button label="Aceptar" icon="pi pi-check" (click)="saveUser()" />
+    </ng-template>
+</p-dialog>
+
+<p-confirmdialog [style]="{ width: '450px' }" />
