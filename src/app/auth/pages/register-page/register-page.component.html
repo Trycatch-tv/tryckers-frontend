@@ -1,23 +1,69 @@
-<form class="flex flex-col gap-2"
-  [formGroup]="registerForm"
-  (ngSubmit)="onSubmit()"
->
+<div class="flex flex-col justify-center items-start  p-12">
 
-  <input pInputText type="text" placeholder="Username" formControlName="name" class="p-inputtext w-full" />
+  <h1 class="text-5xl font-bold leading-tight mb-6">
+    Welcome
+  </h1>
 
-  <select formControlName="country" class="p-inputtext w-full">
-    <option [ngValue]="''" disabled>Selecciona un país</option>
-    @for (country of countries; track $index) {
-      <option [ngValue]="country.name">{{ country.name }}</option>
-    }
-  </select>
+  <p class="text-gray-700 mb-6 font-bold text-2xl">
+    Create your account
+  </p>
 
-  <input type="email" pInputText placeholder="Email" formControlName="email" class="p-inputtext w-full" />
+  <form
+    class="w-full space-y-4"
+    [formGroup]="registerForm"
+    (ngSubmit)="onSubmit()"
+  >
 
-  <input type="password" pInputText placeholder="Password" formControlName="password" class="p-inputtext w-full" />
+    <input
+      type="text"
+      placeholder="Username"
+      formControlName="name"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    />
 
-  <p-button type="submit" label="REGISTRARSE" class="mt-2" styleClass="w-full"/>
-</form>
+
+    <input
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    />
+
+
+    <select
+      formControlName="country"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    >
+      <option value="" disabled selected>Country</option>
+      <option value="colombia">Colombia</option>
+      <option value="chile">Chile</option>
+    </select>
+
+
+    <input
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    />
+
+
+    <button
+      type="submit"
+      class="w-full bg-black text-white font-semibold py-3 rounded-full hover:bg-gray-800 transition cursor-pointer"
+    >
+      Register
+    </button>
+  </form>
+</div>
+
+
+
+
+
+
+
+
 
 
 

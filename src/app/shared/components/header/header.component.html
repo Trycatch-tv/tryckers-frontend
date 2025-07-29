@@ -1,82 +1,99 @@
-<div class="card">
-    <p-menubar [model]="items">
-        <ng-template #start>
-            <svg width="33" height="35" viewBox="0 0 33 35" fill="none" xmlns="http://www.w3.org/2000/svg">
-                <path d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z" fill="var(--primary-color)" />
-                <mask id="mask0_1_36" style="mask-type:luminance" maskUnits="userSpaceOnUse" x="0" y="0" width="31" height="33">
-                    <path d="M15.1934 0V0V0L0.0391235 5.38288L2.35052 25.3417L15.1934 32.427V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1934 0Z" fill="var(--primary-color-text)" />
-                </mask>
-                <g mask="url(#mask0_1_52)">
-                    <path
-                        fill-rule="evenodd"
-                        clip-rule="evenodd"
-                        d="M15.1935 0V3.5994V3.58318V20.0075V20.0075V32.427V32.427L28.0364 25.3417L30.3478 5.38288L15.1935 0Z"
-                        fill="var(--p-primary-color)"
-                    />
-                </g>
-                <path
-                    d="M19.6399 15.3776L18.1861 15.0547L19.3169 16.6695V21.6755L23.1938 18.4458V12.9554L21.4169 13.6013L19.6399 15.3776Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    d="M10.5936 15.3776L12.0474 15.0547L10.9166 16.6695V21.6755L7.03966 18.4458V12.9554L8.81661 13.6013L10.5936 15.3776Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M11.3853 16.9726L12.6739 15.0309L13.4793 15.5163H16.7008L17.5061 15.0309L18.7947 16.9726V24.254L17.8283 25.7103L16.7008 26.843H13.4793L12.3518 25.7103L11.3853 24.254V16.9726Z"
-                    fill="var(--ground-background)"
-                />
-                <path d="M19.3168 24.7437L21.4168 22.6444V20.5451L19.3168 22.3214V24.7437Z" fill="var(--ground-background)" />
-                <path d="M10.9166 24.7437L8.81662 22.6444V20.5451L10.9166 22.3214V24.7437Z" fill="var(--ground-background)" />
-                <path
-                    fill-rule="evenodd"
-                    clip-rule="evenodd"
-                    d="M13.0167 5.68861L11.7244 8.7568L13.8244 14.8932H14.7936V5.68861H13.0167ZM15.4397 5.68861V14.8932H16.5706L18.5091 8.7568L17.2167 5.68861H15.4397Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    d="M13.8244 14.8932L6.87813 12.3094L5.90888 8.27235L11.8859 8.7568L13.9859 14.8932H13.8244Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    d="M16.5706 14.8932L23.5169 12.3094L24.4861 8.27235L18.3476 8.7568L16.4091 14.8932H16.5706Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    d="M18.8321 8.27235L22.2245 7.94938L19.9629 5.68861H17.7013L18.8321 8.27235Z"
-                    fill="var(--ground-background)"
-                />
-                <path
-                    d="M11.4013 8.27235L8.00893 7.94938L10.2705 5.68861H12.5321L11.4013 8.27235Z"
-                    fill="var(--ground-background)"
-                />
-            </svg>
-        </ng-template>
-        <ng-template #item let-item let-root="root">
-            <a pRipple class="flex items-center p-menubar-item-link">
-                <span class="font-bold">{{ item.label }}</span>
-                <p-badge *ngIf="item.badge" [ngClass]="{ 'ml-auto': !root, 'ml-2': root }" [value]="item.badge" />
-                <span *ngIf="item.shortcut" class="ml-auto border border-surface rounded bg-emphasis text-muted-color text-xs p-1">{{ item.shortcut }}</span>
-                <i *ngIf="item.items" [ngClass]="['ml-auto pi', root ? 'pi-angle-down' : 'pi-angle-right']"></i>
-            </a>
-        </ng-template>
-        <ng-template #end>
-          <ng-container *ngIf="authService.authStatus() === 'authenticated'; else notLoggedIn">
-            <h2>
-              {{ authService.user()?.name }}
-            </h2>
-            <p-button (click)="authService.logout()" label="Salir"></p-button>
-          </ng-container>
+<header class="bg-white shadow-sm">
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
 
-          <ng-template #notLoggedIn>
-            <div class="flex items-center gap-2">
-              <div class="card flex justify-center">
-                <p-button routerLink="/auth/login" label="Login" />
-              </div>
-            </div>
-          </ng-template>
-        </ng-template>
-    </p-menubar>
-</div>
+    <!-- Logo -->
+    <div class="flex items-center">
+      <a routerLink="./home" class="text-2xl font-bold text-gray-800 hover:text-blue-800">
+        Tryckers
+      </a>
+    </div>
+
+    <!-- Links -->
+    <nav class="hidden md:flex items-center gap-8">
+      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Network</a>
+      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Messages</a>
+      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Notifications</a>
+    </nav>
+
+    <!-- Search & Auth -->
+    <div class="flex items-center gap-4">
+      <input
+        type="text"
+        placeholder="Search"
+        class="w-28 md:w-40 px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring focus:border-indigo-300 transition"
+      />
+
+      <!-- Si no está autenticado -->
+      <ng-container *ngIf="authService.authStatus() === 'not-authenticated'; else loggedIn">
+        <button
+          routerLink="/auth/login"
+          class="bg-black text-white px-4 py-2 rounded-md hover:bg-blue-700 transition font-bold"
+        >
+          Login
+        </button>
+      </ng-container>
+
+      <!-- Si está autenticado -->
+      <ng-template #loggedIn>
+        <div class="relative">
+          <button
+            (click)="toggleDropdown()"
+            class="flex items-center space-x-2 px-2 h-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+          >
+            <img
+              [src]="authService.user()?.profile_picture || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'"
+              alt="Avatar"
+              class="w-8 h-8 rounded-full object-cover"
+            />
+            <span class="text-base text-gray-800 font-medium hidden md:block">
+              {{ authService.user()?.name }}
+            </span>
+            <svg
+              class="w-4 h-4 text-gray-600 transition-transform duration-150"
+              [class.rotate-180]="dropdownOpen()"
+              xmlns="http://www.w3.org/2000/svg"
+              fill="none"
+              viewBox="0 0 10 6"
+              stroke="currentColor"
+            >
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l4 4 4-4"/>
+            </svg>
+          </button>
+
+          <!-- Dropdown -->
+          <div
+            *ngIf="dropdownOpen()"
+            (clickOutside)="closeDropdown()"
+            class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10
+                   transition-all duration-200 ease-out transform origin-top-right
+                   opacity-100 scale-100"
+          >
+            <ul class="py-1">
+              <li>
+                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  Profile
+                </a>
+              </li>
+              <li>
+                <a href="#settings" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                  Settings
+                </a>
+              </li>
+              <li>
+                <button
+                  (click)="logout()"
+                  class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100"
+                >
+                  Logout
+                </button>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </ng-template>
+    </div>
+  </div>
+</header>
+
+
+
