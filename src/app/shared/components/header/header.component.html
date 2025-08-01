@@ -31,8 +31,15 @@
       <!-- Si no está autenticado -->
       <ng-container *ngIf="authService.authStatus() === 'not-authenticated'; else loggedIn">
         <button routerLink="/auth/login"
-          class="bg-black text-white px-4 py-2 rounded-md hover:bg-amber-400 transition font-bold hover:cursor-pointer">
+          class="bg-gray-200 text-black px-4 py-2 rounded-md  transition font-bold hover:cursor-pointer">
           Login
+        </button>
+      </ng-container>
+
+      <ng-container *ngIf="authService.authStatus() === 'not-authenticated'; else loggedIn">
+        <button routerLink="/auth/register"
+          class="bg-black text-white px-4 py-2 rounded-md  transition font-bold hover:cursor-pointer">
+          Sing Up
         </button>
       </ng-container>
 
