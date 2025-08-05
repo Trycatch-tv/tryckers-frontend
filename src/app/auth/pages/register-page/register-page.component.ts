@@ -1,13 +1,5 @@
 import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, FormsModule, Validators } from '@angular/forms';
-import { PasswordModule } from 'primeng/password';
-import { IftaLabelModule } from 'primeng/iftalabel';
-import { InputTextModule } from 'primeng/inputtext';
-import { IconFieldModule } from 'primeng/iconfield';
-import { InputIconModule } from 'primeng/inputicon';
-import { FloatLabelModule } from 'primeng/floatlabel';
-import { ButtonModule } from 'primeng/button';
-import { AutoFocusModule } from 'primeng/autofocus';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { ReactiveFormsModule } from '@angular/forms';
@@ -15,19 +7,15 @@ import { ReactiveFormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-register-page',
-  imports: [FormsModule, PasswordModule, IftaLabelModule,InputTextModule, IconFieldModule, InputIconModule, FloatLabelModule, ButtonModule, AutoFocusModule, ReactiveFormsModule],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register-page.component.html',
 })
 export class RegisterPageComponent {
-  username =signal<string>('');
+  name = signal<string>('');
   email = signal<string>('');
   value = signal<string>('');
   password = signal<string>('');
 
-  countries = [
-  { name: 'colombia', code: 'CO' },
-  { name: 'chile', code: 'CL' }
-];
 
 selectedCountry: any = null;
 

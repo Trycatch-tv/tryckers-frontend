@@ -11,7 +11,7 @@ const baseUrl = environment.baseUrl;
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
-  private _authStatus = signal<AuthStatus>('checking');
+  private _authStatus = signal<AuthStatus>('not-authenticated');
   private _user = signal<User | null>(null);
   private __user = signal<UserData | null>(null);
   private _token = signal<string | null>(localStorage.getItem('token'));
@@ -22,7 +22,7 @@ export class AuthService {
   token = computed(() => this._token());
   authStatus = computed<AuthStatus>(() => {
     if (this._authStatus() === 'checking') return 'checking';
-    return this._user() ? 'authenticated' : 'not-authenticated';
+    return this.__user() ? 'authenticated' : 'not-authenticated';
   });
 
 
@@ -58,6 +58,7 @@ export class AuthService {
 
   logout() {
     this._user.set(null);
+    this.__user.set(null);
     this._authStatus.set('not-authenticated');
     this._token.set(null);
     localStorage.removeItem('token');

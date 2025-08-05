@@ -44,6 +44,7 @@ import { HeaderComponent } from '../components/header/header.component';
       .main-content {
         flex: 1;
         padding: 0;
+        overflow-x : hidden;
         background: #f8fafc;
       }
 
