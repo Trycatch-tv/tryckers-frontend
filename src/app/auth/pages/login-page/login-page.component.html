@@ -1,40 +1,89 @@
- <form class="flex flex-col gap-2"
-[formGroup]="loginForm"
-(ngSubmit)="onSumbit()"
->
 
- <div class="card flex justify-center">
-    <div pFocusTrap class="w-full sm:w-80 flex flex-col gap-6">
 
-      <p-iconfield>
-        <p-inputicon>
-          <i class="pi pi-envelope"> </i>
-        </p-inputicon>
-        <input type="text" pInputText id="email" formControlName="email" type="email" placeholder="Email" [pAutoFocus]="true" [fluid]="true" />
-      </p-iconfield>
+<section class="w-2/3 flex m-auto shadow-[4px_4px_20px_0px_rgba(0,_0,_0,_0.8)] rounded-xl overflow-hidden mt-5 h-[500px]">
 
-      <p-iconfield>
-          <p-inputicon >
-              <i class="pi pi-user "></i>
-          </p-inputicon>
-          <input type="password" pInputText id="input" formControlName="password" type="text" placeholder="Password"  [fluid]="true" />
-      </p-iconfield>
+  <div class="bg-white w-3/5 h-full flex flex-col  justify-center relative z-10  p-10 ">
 
-        <p-button type="submit" label="LOGIN" class="mt-2" styleClass="w-full" />
-        <div class="flex flex-row">
-        <p class="text-white ">¿No tienes una cuenta?</p><a ><span class="text-blue-300 ml-2 cursor-pointer" routerLink="/auth/register">Crea una aquí</span></a>
-        </div>
+    <h1 class="text-4xl font-bold leading-tight mb-6 ">
+    Welcome <br /> back!
+  </h1>
+
+  <p class="text-gray-700 mb-6 font-bold text-2xl">Log in to access</p>
+
+
+  <form class="w-full space-y-4"
+  [formGroup]="loginForm"
+  (ngSubmit)="onSubmit()">
+    <input
+      type="email"
+      placeholder="Email"
+      formControlName="email"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    />
+
+    <input
+      type="password"
+      placeholder="Password"
+      formControlName="password"
+      class="w-full px-4 py-3 rounded-md bg-gray-100 focus:outline-none focus:ring-2 focus:ring-black"
+    />
+
+    <button
+      type="submit"
+      class="w-full bg-black text-white font-semibold py-3 rounded-full hover:bg-gray-800 transition cursor-pointer"
+    >
+      Log in
+    </button>
+
+
+    <a href="#" class="text-sm text-gray-500 mt-4">Forgot your password?</a>
+  <p class="text-sm text-gray-500 mt-4">You don't have an account?</p>
+  <a routerLink="/auth/register" class="text-sm text-gray-500 mt-4 cursor-pointer hover:underline">Create one here</a>
+  </form>
+
   </div>
-</div>
- </form>
 
+  <div class=" w-2/5 relative">
+    <div class="w-1/2 p-5 absolute z-10">
+      <h3 class="font-bold text-white text-4xl">Join Tryckers</h3>
+      <h5 class="text-white mt-3">Become a part of the developer community</h5>
+    </div>
 
- @if(hasError()){
+    <div class=" bottom-8 left-3/5 transform -translate-x-1/2 p-5 absolute z-10">
+    <button class="border rounded-2xl border-gray-300 bg-white p-2 w-[200px] flex flex-row  cursor-pointer">
+      <a href="https://discord.com/invite/VYsfnDjD87" class="text-xl font-bold">Join in Discord</a>
+      <div class="ml-2">
+        <svg  xmlns="http://www.w3.org/2000/svg"  width="24"  height="24"  viewBox="0 0 24 24"  fill="currentColor"  class="icon icon-tabler icons-tabler-filled icon-tabler-brand-discord"><path stroke="none" d="M0 0h24v24H0z" fill="none"/><path d="M14.983 3l.123 .006c2.014 .214 3.527 .672 4.966 1.673a1 1 0 0 1 .371 .488c1.876 5.315 2.373 9.987 1.451 12.28c-1.003 2.005 -2.606 3.553 -4.394 3.553c-.732 0 -1.693 -.968 -2.328 -2.045a21.512 21.512 0 0 0 2.103 -.493a1 1 0 1 0 -.55 -1.924c-3.32 .95 -6.13 .95 -9.45 0a1 1 0 0 0 -.55 1.924c.717 .204 1.416 .37 2.103 .494c-.635 1.075 -1.596 2.044 -2.328 2.044c-1.788 0 -3.391 -1.548 -4.428 -3.629c-.888 -2.217 -.39 -6.89 1.485 -12.204a1 1 0 0 1 .371 -.488c1.439 -1.001 2.952 -1.459 4.966 -1.673a1 1 0 0 1 .935 .435l.063 .107l.651 1.285l.137 -.016a12.97 12.97 0 0 1 2.643 0l.134 .016l.65 -1.284a1 1 0 0 1 .754 -.54l.122 -.009zm-5.983 7a2 2 0 0 0 -1.977 1.697l-.018 .154l-.005 .149l.005 .15a2 2 0 1 0 1.995 -2.15zm6 0a2 2 0 0 0 -1.977 1.697l-.018 .154l-.005 .149l.005 .15a2 2 0 1 0 1.995 -2.15z" /></svg>
+      </div>
+    </button>
+    </div>
 
-    <div role="alert" class="alert alert-error fixed bottom-5 right-5 w-52">
-    <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
-      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
-    </svg>
-    <span>Por favor, revise la información ingresada</span>
+    <div class="absolute inset-0 ">
+      <svg width="100%" height="100%" viewBox="0 0 513 771" preserveAspectRatio="xMidYMid slice" xmlns="http://www.w3.org/2000/svg">
+        <g clip-path="url(#clip0_4_5844)">
+          <rect width="513" height="771" fill="#141414"/>
+          <path d="M519.876 208.555L-37.1534 675.959L-0.514551 719.624L556.515 252.22L519.876 208.555Z" fill="#FFFFFFFF"/>
+          <path d="M527.36 32L-79 540.796L-42.3611 584.461L563.998 75.6645L527.36 32Z" fill="#FFFFFF"/>
+        </g>
+      </svg>
+    </div>
   </div>
-  }
+</section>
+
+
+
+   @if(hasError()){
+
+      <div role="alert" class="alert alert-error fixed bottom-5 right-5 w-52">
+      <svg xmlns="http://www.w3.org/2000/svg" class="h-6 w-6 shrink-0 stroke-current" fill="none" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z" />
+      </svg>
+      <span>Por favor, revise la información ingresada</span>
+    </div>
+    }
+
+
+
+
+
+
