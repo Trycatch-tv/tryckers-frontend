@@ -1,6 +1,5 @@
-
 import { CommonModule } from '@angular/common';
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 
@@ -9,11 +8,10 @@ import { AuthService } from '@auth/services/auth.service';
   imports: [RouterLink, CommonModule],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent {
+export class HeaderComponent implements OnInit {
   authService = inject(AuthService);
 
   dropdownOpen = signal(false);
-
 
   toggleDropdown() {
     this.dropdownOpen.update((val) => !val);
@@ -27,4 +25,8 @@ export class HeaderComponent {
     this.authService.logout();
     this.closeDropdown();
   }
- }
+
+  ngOnInit(): void {
+    this.authService.authStatus();
+  }
+}
