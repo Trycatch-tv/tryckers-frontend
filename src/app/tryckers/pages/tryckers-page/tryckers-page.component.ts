@@ -9,11 +9,11 @@ import { OrderListModule } from 'primeng/orderlist';
 import { PickListModule } from 'primeng/picklist';
 import { SelectButtonModule } from 'primeng/selectbutton';
 import { TagModule } from 'primeng/tag';
-
+import { Skeleton } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-tryckers-page',
-  imports: [CommonModule, FormsModule, CardModule, ButtonModule, DataViewModule, OrderListModule, PickListModule, SelectButtonModule, TagModule],
+  imports: [CommonModule, FormsModule, CardModule, ButtonModule, DataViewModule, OrderListModule, PickListModule, SelectButtonModule, TagModule, Skeleton],
   templateUrl: './tryckers-page.component.html',
   styles: [
     `
@@ -110,6 +110,21 @@ export default class TryckersPageComponent implements OnInit {
         id: 3,
         title: 'SANTIAGO',
         description: 'The ultimate solution for tryckers development.',
+      },
+      {
+        id: 4,
+        title: 'TRYCKER',
+        description: 'A powerful framework for building tryckers.',
+      },
+      {
+        id: 5,
+        title: 'ANGULAR',
+        description: 'A modern approach to tryckers creation.',
+      },
+      {
+        id: 6,
+        title: 'REACT',
+        description: 'A flexible and efficient way to build tryckers.',
       },
     ];
   }

@@ -1,18 +1,18 @@
-<header class="bg-white shadow-sm">
+<header class="bg-white dark:bg-gray-800 shadow-sm">
   <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
 
     <!-- Logo -->
     <div class="flex items-center">
-      <a routerLink="./home" class="text-2xl font-bold text-gray-800 hover:text-blue-800">
+      <a routerLink="./home" class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-blue-800">
         Tryckers
       </a>
     </div>
 
     <!-- Links -->
     <nav class="hidden md:flex items-center gap-8">
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Network</a>
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Messages</a>
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Notifications</a>
+      <a href="#" class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800">Network</a>
+      <a href="#" class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800">Messages</a>
+      <a href="#" class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800">Notifications</a>
     </nav>
 
     <!-- Search & Auth -->
@@ -43,6 +43,14 @@
         </button>
       </ng-container>
 
+      <button (click)="toggleDarkMode()">
+        @if(!isDarkMode()) {
+        <i class="fa-solid fa-moon text-3xl"></i>
+        } @else {
+          <i class="fa-solid fa-sun text-3xl"></i>
+        }
+      </button>
+
       <!-- Si está autenticado -->
       <ng-template #loggedIn>
         <div class="relative">
@@ -72,7 +80,7 @@
               </li>
               <li>
                 <a href="#settings" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
-                  Settings
+                  Settingssss
                 </a>
               </li>
               <li>
@@ -83,7 +91,10 @@
             </ul>
           </div>
         </div>
+
+        <div class="flex items-center space-x-2">
+          <span class="text-sm text-gray-600 dark:text-gray-400">Modo oscuro</span>
+        </div>
       </ng-template>
     </div>
   </div>
-</header>
