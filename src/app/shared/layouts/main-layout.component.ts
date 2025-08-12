@@ -45,7 +45,6 @@ import { HeaderComponent } from '../components/header/header.component';
         flex: 1;
         padding: 0;
         overflow-x : hidden;
-        background: #f8fafc;
       }
 
       .footer-section {

@@ -27,4 +27,12 @@ export class HeaderComponent {
     this.authService.logout();
     this.closeDropdown();
   }
+
+  // Dark mode (falta servicio)
+  isDarkMode = signal(document.body.classList.contains('app-dark'));
+
+  toggleDarkMode() {
+    const isDark = document.body.classList.toggle('app-dark');
+    this.isDarkMode.set(isDark);
+  }
  }

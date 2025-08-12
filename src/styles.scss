@@ -1,0 +1,16 @@
+/* You can add global styles to this file, and also import other style files */
+// Importaciones de estilos
+@use './tailwind.css';
+
+// Forzar dark mode sobre PrimeNG/PrimeUI
+body.app-dark, .app-dark {
+	background-color: #1e2939 !important;
+	color: #f3f4f6 !important;
+}
+
+.app-dark .p-inputtext, .app-dark .p-button, .app-dark .p-dropdown, .app-dark .p-dialog, .app-dark .p-card, .app-dark .p-dataview-header, .app-dark .p-dataview-content {
+	background-color: #1e2939 !important;
+	color: #f3f4f6 !important;
+	border-color: #2a3749 !important;
+}
+

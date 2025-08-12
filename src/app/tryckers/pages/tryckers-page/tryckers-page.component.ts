@@ -1,8 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
+
+import { CardModule } from 'primeng/card';
+import { ButtonModule } from 'primeng/button';
+import { DataViewModule } from 'primeng/dataview';
+import { OrderListModule } from 'primeng/orderlist';
+import { PickListModule } from 'primeng/picklist';
+import { SelectButtonModule } from 'primeng/selectbutton';
+import { TagModule } from 'primeng/tag';
+import { Skeleton } from 'primeng/skeleton';
 
 @Component({
   selector: 'app-tryckers-page',
-  imports: [],
+  imports: [CommonModule, FormsModule, CardModule, ButtonModule, DataViewModule, OrderListModule, PickListModule, SelectButtonModule, TagModule, Skeleton],
   templateUrl: './tryckers-page.component.html',
   styles: [
     `
@@ -80,4 +91,41 @@ import { Component } from '@angular/core';
     `,
   ],
 })
-export default class TryckersPageComponent {}
+export default class TryckersPageComponent implements OnInit {
+  tryckers: any[] = [];
+
+  ngOnInit(): void {
+    this.tryckers = [
+      {
+        id: 1,
+        title: 'ZIRUS16',
+        description: 'A simple and fast way to create your own tryckers.',
+      },
+      {
+        id: 2,
+        title: 'JULIAN',
+        description: 'An advanced tool for creating tryckers with ease.',
+      },
+      {
+        id: 3,
+        title: 'SANTIAGO',
+        description: 'The ultimate solution for tryckers development.',
+      },
+      {
+        id: 4,
+        title: 'TRYCKER',
+        description: 'A powerful framework for building tryckers.',
+      },
+      {
+        id: 5,
+        title: 'ANGULAR',
+        description: 'A modern approach to tryckers creation.',
+      },
+      {
+        id: 6,
+        title: 'REACT',
+        description: 'A flexible and efficient way to build tryckers.',
+      },
+    ];
+  }
+}
