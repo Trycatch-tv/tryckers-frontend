@@ -1,12 +1,10 @@
 import { HttpClient } from '@angular/common/http';
-import { computed, inject, Injectable, signal } from '@angular/core';
-import { tap } from 'rxjs';
+import { inject, Injectable } from '@angular/core';
 
 @Injectable({
   providedIn: 'root',
 })
 export class TryckersService {
-  private _tryckers = signal([]);
   private http = inject(HttpClient);
 
   getAuthToken(): string | null {
@@ -17,20 +15,14 @@ export class TryckersService {
     return token;
   }
 
-  tryckers = computed(() => this._tryckers());
-
-  getTryckers() {
-    return this.http
+  async getTryckers(): Promise<any[]> {
+    const result = await this.http
       .get<any[]>('http://localhost:8080/api/v1/users', {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
       })
-      .pipe(
-        tap((data) => {
-          console.log(data);
-          // this._tryckers.set(data);
-        })
-      );
+      .toPromise();
+    return result ?? [];
   }
 }

@@ -1,9 +1,9 @@
-import { Component, inject, OnInit } from '@angular/core';
-import { TryckersService } from '@tryckers/services/tryckers-service';
+import { Component } from '@angular/core';
+import { DashboardPage } from '../dashboard-page/dashboard-page';
 
 @Component({
   selector: 'app-tryckers-page',
-  imports: [],
+  imports: [DashboardPage],
   templateUrl: './tryckers-page.component.html',
   styles: [
     `
@@ -81,13 +81,4 @@ import { TryckersService } from '@tryckers/services/tryckers-service';
     `,
   ],
 })
-export default class TryckersPageComponent implements OnInit {
-  tryckerService = inject(TryckersService);
-
-  // constructor(private tryckersService: TryckersService) {}
-
-  async ngOnInit() {
-    const tryckers = await this.tryckerService.getTryckers().toPromise();
-    console.log(tryckers, '<-- tryckers');
-  }
-}
+export default class TryckersPageComponent {}

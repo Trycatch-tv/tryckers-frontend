@@ -1,32 +1,52 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { MenuItem } from 'primeng/api';
+import { AvatarModule } from 'primeng/avatar';
+import { BadgeModule } from 'primeng/badge';
+import { ButtonModule } from 'primeng/button';
+import { InputTextModule } from 'primeng/inputtext';
+import { MenuModule } from 'primeng/menu';
+import { MenubarModule } from 'primeng/menubar';
 
 @Component({
   selector: 'app-header',
-  imports: [RouterLink, CommonModule],
+  imports: [
+    CommonModule,
+    RouterLink,
+    MenubarModule,
+    InputTextModule,
+    ButtonModule,
+    AvatarModule,
+    MenuModule,
+    BadgeModule,
+  ],
   templateUrl: './header.component.html',
 })
-export class HeaderComponent implements OnInit {
+export class HeaderComponent {
   authService = inject(AuthService);
 
-  dropdownOpen = signal(false);
+  // Main navigation items (center/left)
+  items: MenuItem[] = [
+    { label: 'Network', icon: 'pi pi-share-alt', routerLink: ['/network'] },
+    { label: 'Messages', icon: 'pi pi-comments', routerLink: ['/messages'] },
+    {
+      label: 'Notifications',
+      icon: 'pi pi-bell',
+      routerLink: ['/notifications'],
+    },
+  ];
 
-  toggleDropdown() {
-    this.dropdownOpen.update((val) => !val);
-  }
-
-  closeDropdown() {
-    this.dropdownOpen.set(false);
-  }
+  // Profile dropdown items (right)
+  profileItems: MenuItem[] = [
+    { label: 'Profile', icon: 'pi pi-user', routerLink: ['/profile'] },
+    { label: 'Settings', icon: 'pi pi-cog', routerLink: ['/settings'] },
+    { separator: true },
+    { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() },
+  ];
 
   logout() {
     this.authService.logout();
-    this.closeDropdown();
-  }
-
-  ngOnInit(): void {
-    this.authService.authStatus();
   }
 }
