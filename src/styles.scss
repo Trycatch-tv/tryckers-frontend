@@ -2,15 +2,139 @@
 // Importaciones de estilos
 @use './tailwind.css';
 
-// Forzar dark mode sobre PrimeNG/PrimeUI
-body.app-dark, .app-dark {
-	background-color: #1e2939 !important;
-	color: #f3f4f6 !important;
+// Identidad visual blanco y negro
+body {
+	background-color: #ffffff;
+	color: #000000;
+	font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 }
 
-.app-dark .p-inputtext, .app-dark .p-button, .app-dark .p-dropdown, .app-dark .p-dialog, .app-dark .p-card, .app-dark .p-dataview-header, .app-dark .p-dataview-content {
-	background-color: #1e2939 !important;
-	color: #f3f4f6 !important;
-	border-color: #2a3749 !important;
+body.app-dark {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+}
+
+// Estilos para componentes PrimeNG - Identidad blanco y negro
+.p-menubar {
+	background-color: #ffffff !important;
+	border: 2px solid #000000 !important;
+	border-radius: 0 !important;
+}
+
+.app-dark .p-menubar {
+	background-color: #000000 !important;
+	border-color: #ffffff !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+	color: #000000 !important;
+	font-weight: 600;
+}
+
+.app-dark .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link {
+	color: #ffffff !important;
+}
+
+.p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+}
+
+.app-dark .p-menubar .p-menubar-root-list > .p-menuitem > .p-menuitem-link:hover {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+
+// Inputs y botones
+.p-inputtext {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+	border: 2px solid #000000 !important;
+	border-radius: 0 !important;
+}
+
+.app-dark .p-inputtext {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+
+.p-button {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border: 2px solid #000000 !important;
+	border-radius: 0 !important;
+	font-weight: 600;
+}
+
+.app-dark .p-button {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+	border-color: #ffffff !important;
+}
+
+.p-button:hover {
+	background-color: #333333 !important;
+}
+
+.app-dark .p-button:hover {
+	background-color: #cccccc !important;
+}
+
+.p-button.p-button-outlined {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+	border: 2px solid #000000 !important;
+}
+
+.app-dark .p-button.p-button-outlined {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+
+.p-button.p-button-outlined:hover {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+}
+
+.app-dark .p-button.p-button-outlined:hover {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+}
+
+// Cards y contenedores
+.p-card {
+	background-color: #ffffff !important;
+	color: #000000 !important;
+	border: 2px solid #000000 !important;
+	border-radius: 0 !important;
+}
+
+.app-dark .p-card {
+	background-color: #000000 !important;
+	color: #ffffff !important;
+	border-color: #ffffff !important;
+}
+
+// Scrollbar personalizada
+::-webkit-scrollbar {
+	width: 8px;
+}
+
+::-webkit-scrollbar-track {
+	background: #ffffff;
+}
+
+::-webkit-scrollbar-thumb {
+	background: #000000;
+}
+
+.app-dark ::-webkit-scrollbar-track {
+	background: #000000;
+}
+
+.app-dark ::-webkit-scrollbar-thumb {
+	background: #ffffff;
 }
 

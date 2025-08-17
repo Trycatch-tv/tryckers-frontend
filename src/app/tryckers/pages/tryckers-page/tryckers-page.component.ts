@@ -1,142 +1,95 @@
 import { CommonModule } from '@angular/common';
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-
-import { ButtonModule } from 'primeng/button';
-import { CardModule } from 'primeng/card';
-import { DataViewModule } from 'primeng/dataview';
-import { OrderListModule } from 'primeng/orderlist';
-import { PickListModule } from 'primeng/picklist';
-import { SelectButtonModule } from 'primeng/selectbutton';
-import { Skeleton } from 'primeng/skeleton';
-import { TagModule } from 'primeng/tag';
+import { TryckersService } from '../../services/tryckers-service';
 
 @Component({
   selector: 'app-tryckers-page',
-  imports: [
-    CommonModule,
-    FormsModule,
-    CardModule,
-    ButtonModule,
-    DataViewModule,
-    OrderListModule,
-    PickListModule,
-    SelectButtonModule,
-    TagModule,
-    Skeleton,
-  ],
+  imports: [CommonModule, FormsModule],
   templateUrl: './tryckers-page.component.html',
   styles: [
     `
-      .tryckers-content {
-        padding: 2rem;
-        max-width: 1200px;
-        margin: 0 auto;
+      :host {
+        display: block;
+        min-height: 100vh;
+        background-color: #ffffff;
       }
 
-      .hero-section {
-        text-align: center;
-        padding: 4rem 0;
+      :host(.app-dark) {
+        background-color: #000000;
       }
 
-      .hero-title {
-        font-size: 3rem;
-        font-weight: bold;
-        margin-bottom: 1rem;
-        background: linear-gradient(135deg, #3b82f6 0%, #1d4ed8 100%);
-        background-clip: text;
-        -webkit-background-clip: text;
-        -webkit-text-fill-color: transparent;
+      .pattern-bg {
+        background-image: repeating-linear-gradient(
+          45deg,
+          transparent 0px,
+          transparent 4px,
+          currentColor 4px,
+          currentColor 8px
+        );
       }
 
-      .hero-subtitle {
-        font-size: 1.25rem;
-        color: #64748b;
-        margin-bottom: 2rem;
+      .card-hover:hover {
+        transform: translateY(-4px);
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
       }
 
-      .cta-buttons {
-        display: flex;
-        gap: 1rem;
-        justify-content: center;
-        flex-wrap: wrap;
+      .app-dark .card-hover:hover {
+        box-shadow: 0 8px 25px rgba(255, 255, 255, 0.15);
       }
 
-      .btn-primary {
-        background-color: #3b82f6;
-        color: white;
-        padding: 0.75rem 2rem;
-        border-radius: 0.5rem;
-        border: none;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
+      @keyframes fadeIn {
+        from {
+          opacity: 0;
+          transform: translateY(20px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
       }
 
-      .btn-primary:hover {
-        background-color: #2563eb;
-        transform: translateY(-2px);
-        box-shadow: 0 4px 12px rgba(59, 130, 246, 0.4);
-      }
-
-      .btn-secondary {
-        background-color: transparent;
-        color: #3b82f6;
-        padding: 0.75rem 2rem;
-        border: 2px solid #3b82f6;
-        border-radius: 0.5rem;
-        font-weight: 600;
-        cursor: pointer;
-        transition: all 0.3s ease;
-        text-decoration: none;
-        display: inline-block;
-      }
-
-      .btn-secondary:hover {
-        background-color: #3b82f6;
-        color: white;
-        transform: translateY(-2px);
+      .fade-in {
+        animation: fadeIn 0.5s ease-out;
       }
     `,
   ],
 })
 export default class TryckersPageComponent implements OnInit {
   tryckers: any[] = [];
+  loading = true;
 
-  ngOnInit(): void {
-    this.tryckers = [
-      {
-        id: 1,
-        title: 'ZIRUS16',
-        description: 'A simple and fast way to create your own tryckers.',
-      },
-      {
-        id: 2,
-        title: 'JULIAN',
-        description: 'An advanced tool for creating tryckers with ease.',
-      },
-      {
-        id: 3,
-        title: 'SANTIAGO',
-        description: 'The ultimate solution for tryckers development.',
-      },
-      {
-        id: 4,
-        title: 'TRYCKER',
-        description: 'A powerful framework for building tryckers.',
-      },
-      {
-        id: 5,
-        title: 'ANGULAR',
-        description: 'A modern approach to tryckers creation.',
-      },
-      {
-        id: 6,
-        title: 'REACT',
-        description: 'A flexible and efficient way to build tryckers.',
-      },
-    ];
+  private tryckersService = inject(TryckersService);
+
+  async ngOnInit(): Promise<void> {
+    try {
+      this.loading = true;
+      this.tryckers = await this.tryckersService.getTryckers();
+    } catch (error) {
+      console.error('Error loading tryckers:', error);
+      // Fallback data en caso de error
+      this.tryckers = [
+        {
+          id: 1,
+          name: 'ZIRUS16',
+          email: 'zirus16@example.com',
+          country: 'Colombia',
+        },
+        {
+          id: 2,
+          name: 'JULIAN',
+          email: 'julian@example.com',
+          country: 'Chile',
+        },
+        {
+          id: 3,
+          name: 'SANTIAGO',
+          email: 'santiago@example.com',
+          country: 'Colombia',
+        },
+      ];
+    } finally {
+      this.loading = false;
+    }
   }
 }

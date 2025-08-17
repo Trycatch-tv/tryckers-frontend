@@ -7,20 +7,11 @@ import {
 } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
-import { ButtonModule } from 'primeng/button';
-import { InputTextModule } from 'primeng/inputtext';
-import { PasswordModule } from 'primeng/password';
 
 @Component({
   selector: 'app-register-page',
   standalone: true,
-  imports: [
-    FormsModule,
-    ReactiveFormsModule,
-    InputTextModule,
-    PasswordModule,
-    ButtonModule,
-  ],
+  imports: [FormsModule, ReactiveFormsModule],
   templateUrl: './register-page.component.html',
 })
 export class RegisterPageComponent {

@@ -1,158 +1,128 @@
-<header class="bg-white dark:bg-gray-800 shadow-sm">
-  <div
-    class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16"
-  >
-    <!-- Logo -->
-    <div class="flex items-center">
-      <a
-        routerLink="./home"
-        class="text-2xl font-bold text-gray-800 dark:text-gray-200 hover:text-blue-800"
-      >
-        Tryckers
-      </a>
-    </div>
-
-    <!-- Links -->
-    <nav class="hidden md:flex items-center gap-8">
-      <a
-        routerLink="/network"
-        class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800"
-        >Network</a
-      >
-      <a
-        routerLink="/messages"
-        class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800"
-        >Messages</a
-      >
-      <a
-        routerLink="/notifications"
-        class="text-lg font-semibold text-gray-800 dark:text-gray-200 hover:text-blue-800"
-        >Notifications</a
-      >
-    </nav>
-
-    <!-- Search & Auth -->
-    <div class="flex items-center gap-4 px-2">
-      <div
-        class="w-40 md:w-50 flex items-center gap-2 bg-[#f2f2f2] dark:bg-gray-700 rounded-md text-gray-500 transition outline-gray-300 focus-within:outline-1"
-      >
-        <svg
-          xmlns="http://www.w3.org/2000/svg"
-          width="2em"
-          height="2em"
-          viewBox="0 0 24 24"
+<!-- Header con identidad blanco y negro -->
+<header
+  class="bg-white dark:bg-black border-b-2 border-black dark:border-white"
+>
+  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+    <div class="flex items-center justify-between h-16">
+      <!-- Logo -->
+      <div class="flex items-center">
+        <a
+          routerLink="./home"
+          class="text-2xl font-bold text-black dark:text-white hover:opacity-75 transition-opacity"
         >
-          <path
-            fill="currentColor"
-            d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37"
-          />
-        </svg>
-        <input
-          type="text"
-          placeholder="Search"
-          class="w-4/6 py-1 bg-[#f2f2f2] dark:bg-gray-700 outline-none text-gray-500 dark:text-gray-300"
-        />
+          TRYCKERS
+        </a>
       </div>
 
-      <!-- Dark mode toggle -->
-      <button
-        (click)="toggleDarkMode()"
-        class="p-2 rounded-md hover:bg-gray-100 dark:hover:bg-gray-700 transition"
-      >
-        @if (!isDarkMode()) {
-          <i class="pi pi-moon text-xl text-gray-600 dark:text-gray-300"></i>
-        } @else {
-          <i class="pi pi-sun text-xl text-gray-600 dark:text-gray-300"></i>
-        }
-      </button>
-
-      <!-- Not authenticated -->
-      <ng-container *ngIf="authService.authStatus() === 'not-authenticated'">
-        <button
-          routerLink="/auth/login"
-          class="bg-gray-200 dark:bg-gray-600 text-black dark:text-white px-4 py-2 rounded-md transition font-bold hover:cursor-pointer hover:bg-gray-300 dark:hover:bg-gray-500"
+      <!-- Navigation -->
+      <nav class="hidden md:flex items-center space-x-8">
+        <a
+          routerLink="/network"
+          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
         >
-          Login
-        </button>
-        <button
-          routerLink="/auth/register"
-          class="bg-blue-600 text-white px-4 py-2 rounded-md transition font-bold hover:cursor-pointer hover:bg-blue-700"
+          Network
+        </a>
+        <a
+          routerLink="/messages"
+          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
         >
-          Sign Up
+          Messages
+        </a>
+        <a
+          routerLink="/notifications"
+          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
+        >
+          Notifications
+        </a>
+      </nav>
+
+      <!-- Right side -->
+      <div class="flex items-center space-x-4">
+        <!-- Search -->
+        <div class="hidden sm:block">
+          <input
+            type="text"
+            placeholder="Search..."
+            class="px-3 py-1 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-0"
+          />
+        </div>
+
+        <!-- Dark mode toggle -->
+        <button
+          (click)="toggleDarkMode()"
+          class="p-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+          [attr.aria-label]="
+            isDarkMode() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
+          "
+          title="Alternar modo oscuro"
+        >
+          @if (!isDarkMode()) {
+            <span class="text-lg">🌙</span>
+          } @else {
+            <span class="text-lg">☀️</span>
+          }
         </button>
-      </ng-container>
 
-      <!-- Authenticated -->
-      <ng-container *ngIf="authService.authStatus() === 'authenticated'">
-        <div class="relative">
-          <button
-            (click)="toggleDropdown()"
-            class="flex items-center space-x-2 px-2 h-10 rounded-full border border-gray-300 dark:border-gray-600 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition"
+        <!-- Authentication buttons -->
+        <ng-container *ngIf="authService.authStatus() === 'not-authenticated'">
+          <a
+            routerLink="/auth/login"
+            class="px-4 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-medium transition-colors"
           >
-            <p-avatar
-              [image]="authService.user()?.profile_picture || undefined"
-              shape="circle"
-              size="normal"
-              icon="pi pi-user"
-              class="w-8 h-8"
-            />
-            <span
-              class="text-base text-gray-800 dark:text-gray-200 font-medium hidden md:block"
-            >
-              {{ authService.user()?.name }}
-            </span>
-            <svg
-              class="w-4 h-4 text-gray-600 dark:text-gray-300 transition-transform duration-150"
-              [class.rotate-180]="dropdownOpen()"
-              xmlns="http://www.w3.org/2000/svg"
-              fill="none"
-              viewBox="0 0 10 6"
-              stroke="currentColor"
-            >
-              <path
-                stroke-linecap="round"
-                stroke-linejoin="round"
-                stroke-width="2"
-                d="M1 1l4 4 4-4"
-              />
-            </svg>
-          </button>
+            LOGIN
+          </a>
+          <a
+            routerLink="/auth/register"
+            class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 font-medium transition-colors"
+          >
+            SIGN UP
+          </a>
+        </ng-container>
 
-          <!-- Dropdown -->
-          <div
-            *ngIf="dropdownOpen()"
-            (clickOutside)="closeDropdown()"
-            class="absolute right-0 mt-2 w-48 bg-white dark:bg-gray-800 border border-gray-200 dark:border-gray-600 rounded-md shadow-lg z-10 transition-all duration-200 ease-out transform origin-top-right opacity-100 scale-100"
-          >
-            <ul class="py-1">
-              <li>
+        <!-- User menu -->
+        <ng-container *ngIf="authService.authStatus() === 'authenticated'">
+          <div class="relative">
+            <button
+              (click)="toggleDropdown()"
+              class="flex items-center space-x-2 px-3 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+            >
+              <div class="w-6 h-6 bg-black dark:bg-white rounded-full"></div>
+              <span class="hidden md:block font-medium">
+                {{ authService.user()?.name || "Usuario" }}
+              </span>
+              <span class="text-xs">{{ dropdownOpen() ? "▲" : "▼" }}</span>
+            </button>
+
+            <!-- Dropdown menu -->
+            @if (dropdownOpen()) {
+              <div
+                class="absolute right-0 mt-2 w-48 bg-white dark:bg-black border-2 border-black dark:border-white shadow-lg z-50"
+              >
                 <a
                   routerLink="/profile"
-                  class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                  (click)="closeDropdown()"
                 >
                   Profile
                 </a>
-              </li>
-              <li>
                 <a
                   routerLink="/settings"
-                  class="block px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  class="block px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                  (click)="closeDropdown()"
                 >
                   Settings
                 </a>
-              </li>
-              <li>
                 <button
-                  (click)="logout()"
-                  class="w-full text-left px-4 py-2 text-gray-700 dark:text-gray-200 hover:bg-gray-100 dark:hover:bg-gray-700"
+                  (click)="logout(); closeDropdown()"
+                  class="w-full text-left px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
                 >
                   Logout
                 </button>
-              </li>
-            </ul>
+              </div>
+            }
           </div>
-        </div>
-      </ng-container>
+        </ng-container>
+      </div>
     </div>
   </div>
 </header>

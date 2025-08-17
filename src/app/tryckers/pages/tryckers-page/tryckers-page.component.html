@@ -1,26 +1,96 @@
-<p-dataview [value]="tryckers" layout="grid">
-  <ng-template #header>
-    <h1 class="text-3xl font-bold p-2 dark:text-white">Tryckers Destacados</h1>
-  </ng-template>
+<!-- Loading state -->
+@if (loading) {
+  <div class="flex justify-center items-center min-h-96">
+    <div class="text-center">
+      <div
+        class="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"
+      ></div>
+      <p class="text-gray-600 dark:text-gray-300">Cargando tryckers...</p>
+    </div>
+  </div>
+} @else {
+  <!-- Header con identidad blanco y negro -->
+  <div
+    class="bg-white dark:bg-black border-b-2 border-black dark:border-white p-8"
+  >
+    <div class="max-w-6xl mx-auto">
+      <h1 class="text-5xl font-bold text-black dark:text-white mb-2">
+        TRYCKERS
+      </h1>
+      <p class="text-xl text-gray-600 dark:text-gray-300">
+        Comunidad de desarrolladores
+      </p>
+    </div>
+  </div>
 
-  <ng-template #grid let-tryckers>
-    <div class="grid grid-cols-12 gap-4">
+  <!-- Grid de usuarios -->
+  <div class="max-w-6xl mx-auto p-8">
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
       @for (trycker of tryckers; track trycker.id) {
-        <div class="col-span-12 sm:col-span-6 lg:col-span-4 p-2">
-          <p-card
-            class="dark:bg-gray-800 dark:text-white hover:shadow-lg transition-shadow duration-200"
+        <div class="group">
+          <!-- Tarjeta con diseño minimalista blanco y negro -->
+          <div
+            class="bg-white dark:bg-black border-2 border-black dark:border-white p-6 transition-all duration-300 hover:shadow-lg hover:scale-105"
           >
-            <p-skeleton
-              class="!w-9/12 sm:!w-64 xl:!w-112 !h-24 mx-auto mt-2 hover:shadow-lg transition-shadow duration-200"
-            />
-            <p class="m-0">
-              <span class="text-2xl font-bold">{{ trycker.title }}</span>
-              <br />
-              <span class="text-sm">{{ trycker.description }} </span>
-            </p>
-          </p-card>
+            <!-- Avatar placeholder con patrón -->
+            <div
+              class="w-20 h-20 mx-auto mb-4 border-2 border-black dark:border-white flex items-center justify-center"
+            >
+              <div
+                class="w-full h-full bg-black dark:bg-white"
+                style="
+                  background-image: repeating-linear-gradient(
+                    45deg,
+                    transparent 0px,
+                    transparent 4px,
+                    currentColor 4px,
+                    currentColor 8px
+                  );
+                "
+              ></div>
+            </div>
+
+            <!-- Información del usuario -->
+            <div class="text-center">
+              <h3 class="text-xl font-bold text-black dark:text-white mb-2">
+                {{ trycker.name || trycker.title || "Usuario" }}
+              </h3>
+              <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">
+                {{ trycker.email || "email@example.com" }}
+              </p>
+              <p class="text-xs text-gray-500 dark:text-gray-400">
+                {{ trycker.country || "País no especificado" }}
+              </p>
+            </div>
+
+            <!-- Botón de acción -->
+            <div class="mt-4 text-center">
+              <button
+                class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
+              >
+                VER PERFIL
+              </button>
+            </div>
+          </div>
         </div>
       }
     </div>
-  </ng-template>
-</p-dataview>
+
+    <!-- Mensaje si no hay usuarios -->
+    @if (tryckers.length === 0) {
+      <div class="text-center py-12">
+        <div
+          class="w-24 h-24 mx-auto mb-4 border-2 border-black dark:border-white flex items-center justify-center"
+        >
+          <span class="text-2xl">👥</span>
+        </div>
+        <h3 class="text-xl font-bold text-black dark:text-white mb-2">
+          No hay tryckers disponibles
+        </h3>
+        <p class="text-gray-600 dark:text-gray-300">
+          Inicia sesión para ver la comunidad de desarrolladores
+        </p>
+      </div>
+    }
+  </div>
+}
