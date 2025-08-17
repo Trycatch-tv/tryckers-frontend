@@ -4,10 +4,14 @@
   "compileOnSave": false,
   "compilerOptions": {
     "baseUrl": "./",
+    "outDir": "./dist/out-tsc",
     "paths": {
-      "@auth/*": ["./src/app/auth/*"],
-      "@tryckers/*": ["./src/app/tryckers/*"],
-
+      "@auth/*": [
+        "./src/app/auth/*"
+      ],
+      "@tryckers/*": [
+        "./src/app/tryckers/*"
+      ],
     },
     "strict": true,
     "noImplicitOverride": true,
@@ -19,14 +23,14 @@
     "experimentalDecorators": true,
     "importHelpers": true,
     "target": "ES2022",
+    "typeRoots": [
+      "node_modules/@types"
+    ],
+    "lib": [
+      "es2022",
+      "dom"
+    ],
     "module": "preserve"
-  },
-  "angularCompilerOptions": {
-    "enableI18nLegacyMessageIdFormat": false,
-    "strictInjectionParameters": true,
-    "strictInputAccessModifiers": true,
-    "typeCheckHostBindings": true,
-    "strictTemplates": true
   },
   "files": [],
   "references": [
@@ -36,5 +40,11 @@
     {
       "path": "./tsconfig.spec.json"
     }
-  ]
+  ],
+  "angularCompilerOptions": {
+    "enableI18nLegacyMessageIdFormat": false,
+    "strictInjectionParameters": true,
+    "strictInputAccessModifiers": true,
+    "strictTemplates": true
+  }
 }
