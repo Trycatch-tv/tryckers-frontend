@@ -19,9 +19,7 @@ export const appConfig: ApplicationConfig = {
     provideAnimationsAsync(),
     provideHttpClient(withFetch()),
     providePrimeNG({
-      theme: {
-        preset: Aura,
-      },
+      theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } },
     }),
   ],
 };

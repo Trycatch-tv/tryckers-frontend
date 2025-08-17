@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject } from '@angular/core';
+import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { MenuItem } from 'primeng/api';
@@ -46,7 +46,24 @@ export class HeaderComponent {
     { label: 'Logout', icon: 'pi pi-sign-out', command: () => this.logout() },
   ];
 
+  // Dark mode
+  isDarkMode = signal(document.body.classList.contains('app-dark'));
+  dropdownOpen = signal(false);
+
   logout() {
     this.authService.logout();
+  }
+
+  toggleDarkMode() {
+    const isDark = document.body.classList.toggle('app-dark');
+    this.isDarkMode.set(isDark);
+  }
+
+  toggleDropdown() {
+    this.dropdownOpen.set(!this.dropdownOpen());
+  }
+
+  closeDropdown() {
+    this.dropdownOpen.set(false);
   }
 }

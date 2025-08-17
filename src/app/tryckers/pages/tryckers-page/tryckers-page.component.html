@@ -1,1 +1,26 @@
-<app-dashboard-page />
+<p-dataview [value]="tryckers" layout="grid">
+  <ng-template #header>
+    <h1 class="text-3xl font-bold p-2 dark:text-white">Tryckers Destacados</h1>
+  </ng-template>
+
+  <ng-template #grid let-tryckers>
+    <div class="grid grid-cols-12 gap-4">
+      @for (trycker of tryckers; track trycker.id) {
+        <div class="col-span-12 sm:col-span-6 lg:col-span-4 p-2">
+          <p-card
+            class="dark:bg-gray-800 dark:text-white hover:shadow-lg transition-shadow duration-200"
+          >
+            <p-skeleton
+              class="!w-9/12 sm:!w-64 xl:!w-112 !h-24 mx-auto mt-2 hover:shadow-lg transition-shadow duration-200"
+            />
+            <p class="m-0">
+              <span class="text-2xl font-bold">{{ trycker.title }}</span>
+              <br />
+              <span class="text-sm">{{ trycker.description }} </span>
+            </p>
+          </p-card>
+        </div>
+      }
+    </div>
+  </ng-template>
+</p-dataview>
