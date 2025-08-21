@@ -10,19 +10,40 @@ import { CardModule } from 'primeng/card';
   standalone: true,
 })
 export class DashboardPage implements OnInit {
-  tryckerService = inject(TryckersService);
-
   tryckers: any[] = [];
+  loading = true;
 
-  async getTryckers() {
+  private tryckersService = inject(TryckersService);
+
+  async ngOnInit(): Promise<void> {
     try {
-      this.tryckers = await this.tryckerService.getTryckers();
+      this.loading = true;
+      this.tryckers = await this.tryckersService.getTryckers();
     } catch (error) {
-      console.error('Error fetching tryckers:', error);
+      console.error('Error loading tryckers:', error);
+      // Fallback data en caso de error
+      this.tryckers = [
+        {
+          id: 1,
+          name: 'ZIRUS16',
+          email: 'zirus16@example.com',
+          country: 'Colombia',
+        },
+        {
+          id: 2,
+          name: 'JULIAN',
+          email: 'julian@example.com',
+          country: 'Chile',
+        },
+        {
+          id: 3,
+          name: 'SANTIAGO',
+          email: 'santiago@example.com',
+          country: 'Colombia',
+        },
+      ];
+    } finally {
+      this.loading = false;
     }
-  }
-
-  async ngOnInit() {
-    await this.getTryckers();
   }
 }

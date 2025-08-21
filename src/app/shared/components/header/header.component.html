@@ -65,18 +65,20 @@
 
         <!-- Authentication buttons -->
         <ng-container *ngIf="authService.authStatus() === 'not-authenticated'">
-          <a
+          <button
+            type="button"
             routerLink="/auth/login"
             class="px-4 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-medium transition-colors"
           >
             LOGIN
-          </a>
-          <a
+          </button>
+          <button
+            type="button"
             routerLink="/auth/register"
             class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 font-medium transition-colors"
           >
             SIGN UP
-          </a>
+          </button>
         </ng-container>
 
         <!-- User menu -->

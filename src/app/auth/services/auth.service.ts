@@ -56,18 +56,11 @@ export class AuthService {
     return 'not-authenticated';
   });
 
-  login(email: string, password: string): Observable<boolean> {
-    return this.http
-      .post<AuthResponse>(`${baseUrl}/login`, {
-        email,
-        password,
-      })
-      .pipe(
-        tap((resp) => this.handleAuthSuccess(resp)),
-        tap((resp) => console.log('Login response:', resp)),
-        map(() => true),
-        catchError((error: any) => this.handleAuthError(error))
-      );
+  login(email: string, password: string): any {
+    return this.http.post<AuthResponse>(`${baseUrl}/login`, {
+      email,
+      password,
+    });
   }
 
   register(name: string, country: string, email: string, password: string) {
@@ -84,62 +77,27 @@ export class AuthService {
         }),
         tap((resp) => console.log('Register response:', resp)),
         map(() => true),
-        catchError((error: any) => this.handleAuthError(error))
+        catchError((error: any) => this.handleAuthError(error)),
       );
   }
 
   logout() {
+    this._authStatus.set('not-authenticated');
     this._user.set(null);
     this.__user.set(null);
-    this._authStatus.set('not-authenticated');
     this._token.set(null);
     localStorage.removeItem('token');
     localStorage.removeItem('userData');
   }
 
-  checkStatus(): Observable<boolean> {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      this.logout();
-      return of(false);
-    }
-
-    this._authStatus.set('checking');
-    this._token.set(token);
-
-    // Opcional: Aquí podrías hacer una llamada al backend para validar el token
-    // y obtener los datos del usuario actual
-    // return this.http.get<AuthResponse>(`${baseUrl}/verify-token`)
-    //   .pipe(
-    //     tap(resp => this.handleAuthSuccess(resp)),
-    //     map(() => true),
-    //     catchError(() => {
-    //       this.logout();
-    //       return of(false);
-    //     })
-    //   );
-
-    // Por ahora, solo marca como autenticado si existe el token
-    this._authStatus.set('authenticated');
-    return of(true);
-  }
-
-  private handleAuthSuccess(response: AuthResponse) {
-    const token = response.user.Token;
-    const userData = response.user.UserData;
-
-    this._authStatus.set('authenticated');
-    this._token.set(token);
-    this.__user.set(userData);
-
-    // Guardar token y datos del usuario en localStorage
-    localStorage.setItem('token', token);
-    localStorage.setItem('userData', JSON.stringify(userData));
-  }
-
   private handleAuthError(error: any): Observable<boolean> {
-    console.error('Auth error:', error);
-    this.logout();
+    console.error('Authentication error:', error);
+    this._authStatus.set('not-authenticated');
+    this._user.set(null);
+    this.__user.set(null);
+    this._token.set(null);
+    localStorage.removeItem('token');
+    localStorage.removeItem('userData');
     return of(false);
   }
 }

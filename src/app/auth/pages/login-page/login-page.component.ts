@@ -2,11 +2,12 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { AuthStore } from '@auth/store/auth-store';
 
 @Component({
   selector: 'app-login-page',
   standalone: true,
-  imports: [ReactiveFormsModule],
+  imports: [ReactiveFormsModule, AuthStore],
   templateUrl: './login-page.component.html',
 })
 export class LoginPageComponent {
@@ -16,13 +17,14 @@ export class LoginPageComponent {
   router = inject(Router);
 
   authService = inject(AuthService);
+  readonly authStore = inject(AuthStore);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  onSubmit() {
+  async onSubmit() {
     if (this.loginForm.invalid) {
       this.hasError.set(true);
       setTimeout(() => {
@@ -33,16 +35,6 @@ export class LoginPageComponent {
 
     const { email = '', password = '' } = this.loginForm.value;
 
-    this.authService.login(email!, password!).subscribe((isAuthenticated) => {
-      if (isAuthenticated) {
-        this.router.navigateByUrl('/');
-        return;
-      }
-
-      this.hasError.set(true);
-      setTimeout(() => {
-        this.hasError.set(false);
-      }, 2000);
-    });
+    await this.authStore.login(email!, password!);
   }
 }
