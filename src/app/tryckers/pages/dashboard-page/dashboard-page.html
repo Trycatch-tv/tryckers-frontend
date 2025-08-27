@@ -1,74 +1,40 @@
 <!-- Loading state -->
 @if (loading) {
-<div class="flex justify-center items-center min-h-96">
-  <div class="text-center">
-    <div
-      class="animate-spin rounded-full h-12 w-12 border-b-2 border-black dark:border-white mx-auto mb-4"
-    ></div>
-    <p class="text-gray-600 dark:text-gray-300">Cargando tryckers...</p>
+<div class="loading-container">
+  <div class="loading-content">
+    <div class="spinner"></div>
+    <p>Cargando tryckers...</p>
   </div>
 </div>
 } @else {
-<!-- Header con identidad blanco y negro -->
-<div
-  class="bg-white dark:bg-black border-b-2 border-black dark:border-white p-8"
->
-  <div class="max-w-6xl mx-auto">
-    <h1 class="text-5xl font-bold text-black dark:text-white mb-2">TRYCKERS</h1>
-    <p class="text-xl text-gray-600 dark:text-gray-300">
-      Comunidad de desarrolladores
-    </p>
+<!-- Header -->
+<div class="page-header">
+  <div class="container">
+    <h1>TRYCKERS</h1>
+    <p>Comunidad de desarrolladores</p>
   </div>
 </div>
 
 <!-- Grid de usuarios -->
-<div class="max-w-6xl mx-auto p-8">
-  <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+<div class="main-content">
+  <div class="users-grid">
     @for (trycker of tryckers; track trycker.id) {
-    <div class="group">
-      <!-- Tarjeta con diseño minimalista blanco y negro -->
-      <div
-        class="bg-white dark:bg-black border-2 border-black dark:border-white p-6 transition-all duration-300 hover:shadow-lg hover:scale-105"
-      >
-        <!-- Avatar placeholder con patrón -->
-        <div
-          class="w-20 h-20 mx-auto mb-4 border-2 border-black dark:border-white flex items-center justify-center"
-        >
-          <div
-            class="w-full h-full bg-black dark:bg-white"
-            style="
-              background-image: repeating-linear-gradient(
-                45deg,
-                transparent 0px,
-                transparent 4px,
-                currentColor 4px,
-                currentColor 8px
-              );
-            "
-          ></div>
-        </div>
+    <div class="user-card">
+      <!-- Avatar placeholder -->
+      <div class="avatar">
+        <div class="avatar-pattern"></div>
+      </div>
 
-        <!-- Información del usuario -->
-        <div class="text-center">
-          <h3 class="text-xl font-bold text-black dark:text-white mb-2">
-            {{ trycker.name || trycker.title || "Usuario" }}
-          </h3>
-          <p class="text-sm text-gray-600 dark:text-gray-300 mb-1">
-            {{ trycker.email || "email@example.com" }}
-          </p>
-          <p class="text-xs text-gray-500 dark:text-gray-400">
-            {{ trycker.country || "País no especificado" }}
-          </p>
-        </div>
+      <!-- Información del usuario -->
+      <div class="user-info">
+        <h3>{{ trycker.name || trycker.title || "Usuario" }}</h3>
+        <p class="email">{{ trycker.email || "email@example.com" }}</p>
+        <p class="country">{{ trycker.country || "País no especificado" }}</p>
+      </div>
 
-        <!-- Botón de acción -->
-        <div class="mt-4 text-center">
-          <button
-            class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black font-semibold text-sm hover:bg-gray-800 dark:hover:bg-gray-200 transition-colors"
-          >
-            VER PERFIL
-          </button>
-        </div>
+      <!-- Botón de acción -->
+      <div class="card-actions">
+        <button class="btn-profile">VER PERFIL</button>
       </div>
     </div>
     }
@@ -76,18 +42,10 @@
 
   <!-- Mensaje si no hay usuarios -->
   @if (tryckers.length === 0) {
-  <div class="text-center py-12">
-    <div
-      class="w-24 h-24 mx-auto mb-4 border-2 border-black dark:border-white flex items-center justify-center"
-    >
-      <span class="text-2xl">👥</span>
-    </div>
-    <h3 class="text-xl font-bold text-black dark:text-white mb-2">
-      No hay tryckers disponibles
-    </h3>
-    <p class="text-gray-600 dark:text-gray-300">
-      Inicia sesión para ver la comunidad de desarrolladores
-    </p>
+  <div class="empty-state">
+    <div class="empty-icon">👥</div>
+    <h3>No hay tryckers disponibles</h3>
+    <p>Inicia sesión para ver la comunidad de desarrolladores</p>
   </div>
   }
 </div>

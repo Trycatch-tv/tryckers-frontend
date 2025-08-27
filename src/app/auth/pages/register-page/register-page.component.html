@@ -1,111 +1,67 @@
-<section class="min-h-screen flex">
-  <!-- Lado izquierdo - Formulario -->
-  <div
-    class="flex-1 flex items-center justify-center p-8 bg-white dark:bg-gray-800"
-  >
-    <div class="w-full max-w-md">
-      <h1 class="text-5xl font-bold mb-2 text-gray-900 dark:text-white">
-        Welcome
-      </h1>
-      <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-        Create your account
-      </p>
+<div class="register-container">
+  <!-- Formulario de Registro -->
+  <div class="register-form">
+    <div class="form-content">
+      <h1>Welcome</h1>
+      <p>Create your account</p>
 
-      <form
-        class="space-y-6"
-        [formGroup]="registerForm"
-        (ngSubmit)="onSubmit()"
-      >
-        <input
-          pInputText
-          type="text"
-          formControlName="name"
-          placeholder="Full Name"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+      <form [formGroup]="registerForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            type="text"
+            formControlName="name"
+            placeholder="Full Name"
+            class="form-input"
+          />
+        </div>
 
-        <input
-          pInputText
-          type="email"
-          formControlName="email"
-          placeholder="Email"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            class="form-input"
+          />
+        </div>
 
-        <select
-          formControlName="country"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg appearance-none"
-          style="
-            background-image: url('data:image/svg+xml;charset=US-ASCII,<svg xmlns=&quot;http://www.w3.org/2000/svg&quot; viewBox=&quot;0 0 4 5&quot;><path fill=&quot;%23666&quot; d=&quot;M2 0L0 2h4zm0 5L0 3h4z&quot;/></svg>');
-            background-repeat: no-repeat;
-            background-position: right 1rem center;
-            background-size: 12px;
-          "
-        >
-          <option value="" disabled selected>Country</option>
-          <option value="colombia">Colombia</option>
-          <option value="chile">Chile</option>
-        </select>
+        <div class="form-group">
+          <select formControlName="country" class="form-select">
+            <option value="" disabled selected>Select Country</option>
+            <option value="colombia">Colombia</option>
+            <option value="chile">Chile</option>
+            <option value="argentina">Argentina</option>
+            <option value="peru">Peru</option>
+            <option value="mexico">Mexico</option>
+            <option value="spain">Spain</option>
+          </select>
+        </div>
 
-        <input
-          pInputText
-          type="password"
-          formControlName="password"
-          placeholder="Password"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            class="form-input"
+          />
+        </div>
 
-        <input
-          pInputText
-          type="password"
-          placeholder="Confirm Password"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+        <button type="submit" class="submit-btn">Register</button>
 
-        <button
-          type="submit"
-          class="w-full p-4 text-lg font-semibold text-white bg-black hover:bg-gray-800 rounded-lg transition-colors"
-        >
-          Register
-        </button>
+        <div class="form-links">
+          <p>
+            Already have an account?
+            <a routerLink="/auth/login" class="login-link">Log in</a>
+          </p>
+        </div>
       </form>
     </div>
   </div>
 
-  <!-- Lado derecho - Diseño con rayas -->
-  <div class="flex-1 relative bg-black text-white overflow-hidden">
-    <!-- Patrón de rayas diagonales -->
-    <div
-      class="absolute inset-0"
-      style="
-        background-image: repeating-linear-gradient(
-          45deg,
-          #000 0px,
-          #000 60px,
-          #fff 60px,
-          #fff 120px
-        );
-      "
-    ></div>
-
-    <!-- Contenido -->
-    <div class="relative z-10 h-full flex flex-col justify-between p-12">
-      <div class="flex-1 flex items-center">
-        <div>
-          <h2 class="text-6xl font-bold mb-4">Join Tryckers</h2>
-          <p class="text-xl opacity-90">
-            Become a part of the developer community.
-          </p>
-        </div>
-      </div>
-
-      <div class="flex justify-center">
-        <button
-          class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-        >
-          Quizas un boton para ir a dc o algo
-        </button>
-      </div>
+  <!-- Lado derecho - Información -->
+  <div class="register-info">
+    <div class="info-content">
+      <h2>Join Tryckers</h2>
+      <p>Become a part of the developer community and start your journey.</p>
     </div>
   </div>
-</section>
+</div>

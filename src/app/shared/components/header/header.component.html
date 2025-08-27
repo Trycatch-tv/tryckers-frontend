@@ -1,81 +1,39 @@
-<!-- Header con identidad blanco y negro -->
-<header
-  class="bg-white dark:bg-black border-b-2 border-black dark:border-white"
->
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-    <div class="flex items-center justify-between h-16">
+<!-- Header básico -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
       <!-- Logo -->
-      <div class="flex items-center">
-        <a
-          routerLink="./home"
-          class="text-2xl font-bold text-black dark:text-white hover:opacity-75 transition-opacity"
-        >
-          TRYCKERS
-        </a>
+      <div class="logo">
+        <a routerLink="./home" class="logo-link"> TRYCKERS </a>
       </div>
 
       <!-- Navigation -->
-      <nav class="hidden md:flex items-center space-x-8">
-        <a
-          routerLink="/network"
-          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
-        >
-          Network
-        </a>
-        <a
-          routerLink="/messages"
-          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
-        >
-          Messages
-        </a>
-        <a
-          routerLink="/notifications"
-          class="text-black dark:text-white hover:opacity-75 font-medium transition-opacity"
-        >
-          Notifications
-        </a>
+      <nav class="nav">
+        <a routerLink="/network" class="nav-link">Network</a>
+        <a routerLink="/messages" class="nav-link">Messages</a>
+        <a routerLink="/notifications" class="nav-link">Notifications</a>
       </nav>
 
       <!-- Right side -->
-      <div class="flex items-center space-x-4">
+      <div class="header-actions">
         <!-- Search -->
-        <div class="hidden sm:block">
-          <input
-            type="text"
-            placeholder="Search..."
-            class="px-3 py-1 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white placeholder-gray-500 dark:placeholder-gray-400 focus:outline-none focus:ring-0"
-          />
+        <div class="search-container">
+          <input type="text" placeholder="Search..." class="search-input" />
         </div>
-
-        <!-- Dark mode toggle -->
-        <button
-          (click)="toggleDarkMode()"
-          class="p-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
-          [attr.aria-label]="
-            isDarkMode() ? 'Cambiar a modo claro' : 'Cambiar a modo oscuro'
-          "
-          title="Alternar modo oscuro"
-        >
-          @if (!isDarkMode()) {
-            <span class="text-lg">🌙</span>
-          } @else {
-            <span class="text-lg">☀️</span>
-          }
-        </button>
 
         <!-- Authentication buttons -->
         <ng-container *ngIf="authService.authStatus() === 'not-authenticated'">
           <button
             type="button"
             routerLink="/auth/login"
-            class="px-4 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black font-medium transition-colors"
+            class="btn btn-outline"
           >
             LOGIN
           </button>
           <button
             type="button"
             routerLink="/auth/register"
-            class="px-4 py-2 bg-black dark:bg-white text-white dark:text-black hover:bg-gray-800 dark:hover:bg-gray-200 font-medium transition-colors"
+            class="btn btn-primary"
           >
             SIGN UP
           </button>
@@ -83,40 +41,37 @@
 
         <!-- User menu -->
         <ng-container *ngIf="authService.authStatus() === 'authenticated'">
-          <div class="relative">
-            <button
-              (click)="toggleDropdown()"
-              class="flex items-center space-x-2 px-3 py-2 border-2 border-black dark:border-white bg-white dark:bg-black text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
-            >
-              <div class="w-6 h-6 bg-black dark:bg-white rounded-full"></div>
-              <span class="hidden md:block font-medium">
+          <div class="user-menu">
+            <button (click)="toggleDropdown()" class="user-button">
+              <div class="avatar"></div>
+              <span class="username">
                 {{ authService.user()?.name || "Usuario" }}
               </span>
-              <span class="text-xs">{{ dropdownOpen() ? "▲" : "▼" }}</span>
+              <span class="dropdown-icon">{{
+                dropdownOpen() ? "▲" : "▼"
+              }}</span>
             </button>
 
             <!-- Dropdown menu -->
             @if (dropdownOpen()) {
-              <div
-                class="absolute right-0 mt-2 w-48 bg-white dark:bg-black border-2 border-black dark:border-white shadow-lg z-50"
-              >
+              <div class="dropdown-menu">
                 <a
                   routerLink="/profile"
-                  class="block px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                  class="dropdown-item"
                   (click)="closeDropdown()"
                 >
                   Profile
                 </a>
                 <a
                   routerLink="/settings"
-                  class="block px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                  class="dropdown-item"
                   (click)="closeDropdown()"
                 >
                   Settings
                 </a>
                 <button
                   (click)="logout(); closeDropdown()"
-                  class="w-full text-left px-4 py-2 text-black dark:text-white hover:bg-black hover:text-white dark:hover:bg-white dark:hover:text-black transition-colors"
+                  class="dropdown-item dropdown-button"
                 >
                   Logout
                 </button>

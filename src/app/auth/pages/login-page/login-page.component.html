@@ -1,103 +1,58 @@
-<section class="min-h-screen flex">
-  <!-- Lado izquierdo - Formulario -->
-  <div
-    class="flex-1 flex items-center justify-center p-8 bg-white dark:bg-gray-800"
-  >
-    <div class="w-full max-w-md">
-      <h1 class="text-5xl font-bold mb-2 text-gray-900 dark:text-white">
-        Welcome<br />
-        back!
-      </h1>
-      <p class="text-gray-600 dark:text-gray-300 mb-8 text-lg">
-        Log in to access
-      </p>
+<div class="login-container">
+  <!-- Formulario de Login -->
+  <div class="login-form">
+    <div class="form-content">
+      <h1>Welcome back!</h1>
+      <p>Log in to access your account</p>
 
-      <form class="space-y-6" [formGroup]="loginForm" (ngSubmit)="onSubmit()">
-        <input
-          pInputText
-          type="email"
-          formControlName="email"
-          placeholder="Email"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+      <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
+        <div class="form-group">
+          <input
+            type="email"
+            formControlName="email"
+            placeholder="Email"
+            class="form-input"
+          />
+        </div>
 
-        <input
-          pInputText
-          type="password"
-          formControlName="password"
-          placeholder="Password"
-          class="w-full p-4 text-lg bg-gray-100 dark:bg-gray-700 border-0 rounded-lg"
-        />
+        <div class="form-group">
+          <input
+            type="password"
+            formControlName="password"
+            placeholder="Password"
+            class="form-input"
+          />
+        </div>
 
-        <button
-          type="submit"
-          class="w-full p-4 text-lg font-semibold text-white bg-black hover:bg-gray-800 rounded-lg transition-colors"
-        >
-          Log in
+        <button type="submit" class="submit-btn" [disabled]="isPosting()">
+          {{ isPosting() ? "Logging in..." : "Log in" }}
         </button>
 
-        <div class="text-center">
-          <a href="#" class="text-gray-500 hover:underline"
-            >Forgot your password?</a
-          >
+        <div class="form-links">
+          <a href="#" class="forgot-link">Forgot your password?</a>
+        </div>
+
+        <div class="form-links">
+          <p>
+            Don't have an account?
+            <a routerLink="/auth/register" class="signup-link">Sign up</a>
+          </p>
         </div>
       </form>
     </div>
   </div>
 
-  <!-- Lado derecho - Diseño con rayas -->
-  <div class="flex-1 relative bg-black text-white overflow-hidden">
-    <!-- Patrón de rayas diagonales -->
-    <div
-      class="absolute inset-0"
-      style="
-        background-image: repeating-linear-gradient(
-          45deg,
-          #000 0px,
-          #000 60px,
-          #fff 60px,
-          #fff 120px
-        );
-      "
-    ></div>
-
-    <!-- Contenido -->
-    <div class="relative z-10 h-full flex flex-col justify-between p-12">
-      <div class="flex-1 flex items-center">
-        <div>
-          <h2 class="text-6xl font-bold mb-4">Tryckers</h2>
-          <p class="text-xl opacity-90">
-            Connect with the developer community.
-          </p>
-        </div>
-      </div>
-
-      <div class="flex justify-center">
-        <button
-          class="bg-white text-black px-8 py-3 rounded-full font-semibold hover:bg-gray-100 transition-colors"
-        >
-          Quizas un boton para ir a dc o algo
-        </button>
-      </div>
+  <!-- Lado derecho - Información -->
+  <div class="login-info">
+    <div class="info-content">
+      <h2>Tryckers</h2>
+      <p>Connect with the developer community and showcase your skills.</p>
     </div>
   </div>
-</section>
+</div>
 
 @if (hasError()) {
-  <div role="alert" class="alert alert-error fixed bottom-5 right-5 w-64">
-    <svg
-      xmlns="http://www.w3.org/2000/svg"
-      class="h-6 w-6 shrink-0 stroke-current"
-      fill="none"
-      viewBox="0 0 24 24"
-    >
-      <path
-        stroke-linecap="round"
-        stroke-linejoin="round"
-        stroke-width="2"
-        d="M10 14l2-2m0 0l2-2m-2 2l-2-2m2 2l2 2m7-2a9 9 0 11-18 0 9 9 0 0118 0z"
-      />
-    </svg>
-    <span>Please check your credentials</span>
+  <div class="error-alert">
+    <span>❌ Please check your credentials</span>
   </div>
 }
