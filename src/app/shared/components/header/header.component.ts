@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { AuthStore } from '@auth/store/auth-store';
 
 @Component({
   selector: 'app-header',
@@ -181,10 +182,12 @@ import { AuthService } from '@auth/services/auth.service';
 })
 export class HeaderComponent {
   authService = inject(AuthService);
+  authStore = inject(AuthStore);
   dropdownOpen = signal(false);
 
   logout() {
     this.authService.logout();
+    this.authStore.logout();
   }
 
   toggleDropdown() {

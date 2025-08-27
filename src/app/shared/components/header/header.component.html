@@ -4,14 +4,12 @@
     <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a routerLink="./home" class="logo-link"> TRYCKERS </a>
+        <a routerLink="/home" class="logo-link"> 👥Tryckers </a>
       </div>
 
       <!-- Navigation -->
       <nav class="nav">
-        <a routerLink="/network" class="nav-link">Network</a>
-        <a routerLink="/messages" class="nav-link">Messages</a>
-        <a routerLink="/notifications" class="nav-link">Notifications</a>
+        <a routerLink="/network" class="nav-link">Cartelera</a>
       </nav>
 
       <!-- Right side -->
@@ -22,7 +20,7 @@
         </div>
 
         <!-- Authentication buttons -->
-        <ng-container *ngIf="authService.authStatus() === 'not-authenticated'">
+        <ng-container *ngIf="!authStore.isLoggedIn()">
           <button
             type="button"
             routerLink="/auth/login"
@@ -40,12 +38,12 @@
         </ng-container>
 
         <!-- User menu -->
-        <ng-container *ngIf="authService.authStatus() === 'authenticated'">
+        <ng-container *ngIf="authStore.isLoggedIn()">
           <div class="user-menu">
             <button (click)="toggleDropdown()" class="user-button">
               <div class="avatar"></div>
               <span class="username">
-                {{ authService.user()?.name || "Usuario" }}
+                {{ authStore.user()?.name || "Usuario" }}
               </span>
               <span class="dropdown-icon">{{
                 dropdownOpen() ? "▲" : "▼"

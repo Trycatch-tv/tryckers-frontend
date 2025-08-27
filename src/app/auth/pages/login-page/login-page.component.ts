@@ -2,6 +2,7 @@ import { Component, inject, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { AuthStore } from '@auth/store/auth-store';
 
 @Component({
   selector: 'app-login-page',
@@ -154,6 +155,7 @@ export class LoginPageComponent {
   router = inject(Router);
 
   authService = inject(AuthService);
+  authStore = inject(AuthStore);
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -172,19 +174,18 @@ export class LoginPageComponent {
     this.isPosting.set(true);
     const { email = '', password = '' } = this.loginForm.value;
 
-    this.authService.login(email!, password!).subscribe({
-      next: (response: any) => {
-        this.isPosting.set(false);
-        // Handle successful login
-        this.router.navigateByUrl('/');
-      },
-      error: (error: any) => {
-        this.isPosting.set(false);
-        this.hasError.set(true);
-        setTimeout(() => {
-          this.hasError.set(false);
-        }, 2000);
-      },
-    });
+    try {
+      await this.authStore.login(email!, password!);
+      this.isPosting.set(false);
+      console.log('Login successful, redirecting to home');
+      this.router.navigateByUrl('/');
+    } catch (error) {
+      console.error('Login failed:', error);
+      this.isPosting.set(false);
+      this.hasError.set(true);
+      setTimeout(() => {
+        this.hasError.set(false);
+      }, 2000);
+    }
   }
 }

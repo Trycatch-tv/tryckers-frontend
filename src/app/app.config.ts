@@ -9,6 +9,7 @@ import Aura from '@primeuix/themes/aura';
 import { providePrimeNG } from 'primeng/config';
 
 import { provideHttpClient, withFetch } from '@angular/common/http';
+import { AuthStore } from '@auth/store/auth-store';
 import { routes } from './app.routes';
 
 export const appConfig: ApplicationConfig = {
@@ -21,5 +22,6 @@ export const appConfig: ApplicationConfig = {
     providePrimeNG({
       theme: { preset: Aura, options: { darkModeSelector: '.app-dark' } },
     }),
+    AuthStore, // Proporcionar el store globalmente
   ],
 };

@@ -1,13 +1,17 @@
-@if (isLoggedIn) {
+@if (authStore.isLoggedIn()) {
   <app-dashboard-page />
 } @else {
-  <h1 class="text-5xl font-bold text-black mb-2 bg-white">
-    Esta es la landing
-  </h1>
-  <hr />
-
-  <hr />
-  <p-button (click)="inc()" label="Increment" />
-  {{ authStore.user() | json }}
-  <hr />
+  <div class="landing-page">
+    <h1 class="landing-title">Bienvenido a Tryckers</h1>
+    <p class="landing-subtitle">
+      La plataforma para desarrolladores. Inicia sesión para acceder a la
+      comunidad.
+    </p>
+    <div class="landing-actions">
+      <a routerLink="/auth/login" class="cta-button">Iniciar Sesión</a>
+      <a routerLink="/auth/register" class="cta-button secondary"
+        >Registrarse</a
+      >
+    </div>
+  </div>
 }
