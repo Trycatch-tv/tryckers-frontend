@@ -1,0 +1,52 @@
+<!-- Loading state -->
+@if (loading) {
+<div class="loading-container">
+  <div class="loading-content">
+    <div class="spinner"></div>
+    <p>Cargando tryckers...</p>
+  </div>
+</div>
+} @else {
+<!-- Header -->
+<div class="page-header">
+  <div class="container">
+    <h1>TRYCKERS</h1>
+    <p>Comunidad de desarrolladores</p>
+  </div>
+</div>
+
+<!-- Grid de usuarios -->
+<div class="main-content">
+  <div class="users-grid">
+    @for (trycker of tryckers; track trycker.id) {
+    <div class="user-card">
+      <!-- Avatar placeholder -->
+      <div class="avatar">
+        <div class="avatar-pattern"></div>
+      </div>
+
+      <!-- Información del usuario -->
+      <div class="user-info">
+        <h3>{{ trycker.name || trycker.title || "Usuario" }}</h3>
+        <p class="email">{{ trycker.email || "email@example.com" }}</p>
+        <p class="country">{{ trycker.country || "País no especificado" }}</p>
+      </div>
+
+      <!-- Botón de acción -->
+      <div class="card-actions">
+        <button class="btn-profile">VER PERFIL</button>
+      </div>
+    </div>
+    }
+  </div>
+
+  <!-- Mensaje si no hay usuarios -->
+  @if (tryckers.length === 0) {
+  <div class="empty-state">
+    <div class="empty-icon">👥</div>
+    <h3>No hay tryckers disponibles</h3>
+    <p>Inicia sesión para ver la comunidad de desarrolladores</p>
+  </div>
+  }
+</div>
+}

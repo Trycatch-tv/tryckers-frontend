@@ -1,89 +1,96 @@
-<header class="bg-white shadow-sm">
-  <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 flex items-center justify-between h-16">
-
-    <!-- Logo -->
-    <div class="flex items-center">
-      <a routerLink="./home" class="text-2xl font-bold text-gray-800 hover:text-blue-800">
-        Tryckers
-      </a>
-    </div>
-
-    <!-- Links -->
-    <nav class="hidden md:flex items-center gap-8">
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Network</a>
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Messages</a>
-      <a href="#" class="text-lg font-semibold text-gray-800 hover:text-blue-800">Notifications</a>
-    </nav>
-
-    <!-- Search & Auth -->
-    <div class="flex items-center gap-4 px-2">
-      <div
-        class="w-40 md:w-50 flex items-center gap-2   bg-[#f2f2f2] rounded-md text-gray-500 transition outline-gray-300 focus-within:outline-1">
-        <svg xmlns="http://www.w3.org/2000/svg" width="2em" height="2em" viewBox="0 0 24 24">
-          <path fill="currentColor"
-            d="M9.539 15.23q-2.398 0-4.065-1.666Q3.808 11.899 3.808 9.5t1.666-4.065T9.539 3.77t4.064 1.666T15.269 9.5q0 1.042-.369 2.017t-.97 1.668l5.909 5.907q.14.14.15.345q.009.203-.15.363q-.16.16-.354.16t-.354-.16l-5.908-5.908q-.75.639-1.725.989t-1.96.35m0-1q1.99 0 3.361-1.37q1.37-1.37 1.37-3.361T12.9 6.14T9.54 4.77q-1.991 0-3.361 1.37T4.808 9.5t1.37 3.36t3.36 1.37" />
-        </svg>
-        <input type="text" placeholder="Search" class="w-4/6 py-1 bg-[#f2f2f2] outline-none text-gray-500" />
+<!-- Header básico -->
+<header class="header">
+  <div class="container">
+    <div class="header-content">
+      <!-- Logo -->
+      <div class="logo">
+        <a routerLink="/home" class="logo-link"> 👥Tryckers </a>
       </div>
 
+      @if (authStore.isLoggedIn()) {
+        <!-- Navigation -->
+        <nav class="nav">
+          <a routerLink="/network" class="nav-link">Cartelera</a>
+        </nav>
+      }
 
-
-      <!-- Si no está autenticado -->
-      <ng-container *ngIf="authService.authStatus() === 'not-authenticated'; else loggedIn">
-        <button routerLink="/auth/login"
-          class="bg-gray-200 text-black px-4 py-2 rounded-md  transition font-bold hover:cursor-pointer">
-          Login
+      <!-- Right side -->
+      <div class="header-actions">
+        <!-- Theme toggle button -->
+        <button
+          (click)="toggleTheme()"
+          class="theme-toggle"
+          [attr.aria-label]="
+            isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'
+          "
+          title="Cambiar tema"
+        >
+          @if (isDarkMode()) {
+            <span class="theme-icon">☀️</span>
+          } @else {
+            <span class="theme-icon">🌙</span>
+          }
         </button>
-      </ng-container>
 
-      <ng-container *ngIf="authService.authStatus() === 'not-authenticated'; else loggedIn">
-        <button routerLink="/auth/register"
-          class="bg-black text-white px-4 py-2 rounded-md  transition font-bold hover:cursor-pointer">
-          Sing Up
-        </button>
-      </ng-container>
-
-      <!-- Si está autenticado -->
-      <ng-template #loggedIn>
-        <div class="relative">
-          <button (click)="toggleDropdown()"
-            class="flex items-center space-x-2 px-2 h-10 rounded-full border border-gray-300 focus:outline-none focus:ring-2 focus:ring-indigo-500 transition">
-            <img
-              [src]="authService.user()?.profile_picture || 'https://img.daisyui.com/images/stock/photo-1534528741775-53994a69daeb.webp'"
-              alt="Avatar" class="w-8 h-8 rounded-full object-cover" />
-            <span class="text-base text-gray-800 font-medium hidden md:block">
-              {{ authService.user()?.name }}
-            </span>
-            <svg class="w-4 h-4 text-gray-600 transition-transform duration-150" [class.rotate-180]="dropdownOpen()"
-              xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 10 6" stroke="currentColor">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M1 1l4 4 4-4" />
-            </svg>
+        <!-- Authentication buttons -->
+        <ng-container *ngIf="!authStore.isLoggedIn()">
+          <button
+            type="button"
+            routerLink="/auth/login"
+            class="btn btn-outline"
+          >
+            LOGIN
           </button>
+          <button
+            type="button"
+            routerLink="/auth/register"
+            class="btn btn-primary"
+          >
+            SIGN UP
+          </button>
+        </ng-container>
 
-          <!-- Dropdown -->
-          <div *ngIf="dropdownOpen()" (clickOutside)="closeDropdown()" class="absolute right-0 mt-2 w-48 bg-white border border-gray-200 rounded-md shadow-lg z-10
-                   transition-all duration-200 ease-out transform origin-top-right
-                   opacity-100 scale-100">
-            <ul class="py-1">
-              <li>
-                <a href="#" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+        <!-- User menu -->
+        <ng-container *ngIf="authStore.isLoggedIn()">
+          <div class="user-menu">
+            <button (click)="toggleDropdown()" class="user-button">
+              <div class="avatar"></div>
+              <span class="username">
+                {{ authStore.user()?.name || "Usuario" }}
+              </span>
+              <span class="dropdown-icon">{{
+                dropdownOpen() ? "▲" : "▼"
+              }}</span>
+            </button>
+
+            <!-- Dropdown menu -->
+            @if (dropdownOpen()) {
+              <div class="dropdown-menu">
+                <a
+                  routerLink="/profile"
+                  class="dropdown-item"
+                  (click)="closeDropdown()"
+                >
                   Profile
                 </a>
-              </li>
-              <li>
-                <a href="#settings" class="block px-4 py-2 text-gray-700 hover:bg-gray-100">
+                <a
+                  routerLink="/settings"
+                  class="dropdown-item"
+                  (click)="closeDropdown()"
+                >
                   Settings
                 </a>
-              </li>
-              <li>
-                <button (click)="logout()" class="w-full text-left px-4 py-2 text-gray-700 hover:bg-gray-100">
+                <button
+                  (click)="logout(); closeDropdown()"
+                  class="dropdown-item dropdown-button"
+                >
                   Logout
                 </button>
-              </li>
-            </ul>
+              </div>
+            }
           </div>
-        </div>
-      </ng-template>
+        </ng-container>
+      </div>
     </div>
   </div>
 </header>

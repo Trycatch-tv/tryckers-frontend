@@ -1,0 +1,284 @@
+/* Footer Styles */
+.footer {
+  background: #eeeeee;
+  border-top: 1px solid #e9ecef;
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 16px;
+}
+
+.footer-content {
+  padding: 48px 0 24px;
+}
+
+/* Main Footer Content */
+.footer-main {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 48px;
+  margin-bottom: 32px;
+}
+
+/* Brand Section */
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.brand-title {
+  font-size: 28px;
+  font-weight: bold;
+  color: #333;
+  margin: 0 0 8px 0;
+  letter-spacing: 1px;
+}
+
+.brand-subtitle {
+  color: #666;
+  margin: 0 0 16px 0;
+  font-size: 16px;
+}
+
+.brand-divider {
+  width: 60px;
+  height: 4px;
+  background: linear-gradient(90deg, #007bff, #0056b3);
+  border-radius: 2px;
+}
+
+/* Footer Links */
+.footer-links {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 32px;
+}
+
+.link-section {
+  display: flex;
+  flex-direction: column;
+}
+
+.link-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: #333;
+  margin: 0 0 16px 0;
+}
+
+.link-list {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.link-list li {
+  margin-bottom: 8px;
+}
+
+.footer-link {
+  color: #666;
+  text-decoration: none;
+  font-size: 14px;
+  transition: color 0.3s ease;
+}
+
+.footer-link:hover {
+  color: #007bff;
+}
+
+/* Footer Bottom */
+.footer-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: 24px;
+  border-top: 1px solid #e9ecef;
+}
+
+.copyright {
+  color: #888;
+  font-size: 14px;
+  margin: 0;
+}
+
+/* Social Links */
+.social-links {
+  display: flex;
+  gap: 16px;
+}
+
+.social-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 36px;
+  height: 36px;
+  background: #f1f3f4;
+  color: #666;
+  border-radius: 50%;
+  text-decoration: none;
+  font-size: 16px;
+  transition: all 0.3s ease;
+}
+
+.social-link:hover {
+  background: #007bff;
+  color: white;
+  transform: translateY(-2px);
+}
+
+/* Fallback for Font Awesome icons */
+.social-link i::before {
+  font-family: 'Font Awesome 5 Brands', sans-serif;
+}
+
+.fa-github::before {
+  content: '🐙';
+}
+
+.fa-linkedin::before {
+  content: '💼';
+}
+
+.fa-twitter::before {
+  content: '🐦';
+}
+
+.fa-discord::before {
+  content: '💬';
+}
+
+/* Responsive Design */
+@media (max-width: 968px) {
+  .footer-main {
+    grid-template-columns: 1fr;
+    gap: 32px;
+    text-align: center;
+  }
+  
+  .footer-brand {
+    align-items: center;
+  }
+  
+  .footer-links {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 24px;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer-content {
+    padding: 32px 0 16px;
+  }
+  
+  .footer-main {
+    gap: 24px;
+  }
+  
+  .footer-links {
+    grid-template-columns: 1fr;
+    gap: 20px;
+  }
+  
+  .footer-bottom {
+    flex-direction: column;
+    gap: 16px;
+    text-align: center;
+  }
+  
+  .social-links {
+    justify-content: center;
+  }
+}
+
+@media (max-width: 480px) {
+  .footer-container {
+    padding: 0 12px;
+  }
+  
+  .brand-title {
+    font-size: 24px;
+  }
+  
+  .footer-content {
+    padding: 24px 0 12px;
+  }
+}
+
+/* Dark Theme Support */
+@media (prefers-color-scheme: dark) {
+  .footer {
+    background: #1a1a1a;
+    border-top-color: #333;
+  }
+  
+  .brand-title {
+    color: #fff;
+  }
+  
+  .brand-subtitle {
+    color: #ccc;
+  }
+  
+  .link-title {
+    color: #fff;
+  }
+  
+  .footer-link {
+    color: #ccc;
+  }
+  
+  .footer-link:hover {
+    color: #4dabf7;
+  }
+  
+  .copyright {
+    color: #999;
+  }
+  
+  .footer-bottom {
+    border-top-color: #333;
+  }
+  
+  .social-link {
+    background: #333;
+    color: #ccc;
+  }
+  
+  .social-link:hover {
+    background: #4dabf7;
+    color: white;
+  }
+}
+
+/* High Contrast Mode */
+@media (prefers-contrast: high) {
+  .footer {
+    border-top: 2px solid #000;
+  }
+  
+  .footer-link:hover {
+    text-decoration: underline;
+  }
+  
+  .social-link {
+    border: 1px solid #666;
+  }
+}
+
+/* Reduced Motion */
+@media (prefers-reduced-motion: reduce) {
+  .footer-link,
+  .social-link {
+    transition: none;
+  }
+  
+  .social-link:hover {
+    transform: none;
+  }
+}
