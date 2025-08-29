@@ -7,17 +7,30 @@
         <a routerLink="/home" class="logo-link"> 👥Tryckers </a>
       </div>
 
-      <!-- Navigation -->
-      <nav class="nav">
-        <a routerLink="/network" class="nav-link">Cartelera</a>
-      </nav>
+      @if (authStore.isLoggedIn()) {
+        <!-- Navigation -->
+        <nav class="nav">
+          <a routerLink="/network" class="nav-link">Cartelera</a>
+        </nav>
+      }
 
       <!-- Right side -->
       <div class="header-actions">
-        <!-- Search -->
-        <div class="search-container">
-          <input type="text" placeholder="Search..." class="search-input" />
-        </div>
+        <!-- Theme toggle button -->
+        <button
+          (click)="toggleTheme()"
+          class="theme-toggle"
+          [attr.aria-label]="
+            isDarkMode() ? 'Cambiar a tema claro' : 'Cambiar a tema oscuro'
+          "
+          title="Cambiar tema"
+        >
+          @if (isDarkMode()) {
+            <span class="theme-icon">☀️</span>
+          } @else {
+            <span class="theme-icon">🌙</span>
+          }
+        </button>
 
         <!-- Authentication buttons -->
         <ng-container *ngIf="!authStore.isLoggedIn()">
