@@ -1,0 +1,234 @@
+.login-container {
+  display: flex;
+  min-height: 100vh;
+  align-items: stretch;
+}
+
+.login-form {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: #ffffff;
+  padding: 2rem;
+}
+
+.form-content {
+  width: 100%;
+  max-width: 400px;
+}
+
+.form-content h1 {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #1a1a1a;
+  margin-bottom: 0.5rem;
+}
+
+.form-content p {
+  color: #666;
+  margin-bottom: 2rem;
+  font-size: 1rem;
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-input {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  border: 1px solid #ddd;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  color: #1a1a1a;
+  background: #ffffff;
+  transition: border-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.form-input:focus {
+  outline: none;
+  border-color: #007bff;
+  box-shadow: 0 0 0 3px rgba(0, 123, 255, 0.1);
+}
+
+.submit-btn {
+  width: 100%;
+  padding: 0.875rem 1rem;
+  background: #007bff;
+  color: white;
+  border: none;
+  border-radius: 0.5rem;
+  font-size: 1rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+  margin-bottom: 1.5rem;
+}
+
+.submit-btn:hover:not(:disabled) {
+  background: #0056b3;
+}
+
+.submit-btn:disabled {
+  background: #ccc;
+  cursor: not-allowed;
+}
+
+.form-links {
+  text-align: center;
+  margin-bottom: 1rem;
+}
+
+.form-links p {
+  margin: 0;
+  color: #666;
+}
+
+.forgot-link,
+.signup-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
+
+.forgot-link:hover,
+.signup-link:hover {
+  color: #0056b3;
+}
+
+.login-info {
+  flex: 1;
+  background: linear-gradient(135deg, #007bff, #0056b3);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.info-content {
+  text-align: center;
+  color: white;
+}
+
+.info-content h2 {
+  font-size: 2.5rem;
+  font-weight: 700;
+  margin-bottom: 1rem;
+}
+
+.info-content p {
+  font-size: 1.125rem;
+  opacity: 0.9;
+  max-width: 400px;
+}
+
+.error-alert {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #dc3545;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .login-container {
+    flex-direction: column;
+  }
+  
+  .login-info {
+    order: -1;
+    min-height: 30vh;
+  }
+  
+  .info-content h2 {
+    font-size: 2rem;
+  }
+  
+  .form-content {
+    max-width: none;
+  }
+  
+  .login-form {
+    padding: 1.5rem;
+  }
+}
+
+/* Dark Theme Styles */
+:host-context(.dark-theme) .login-form,
+.dark-theme .login-form {
+  background: #1a1a1a;
+}
+
+:host-context(.dark-theme) .form-content h1,
+.dark-theme .form-content h1 {
+  color: #e0e0e0;
+}
+
+:host-context(.dark-theme) .form-content p,
+.dark-theme .form-content p {
+  color: #ccc;
+}
+
+:host-context(.dark-theme) .form-input,
+.dark-theme .form-input {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+:host-context(.dark-theme) .form-input:focus,
+.dark-theme .form-input:focus {
+  border-color: #4dabf7;
+  box-shadow: 0 0 0 3px rgba(77, 171, 247, 0.1);
+}
+
+:host-context(.dark-theme) .form-input::placeholder,
+.dark-theme .form-input::placeholder {
+  color: #999;
+}
+
+:host-context(.dark-theme) .submit-btn,
+.dark-theme .submit-btn {
+  background: #4dabf7;
+}
+
+:host-context(.dark-theme) .submit-btn:hover:not(:disabled),
+.dark-theme .submit-btn:hover:not(:disabled) {
+  background: #339af0;
+}
+
+:host-context(.dark-theme) .submit-btn:disabled,
+.dark-theme .submit-btn:disabled {
+  background: #555;
+}
+
+:host-context(.dark-theme) .form-links p,
+.dark-theme .form-links p {
+  color: #ccc;
+}
+
+:host-context(.dark-theme) .forgot-link,
+:host-context(.dark-theme) .signup-link,
+.dark-theme .forgot-link,
+.dark-theme .signup-link {
+  color: #4dabf7;
+}
+
+:host-context(.dark-theme) .forgot-link:hover,
+:host-context(.dark-theme) .signup-link:hover,
+.dark-theme .forgot-link:hover,
+.dark-theme .signup-link:hover {
+  color: #74c0fc;
+}
+
+:host-context(.dark-theme) .error-alert,
+.dark-theme .error-alert {
+  background: #e03131;
+}

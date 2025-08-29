@@ -1,0 +1,262 @@
+.header {
+        background: white;
+        border-bottom: 1px solid #e0e0e0;
+        position: sticky;
+        top: 0;
+        z-index: 100;
+      }
+
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 16px;
+      }
+
+      .header-content {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        height: 60px;
+      }
+
+      .logo-link {
+        font-size: 24px;
+        font-weight: bold;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .logo-link:hover {
+        opacity: 0.8;
+      }
+
+      .nav {
+        display: flex;
+        gap: 32px;
+      }
+
+      .nav-link {
+        color: #666;
+        text-decoration: none;
+        font-weight: 500;
+      }
+
+      .nav-link:hover {
+        color: #333;
+      }
+
+      .header-actions {
+        display: flex;
+        align-items: center;
+        gap: 16px;
+      }
+
+      .search-input {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        font-size: 14px;
+      }
+
+      .theme-toggle {
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+        transition: all 0.3s ease;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        min-width: 40px;
+        height: 40px;
+      }
+
+      .theme-toggle:hover {
+        background: #f5f5f5;
+        transform: scale(1.05);
+      }
+
+      .theme-icon {
+        font-size: 18px;
+        transition: transform 0.3s ease;
+      }
+
+      .theme-toggle:hover .theme-icon {
+        transform: rotate(15deg);
+      }
+
+      .btn {
+        padding: 8px 16px;
+        border: none;
+        border-radius: 4px;
+        font-weight: 500;
+        cursor: pointer;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .btn-outline {
+        background: white;
+        color: #333;
+        border: 1px solid #ccc;
+      }
+
+      .btn-outline:hover {
+        background: #f5f5f5;
+      }
+
+      .btn-primary {
+        background: #007bff;
+        color: white;
+      }
+
+      .btn-primary:hover {
+        background: #0056b3;
+      }
+
+      .user-menu {
+        position: relative;
+      }
+
+      .user-button {
+        display: flex;
+        align-items: center;
+        gap: 8px;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        background: white;
+        border-radius: 4px;
+        cursor: pointer;
+      }
+
+      .avatar {
+        width: 24px;
+        height: 24px;
+        background: #ccc;
+        border-radius: 50%;
+      }
+
+      .dropdown-menu {
+        position: absolute;
+        right: 0;
+        top: 100%;
+        margin-top: 4px;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 4px;
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+        min-width: 160px;
+      }
+
+      .dropdown-item {
+        display: block;
+        padding: 8px 16px;
+        color: #333;
+        text-decoration: none;
+      }
+
+      .dropdown-item:hover {
+        background: #f5f5f5;
+      }
+
+      .dropdown-button {
+        width: 100%;
+        text-align: left;
+        border: none;
+        background: none;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
+        .nav {
+          display: none;
+        }
+
+        .search-container {
+          display: none;
+        }
+
+        .username {
+          display: none;
+        }
+      }
+
+      /* Dark Theme Styles */
+      :host-context(.dark-theme) .header,
+      .dark-theme .header {
+        background: #575656;
+        border-bottom-color: #333;
+      }
+
+      :host-context(.dark-theme) .logo-link,
+      .dark-theme .logo-link {
+        color: #fff;
+      }
+
+      :host-context(.dark-theme) .nav-link,
+      .dark-theme .nav-link {
+        color: #ccc;
+      }
+
+      :host-context(.dark-theme) .nav-link:hover,
+      .dark-theme .nav-link:hover {
+        color: #fff;
+      }
+
+      :host-context(.dark-theme) .theme-toggle,
+      .dark-theme .theme-toggle {
+        background: #333;
+        border-color: #555;
+        color: #fff;
+      }
+
+      :host-context(.dark-theme) .theme-toggle:hover,
+      .dark-theme .theme-toggle:hover {
+        background: #444;
+      }
+
+      :host-context(.dark-theme) .btn-outline,
+      .dark-theme .btn-outline {
+        background: #333;
+        color: #fff;
+        border-color: #555;
+      }
+
+      :host-context(.dark-theme) .btn-outline:hover,
+      .dark-theme .btn-outline:hover {
+        background: #444;
+      }
+
+      :host-context(.dark-theme) .user-button,
+      .dark-theme .user-button {
+        background: #333;
+        border-color: #555;
+        color: #fff;
+      }
+
+      :host-context(.dark-theme) .user-button:hover,
+      .dark-theme .user-button:hover {
+        background: #444;
+      }
+
+      :host-context(.dark-theme) .dropdown-menu,
+      .dark-theme .dropdown-menu {
+        background: #333;
+        border-color: #555;
+      }
+
+      :host-context(.dark-theme) .dropdown-item,
+      .dark-theme .dropdown-item {
+        color: #fff;
+      }
+
+      :host-context(.dark-theme) .dropdown-item:hover,
+      .dark-theme .dropdown-item:hover {
+        background: #444;
+      }
+
+      :host-context(.dark-theme) .avatar,
+      .dark-theme .avatar {
+        background: #666;
+      }
