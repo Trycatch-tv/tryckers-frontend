@@ -19,7 +19,7 @@
 <div class="main-content">
   <div class="users-grid">
     @for (trycker of tryckers; track trycker.id) {
-    <div class="user-card">
+    <div class="user-card" (click)="viewProfile(trycker)">
       <!-- Avatar placeholder -->
       <div class="avatar">
         <div class="avatar-pattern"></div>
@@ -34,7 +34,12 @@
 
       <!-- Botón de acción -->
       <div class="card-actions">
-        <button class="btn-profile">VER PERFIL</button>
+        <button 
+          class="btn-profile" 
+          (click)="viewProfile(trycker); $event.stopPropagation()"
+        >
+          VER PERFIL
+        </button>
       </div>
     </div>
     }

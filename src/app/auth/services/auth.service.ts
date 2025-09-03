@@ -86,13 +86,11 @@ export class AuthService {
       })
       .pipe(
         tap((resp) => {
-          console.log('Registration successful:', resp);
           this._user.set(resp.user);
           this._authStatus.set('authenticated');
         }),
         map(() => true),
         catchError((error: any) => {
-          console.error('Registration failed:', error);
           return this.handleAuthError(error);
         }),
       );
