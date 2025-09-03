@@ -140,6 +140,15 @@
   background: #0056b3;
 }
 
+.btn-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-link:hover {
+  text-decoration: none;
+}
+
 .empty-state {
   text-align: center;
   padding: 48px 16px;

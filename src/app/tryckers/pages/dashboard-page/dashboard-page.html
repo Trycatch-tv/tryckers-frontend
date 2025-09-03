@@ -32,14 +32,15 @@
         <p class="country">{{ trycker.country || "País no especificado" }}</p>
       </div>
 
-      <!-- Botón de acción -->
+      <!-- Botón de acción con RouterLink -->
       <div class="card-actions">
-        <button 
-          class="btn-profile" 
-          (click)="viewProfile(trycker); $event.stopPropagation()"
+        <a 
+          [routerLink]="['/profile', trycker.username || trycker.name?.toLowerCase().replace(/\s+/g, '') || trycker.id]"
+          class="btn-profile btn-link" 
+          (click)="$event.stopPropagation()"
         >
           VER PERFIL
-        </button>
+        </a>
       </div>
     </div>
     }
