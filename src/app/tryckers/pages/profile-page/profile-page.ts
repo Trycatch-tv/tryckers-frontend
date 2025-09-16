@@ -33,6 +33,8 @@ export default class ProfilePage implements OnInit {
     content: '',
     type: 'article', // article, video, project
     coverImage: null as File | null,
+    tags: '',
+    status: 'draft', // draft, published
   };
 
   postTypes = [
@@ -70,6 +72,8 @@ export default class ProfilePage implements OnInit {
       content: '',
       type: 'article',
       coverImage: null,
+      tags: '',
+      status: 'draft',
     };
   }
 
@@ -80,6 +84,7 @@ export default class ProfilePage implements OnInit {
     }
   }
 
+  //TODO: Vamos a crear el servicio de Post y crear el método createPost
   async createPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
       alert('Por favor, completa todos los campos requeridos.');

@@ -203,6 +203,28 @@
       </div>
     </div>
 
+    <!-- Tags -->
+    <div class="form-group">
+      <label for="postTags" class="form-label">Etiquetas</label>
+      <input
+        type="text"
+        id="postTags"
+        pInputText
+        [(ngModel)]="newPost.tags"
+        placeholder="Ingresa las etiquetas (separadas por comas)"
+        class="form-input"
+      />
+    </div>
+
+    <!-- Status Selection -->
+    <div class="form-group">
+      <label for="postStatus" class="form-label">Estado</label>
+      <select id="postStatus" [(ngModel)]="newPost.status" class="form-select">
+        <option value="draft">Borrador</option>
+        <option value="published">Publicado</option>
+      </select>
+    </div>
+
     <ng-template pTemplate="footer">
       <div class="modal-actions">
         <p-button
