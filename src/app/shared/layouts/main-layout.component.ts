@@ -31,6 +31,9 @@ import { HeaderComponent } from '../components/header/header.component';
         min-height: 100vh;
         display: flex;
         flex-direction: column;
+        width: 100%;
+        margin: 0;
+        padding: 0;
       }
 
       .header-section {
@@ -39,16 +42,21 @@ import { HeaderComponent } from '../components/header/header.component';
         z-index: 1000;
         background: white;
         box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        width: 100%;
       }
 
       .main-content {
         flex: 1;
-        padding: 0;
-        overflow-x : hidden;
+        padding: 20px;
+        margin: 0;
+        width: 100%;
+        overflow-x: hidden;
+        background: #f8f9fa;
       }
 
       .footer-section {
         margin-top: auto;
+        width: 100%;
       }
     `,
   ],

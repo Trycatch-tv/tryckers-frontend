@@ -63,10 +63,23 @@ export class AuthService {
     });
   }
 
-  register(name: string, country: string, email: string, password: string) {
+  register(
+    name: string,
+    username: string,
+    country: string,
+    email: string,
+    password: string,
+  ) {
+    console.log('Attempting registration with:', {
+      name,
+      username,
+      country,
+      email,
+    });
     return this.http
       .post<{ user: User }>(`${baseUrl}/register`, {
         name,
+        username,
         country,
         email,
         password,
@@ -74,10 +87,12 @@ export class AuthService {
       .pipe(
         tap((resp) => {
           this._user.set(resp.user);
+          this._authStatus.set('authenticated');
         }),
-        tap((resp) => console.log('Register response:', resp)),
         map(() => true),
-        catchError((error: any) => this.handleAuthError(error)),
+        catchError((error: any) => {
+          return this.handleAuthError(error);
+        }),
       );
   }
 

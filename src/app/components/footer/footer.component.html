@@ -1,0 +1,39 @@
+<footer class="footer-container">
+  <div class="footer-content">
+    <!-- Brand Section -->
+    <div class="brand-text">
+      <i class="pi pi-star mr-2"></i>
+      Tryckers
+    </div>
+
+    <p-divider></p-divider>
+
+    <!-- Social Networks Section -->
+    <div class="social-container">
+      @for (item of socialNetworks; track $index) {
+      <p-button
+        [icon]="item.icon"
+        [label]="item.label"
+        severity="secondary"
+        [text]="true"
+        class="social-button"
+        [pTooltip]="'Visitar ' + item.label"
+        tooltipPosition="top"
+        (onClick)="openSocialLink(item.route)"
+      />
+      }
+    </div>
+
+    <p-divider></p-divider>
+
+    <!-- Copyright Section -->
+    <div class="mt-3">
+      <p class="text-sm opacity-75">
+        © 2025 Tryckers. Todos los derechos reservados.
+      </p>
+      <p class="text-xs opacity-60 mt-1">
+        Plataforma de casting y oportunidades para actores
+      </p>
+    </div>
+  </div>
+</footer>

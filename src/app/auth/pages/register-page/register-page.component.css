@@ -229,3 +229,30 @@
 .dark-theme .login-link:hover {
   color: #74c0fc;
 }
+
+/* Error Alert Styles */
+.error-alert {
+  position: fixed;
+  top: 1rem;
+  right: 1rem;
+  background: #dc3545;
+  color: white;
+  padding: 1rem 1.5rem;
+  border-radius: 0.5rem;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  z-index: 1000;
+  font-weight: 500;
+}
+
+/* Validation Error Styles */
+.form-input.ng-invalid.ng-touched,
+.form-select.ng-invalid.ng-touched {
+  border-color: #dc3545;
+  box-shadow: 0 0 0 3px rgba(220, 53, 69, 0.1);
+}
+
+.form-input.ng-valid.ng-touched,
+.form-select.ng-valid.ng-touched {
+  border-color: #28a745;
+  box-shadow: 0 0 0 3px rgba(40, 167, 69, 0.1);
+}

@@ -1,0 +1,31 @@
+<div class="card">
+  <p-menubar [model]="items">
+    <ng-template pTemplate="start">
+      <div class="brand-container">
+        <i class="pi pi-star brand-icon"></i>
+        <span class="brand-text">Tryckers</span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="end">
+      <div class="nav-buttons">
+        <p-button
+          label="Cartelera"
+          [text]="true"
+          routerLink="/cartelera"
+          (onClick)="navigateTo('/cartelera')"
+        ></p-button>
+        <p-button
+          label="Login"
+          [text]="true"
+          (onClick)="navigateTo('/auth/login')"
+        ></p-button>
+        <p-button
+          label="Registro"
+          [text]="true"
+          routerLink="/register"
+          (onClick)="navigateTo('/auth/register')"
+        ></p-button>
+      </div>
+    </ng-template>
+  </p-menubar>
+</div>

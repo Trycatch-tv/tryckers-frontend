@@ -1,0 +1,134 @@
+<div class="profile-container">
+  <!-- Header Section -->
+  <div class="profile-header">
+    <div class="profile-info">
+      <div class="profile-avatar">
+        <img
+          [src]="user?.profile_picture || 'avatar-default.svg'"
+          [alt]="user?.name"
+        />
+      </div>
+      <div class="profile-basic">
+        <h1 class="profile-name">{{ user?.name || 'Nombre' }}</h1>
+        <p class="profile-username">@{{ user?.username || 'username' }}</p>
+        <p class="profile-headline">{{ user?.headline || 'Headline' }}</p>
+        <div class="profile-biography">
+          <p>{{ user?.bio || 'Información de biografía aquí...' }}</p>
+        </div>
+
+        <!-- Social Links -->
+        <div class="profile-social-links">
+          <a
+            *ngIf="user?.github_url"
+            [href]="user.github_url"
+            target="_blank"
+            class="social-link github"
+          >
+            <span>🐙 GitHub</span>
+          </a>
+          <a
+            *ngIf="user?.linkedin_url"
+            [href]="user.linkedin_url"
+            target="_blank"
+            class="social-link linkedin"
+          >
+            <span>💼 LinkedIn</span>
+          </a>
+        </div>
+      </div>
+
+      <!-- Video Pitch Section -->
+      <div class="video-pitch-header">
+        <div class="video-placeholder">
+          <span>Video Pitch</span>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Profile Stats Section -->
+  <div class="profile-stats">
+    <div class="stats-grid">
+      <div class="stat-item">
+        <span class="stat-label">Seniority</span>
+        <span class="stat-value">{{ user?.seniority || 'N/A' }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">English Level</span>
+        <span class="stat-value">{{ user?.english_level || 'N/A' }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">EF SET Score</span>
+        <span class="stat-value">{{ user?.efset_score || 'N/A' }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Points</span>
+        <span class="stat-value">{{ user?.points || 0 }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Country</span>
+        <span class="stat-value">{{ user?.country || 'N/A' }}</span>
+      </div>
+      <div class="stat-item">
+        <span class="stat-label">Availability</span>
+        <span
+          class="stat-value availability"
+          [class]="'status-' + user?.availability"
+        >
+          {{ user?.availability || 'N/A' }}
+        </span>
+      </div>
+    </div>
+
+    <!-- Interests Section -->
+    <div
+      class="interests-section"
+      *ngIf="user?.interests && user.interests.length > 0"
+    >
+      <h3>Interests</h3>
+      <div class="interests-tags">
+        <span class="interest-tag" *ngFor="let interest of user.interests">
+          {{ interest }}
+        </span>
+      </div>
+    </div>
+  </div>
+
+  <!-- Main Content Area -->
+  <div class="profile-content">
+    <!-- Left Sidebar -->
+    <div class="profile-sidebar">
+      <!-- Sidebar content can go here -->
+    </div>
+
+    <!-- Main Content -->
+    <div class="profile-main">
+      <div class="content-header">
+        <div class="sort-options">
+          <button class="sort-btn">Populares / Más Recientes</button>
+        </div>
+      </div>
+
+      <!-- Content Card -->
+      <div class="content-card">
+        <div class="card-image">
+          <span>Portada</span>
+        </div>
+        <div class="card-content">
+          <h3>{{ user?.headline || 'Título' }}</h3>
+          <p class="card-author">{{ user?.name || 'Autor' }}</p>
+          <p class="card-description">Primeras 280 caracteres del contenido</p>
+        </div>
+        <div class="card-actions">
+          <button class="action-btn">Editar</button>
+          <button class="action-btn">Eliminar</button>
+          <button class="action-btn primary">Leer</button>
+          <button class="card-like">👍 1</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Floating Create Button -->
+  <button class="create-btn">Crear</button>
+</div>

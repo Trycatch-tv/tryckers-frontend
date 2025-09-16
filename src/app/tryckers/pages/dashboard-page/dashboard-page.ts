@@ -1,10 +1,11 @@
 import { Component, inject, OnInit } from '@angular/core';
+import { Router, RouterLink } from '@angular/router';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { CardModule } from 'primeng/card';
 
 @Component({
   selector: 'app-dashboard-page',
-  imports: [CardModule],
+  imports: [CardModule, RouterLink],
   templateUrl: './dashboard-page.html',
   styleUrl: './dashboard-page.css',
   standalone: true,
@@ -14,6 +15,7 @@ export class DashboardPage implements OnInit {
   loading = true;
 
   private tryckersService = inject(TryckersService);
+  private router = inject(Router);
 
   async ngOnInit(): Promise<void> {
     try {
@@ -45,5 +47,14 @@ export class DashboardPage implements OnInit {
     } finally {
       this.loading = false;
     }
+  }
+
+  viewProfile(trycker: any): void {
+    // Usar username si existe, si no usar el name como fallback
+    const username =
+      trycker.username ||
+      trycker.name?.toLowerCase().replace(/\s+/g, '') ||
+      trycker.id;
+    this.router.navigate(['/profile', username]);
   }
 }

@@ -68,12 +68,14 @@
   border-radius: 8px;
   padding: 24px;
   text-align: center;
-  transition: transform 0.2s, box-shadow 0.2s;
+  transition: transform 0.2s, box-shadow 0.2s, border-color 0.2s;
+  cursor: pointer;
 }
 
 .user-card:hover {
   transform: translateY(-2px);
   box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+  border-color: #007bff;
 }
 
 .avatar {
@@ -136,6 +138,15 @@
 
 .btn-profile:hover {
   background: #0056b3;
+}
+
+.btn-link {
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-link:hover {
+  text-decoration: none;
 }
 
 .empty-state {

@@ -1,0 +1,21 @@
+.layout-container {
+        min-height: 100vh;
+        display: flex;
+        flex-direction: column;
+      }
+
+      .main-content {
+        flex: 1;
+        padding: 0;
+        overflow-y: auto;
+      }
+
+      app-header {
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
+
+      app-footer {
+        margin-top: auto;
+      }

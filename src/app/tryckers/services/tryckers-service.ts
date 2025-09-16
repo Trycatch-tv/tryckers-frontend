@@ -25,4 +25,15 @@ export class TryckersService {
       .toPromise();
     return result ?? [];
   }
+
+  async getTryckerByUsername(username: string): Promise<any> {
+    const result = await this.http
+      .get<any>(`http://localhost:8080/api/v1/perfil/${username}`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+      .toPromise();
+    return result.user ?? null;
+  }
 }
