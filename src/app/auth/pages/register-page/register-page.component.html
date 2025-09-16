@@ -17,6 +17,15 @@
 
         <div class="form-group">
           <input
+            type="text"
+            formControlName="username"
+            placeholder="Username"
+            class="form-input"
+          />
+        </div>
+
+        <div class="form-group">
+          <input
             type="email"
             formControlName="email"
             placeholder="Email"
@@ -45,7 +54,9 @@
           />
         </div>
 
-        <button type="submit" class="submit-btn">Register</button>
+        <button type="submit" class="submit-btn" [disabled]="isPosting()">
+          {{ isPosting() ? "Creating account..." : "Register" }}
+        </button>
 
         <div class="form-links">
           <p>
@@ -65,3 +76,12 @@
     </div>
   </div>
 </div>
+
+@if (hasError()) {
+  <div class="error-alert">
+    <span
+      >❌ Registration failed. Please check your information and try
+      again.</span
+    >
+  </div>
+}

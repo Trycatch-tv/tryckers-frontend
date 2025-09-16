@@ -19,7 +19,7 @@
 <div class="main-content">
   <div class="users-grid">
     @for (trycker of tryckers; track trycker.id) {
-    <div class="user-card">
+    <div class="user-card" (click)="viewProfile(trycker)">
       <!-- Avatar placeholder -->
       <div class="avatar">
         <div class="avatar-pattern"></div>
@@ -32,9 +32,15 @@
         <p class="country">{{ trycker.country || "País no especificado" }}</p>
       </div>
 
-      <!-- Botón de acción -->
+      <!-- Botón de acción con RouterLink -->
       <div class="card-actions">
-        <button class="btn-profile">VER PERFIL</button>
+        <a
+          [routerLink]="['/profile', trycker.username?.toLowerCase()]"
+          class="btn-profile btn-link"
+          (click)="$event.stopPropagation()"
+        >
+          VER PERFIL
+        </a>
       </div>
     </div>
     }

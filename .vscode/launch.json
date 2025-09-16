@@ -3,7 +3,14 @@
   "version": "0.2.0",
   "configurations": [
     {
-      "name": "ng serve",
+      "name": "ng serve (no browser)",
+      "type": "node-terminal",
+      "request": "launch",
+      "command": "npm run start-no-browser",
+      "cwd": "${workspaceFolder}"
+    },
+    {
+      "name": "ng serve (with browser)",
       "type": "chrome",
       "request": "launch",
       "preLaunchTask": "npm: start",
