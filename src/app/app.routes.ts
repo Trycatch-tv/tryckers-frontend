@@ -19,7 +19,7 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./tryckers/pages/tryckers-page/tryckers-page.component'),
+          import('./tryckers/pages/dashboard-page/dashboard-page').then(m => m.DashboardPage),
       },
       {
         path: 'profile/:username',
@@ -27,5 +27,9 @@ export const routes: Routes = [
           import('./tryckers/pages/profile-page/profile-page'),
       },
     ],
+  },
+  {
+    path: '**',
+    redirectTo: 'home',
   },
 ];
