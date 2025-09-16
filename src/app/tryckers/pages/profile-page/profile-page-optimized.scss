@@ -1,0 +1,139 @@
+/* Optimized profile page styles */
+.profile-container {
+  @apply bg-white text-gray-800 min-h-screen p-5 max-w-6xl mx-auto;
+}
+
+.profile-header {
+  @apply flex justify-between items-center p-5 border border-gray-200 rounded-lg mb-5 bg-gray-50;
+}
+
+.profile-info {
+  @apply flex items-start gap-5 flex-1;
+}
+
+.video-pitch-header {
+  @apply ml-auto;
+  
+  .video-placeholder {
+    @apply w-48 h-36 border border-gray-300 rounded-lg flex items-center justify-center text-gray-600 text-sm bg-gray-50;
+  }
+}
+
+.profile-avatar {
+  @apply w-20 h-20 rounded-full border-2 border-gray-300 overflow-hidden;
+  
+  img {
+    @apply w-full h-full object-cover;
+  }
+}
+
+.profile-basic {
+  h1 { @apply text-2xl font-semibold mb-1 text-gray-800; }
+  .profile-username { @apply text-sm text-gray-500 mb-2 font-medium; }
+  .profile-headline { @apply text-base text-gray-600 mb-2; }
+  .profile-biography p { @apply text-sm text-gray-600 leading-relaxed mb-4 max-w-lg; }
+  
+  .profile-social-links {
+    @apply flex gap-2 mt-2;
+    
+    .social-link {
+      @apply inline-flex items-center gap-1 px-2 py-1 border border-gray-300 rounded text-xs text-gray-600 no-underline transition-all hover:border-gray-500 hover:text-gray-800 hover:bg-gray-50;
+      
+      &.github:hover { @apply border-gray-800 bg-gray-100; }
+      &.linkedin:hover { @apply border-blue-600 bg-blue-50 text-blue-600; }
+    }
+  }
+}
+
+.profile-stats {
+  @apply mb-5 p-5 border border-gray-300 rounded-lg bg-white;
+}
+
+.stats-grid {
+  @apply grid gap-4 mb-5;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+}
+
+.stat-item {
+  @apply flex flex-col p-2 rounded bg-gray-50;
+  
+  .stat-label { @apply text-xs text-gray-500 font-medium mb-1 uppercase; }
+  .stat-value { 
+    @apply text-base text-gray-800 font-semibold;
+    
+    &.availability {
+      &.status-available { @apply text-green-600; }
+      &.status-busy { @apply text-yellow-600; }
+      &.status-not_available { @apply text-red-600; }
+    }
+  }
+}
+
+.interests-section {
+  h3 { @apply text-base text-gray-800 mb-2 font-semibold; }
+  
+  .interests-tags {
+    @apply flex flex-wrap gap-2;
+    
+    .interest-tag { @apply bg-gray-200 text-gray-700 px-2 py-1 rounded-xl text-xs font-medium; }
+  }
+}
+
+.profile-content {
+  @apply grid gap-5 items-start;
+  grid-template-columns: 300px 1fr;
+}
+
+.profile-main {
+  @apply flex flex-col gap-5;
+}
+
+.content-header .sort-btn {
+  @apply bg-white border border-gray-300 text-gray-600 px-4 py-2 rounded cursor-pointer hover:border-gray-500 hover:text-gray-800 hover:bg-gray-50;
+}
+
+.content-card {
+  @apply grid gap-5 border border-gray-300 rounded-lg p-5 bg-white items-start shadow;
+  grid-template-columns: 200px 1fr auto;
+  
+  .card-image { @apply h-30 border border-gray-300 rounded flex items-center justify-center text-gray-600 bg-gray-50; }
+  
+  h3 { @apply text-lg text-gray-800 mb-2; }
+  .card-author { @apply text-gray-600 text-sm mb-3; }
+  .card-description { @apply text-gray-600 leading-relaxed; }
+  
+  .card-actions {
+    @apply flex flex-col gap-2 items-end;
+    
+    .action-btn {
+      @apply bg-white border border-gray-300 text-gray-600 px-3 py-1 rounded cursor-pointer text-xs min-w-15 hover:border-gray-500 hover:text-gray-800 hover:bg-gray-50;
+      
+      &.primary { @apply bg-red-600 border-red-600 text-white hover:bg-red-700 hover:border-red-700; }
+    }
+    
+    .card-like { @apply bg-transparent border-none text-gray-600 cursor-pointer text-xs mt-2 hover:text-gray-800; }
+  }
+}
+
+.create-btn {
+  @apply fixed bottom-8 right-8 w-15 h-15 rounded-full bg-blue-500 border border-blue-500 text-white text-sm cursor-pointer shadow-lg hover:bg-blue-600 hover:border-blue-600;
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .profile-container { @apply p-4 max-w-full; }
+  .profile-content { @apply grid-cols-1 gap-5; }
+  .profile-header { @apply flex-col gap-4 text-center p-4; }
+  .profile-info { @apply flex-col items-center gap-4; }
+  .video-pitch-header { 
+    @apply ml-0;
+    .video-placeholder { @apply w-full max-w-xs; }
+  }
+  .content-card { @apply grid-cols-1 gap-4 text-center; }
+  .card-actions { @apply flex-row justify-center; }
+  .profile-stats { @apply p-4; }
+}
+
+@media (min-width: 1400px) {
+  .profile-container { @apply max-w-7xl p-8; }
+}
