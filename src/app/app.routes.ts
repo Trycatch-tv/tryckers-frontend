@@ -19,7 +19,9 @@ export const routes: Routes = [
       {
         path: 'home',
         loadComponent: () =>
-          import('./tryckers/pages/dashboard-page/dashboard-page').then(m => m.DashboardPage),
+          import('./tryckers/pages/dashboard-page/dashboard-page').then(
+            (m) => m.DashboardPage,
+          ),
       },
       {
         path: 'profile/:username',
