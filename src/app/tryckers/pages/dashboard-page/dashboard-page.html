@@ -34,9 +34,9 @@
 
       <!-- Botón de acción con RouterLink -->
       <div class="card-actions">
-        <a 
-          [routerLink]="['/profile', trycker.username || trycker.name?.toLowerCase().replace(/\s+/g, '') || trycker.id]"
-          class="btn-profile btn-link" 
+        <a
+          [routerLink]="['/profile', trycker.username?.toLowerCase()]"
+          class="btn-profile btn-link"
           (click)="$event.stopPropagation()"
         >
           VER PERFIL
