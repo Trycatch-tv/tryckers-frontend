@@ -189,9 +189,255 @@
   cursor: pointer;
 }
 
+/* Create Post Modal Styles */
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.form-file {
+  width: 100%;
+  padding: 8px;
+  border: 1px dashed #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.form-help {
+  color: #666;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.image-preview {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.preview-label {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.preview-placeholder {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+/* Dark theme support for modal */
+.dark-theme .form-label {
+  color: #e0e0e0;
+}
+
+.dark-theme .form-input,
+.dark-theme .form-textarea,
+.dark-theme .form-select {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-theme .form-input:focus,
+.dark-theme .form-textarea:focus,
+.dark-theme .form-select:focus {
+  border-color: #4A90E2;
+}
+
+.dark-theme .form-file {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-theme .form-help {
+  color: #ccc;
+}
+
+.dark-theme .image-preview {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.dark-theme .preview-placeholder {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+/* Custom Modal Backdrop with Black Transparency */
+:host ::ng-deep .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-enter {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-enter-active {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-leave-active {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Enhanced Modal Dialog Styles */
+:host ::ng-deep .p-dialog {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+              0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+:host ::ng-deep .p-dialog-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px 32px;
+  border-bottom: none;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-header-close {
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-header-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .p-dialog-content {
+  padding: 32px;
+  background: #fff;
+}
+
+:host ::ng-deep .p-dialog-footer {
+  padding: 24px 32px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Modal Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Dark theme support for modal */
+.dark-theme :host ::ng-deep .p-dialog-content {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.dark-theme :host ::ng-deep .p-dialog-footer {
+  background: #2a2a2a;
+  border-top-color: #444;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .profile-container { padding: 15px; }
   .profile-content { grid-template-columns: 1fr; }
   .profile-header { flex-direction: column; gap: 15px; }
+  
+  .create-post-form {
+    gap: 20px;
+    padding: 4px 0;
+  }
+  
+  .modal-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  
+  .modal-actions p-button {
+    width: 100%;
+  }
+  
+  /* Modal responsive padding */
+  :host ::ng-deep .p-dialog-content {
+    padding: 24px 20px;
+  }
+  
+  :host ::ng-deep .p-dialog-header {
+    padding: 20px 20px;
+  }
+  
+  :host ::ng-deep .p-dialog-footer {
+    padding: 20px 20px;
+  }
 }

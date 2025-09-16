@@ -130,5 +130,96 @@
   </div>
 
   <!-- Floating Create Button -->
-  <button class="create-btn">Crear</button>
+  <button class="create-btn" (click)="openCreatePostModal()">Crear</button>
+
+  <!-- Create Post Modal -->
+  <p-dialog
+    header="Crear Nueva Publicación"
+    [(visible)]="showCreatePostModal"
+    [modal]="true"
+    [closable]="true"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '600px', maxWidth: '90vw' }"
+    [showHeader]="true"
+    (onHide)="closeCreatePostModal()"
+  >
+    <div class="create-post-form">
+      <!-- Post Type Selection -->
+      <div class="form-group">
+        <label for="postType" class="form-label">Tipo de Publicación</label>
+        <select id="postType" [(ngModel)]="newPost.type" class="form-select">
+          <option *ngFor="let type of postTypes" [value]="type.value">
+            {{ type.label }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label for="postTitle" class="form-label">Título *</label>
+        <input
+          type="text"
+          id="postTitle"
+          pInputText
+          [(ngModel)]="newPost.title"
+          placeholder="Ingresa el título de tu publicación"
+          class="form-input"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="form-group">
+        <label for="postContent" class="form-label">Contenido *</label>
+        <textarea
+          id="postContent"
+          [(ngModel)]="newPost.content"
+          placeholder="Escribe el contenido de tu publicación..."
+          rows="6"
+          class="form-textarea"
+        ></textarea>
+      </div>
+
+      <!-- Cover Image -->
+      <div class="form-group">
+        <label for="coverImage" class="form-label">Imagen de Portada</label>
+        <input
+          type="file"
+          id="coverImage"
+          (change)="onFileSelect($event)"
+          accept="image/*"
+          class="form-file"
+        />
+        <small class="form-help"
+          >Formatos soportados: JPG, PNG, GIF (máx. 5MB)</small
+        >
+      </div>
+
+      <!-- Preview of selected image -->
+      <div class="image-preview" *ngIf="newPost.coverImage">
+        <p class="preview-label">Vista previa:</p>
+        <div class="preview-placeholder">{{ newPost.coverImage.name }}</div>
+      </div>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="modal-actions">
+        <p-button
+          label="Cancelar"
+          icon="pi pi-times"
+          (onClick)="closeCreatePostModal()"
+          [text]="true"
+        >
+        </p-button>
+        <p-button
+          label="Crear Publicación"
+          icon="pi pi-check"
+          (onClick)="createPost()"
+          [disabled]="!newPost.title.trim() || !newPost.content.trim()"
+        >
+        </p-button>
+      </div>
+    </ng-template>
+  </p-dialog>
 </div>
