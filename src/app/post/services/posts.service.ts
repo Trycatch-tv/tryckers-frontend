@@ -25,4 +25,15 @@ export class PostsService {
       .toPromise();
     return result ?? null;
   }
+
+  async getPostsByUserId(userId: string): Promise<any[]> {
+    const result = await this.http
+      .get<any[]>(`http://localhost:8080/api/v1/users/${userId}/posts`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+      .toPromise();
+    return result ?? [];
+  }
 }

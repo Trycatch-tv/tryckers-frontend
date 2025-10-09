@@ -27,6 +27,7 @@ export default class ProfilePage implements OnInit {
 
   username: string = '';
   user: any = null;
+  userPosts: any[] = [];
 
   // Modal properties
   showCreatePostModal: boolean = false;
@@ -53,6 +54,14 @@ export default class ProfilePage implements OnInit {
   async getProfileData() {
     this.user = await this.tryckersService.getTryckerByUsername(this.username);
     this.user.interests = this.user.interests.split(',') || [];
+    //TODO: Aquí vamos, falta mostrar los resultados en la vista.
+    this.getUserPosts(this.user.id);
+  }
+
+  async getUserPosts(userId: string) {
+    const posts = await this.postsService.getPostsByUserId(userId);
+    console.log('User posts:', posts);
+    this.userPosts = posts;
   }
 
   ngOnInit() {
