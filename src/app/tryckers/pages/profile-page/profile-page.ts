@@ -6,6 +6,7 @@ import { TryckersService } from '@tryckers/services/tryckers-service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import { PostsService } from 'src/app/post/services/posts.service';
 
 @Component({
   selector: 'app-profile-page',
@@ -22,6 +23,7 @@ import { InputTextModule } from 'primeng/inputtext';
 })
 export default class ProfilePage implements OnInit {
   tryckersService = inject(TryckersService);
+  postsService = inject(PostsService);
 
   username: string = '';
   user: any = null;
@@ -32,9 +34,10 @@ export default class ProfilePage implements OnInit {
     title: '',
     content: '',
     type: 'article', // article, video, project
-    coverImage: null as File | null,
+    image: null as File | null,
     tags: '',
     status: 'draft', // draft, published
+    user_id: null,
   };
 
   postTypes = [
@@ -71,20 +74,20 @@ export default class ProfilePage implements OnInit {
       title: '',
       content: '',
       type: 'article',
-      coverImage: null,
+      image: null,
       tags: '',
       status: 'draft',
+      user_id: null,
     };
   }
 
   onFileSelect(event: any) {
     const file = event.target.files[0];
     if (file) {
-      this.newPost.coverImage = file;
+      this.newPost.image = file.name; // TODO: reemplazar con file cuando el backend soporte archivos
     }
   }
 
-  //TODO: Vamos a crear el servicio de Post y crear el método createPost
   async createPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
       alert('Por favor, completa todos los campos requeridos.');
@@ -95,11 +98,13 @@ export default class ProfilePage implements OnInit {
       // Aquí iría la lógica para crear el post
       console.log('Creating post:', this.newPost);
 
-      // Simulated API call
-      // await this.tryckersService.createPost(this.newPost);
+      this.newPost.user_id = this.user.id;
+      const result = await this.postsService.createPost(this.newPost);
+
+      console.log('Post created successfully:', result);
 
       alert('¡Publicación creada exitosamente!');
-      this.closeCreatePostModal();
+      // this.closeCreatePostModal();
 
       // Refresh profile data to show new post
       // await this.getProfileData();

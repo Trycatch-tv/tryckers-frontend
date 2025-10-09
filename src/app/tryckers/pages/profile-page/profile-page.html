@@ -181,12 +181,12 @@
         ></textarea>
       </div>
 
-      <!-- Cover Image -->
+      <!-- Image -->
       <div class="form-group">
-        <label for="coverImage" class="form-label">Imagen de Portada</label>
+        <label for="imagen" class="form-label">Imagen de Portada</label>
         <input
           type="file"
-          id="coverImage"
+          id="imagen"
           (change)="onFileSelect($event)"
           accept="image/*"
           class="form-file"
@@ -197,9 +197,9 @@
       </div>
 
       <!-- Preview of selected image -->
-      <div class="image-preview" *ngIf="newPost.coverImage">
+      <div class="image-preview" *ngIf="newPost.image">
         <p class="preview-label">Vista previa:</p>
-        <div class="preview-placeholder">{{ newPost.coverImage.name }}</div>
+        <div class="preview-placeholder">{{ newPost.image.name }}</div>
       </div>
     </div>
 
