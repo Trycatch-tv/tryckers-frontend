@@ -122,4 +122,12 @@ export default class ProfilePage implements OnInit {
       alert('Error al crear la publicación. Inténtalo de nuevo.');
     }
   }
+
+  toArray(string: string): string[] {
+    return string.split(',').map((s: string) => s.trim());
+  }
+
+  textPreview(content: string): string {
+    return content.length > 200 ? content.substring(0, 200) + '...' : content;
+  }
 }
