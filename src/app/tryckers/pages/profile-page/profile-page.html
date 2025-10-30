@@ -34,6 +34,20 @@
           >
             <span>💼 LinkedIn</span>
           </a>
+          <!-- Interests Section -->
+          <div
+            class="interests-section"
+            *ngIf="user?.interests && user.interests.length > 0"
+          >
+            <div class="interests-tags">
+              <span
+                class="interest-tag"
+                *ngFor="let interest of user.interests"
+              >
+                {{ interest }}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -46,59 +60,44 @@
     </div>
   </div>
 
-  <!-- Profile Stats Section -->
-  <div class="profile-stats">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-label">Seniority</span>
-        <span class="stat-value">{{ user?.seniority || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">English Level</span>
-        <span class="stat-value">{{ user?.english_level || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">EF SET Score</span>
-        <span class="stat-value">{{ user?.efset_score || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Points</span>
-        <span class="stat-value">{{ user?.points || 0 }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Country</span>
-        <span class="stat-value">{{ user?.country || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Availability</span>
-        <span
-          class="stat-value availability"
-          [class]="'status-' + user?.availability"
-        >
-          {{ user?.availability || 'N/A' }}
-        </span>
-      </div>
-    </div>
-
-    <!-- Interests Section -->
-    <div
-      class="interests-section"
-      *ngIf="user?.interests && user.interests.length > 0"
-    >
-      <h3>Interests</h3>
-      <div class="interests-tags">
-        <span class="interest-tag" *ngFor="let interest of user.interests">
-          {{ interest }}
-        </span>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content Area -->
   <div class="profile-content">
     <!-- Left Sidebar -->
     <div class="profile-sidebar">
-      <!-- Sidebar content can go here -->
+      <!-- Profile Stats Section -->
+      <div class="profile-stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Seniority</span>
+            <span class="stat-value">{{ user?.seniority || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">English Level</span>
+            <span class="stat-value">{{ user?.english_level || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">EF SET Score</span>
+            <span class="stat-value">{{ user?.efset_score || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Points</span>
+            <span class="stat-value">{{ user?.points || 0 }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Country</span>
+            <span class="stat-value">{{ user?.country || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Availability</span>
+            <span
+              class="stat-value availability"
+              [class]="'status-' + user?.availability"
+            >
+              {{ user?.availability || 'N/A' }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Main Content -->

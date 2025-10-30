@@ -94,8 +94,13 @@
   background: #f8f9fa;
 }
 
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .profile-stats {
-  margin-bottom: 20px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -104,9 +109,8 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
   gap: 15px;
-  margin-bottom: 20px;
 }
 
 .stat-item {
