@@ -1,4 +1,119 @@
-﻿/* Optimized profile page - essential styles only */
+﻿/* Unificado: estilos esenciales, responsive y utilidades */
+.profile-container {
+  background: #fff;
+  color: #333;
+  min-height: 100vh;
+  padding: 20px;
+  max-width: 1200px;
+  margin: 0 auto;
+  box-sizing: border-box;
+}
+
+@media (min-width: 1400px) {
+  .profile-container {
+    max-width: 1400px;
+    padding: 30px;
+  }
+}
+.profile-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  margin-bottom: 20px;
+  background: rgba(248, 249, 250, 0.8);
+  width: 100%;
+  box-sizing: border-box;
+}
+.profile-info {
+  display: flex;
+  align-items: flex-start;
+  gap: 20px;
+  flex: 1;
+}
+.profile-avatar {
+  width: 80px;
+  height: 80px;
+  border-radius: 50%;
+  border: 2px solid #ddd;
+  overflow: hidden;
+}
+.profile-avatar img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.profile-basic h1.profile-name {
+  font-size: 24px;
+  font-weight: 600;
+  margin: 0 0 5px 0;
+  color: #333;
+}
+.profile-basic p.profile-username {
+  font-size: 14px;
+  color: #999;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+.profile-basic p.profile-headline {
+  font-size: 16px;
+  color: #666;
+  margin: 0 0 10px 0;
+}
+.profile-biography p {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.5;
+  margin: 0 0 15px 0;
+  max-width: 500px;
+}
+.profile-social-links {
+  display: flex;
+  gap: 10px;
+  margin-top: 10px;
+}
+.social-link {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 4px 8px;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  text-decoration: none;
+  color: #666;
+  font-size: 12px;
+  transition: all 0.3s ease;
+}
+.social-link.github:hover {
+  border-color: #333;
+  background: #f6f8fa;
+}
+.social-link.linkedin:hover {
+  border-color: #0077b5;
+  background: #e7f3ff;
+  color: #0077b5;
+}
+.social-link:hover {
+  border-color: #999;
+  color: #333;
+  background: #f8f9fa;
+}
+/* ...existing code... */
+// Se integran utilidades y responsive de los otros archivos
+@media (max-width: 768px) {
+  .profile-container { padding: 15px; max-width: 100%; }
+  .profile-content { grid-template-columns: 1fr; gap: 20px; }
+  .profile-header { flex-direction: column; gap: 15px; text-align: center; padding: 15px; }
+  .profile-info { flex-direction: column; align-items: center; gap: 15px; }
+  .video-pitch-header { margin-left: 0; }
+  .video-pitch-header .video-placeholder { width: 100%; max-width: 300px; }
+  .content-card { grid-template-columns: 1fr; gap: 15px; text-align: center; }
+  .card-actions { flex-direction: row; justify-content: center; }
+  .profile-stats { padding: 15px; }
+}
+/* Optimized profile page - essential styles only */
 .profile-container {
   background: #fff;
   color: #333;
@@ -94,8 +209,13 @@
   background: #f8f9fa;
 }
 
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
 .profile-stats {
-  margin-bottom: 20px;
   padding: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
@@ -104,9 +224,8 @@
 
 .stats-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: 1fr;
   gap: 15px;
-  margin-bottom: 20px;
 }
 
 .stat-item {
@@ -147,12 +266,186 @@
   align-items: start;
 }
 
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.content-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 15px;
+}
+
+.sort-btn {
+  background: #fff;
+  border: 1px solid #ddd;
+  color: #666;
+  padding: 8px 16px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 14px;
+}
+
+.sort-btn:hover {
+  border-color: #999;
+  color: #333;
+  background: #f8f9fa;
+}
+
 .content-card {
+  display: grid;
+  grid-template-columns: 200px 1fr auto;
+  gap: 20px;
   border: 1px solid #ddd;
   border-radius: 8px;
   padding: 20px;
   background: #fff;
+  align-items: start;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 15px;
+}
+
+.card-image {
+  width: 200px;
+  height: 140px;
+  border-radius: 6px;
+  overflow: hidden;
+  background: #f0f0f0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.card-image img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.card-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.card-content h3 {
+  font-size: 20px;
+  font-weight: 600;
+  color: #333;
+  margin: 0;
+  line-height: 1.3;
+}
+
+.card-description {
+  font-size: 14px;
+  color: #666;
+  line-height: 1.6;
+  margin: 8px 0;
+  display: -webkit-box;
+  -webkit-line-clamp: 4;
+  line-clamp: 4;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-height: 5.6em; /* 4 lines * 1.4 line-height */
+  word-wrap: break-word;
+  word-break: break-word;
+}
+
+.card-tags {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 8px;
+}
+
+.post-tag {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 5px 12px;
+  border-radius: 16px;
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  box-shadow: 0 2px 4px rgba(102, 126, 234, 0.2);
+  display: inline-block;
+}
+
+.post-tag:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 8px rgba(102, 126, 234, 0.3);
+  cursor: pointer;
+}
+
+.card-actions {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  align-items: flex-end;
+}
+
+
+// Botón de me gusta
+.like-btn {
+  background: #f0f4ff;
+  border: 1px solid #b3c6ff;
+  color: #4A90E2;
+  cursor: pointer;
+  font-size: 15px;
+  padding: 6px 14px;
+  border-radius: 20px;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  transition: background 0.2s, color 0.2s, border 0.2s, transform 0.2s;
+}
+.like-btn:hover {
+  background: #e3edff;
+  color: #2366b8;
+  border-color: #4A90E2;
+  transform: scale(1.08);
+}
+
+// Botón de leer destacado
+.read-btn {
+  background: #e3edff !important;
+  color: #2366b8 !important;
+  border-color: #4A90E2 !important;
+  font-weight: 700;
+  transition: background 0.2s, color 0.2s, border 0.2s;
+}
+.read-btn:hover {
+  background: #d0e2ff !important;
+  color: #174a7c !important;
+  border-color: #2366b8 !important;
+}
+
+// Dark theme support
+.dark-theme .like-btn {
+  background: #232a3a;
+  border-color: #3a4a6b;
+  color: #7bb6ff;
+}
+.dark-theme .like-btn:hover {
+  background: #1a2233;
+  color: #4A90E2;
+  border-color: #4A90E2;
+}
+.dark-theme .read-btn {
+  background: #1a2233 !important;
+  color: #7bb6ff !important;
+  border-color: #4A90E2 !important;
+}
+.dark-theme .read-btn:hover {
+  background: #101624 !important;
+  color: #4A90E2 !important;
+  border-color: #2366b8 !important;
 }
 
 .action-btn {
@@ -189,9 +482,335 @@
   cursor: pointer;
 }
 
+/* Create Post Modal Styles */
+.create-post-form {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 8px 0;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.form-label {
+  font-weight: 600;
+  color: #333;
+  font-size: 14px;
+}
+
+.form-input,
+.form-textarea,
+.form-select {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #ddd;
+  border-radius: 6px;
+  font-size: 14px;
+  transition: border-color 0.2s ease;
+}
+
+.form-input:focus,
+.form-textarea:focus,
+.form-select:focus {
+  outline: none;
+  border-color: #4A90E2;
+  box-shadow: 0 0 0 3px rgba(74, 144, 226, 0.1);
+}
+
+.form-textarea {
+  resize: vertical;
+  min-height: 120px;
+  font-family: inherit;
+}
+
+.form-file {
+  width: 100%;
+  padding: 8px;
+  border: 1px dashed #ddd;
+  border-radius: 6px;
+  background: #f9f9f9;
+  cursor: pointer;
+}
+
+.form-help {
+  color: #666;
+  font-size: 12px;
+  margin-top: 4px;
+}
+
+.image-preview {
+  padding: 12px;
+  background: #f8f9fa;
+  border-radius: 6px;
+  border: 1px solid #e9ecef;
+}
+
+.preview-label {
+  font-size: 12px;
+  color: #666;
+  margin: 0 0 8px 0;
+  font-weight: 500;
+}
+
+.preview-placeholder {
+  background: #fff;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 8px 12px;
+  font-size: 14px;
+  color: #333;
+}
+
+.modal-actions {
+  display: flex;
+  justify-content: flex-end;
+  gap: 12px;
+  padding-top: 20px;
+  border-top: 1px solid #eee;
+}
+
+/* Dark theme support for modal */
+.dark-theme .form-label {
+  color: #e0e0e0;
+}
+
+.dark-theme .form-input,
+.dark-theme .form-textarea,
+.dark-theme .form-select {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-theme .form-input:focus,
+.dark-theme .form-textarea:focus,
+.dark-theme .form-select:focus {
+  border-color: #4A90E2;
+}
+
+.dark-theme .form-file {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-theme .form-help {
+  color: #ccc;
+}
+
+.dark-theme .image-preview {
+  background: #2a2a2a;
+  border-color: #444;
+}
+
+.dark-theme .preview-placeholder {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+/* Custom Modal Backdrop with Black Transparency */
+:host ::ng-deep .p-dialog-mask {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+  backdrop-filter: blur(2px);
+  transition: all 0.3s ease-in-out;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-enter {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-enter-active {
+  background-color: rgba(0, 0, 0, 0.7) !important;
+}
+
+:host ::ng-deep .p-dialog-mask.p-dialog-mask-leave-active {
+  background-color: rgba(0, 0, 0, 0) !important;
+}
+
+/* Enhanced Modal Dialog Styles */
+:host ::ng-deep .p-dialog {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25), 
+              0 10px 20px -5px rgba(0, 0, 0, 0.1);
+  border-radius: 12px;
+  overflow: hidden;
+  animation: modalFadeIn 0.3s ease-out;
+}
+
+:host ::ng-deep .p-dialog-header {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  padding: 24px 32px;
+  border-bottom: none;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-title {
+  font-weight: 600;
+  font-size: 18px;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-header-close {
+  color: white;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.1);
+  transition: all 0.2s ease;
+}
+
+:host ::ng-deep .p-dialog-header .p-dialog-header-close:hover {
+  background: rgba(255, 255, 255, 0.2);
+  transform: scale(1.05);
+}
+
+:host ::ng-deep .p-dialog-content {
+  padding: 32px;
+  background: #fff;
+}
+
+:host ::ng-deep .p-dialog-footer {
+  padding: 24px 32px;
+  background: #f8f9fa;
+  border-top: 1px solid #e9ecef;
+}
+
+/* Modal Animation */
+@keyframes modalFadeIn {
+  from {
+    opacity: 0;
+    transform: scale(0.9) translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: scale(1) translateY(0);
+  }
+}
+
+/* Dark theme support for modal */
+.dark-theme :host ::ng-deep .p-dialog-content {
+  background: #1a1a1a;
+  color: #e0e0e0;
+}
+
+.dark-theme :host ::ng-deep .p-dialog-footer {
+  background: #2a2a2a;
+  border-top-color: #444;
+}
+
+/* Dark theme support for cards and tags */
+.dark-theme .content-card {
+  background: rgba(26, 26, 26, 0.6);
+  border-color: #444;
+}
+
+.dark-theme .card-content h3 {
+  color: #e0e0e0;
+}
+
+.dark-theme .card-description {
+  color: #ccc;
+}
+
+.dark-theme .card-image {
+  background: rgba(18, 18, 18, 0.8);
+  border-color: #444;
+}
+
+.dark-theme .post-tag {
+  background: linear-gradient(135deg, #5a67d8 0%, #6b46c1 100%);
+  box-shadow: 0 2px 4px rgba(90, 103, 216, 0.3);
+}
+
+.dark-theme .post-tag:hover {
+  box-shadow: 0 4px 8px rgba(90, 103, 216, 0.4);
+}
+
+.dark-theme .sort-btn {
+  background: #333;
+  border-color: #555;
+  color: #e0e0e0;
+}
+
+.dark-theme .sort-btn:hover {
+  background: #444;
+  border-color: #666;
+}
+
+.dark-theme .profile-stats {
+  background: rgba(26, 26, 26, 0.8);
+  border-color: #444;
+}
+
+.dark-theme .stat-item {
+  background: rgba(18, 18, 18, 0.8);
+}
+
+.dark-theme .stat-label {
+  color: #999;
+}
+
+.dark-theme .stat-value {
+  color: #e0e0e0;
+}
+
 /* Responsive */
 @media (max-width: 768px) {
   .profile-container { padding: 15px; }
   .profile-content { grid-template-columns: 1fr; }
   .profile-header { flex-direction: column; gap: 15px; }
+  
+  .content-card {
+    grid-template-columns: 1fr;
+    gap: 15px;
+    padding: 15px;
+  }
+  
+  .card-image {
+    width: 100%;
+    height: 200px;
+  }
+  
+  .card-actions {
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    gap: 10px;
+  }
+  
+  .content-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+  }
+  
+  .create-post-form {
+    gap: 20px;
+    padding: 4px 0;
+  }
+  
+  .modal-actions {
+    flex-direction: column-reverse;
+    gap: 8px;
+  }
+  
+  .modal-actions p-button {
+    width: 100%;
+  }
+  
+  /* Modal responsive padding */
+  :host ::ng-deep .p-dialog-content {
+    padding: 24px 20px;
+  }
+  
+  :host ::ng-deep .p-dialog-header {
+    padding: 20px 20px;
+  }
+  
+  :host ::ng-deep .p-dialog-footer {
+    padding: 20px 20px;
+  }
 }
