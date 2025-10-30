@@ -34,6 +34,20 @@
           >
             <span>💼 LinkedIn</span>
           </a>
+          <!-- Interests Section -->
+          <div
+            class="interests-section"
+            *ngIf="user?.interests && user.interests.length > 0"
+          >
+            <div class="interests-tags">
+              <span
+                class="interest-tag"
+                *ngFor="let interest of user.interests"
+              >
+                {{ interest }}
+              </span>
+            </div>
+          </div>
         </div>
       </div>
 
@@ -46,89 +60,206 @@
     </div>
   </div>
 
-  <!-- Profile Stats Section -->
-  <div class="profile-stats">
-    <div class="stats-grid">
-      <div class="stat-item">
-        <span class="stat-label">Seniority</span>
-        <span class="stat-value">{{ user?.seniority || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">English Level</span>
-        <span class="stat-value">{{ user?.english_level || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">EF SET Score</span>
-        <span class="stat-value">{{ user?.efset_score || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Points</span>
-        <span class="stat-value">{{ user?.points || 0 }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Country</span>
-        <span class="stat-value">{{ user?.country || 'N/A' }}</span>
-      </div>
-      <div class="stat-item">
-        <span class="stat-label">Availability</span>
-        <span
-          class="stat-value availability"
-          [class]="'status-' + user?.availability"
-        >
-          {{ user?.availability || 'N/A' }}
-        </span>
-      </div>
-    </div>
-
-    <!-- Interests Section -->
-    <div
-      class="interests-section"
-      *ngIf="user?.interests && user.interests.length > 0"
-    >
-      <h3>Interests</h3>
-      <div class="interests-tags">
-        <span class="interest-tag" *ngFor="let interest of user.interests">
-          {{ interest }}
-        </span>
-      </div>
-    </div>
-  </div>
-
   <!-- Main Content Area -->
   <div class="profile-content">
     <!-- Left Sidebar -->
     <div class="profile-sidebar">
-      <!-- Sidebar content can go here -->
+      <!-- Profile Stats Section -->
+      <div class="profile-stats">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <span class="stat-label">Seniority</span>
+            <span class="stat-value">{{ user?.seniority || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">English Level</span>
+            <span class="stat-value">{{ user?.english_level || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">EF SET Score</span>
+            <span class="stat-value">{{ user?.efset_score || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Points</span>
+            <span class="stat-value">{{ user?.points || 0 }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Country</span>
+            <span class="stat-value">{{ user?.country || 'N/A' }}</span>
+          </div>
+          <div class="stat-item">
+            <span class="stat-label">Availability</span>
+            <span
+              class="stat-value availability"
+              [class]="'status-' + user?.availability"
+            >
+              {{ user?.availability || 'N/A' }}
+            </span>
+          </div>
+        </div>
+      </div>
     </div>
 
     <!-- Main Content -->
     <div class="profile-main">
       <div class="content-header">
         <div class="sort-options">
+          {{ userPosts.length || 0 }} publicaciones
           <button class="sort-btn">Populares / Más Recientes</button>
         </div>
       </div>
 
+      <!-- title, content, image, tags, user.name, user.profile_picture -->
       <!-- Content Card -->
+      @for (post of userPosts; track post.id) {
       <div class="content-card">
         <div class="card-image">
-          <span>Portada</span>
+          <img [src]="post.image || 'post-default.jpg'" alt="Post Image" />
         </div>
         <div class="card-content">
-          <h3>{{ user?.headline || 'Título' }}</h3>
-          <p class="card-author">{{ user?.name || 'Autor' }}</p>
-          <p class="card-description">Primeras 280 caracteres del contenido</p>
+          <h3>{{ post.title || 'Título' }}</h3>
+          <p class="card-description">{{ textPreview(post.content) }}</p>
+          <!-- tags -->
+          <div class="card-tags">
+            <span class="post-tag" *ngFor="let tag of toArray(post.tags)">
+              {{ tag }}
+            </span>
+          </div>
         </div>
         <div class="card-actions">
-          <button class="action-btn">Editar</button>
-          <button class="action-btn">Eliminar</button>
-          <button class="action-btn primary">Leer</button>
-          <button class="card-like">👍 1</button>
+          <button class="action-btn" title="Editar">✏️</button>
+          <!-- TODO: Que solo pueda ser eliminado por el autor o el admin -->
+          <button
+            class="action-btn"
+            title="Eliminar"
+            (click)="deletePost(post.id)"
+          >
+            🗑️
+          </button>
+          <button class="action-btn primary read-btn" title="Leer">📖</button>
+          <button class="like-btn" title="Upvote">
+            <!-- TODO: Mostrar el contador de up votes -->
+            <span>👍</span>
+          </button>
         </div>
       </div>
+      }
     </div>
   </div>
 
   <!-- Floating Create Button -->
-  <button class="create-btn">Crear</button>
+  <button class="create-btn" (click)="openCreatePostModal()">Crear</button>
+
+  <!-- Create Post Modal -->
+  <p-dialog
+    header="Crear Nueva Publicación"
+    [(visible)]="showCreatePostModal"
+    [modal]="true"
+    [closable]="true"
+    [dismissableMask]="true"
+    [draggable]="false"
+    [resizable]="false"
+    [style]="{ width: '600px', maxWidth: '90vw' }"
+    [showHeader]="true"
+    (onHide)="closeCreatePostModal()"
+  >
+    <div class="create-post-form">
+      <!-- Post Type Selection -->
+      <div class="form-group">
+        <label for="postType" class="form-label">Tipo de Publicación</label>
+        <select id="postType" [(ngModel)]="newPost.type" class="form-select">
+          <option *ngFor="let type of postTypes" [value]="type.value">
+            {{ type.label }}
+          </option>
+        </select>
+      </div>
+
+      <!-- Title -->
+      <div class="form-group">
+        <label for="postTitle" class="form-label">Título *</label>
+        <input
+          type="text"
+          id="postTitle"
+          pInputText
+          [(ngModel)]="newPost.title"
+          placeholder="Ingresa el título de tu publicación"
+          class="form-input"
+        />
+      </div>
+
+      <!-- Content -->
+      <div class="form-group">
+        <label for="postContent" class="form-label">Contenido *</label>
+        <textarea
+          id="postContent"
+          [(ngModel)]="newPost.content"
+          placeholder="Escribe el contenido de tu publicación..."
+          rows="6"
+          class="form-textarea"
+        ></textarea>
+      </div>
+
+      <!-- Image -->
+      <div class="form-group">
+        <label for="imagen" class="form-label">Imagen de Portada</label>
+        <input
+          type="file"
+          id="imagen"
+          (change)="onFileSelect($event)"
+          accept="image/*"
+          class="form-file"
+        />
+        <small class="form-help"
+          >Formatos soportados: JPG, PNG, GIF (máx. 5MB)</small
+        >
+      </div>
+
+      <!-- Preview of selected image -->
+      <div class="image-preview" *ngIf="newPost.image">
+        <p class="preview-label">Vista previa:</p>
+        <div class="preview-placeholder">{{ newPost.image.name }}</div>
+      </div>
+    </div>
+
+    <!-- Tags -->
+    <div class="form-group">
+      <label for="postTags" class="form-label">Etiquetas</label>
+      <input
+        type="text"
+        id="postTags"
+        pInputText
+        [(ngModel)]="newPost.tags"
+        placeholder="Ingresa las etiquetas (separadas por comas)"
+        class="form-input"
+      />
+    </div>
+
+    <!-- Status Selection -->
+    <div class="form-group">
+      <label for="postStatus" class="form-label">Estado</label>
+      <select id="postStatus" [(ngModel)]="newPost.status" class="form-select">
+        <option value="draft">Borrador</option>
+        <option value="published">Publicado</option>
+      </select>
+    </div>
+
+    <ng-template pTemplate="footer">
+      <div class="modal-actions">
+        <p-button
+          label="Cancelar"
+          icon="pi pi-times"
+          (onClick)="closeCreatePostModal()"
+          [text]="true"
+        >
+        </p-button>
+        <p-button
+          label="Crear Publicación"
+          icon="pi pi-check"
+          (onClick)="createPost()"
+          [disabled]="!newPost.title.trim() || !newPost.content.trim()"
+        >
+        </p-button>
+      </div>
+    </ng-template>
+  </p-dialog>
 </div>

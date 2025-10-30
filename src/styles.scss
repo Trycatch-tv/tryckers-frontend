@@ -1,18 +1,65 @@
-/* You can add global styles to this file, and also import other style files */
+/* Tailwind CSS v4 */
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
 
-/* Reset básico para asegurar ancho completo */
-* {
+/* PrimeNG Default Styles */
+
+/* PrimeIcons */
+@import "primeicons/primeicons.css";
+
+/* Global styles */
+html, body {
+  height: 100%;
+  margin: 0;
+  font-family: system-ui, -apple-system, sans-serif;
   box-sizing: border-box;
 }
 
-html, body {
-  margin: 0;
-  padding: 0;
-  width: 100%;
-  height: 100%;
-  overflow-x: hidden;
+*, *::before, *::after {
+  box-sizing: border-box;
 }
 
-body {
-  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+/* PrimeNG specific overrides to work with Tailwind */
+.p-button {
+  margin: 0.25rem;
+}
+
+.p-card {
+  box-shadow: 0 4px 6px -1px rgb(0 0 0 / 0.1), 0 2px 4px -2px rgb(0 0 0 / 0.1);
+}
+
+.p-inputtext {
+  width: 100%;
+}
+
+/* Dark theme styles for backwards compatibility */
+body.dark-theme,
+.dark-theme {
+  background-color: #121212;
+  color: #e0e0e0;
+}
+
+.dark-theme input,
+.dark-theme textarea,
+.dark-theme select {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+.dark-theme button:not(.theme-toggle) {
+  background-color: #333;
+  color: #e0e0e0;
+  border-color: #555;
+}
+
+.dark-theme button:not(.theme-toggle):hover {
+  background-color: #444;
+}
+
+.dark-theme .card,
+.dark-theme .form-container {
+  background-color: #1a1a1a;
+  border-color: #333;
 }
