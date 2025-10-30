@@ -36,4 +36,20 @@ export class PostsService {
       .toPromise();
     return result ?? [];
   }
+
+  async deletePost(postId: string): Promise<boolean> {
+    try {
+      await this.http
+        .delete(`http://localhost:8080/api/v1/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${this.getAuthToken()}`,
+          },
+        })
+        .toPromise();
+      return true;
+    } catch (error) {
+      console.error('Error deleting post:', error);
+      return false;
+    }
+  }
 }

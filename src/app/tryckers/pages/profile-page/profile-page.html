@@ -128,7 +128,13 @@
         </div>
         <div class="card-actions">
           <button class="action-btn" title="Editar">✏️</button>
-          <button class="action-btn" title="Eliminar">🗑️</button>
+          <button
+            class="action-btn"
+            title="Eliminar"
+            (click)="deletePost(post.id)"
+          >
+            🗑️
+          </button>
           <button class="action-btn primary read-btn" title="Leer">📖</button>
           <button class="like-btn" title="Upvote">
             <!-- TODO: Mostrar el contador de up votes -->

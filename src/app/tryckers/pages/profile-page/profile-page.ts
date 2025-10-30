@@ -64,6 +64,21 @@ export default class ProfilePage implements OnInit {
     this.userPosts = posts;
   }
 
+  async deletePost(postId: string) {
+    const confirmed = confirm(
+      '¿Estás seguro de que deseas eliminar esta publicación? ',
+    );
+    if (confirmed) {
+      const result = await this.postsService.deletePost(postId);
+      if (result) {
+        alert('Publicación eliminada exitosamente.');
+        this.getUserPosts(this.user.id);
+      } else {
+        alert('Error al eliminar la publicación. Inténtalo de nuevo.');
+      }
+    }
+  }
+
   ngOnInit() {
     this.getProfileData();
   }
@@ -123,6 +138,7 @@ export default class ProfilePage implements OnInit {
     }
   }
 
+  // TODO: Pendiente de mover a un utilitario común
   toArray(string: string): string[] {
     return string.split(',').map((s: string) => s.trim());
   }
