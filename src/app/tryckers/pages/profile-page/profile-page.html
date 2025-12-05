@@ -127,7 +127,13 @@
           </div>
         </div>
         <div class="card-actions">
-          <button class="action-btn" title="Editar">✏️</button>
+          <button
+            class="action-btn"
+            title="Editar"
+            (click)="openPostModal(true, post)"
+          >
+            ✏️
+          </button>
           <!-- TODO: Que solo pueda ser eliminado por el autor o el admin -->
           <button
             class="action-btn"
@@ -148,12 +154,12 @@
   </div>
 
   <!-- Floating Create Button -->
-  <button class="create-btn" (click)="openCreatePostModal()">Crear</button>
+  <button class="create-btn" (click)="openPostModal()">Crear</button>
 
   <!-- Create Post Modal -->
   <p-dialog
-    header="Crear Nueva Publicación"
-    [(visible)]="showCreatePostModal"
+    header="{{ info.header }}"
+    [(visible)]="showPostModal"
     [modal]="true"
     [closable]="true"
     [dismissableMask]="true"
@@ -161,7 +167,7 @@
     [resizable]="false"
     [style]="{ width: '600px', maxWidth: '90vw' }"
     [showHeader]="true"
-    (onHide)="closeCreatePostModal()"
+    (onHide)="closePostModal()"
   >
     <div class="create-post-form">
       <!-- Post Type Selection -->
@@ -248,14 +254,15 @@
         <p-button
           label="Cancelar"
           icon="pi pi-times"
-          (onClick)="closeCreatePostModal()"
+          (onClick)="closePostModal()"
           [text]="true"
         >
         </p-button>
+        <!-- TODO: crear la función para editar post -->
         <p-button
-          label="Crear Publicación"
+          label="{{ info.buttonLabel }}"
           icon="pi pi-check"
-          (onClick)="createPost()"
+          (onClick)="savePost()"
           [disabled]="!newPost.title.trim() || !newPost.content.trim()"
         >
         </p-button>
