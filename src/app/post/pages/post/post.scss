@@ -1,0 +1,158 @@
+/* Post detail page styling */
+
+.post-page {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 32px 24px 64px;
+	background: #ffffff;
+	border-radius: 16px;
+	box-shadow: 0 12px 40px rgba(0, 0, 0, 0.08);
+	display: flex;
+	flex-direction: column;
+	gap: 20px;
+}
+
+.post-header {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+}
+
+.post-meta {
+	display: flex;
+	align-items: center;
+	gap: 10px;
+	font-size: 14px;
+	color: #4b5563;
+}
+
+.post-type {
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: #eef2ff;
+	color: #4338ca;
+	font-weight: 600;
+	text-transform: capitalize;
+}
+
+.post-status {
+	padding: 6px 12px;
+	border-radius: 999px;
+	background: #f3f4f6;
+	color: #374151;
+	text-transform: capitalize;
+}
+
+.post-status.published {
+	background: #ecfdf3;
+	color: #15803d;
+}
+
+.post-title {
+	font-size: 32px;
+	line-height: 1.2;
+	margin: 0;
+	color: #111827;
+}
+
+.post-submeta {
+	display: flex;
+	gap: 14px;
+	align-items: center;
+	color: #6b7280;
+	font-size: 14px;
+}
+
+.post-tags {
+	display: flex;
+	flex-wrap: wrap;
+	gap: 8px;
+}
+
+.tag {
+	padding: 6px 10px;
+	border-radius: 999px;
+	background: #f9fafb;
+	color: #4b5563;
+	border: 1px solid #e5e7eb;
+	font-size: 13px;
+}
+
+.post-hero {
+	width: 100%;
+	border-radius: 14px;
+	overflow: hidden;
+	background: #f3f4f6;
+	border: 1px solid #e5e7eb;
+}
+
+.post-hero img {
+	width: 100%;
+	display: block;
+	object-fit: cover;
+	max-height: 420px;
+}
+
+.post-content {
+	font-size: 17px;
+	line-height: 1.7;
+	color: #111827;
+	display: flex;
+	flex-direction: column;
+	gap: 16px;
+}
+
+.post-content p {
+	margin: 0;
+	white-space: pre-line;
+}
+
+.post-footer {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 12px;
+}
+
+.back-link {
+	color: #2563eb;
+	font-weight: 600;
+	text-decoration: none;
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+}
+
+.back-link:hover {
+	text-decoration: underline;
+}
+
+.state {
+	max-width: 960px;
+	margin: 0 auto;
+	padding: 40px 24px;
+	text-align: center;
+	color: #4b5563;
+	background: #ffffff;
+	border-radius: 14px;
+	border: 1px dashed #e5e7eb;
+}
+
+.state.error {
+	color: #b91c1c;
+	border-color: #fecdd3;
+	background: #fef2f2;
+}
+
+@media (max-width: 768px) {
+	.post-page {
+		padding: 24px 16px 48px;
+	}
+
+	.post-title {
+		font-size: 26px;
+	}
+
+	.post-submeta {
+		flex-wrap: wrap;
+	}
+}

@@ -142,7 +142,13 @@
           >
             🗑️
           </button>
-          <button class="action-btn primary read-btn" title="Leer">📖</button>
+          <a
+            class="action-btn primary read-btn"
+            title="Leer"
+            [routerLink]="['/perfil', user?.username, 'post', post.id]"
+          >
+            📖
+          </a>
           <button class="like-btn" title="Upvote">
             <!-- TODO: Mostrar el contador de up votes -->
             <span>👍</span>
@@ -258,7 +264,6 @@
           [text]="true"
         >
         </p-button>
-        <!-- TODO: crear la función para editar post -->
         <p-button
           label="{{ info.buttonLabel }}"
           icon="pi pi-check"

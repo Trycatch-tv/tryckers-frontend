@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { PostsService } from 'src/app/post/services/posts.service';
+
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,6 +18,8 @@ import { PostsService } from 'src/app/post/services/posts.service';
     ButtonModule,
     DialogModule,
     InputTextModule,
+    RouterModule,
+    RouterLink,
   ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',

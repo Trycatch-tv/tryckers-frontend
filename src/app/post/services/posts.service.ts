@@ -48,7 +48,16 @@ export class PostsService {
     return result ?? [];
   }
 
-  // TODO: Implementar el getPostById
+  async getPostById(postId: string): Promise<any | null> {
+    const result = await this.http
+      .get<any>(`http://localhost:8080/api/v1/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+      .toPromise();
+    return result ?? null;
+  }
 
   async deletePost(postId: string): Promise<boolean> {
     try {

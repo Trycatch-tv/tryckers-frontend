@@ -1,1 +1,49 @@
-<p>post works!</p>
+<div class="post-page" *ngIf="!loading && !error && post; else stateBlock">
+  <header class="post-header">
+    <div class="post-meta">
+      <span class="post-type">{{ post?.type || 'Artículo' }}</span>
+      <span
+        class="post-status"
+        [class.published]="post?.status === 'published'"
+      >
+        {{ post?.status || 'borrador' }}
+      </span>
+    </div>
+    <h1 class="post-title">{{ post?.title }}</h1>
+    <div class="post-submeta">
+      <span class="post-author"
+        >Por {{ post?.user?.name || post?.author || 'Autor' }}</span
+      >
+      <span class="post-date" *ngIf="post?.created_at"
+        >{{ post.created_at | date:'mediumDate' }}</span
+      >
+    </div>
+    <div class="post-tags" *ngIf="toArray(post?.tags).length">
+      <span class="tag" *ngFor="let tag of toArray(post?.tags)"
+        >#{{ tag }}</span
+      >
+    </div>
+  </header>
+
+  <figure class="post-hero" *ngIf="post?.image">
+    <img [src]="post.image" [alt]="post?.title || 'Imagen de la publicación'" />
+  </figure>
+
+  <article class="post-content">
+    <p>{{ post?.content }}</p>
+  </article>
+
+  <footer class="post-footer">
+    <a
+      [routerLink]="['/perfil', username || post?.user?.username || '']"
+      class="back-link"
+    >
+      ← Volver al perfil
+    </a>
+  </footer>
+</div>
+
+<ng-template #stateBlock>
+  <div class="state" *ngIf="loading">Cargando publicación...</div>
+  <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+</ng-template>
