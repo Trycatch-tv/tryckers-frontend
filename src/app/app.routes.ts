@@ -26,6 +26,21 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./tryckers/pages/profile-page/profile-page'),
       },
+      {
+        path: 'perfil/:username',
+        loadComponent: () =>
+          import('./tryckers/pages/profile-page/profile-page'),
+      },
+      {
+        path: 'perfil/:username/post/:id',
+        loadComponent: () =>
+          import('./post/pages/post/post').then((m) => m.Post),
+      },
+      {
+        path: 'profile/:username/post/:id',
+        loadComponent: () =>
+          import('./post/pages/post/post').then((m) => m.Post),
+      },
     ],
   },
   {

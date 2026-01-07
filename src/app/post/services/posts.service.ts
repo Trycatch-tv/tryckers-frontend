@@ -26,6 +26,17 @@ export class PostsService {
     return result ?? null;
   }
 
+  async updatePost(postData: any): Promise<any> {
+    const result = await this.http
+      .put<any>(`http://localhost:8080/api/v1/posts`, postData, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+      .toPromise();
+    return result ?? null;
+  }
+
   async getPostsByUserId(userId: string): Promise<any[]> {
     const result = await this.http
       .get<any[]>(`http://localhost:8080/api/v1/users/${userId}/posts`, {
@@ -35,6 +46,17 @@ export class PostsService {
       })
       .toPromise();
     return result ?? [];
+  }
+
+  async getPostById(postId: string): Promise<any | null> {
+    const result = await this.http
+      .get<any>(`http://localhost:8080/api/v1/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+      .toPromise();
+    return result ?? null;
   }
 
   async deletePost(postId: string): Promise<boolean> {

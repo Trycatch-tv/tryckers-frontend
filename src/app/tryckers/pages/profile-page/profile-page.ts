@@ -1,12 +1,14 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, RouterLink } from '@angular/router';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import { PostsService } from 'src/app/post/services/posts.service';
+
+import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-profile-page',
@@ -16,6 +18,8 @@ import { PostsService } from 'src/app/post/services/posts.service';
     ButtonModule,
     DialogModule,
     InputTextModule,
+    RouterModule,
+    RouterLink,
   ],
   templateUrl: './profile-page.html',
   styleUrl: './profile-page.scss',
@@ -30,8 +34,9 @@ export default class ProfilePage implements OnInit {
   userPosts: any[] = [];
 
   // Modal properties
-  showCreatePostModal: boolean = false;
+  showPostModal: boolean = false;
   newPost = {
+    id: undefined,
     title: '',
     content: '',
     type: 'article', // article, video, project
@@ -47,6 +52,13 @@ export default class ProfilePage implements OnInit {
     { label: 'Proyecto', value: 'project' },
   ];
 
+  info = {
+    header: 'Crear Nueva Publicación',
+    buttonLabel: 'Crear Publicación',
+  };
+
+  isEditing = false;
+
   constructor(private route: ActivatedRoute) {
     this.username = this.route.snapshot.paramMap.get('username')!;
   }
@@ -54,14 +66,18 @@ export default class ProfilePage implements OnInit {
   async getProfileData() {
     this.user = await this.tryckersService.getTryckerByUsername(this.username);
     this.user.interests = this.user.interests.split(',') || [];
-    //TODO: Aquí vamos, falta mostrar los resultados en la vista.
     this.getUserPosts(this.user.id);
   }
 
   async getUserPosts(userId: string) {
     const posts = await this.postsService.getPostsByUserId(userId);
-    console.log('User posts:', posts);
     this.userPosts = posts;
+  }
+
+  async getPostByID(postId: string) {
+    alert(postId);
+    // const post = await this.postsService.getPostById(postId);
+    // return post;
   }
 
   async deletePost(postId: string) {
@@ -81,20 +97,33 @@ export default class ProfilePage implements OnInit {
 
   ngOnInit() {
     this.getProfileData();
+    if (this.isEditing && this.newPost.id) {
+      this.getPostByID(this.newPost.id);
+    }
   }
 
   // Modal methods
-  openCreatePostModal() {
-    this.showCreatePostModal = true;
+  openPostModal(isEditing: boolean = false, post: any = null) {
+    console.log(post);
+    this.showPostModal = true;
+    this.isEditing = isEditing;
+    this.info.header =
+      '' + (isEditing ? 'Editar' : 'Crear Nueva') + ' Publicación';
+    this.info.buttonLabel = isEditing ? 'Guardar Cambios' : 'Crear Publicación';
+
+    if (isEditing && post) {
+      this.newPost = { ...post };
+    }
   }
 
-  closeCreatePostModal() {
-    this.showCreatePostModal = false;
+  closePostModal() {
+    this.showPostModal = false;
     this.resetPostForm();
   }
 
   resetPostForm() {
     this.newPost = {
+      id: undefined,
       title: '',
       content: '',
       type: 'article',
@@ -112,6 +141,14 @@ export default class ProfilePage implements OnInit {
     }
   }
 
+  async savePost() {
+    if (this.isEditing) {
+      await this.editPost();
+    } else {
+      await this.createPost();
+    }
+  }
+
   async createPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
       alert('Por favor, completa todos los campos requeridos.');
@@ -119,22 +156,33 @@ export default class ProfilePage implements OnInit {
     }
 
     try {
-      // Aquí iría la lógica para crear el post
-      console.log('Creating post:', this.newPost);
-
       this.newPost.user_id = this.user.id;
-      const result = await this.postsService.createPost(this.newPost);
-
-      console.log('Post created successfully:', result);
+      await this.postsService.createPost(this.newPost);
 
       alert('¡Publicación creada exitosamente!');
-      // this.closeCreatePostModal();
+      this.closePostModal();
 
       // Refresh profile data to show new post
-      // await this.getProfileData();
+      await this.getProfileData();
     } catch (error) {
-      console.error('Error creating post:', error);
       alert('Error al crear la publicación. Inténtalo de nuevo.');
+    }
+  }
+
+  async editPost() {
+    if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
+      alert('Por favor, completa todos los campos requeridos.');
+      return;
+    }
+
+    try {
+      await this.postsService.updatePost(this.newPost);
+      alert('¡Publicación actualizada exitosamente!');
+      this.closePostModal();
+      // Refresh profile data to show updated post
+      await this.getProfileData();
+    } catch (error) {
+      alert('Error al actualizar la publicación. Inténtalo de nuevo.');
     }
   }
 
