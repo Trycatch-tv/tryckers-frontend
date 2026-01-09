@@ -186,6 +186,8 @@ export default class ProfilePage implements OnInit {
     }
   }
 
+  async votePost(postId: string) {}
+
   // TODO: Pendiente de mover a un utilitario común
   toArray(string: string): string[] {
     return string.split(',').map((s: string) => s.trim());
