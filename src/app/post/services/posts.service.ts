@@ -76,11 +76,11 @@ export class PostsService {
     }
   }
 
-  async votePost(postId: string, voteType: '1' | '-1'): Promise<Post | null> {
+  async votePost(postId: string, voteType: 0 | 1): Promise<Post | null> {
     const result = await this.http
       .post<any>(
         `http://localhost:8080/api/v1/posts/${postId}/vote`,
-        { type: voteType },
+        { vote: voteType },
         {
           headers: {
             Authorization: `Bearer ${this.getAuthToken()}`,

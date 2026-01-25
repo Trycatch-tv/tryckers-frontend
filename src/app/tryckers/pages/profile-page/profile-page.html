@@ -149,9 +149,14 @@
           >
             📖
           </a>
-          <button class="like-btn" title="Upvote">
-            <!-- TODO: Mostrar el contador de up votes -->
+          <button
+            class="like-btn"
+            [class.voted]="post.user_vote === 1"
+            title="Upvote"
+            (click)="votePost(post.id, post.user_vote === 1 ? 0 : 1)"
+          >
             <span>👍</span>
+            <span class="vote-count">{{ post.votes_count ?? 0 }}</span>
           </button>
         </div>
       </div>

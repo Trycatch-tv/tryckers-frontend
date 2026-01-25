@@ -186,7 +186,22 @@ export default class ProfilePage implements OnInit {
     }
   }
 
-  async votePost(postId: string) {}
+  async votePost(postId: string, voteType: 0 | 1) {
+    try {
+      const post = this.userPosts.find((p) => p.id === postId);
+      const currentVote = post?.user_vote;
+      const finalVoteType = currentVote === 1 ? 0 : 1;
+      const result = await this.postsService.votePost(postId, finalVoteType);
+      if (result) {
+        // Refrescar todos los posts del usuario
+        await this.getUserPosts(this.user.id);
+        // Notificación eliminada
+      }
+    } catch (error) {
+      console.error('Error al votar la publicación:', error);
+      alert('Error al votar la publicación. Inténtalo de nuevo.');
+    }
+  }
 
   // TODO: Pendiente de mover a un utilitario común
   toArray(string: string): string[] {
