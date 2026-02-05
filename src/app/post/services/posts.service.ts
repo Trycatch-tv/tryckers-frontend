@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Post } from '../interfaces/post';
 
 @Injectable({
   providedIn: 'root',
@@ -73,5 +74,20 @@ export class PostsService {
       console.error('Error deleting post:', error);
       return false;
     }
+  }
+
+  async votePost(postId: string, voteType: 0 | 1): Promise<Post | null> {
+    const result = await this.http
+      .post<any>(
+        `http://localhost:8080/api/v1/posts/${postId}/vote`,
+        { vote: voteType },
+        {
+          headers: {
+            Authorization: `Bearer ${this.getAuthToken()}`,
+          },
+        },
+      )
+      .toPromise();
+    return result ?? null;
   }
 }

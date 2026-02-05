@@ -109,8 +109,50 @@
 
 .post-footer {
 	display: flex;
-	justify-content: flex-start;
+	justify-content: space-between;
+	align-items: center;
 	margin-top: 12px;
+	flex-wrap: wrap;
+	gap: 16px;
+}
+
+.post-actions {
+	display: flex;
+	gap: 12px;
+}
+
+.vote-btn {
+	display: inline-flex;
+	align-items: center;
+	gap: 6px;
+	padding: 8px 16px;
+	border: 1px solid #e5e7eb;
+	border-radius: 8px;
+	background: #f9fafb;
+	cursor: pointer;
+	font-size: 14px;
+	transition: all 0.2s ease;
+}
+
+.vote-btn:hover {
+	background: #f3f4f6;
+	border-color: #d1d5db;
+}
+
+.vote-btn.voted.upvote {
+	background: #ecfdf5;
+	border-color: #10b981;
+	color: #059669;
+}
+
+.vote-btn.voted.downvote {
+	background: #fef2f2;
+	border-color: #ef4444;
+	color: #dc2626;
+}
+
+.vote-count {
+	font-weight: 600;
 }
 
 .back-link {

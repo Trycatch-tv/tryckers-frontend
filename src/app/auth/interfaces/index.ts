@@ -2,4 +2,4 @@
 export * from './user';
 
 // Auth response interface
-export * from './auth-response';
+export type { AuthResponse } from './auth-response';

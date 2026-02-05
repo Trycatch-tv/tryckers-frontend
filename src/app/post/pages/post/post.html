@@ -34,6 +34,18 @@
   </article>
 
   <footer class="post-footer">
+    <div class="post-actions">
+      <button
+        type="button"
+        class="vote-btn upvote"
+        [class.voted]="post?.user_vote === 1"
+        title="Upvote"
+        (click)="votePost(post.id)"
+      >
+        <span>👍</span>
+        <span class="vote-count">{{ post?.votes_count ?? 0 }}</span>
+      </button>
+    </div>
     <a
       [routerLink]="['/perfil', username || post?.user?.username || '']"
       class="back-link"
