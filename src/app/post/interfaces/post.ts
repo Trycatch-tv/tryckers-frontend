@@ -13,4 +13,5 @@ export interface Post {
   updatedAt: Date;
   user: User;
   votes_count?: number;
+  user_vote?: 0 | 1 | null;
 }

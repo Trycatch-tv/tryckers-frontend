@@ -53,4 +53,41 @@ export class Post implements OnInit {
       .map((t) => t.trim())
       .filter(Boolean);
   }
+
+  async votePost(postId: string) {
+    try {
+      const currentVote = this.post?.user_vote;
+      const currentVotesCount = this.post?.votes_count ?? 0;
+      const newVoteType = currentVote === 1 ? 0 : 1;
+      console.log('Enviando voto:', { postId, currentVote, newVoteType });
+      const result = await this.postsService.votePost(postId, newVoteType);
+      console.log('Respuesta del backend:', result);
+      if (result) {
+        // Si el backend devuelve user_vote lo usamos, sino usamos el valor calculado
+        const updatedUserVote =
+          result.user_vote !== undefined ? result.user_vote : newVoteType;
+
+        // Calcular el nuevo conteo de votos
+        // Si el backend lo devuelve, usarlo; sino calcular localmente
+        let updatedVotesCount = result.votes_count;
+        if (updatedVotesCount === undefined) {
+          // Calcular localmente: si votamos (1) sumamos, si quitamos voto (0) restamos
+          if (newVoteType === 1) {
+            updatedVotesCount = currentVotesCount + 1;
+          } else {
+            updatedVotesCount = Math.max(0, currentVotesCount - 1);
+          }
+        }
+
+        this.post = {
+          ...this.post,
+          user_vote: updatedUserVote,
+          votes_count: updatedVotesCount,
+        };
+        console.log('Post actualizado:', this.post);
+      }
+    } catch (error) {
+      console.error('Error al votar la publicación:', error);
+    }
+  }
 }
