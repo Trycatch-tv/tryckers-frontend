@@ -35,6 +35,9 @@ export const AuthStore = signalStore(
       async login(email: string, password: string) {
         try {
           const response = await authService.login(email, password).toPromise();
+          if (!response) {
+            throw new Error('No response from server');
+          }
           const newState: AuthState = {
             isLoggedIn: response.user.Token ? true : false,
             user: response.user.UserData,

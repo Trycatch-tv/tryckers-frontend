@@ -266,8 +266,14 @@ export default class ProfilePage implements OnInit {
   }
 
   // TODO: Pendiente de mover a un utilitario común
-  toArray(string: string): string[] {
-    return string.split(',').map((s: string) => s.trim());
+  toArray(value: string | null | undefined): string[] {
+    if (!value || typeof value !== 'string') {
+      return [];
+    }
+    return value
+      .split(',')
+      .map((s: string) => s.trim())
+      .filter(Boolean);
   }
 
   textPreview(content: string): string {

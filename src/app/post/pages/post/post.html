@@ -11,9 +11,7 @@
     </div>
     <h1 class="post-title">{{ post?.title }}</h1>
     <div class="post-submeta">
-      <span class="post-author"
-        >Por {{ post?.user?.name || post?.author || 'Autor' }}</span
-      >
+      <span class="post-author">Por {{ post?.user?.name || 'Autor' }}</span>
       <span class="post-date" *ngIf="post?.created_at"
         >{{ post.created_at | date:'mediumDate' }}</span
       >
