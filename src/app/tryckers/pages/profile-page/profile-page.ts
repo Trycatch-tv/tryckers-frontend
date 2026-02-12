@@ -40,7 +40,7 @@ export default class ProfilePage implements OnInit {
     title: '',
     content: '',
     type: 'article', // article, video, project
-    image: null as File | null,
+    image: '',
     tags: '',
     status: 'draft', // draft, published
     user_id: null,
@@ -127,18 +127,11 @@ export default class ProfilePage implements OnInit {
       title: '',
       content: '',
       type: 'article',
-      image: null,
+      image: '',
       tags: '',
       status: 'draft',
       user_id: null,
     };
-  }
-
-  onFileSelect(event: any) {
-    const file = event.target.files[0];
-    if (file) {
-      this.newPost.image = file.name; // TODO: reemplazar con file cuando el backend soporte archivos
-    }
   }
 
   async savePost() {

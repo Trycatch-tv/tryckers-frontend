@@ -220,21 +220,27 @@
       <div class="form-group">
         <label for="imagen" class="form-label">Imagen de Portada</label>
         <input
-          type="file"
+          type="text"
           id="imagen"
-          (change)="onFileSelect($event)"
-          accept="image/*"
-          class="form-file"
+          pInputText
+          [(ngModel)]="newPost.image"
+          placeholder="Ingresa la URL de la imagen"
+          class="form-input"
         />
         <small class="form-help"
-          >Formatos soportados: JPG, PNG, GIF (máx. 5MB)</small
+          >Ingresa la URL de la imagen (ej:
+          https://ejemplo.com/imagen.jpg)</small
         >
       </div>
 
       <!-- Preview of selected image -->
       <div class="image-preview" *ngIf="newPost.image">
         <p class="preview-label">Vista previa:</p>
-        <div class="preview-placeholder">{{ newPost.image.name }}</div>
+        <img
+          [src]="newPost.image"
+          alt="Vista previa"
+          style="max-width: 100%; max-height: 200px; border-radius: 8px"
+        />
       </div>
     </div>
 
