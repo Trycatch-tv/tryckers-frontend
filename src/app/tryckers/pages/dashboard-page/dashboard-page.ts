@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { CardModule } from 'primeng/card';
 
@@ -11,7 +12,7 @@ import { CardModule } from 'primeng/card';
   standalone: true,
 })
 export class DashboardPage implements OnInit {
-  tryckers: any[] = [];
+  tryckers: Trycker[] = [];
   loading = true;
 
   private tryckersService = inject(TryckersService);
@@ -24,37 +25,16 @@ export class DashboardPage implements OnInit {
     } catch (error) {
       console.error('Error loading tryckers:', error);
       // Fallback data en caso de error
-      this.tryckers = [
-        {
-          id: 1,
-          name: 'ZIRUS16',
-          email: 'zirus16@example.com',
-          country: 'Colombia',
-        },
-        {
-          id: 2,
-          name: 'JULIAN',
-          email: 'julian@example.com',
-          country: 'Chile',
-        },
-        {
-          id: 3,
-          name: 'SANTIAGO',
-          email: 'santiago@example.com',
-          country: 'Colombia',
-        },
-      ];
+      this.tryckers = [];
     } finally {
       this.loading = false;
     }
   }
 
-  viewProfile(trycker: any): void {
+  viewProfile(trycker: Trycker): void {
     // Usar username si existe, si no usar el name como fallback
     const username =
-      trycker.username ||
-      trycker.name?.toLowerCase().replace(/\s+/g, '') ||
-      trycker.id;
+      trycker.name?.toLowerCase().replace(/\\s+/g, '') || trycker.id;
     this.router.navigate(['/profile', username]);
   }
 }

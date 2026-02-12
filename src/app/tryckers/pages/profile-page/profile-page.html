@@ -20,7 +20,7 @@
         <div class="profile-social-links">
           <a
             *ngIf="user?.github_url"
-            [href]="user.github_url"
+            [href]="user?.github_url"
             target="_blank"
             class="social-link github"
           >
@@ -28,21 +28,18 @@
           </a>
           <a
             *ngIf="user?.linkedin_url"
-            [href]="user.linkedin_url"
+            [href]="user?.linkedin_url"
             target="_blank"
             class="social-link linkedin"
           >
             <span>💼 LinkedIn</span>
           </a>
           <!-- Interests Section -->
-          <div
-            class="interests-section"
-            *ngIf="user?.interests && user.interests.length > 0"
-          >
+          <div class="interests-section" *ngIf="user?.interests?.length">
             <div class="interests-tags">
               <span
                 class="interest-tag"
-                *ngFor="let interest of user.interests"
+                *ngFor="let interest of user?.interests"
               >
                 {{ interest }}
               </span>

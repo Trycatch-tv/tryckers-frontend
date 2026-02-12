@@ -1,6 +1,11 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
-import { Post } from '../interfaces/post';
+import {
+  CreatePostDto,
+  Post,
+  UpdatePostDto,
+  VotePostResponse,
+} from '../interfaces/post';
 
 @Injectable({
   providedIn: 'root',
@@ -16,9 +21,9 @@ export class PostsService {
     return token;
   }
 
-  async createPost(postData: any): Promise<any> {
+  async createPost(postData: CreatePostDto): Promise<Post | null> {
     const result = await this.http
-      .post<any>('http://localhost:8080/api/v1/posts', postData, {
+      .post<Post>('http://localhost:8080/api/v1/posts', postData, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -27,9 +32,9 @@ export class PostsService {
     return result ?? null;
   }
 
-  async updatePost(postData: any): Promise<any> {
+  async updatePost(postData: UpdatePostDto): Promise<Post | null> {
     const result = await this.http
-      .put<any>(`http://localhost:8080/api/v1/posts`, postData, {
+      .put<Post>(`http://localhost:8080/api/v1/posts`, postData, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -38,9 +43,9 @@ export class PostsService {
     return result ?? null;
   }
 
-  async getPostsByUserId(userId: string): Promise<any[]> {
+  async getPostsByUserId(userId: string): Promise<Post[]> {
     const result = await this.http
-      .get<any[]>(`http://localhost:8080/api/v1/users/${userId}/posts`, {
+      .get<Post[]>(`http://localhost:8080/api/v1/users/${userId}/posts`, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -49,9 +54,9 @@ export class PostsService {
     return result ?? [];
   }
 
-  async getPostById(postId: string): Promise<any | null> {
+  async getPostById(postId: string): Promise<Post | null> {
     const result = await this.http
-      .get<any>(`http://localhost:8080/api/v1/posts/${postId}`, {
+      .get<Post>(`http://localhost:8080/api/v1/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -76,9 +81,12 @@ export class PostsService {
     }
   }
 
-  async votePost(postId: string, voteType: 0 | 1): Promise<Post | null> {
+  async votePost(
+    postId: string,
+    voteType: 0 | 1,
+  ): Promise<VotePostResponse | null> {
     const result = await this.http
-      .post<any>(
+      .post<VotePostResponse>(
         `http://localhost:8080/api/v1/posts/${postId}/vote`,
         { vote: voteType },
         {
