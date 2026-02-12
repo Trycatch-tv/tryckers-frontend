@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { Trycker, TryckerProfileResponse } from '@tryckers/interfaces';
 
 @Injectable({
   providedIn: 'root',
@@ -15,9 +16,9 @@ export class TryckersService {
     return token;
   }
 
-  async getTryckers(): Promise<any[]> {
+  async getTryckers(): Promise<Trycker[]> {
     const result = await this.http
-      .get<any[]>('http://localhost:8080/api/v1/users', {
+      .get<Trycker[]>('http://localhost:8080/api/v1/users', {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -26,14 +27,17 @@ export class TryckersService {
     return result ?? [];
   }
 
-  async getTryckerByUsername(username: string): Promise<any> {
+  async getTryckerByUsername(username: string): Promise<Trycker | null> {
     const result = await this.http
-      .get<any>(`http://localhost:8080/api/v1/perfil/${username}`, {
-        headers: {
-          Authorization: `Bearer ${this.getAuthToken()}`,
+      .get<TryckerProfileResponse>(
+        `http://localhost:8080/api/v1/perfil/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getAuthToken()}`,
+          },
         },
-      })
+      )
       .toPromise();
-    return result.user ?? null;
+    return result?.user ?? null;
   }
 }

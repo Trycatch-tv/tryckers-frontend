@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Post as PostInterface } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
 
 @Component({
@@ -16,7 +17,7 @@ export class Post implements OnInit {
 
   loading = true;
   error: string | null = null;
-  post: any = null;
+  post: PostInterface | null = null;
   username: string | null = null;
 
   ngOnInit(): void {
@@ -56,8 +57,10 @@ export class Post implements OnInit {
 
   async votePost(postId: string) {
     try {
-      const currentVote = this.post?.user_vote;
-      const currentVotesCount = this.post?.votes_count ?? 0;
+      if (!this.post) return;
+
+      const currentVote = this.post.user_vote;
+      const currentVotesCount = this.post.votes_count ?? 0;
       const newVoteType = currentVote === 1 ? 0 : 1;
       console.log('Enviando voto:', { postId, currentVote, newVoteType });
       const result = await this.postsService.votePost(postId, newVoteType);

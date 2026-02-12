@@ -23,7 +23,7 @@ export class RegisterPageComponent {
   value = signal<string>('');
   password = signal<string>('');
 
-  selectedCountry: any = null;
+  selectedCountry: string | null = null;
 
   fb = inject(FormBuilder);
   hasError = signal(false);

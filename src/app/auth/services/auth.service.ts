@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import { AuthResponse, UserData } from '@auth/interfaces/auth-response';
 import { User } from '@auth/interfaces/user';
@@ -56,7 +56,7 @@ export class AuthService {
     return 'not-authenticated';
   });
 
-  login(email: string, password: string): any {
+  login(email: string, password: string): Observable<AuthResponse> {
     return this.http.post<AuthResponse>(`${baseUrl}/login`, {
       email,
       password,
@@ -69,7 +69,7 @@ export class AuthService {
     country: string,
     email: string,
     password: string,
-  ) {
+  ): Observable<boolean> {
     console.log('Attempting registration with:', {
       name,
       username,
@@ -90,7 +90,7 @@ export class AuthService {
           this._authStatus.set('authenticated');
         }),
         map(() => true),
-        catchError((error: any) => {
+        catchError((error: HttpErrorResponse) => {
           return this.handleAuthError(error);
         }),
       );
@@ -105,7 +105,7 @@ export class AuthService {
     localStorage.removeItem('userData');
   }
 
-  private handleAuthError(error: any): Observable<boolean> {
+  private handleAuthError(error: HttpErrorResponse): Observable<boolean> {
     console.error('Authentication error:', error);
     this._authStatus.set('not-authenticated');
     this._user.set(null);
