@@ -1,4 +1,5 @@
 import { inject } from '@angular/core';
+import { UserData } from '@auth/interfaces/auth-response';
 import { AuthService } from '@auth/services/auth.service';
 import {
   patchState,
@@ -8,7 +9,7 @@ import {
   withState,
 } from '@ngrx/signals';
 
-type AuthState = { isLoggedIn: boolean; user: any; token: string };
+type AuthState = { isLoggedIn: boolean; user: UserData | null; token: string };
 
 // Función para cargar el estado inicial desde localStorage
 function loadInitialState(): AuthState {
@@ -18,7 +19,7 @@ function loadInitialState(): AuthState {
 
     return {
       isLoggedIn: !!token,
-      user: userData ? JSON.parse(userData) : null,
+      user: userData ? (JSON.parse(userData) as UserData) : null,
       token: token || '',
     };
   }
@@ -34,7 +35,7 @@ export const AuthStore = signalStore(
       async login(email: string, password: string) {
         try {
           const response = await authService.login(email, password).toPromise();
-          const newState = {
+          const newState: AuthState = {
             isLoggedIn: response.user.Token ? true : false,
             user: response.user.UserData,
             token: response.user.Token,
@@ -53,7 +54,7 @@ export const AuthStore = signalStore(
           throw error;
         }
       },
-      setUser(user: any) {
+      setUser(user: UserData | null) {
         patchState(store, { user });
         if (typeof localStorage !== 'undefined') {
           localStorage.setItem('userData', JSON.stringify(user));

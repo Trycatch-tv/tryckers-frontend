@@ -2,13 +2,36 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
+import {
+  CreatePostDto,
+  Post,
+  PostStatus,
+  PostType,
+  UpdatePostDto,
+} from 'src/app/post/interfaces/post';
 import { PostsService } from 'src/app/post/services/posts.service';
 
 import { RouterModule } from '@angular/router';
+
+interface PostFormData {
+  id?: string;
+  title: string;
+  content: string;
+  type: PostType;
+  image: string;
+  tags: string;
+  status: PostStatus;
+  user_id: string | null;
+}
+
+interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
+  interests: string[];
+}
 
 @Component({
   selector: 'app-profile-page',
@@ -30,19 +53,19 @@ export default class ProfilePage implements OnInit {
   postsService = inject(PostsService);
 
   username: string = '';
-  user: any = null;
-  userPosts: any[] = [];
+  user: TryckerWithParsedInterests | null = null;
+  userPosts: Post[] = [];
 
   // Modal properties
   showPostModal: boolean = false;
-  newPost = {
+  newPost: PostFormData = {
     id: undefined,
     title: '',
     content: '',
-    type: 'article', // article, video, project
+    type: 'article' as PostType,
     image: '',
     tags: '',
-    status: 'draft', // draft, published
+    status: 'draft' as PostStatus,
     user_id: null,
   };
 
@@ -64,9 +87,16 @@ export default class ProfilePage implements OnInit {
   }
 
   async getProfileData() {
-    this.user = await this.tryckersService.getTryckerByUsername(this.username);
-    this.user.interests = this.user.interests.split(',') || [];
-    this.getUserPosts(this.user.id);
+    const userData = await this.tryckersService.getTryckerByUsername(
+      this.username,
+    );
+    if (userData) {
+      this.user = {
+        ...userData,
+        interests: userData.interests ? userData.interests.split(',') : [],
+      };
+      this.getUserPosts(this.user.id);
+    }
   }
 
   async getUserPosts(userId: string) {
@@ -88,7 +118,9 @@ export default class ProfilePage implements OnInit {
       const result = await this.postsService.deletePost(postId);
       if (result) {
         alert('Publicación eliminada exitosamente.');
-        this.getUserPosts(this.user.id);
+        if (this.user) {
+          this.getUserPosts(this.user.id);
+        }
       } else {
         alert('Error al eliminar la publicación. Inténtalo de nuevo.');
       }
@@ -103,7 +135,7 @@ export default class ProfilePage implements OnInit {
   }
 
   // Modal methods
-  openPostModal(isEditing: boolean = false, post: any = null) {
+  openPostModal(isEditing: boolean = false, post: Post | null = null) {
     console.log(post);
     this.showPostModal = true;
     this.isEditing = isEditing;
@@ -112,7 +144,16 @@ export default class ProfilePage implements OnInit {
     this.info.buttonLabel = isEditing ? 'Guardar Cambios' : 'Crear Publicación';
 
     if (isEditing && post) {
-      this.newPost = { ...post };
+      this.newPost = {
+        id: post.id,
+        title: post.title,
+        content: post.content,
+        type: post.type,
+        image: post.image ?? '',
+        tags: post.tags,
+        status: post.status,
+        user_id: post.user_id,
+      };
     }
   }
 
@@ -126,10 +167,10 @@ export default class ProfilePage implements OnInit {
       id: undefined,
       title: '',
       content: '',
-      type: 'article',
+      type: 'article' as PostType,
       image: '',
       tags: '',
-      status: 'draft',
+      status: 'draft' as PostStatus,
       user_id: null,
     };
   }
@@ -148,9 +189,22 @@ export default class ProfilePage implements OnInit {
       return;
     }
 
+    if (!this.user) {
+      alert('Error: No se encontró el usuario.');
+      return;
+    }
+
     try {
-      this.newPost.user_id = this.user.id;
-      await this.postsService.createPost(this.newPost);
+      const postData: CreatePostDto = {
+        title: this.newPost.title,
+        content: this.newPost.content,
+        type: this.newPost.type,
+        image: this.newPost.image,
+        tags: this.newPost.tags,
+        status: this.newPost.status,
+        user_id: this.user.id,
+      };
+      await this.postsService.createPost(postData);
 
       alert('¡Publicación creada exitosamente!');
       this.closePostModal();
@@ -168,8 +222,23 @@ export default class ProfilePage implements OnInit {
       return;
     }
 
+    if (!this.newPost.id) {
+      alert('Error: No se encontró el ID de la publicación.');
+      return;
+    }
+
     try {
-      await this.postsService.updatePost(this.newPost);
+      const updateData: UpdatePostDto = {
+        id: this.newPost.id,
+        title: this.newPost.title,
+        content: this.newPost.content,
+        type: this.newPost.type,
+        image: this.newPost.image,
+        tags: this.newPost.tags,
+        status: this.newPost.status,
+        user_id: this.newPost.user_id,
+      };
+      await this.postsService.updatePost(updateData);
       alert('¡Publicación actualizada exitosamente!');
       this.closePostModal();
       // Refresh profile data to show updated post
@@ -185,7 +254,7 @@ export default class ProfilePage implements OnInit {
       const currentVote = post?.user_vote;
       const finalVoteType = currentVote === 1 ? 0 : 1;
       const result = await this.postsService.votePost(postId, finalVoteType);
-      if (result) {
+      if (result && this.user) {
         // Refrescar todos los posts del usuario
         await this.getUserPosts(this.user.id);
         // Notificación eliminada
