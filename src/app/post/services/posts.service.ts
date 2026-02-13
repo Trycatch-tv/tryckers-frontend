@@ -6,6 +6,9 @@ import {
   UpdatePostDto,
   VotePostResponse,
 } from '../interfaces/post';
+import { environment } from 'src/environments/environment';
+
+const baseUrl = environment.baseUrl;
 
 @Injectable({
   providedIn: 'root',
@@ -23,7 +26,7 @@ export class PostsService {
 
   async createPost(postData: CreatePostDto): Promise<Post | null> {
     const result = await this.http
-      .post<Post>('http://localhost:8080/api/v1/posts', postData, {
+      .post<Post>(`${baseUrl}/posts`, postData, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -34,7 +37,7 @@ export class PostsService {
 
   async updatePost(postData: UpdatePostDto): Promise<Post | null> {
     const result = await this.http
-      .put<Post>(`http://localhost:8080/api/v1/posts`, postData, {
+      .put<Post>(`${baseUrl}/posts`, postData, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -45,7 +48,7 @@ export class PostsService {
 
   async getPostsByUserId(userId: string): Promise<Post[]> {
     const result = await this.http
-      .get<Post[]>(`http://localhost:8080/api/v1/users/${userId}/posts`, {
+      .get<Post[]>(`${baseUrl}/users/${userId}/posts`, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -56,7 +59,7 @@ export class PostsService {
 
   async getPostById(postId: string): Promise<Post | null> {
     const result = await this.http
-      .get<Post>(`http://localhost:8080/api/v1/posts/${postId}`, {
+      .get<Post>(`${baseUrl}/posts/${postId}`, {
         headers: {
           Authorization: `Bearer ${this.getAuthToken()}`,
         },
@@ -68,7 +71,7 @@ export class PostsService {
   async deletePost(postId: string): Promise<boolean> {
     try {
       await this.http
-        .delete(`http://localhost:8080/api/v1/posts/${postId}`, {
+        .delete(`${baseUrl}/posts/${postId}`, {
           headers: {
             Authorization: `Bearer ${this.getAuthToken()}`,
           },
@@ -87,7 +90,7 @@ export class PostsService {
   ): Promise<VotePostResponse | null> {
     const result = await this.http
       .post<VotePostResponse>(
-        `http://localhost:8080/api/v1/posts/${postId}/vote`,
+        `${baseUrl}/posts/${postId}/vote`,
         { vote: voteType },
         {
           headers: {
