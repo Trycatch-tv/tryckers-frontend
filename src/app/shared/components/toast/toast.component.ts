@@ -140,6 +140,7 @@ import { NotificationService } from '../../services/notification.service';
         color: #4b5563;
         font-size: 14px;
         line-height: 1.4;
+        white-space: pre-line;
       }
 
       .toast-close {

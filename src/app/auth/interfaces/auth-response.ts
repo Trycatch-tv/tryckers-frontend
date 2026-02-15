@@ -3,8 +3,14 @@ export interface AuthResponse {
 }
 
 export interface User {
-  UserData: UserData;
-  Token: string;
+  user_data: UserData;
+  token: string;
+  refresh_token: string;
+}
+
+export interface RefreshTokenResponse {
+  token: string;
+  refresh_token: string;
 }
 
 export interface UserData {

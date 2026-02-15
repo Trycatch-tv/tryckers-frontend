@@ -2,10 +2,10 @@
  * Interface para errores del API
  */
 export interface ApiError {
-  message: string;
-  statusCode: number;
-  error?: string;
-  details?: Record<string, string[]>;
+  error: string;
+  code: number;
+  fields?: Record<string, string>;
+  message?: string;
 }
 
 /**
@@ -54,14 +54,41 @@ export class AppError extends Error {
   constructor(
     public override message: string,
     public statusCode: number = 500,
-    public details?: Record<string, string[]>,
+    public fields?: Record<string, string>,
   ) {
     super(message);
     this.name = 'AppError';
   }
 
   static fromHttpError(error: { status: number; error?: ApiError }): AppError {
-    const message = error.error?.message || getHttpErrorMessage(error.status);
-    return new AppError(message, error.status, error.error?.details);
+    const message =
+      error.error?.error || error.error?.message || getHttpErrorMessage(error.status);
+    return new AppError(message, error.status, error.error?.fields);
   }
+}
+
+/**
+ * Extrae un mensaje legible de los campos con error del backend.
+ * Ejemplo: { "Content": "debe tener al menos 10 caracteres" } → "Content: debe tener..."
+ */
+export function formatFieldErrors(fields: Record<string, string>): string {
+  return Object.entries(fields)
+    .map(([field, msg]) => `• ${field}: ${msg}`)
+    .join('\n');
+}
+
+/**
+ * Extrae el mensaje de error principal de una respuesta HTTP del backend.
+ */
+export function extractBackendErrorMessage(error: ApiError | null | undefined): string | null {
+  if (!error) return null;
+  return error.error || error.message || null;
+}
+
+/**
+ * Extrae los errores de campo de una respuesta HTTP del backend.
+ */
+export function extractFieldErrors(error: ApiError | null | undefined): Record<string, string> | null {
+  if (!error?.fields || Object.keys(error.fields).length === 0) return null;
+  return error.fields;
 }

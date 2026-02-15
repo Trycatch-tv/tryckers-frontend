@@ -2,7 +2,13 @@ import { HttpErrorResponse, HttpInterceptorFn } from '@angular/common/http';
 import { inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { catchError, throwError } from 'rxjs';
-import { getHttpErrorMessage } from '../../shared/interfaces/error';
+import {
+  ApiError,
+  extractBackendErrorMessage,
+  extractFieldErrors,
+  formatFieldErrors,
+  getHttpErrorMessage,
+} from '../../shared/interfaces/error';
 import { NotificationService } from '../../shared/services/notification.service';
 
 /**
@@ -21,19 +27,32 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       // Manejar errores específicos
       switch (error.status) {
         case 401:
-          // Token expirado o no autorizado
-          if (!isAuthEndpoint) {
+          // El 401 lo maneja el authInterceptor (refresh token).
+          // Aquí solo mostramos error si es en login/register.
+          if (isAuthEndpoint) {
             notificationService.error(
-              'Tu sesión ha expirado. Por favor, inicia sesión nuevamente.',
-              'Sesión Expirada',
+              'Credenciales inválidas. Verifica tu email y contraseña.',
+              'Error de Autenticación',
             );
-            // Limpiar datos de sesión
-            localStorage.removeItem('token');
-            localStorage.removeItem('userData');
-            // Redirigir al login
-            router.navigate(['/auth/login']);
           }
           break;
+
+        case 400: {
+          const apiErr400 = error.error as ApiError | undefined;
+          const fieldErrors400 = extractFieldErrors(apiErr400);
+
+          if (fieldErrors400) {
+            notificationService.error(
+              formatFieldErrors(fieldErrors400),
+              'Error de Validación',
+            );
+          } else {
+            const mainMsg400 =
+              extractBackendErrorMessage(apiErr400) || 'Solicitud inválida. Verifica los datos enviados.';
+            notificationService.error(mainMsg400, 'Error de Solicitud');
+          }
+          break;
+        }
 
         case 403:
           notificationService.error(
@@ -52,12 +71,22 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           }
           break;
 
-        case 422:
-          // Errores de validación - extraer mensaje del backend si existe
-          const validationMessage =
-            error.error?.message || 'Los datos enviados no son válidos.';
-          notificationService.error(validationMessage, 'Error de Validación');
+        case 422: {
+          const apiErr422 = error.error as ApiError | undefined;
+          const fieldErrors422 = extractFieldErrors(apiErr422);
+
+          if (fieldErrors422) {
+            notificationService.error(
+              formatFieldErrors(fieldErrors422),
+              'Error de Validación',
+            );
+          } else {
+            const mainMsg422 =
+              extractBackendErrorMessage(apiErr422) || 'Los datos enviados no son válidos.';
+            notificationService.error(mainMsg422, 'Error de Validación');
+          }
           break;
+        }
 
         case 500:
         case 502:
@@ -79,9 +108,19 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         default:
           // Para otros errores, solo mostrar si no es una operación silenciosa
           if (error.status >= 400) {
-            const message =
-              error.error?.message || getHttpErrorMessage(error.status);
-            notificationService.error(message, 'Error');
+            const apiErrDefault = error.error as ApiError | undefined;
+            const fieldErrorsDefault = extractFieldErrors(apiErrDefault);
+
+            if (fieldErrorsDefault) {
+              notificationService.error(
+                formatFieldErrors(fieldErrorsDefault),
+                'Error',
+              );
+            } else {
+              const mainMsgDefault =
+                extractBackendErrorMessage(apiErrDefault) || getHttpErrorMessage(error.status);
+              notificationService.error(mainMsgDefault, 'Error');
+            }
           }
       }
 
@@ -90,7 +129,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
         status: error.status,
         statusText: error.statusText,
         url: error.url,
-        message: error.error?.message || error.message,
+        error: error.error,
       });
 
       // Propagar el error para que los componentes puedan manejarlo si lo necesitan
