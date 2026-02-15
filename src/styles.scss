@@ -1,7 +1,7 @@
 /* Tailwind CSS v4 */
-@import "tailwindcss/base";
-@import "tailwindcss/components";
-@import "tailwindcss/utilities";
+@use "tailwindcss/base";
+@use "tailwindcss/components";
+@use "tailwindcss/utilities";
 
 /* PrimeNG Default Styles */
 
@@ -9,14 +9,17 @@
 @import "primeicons/primeicons.css";
 
 /* Global styles */
-html, body {
+html,
+body {
   height: 100%;
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
   box-sizing: border-box;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 

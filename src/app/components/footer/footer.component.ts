@@ -42,6 +42,8 @@ import { Icon } from '../../interfaces/icon';
   ],
 })
 export class FooterComponent {
+  currentYear = new Date().getFullYear();
+  
   socialNetworks: Icon[] = [
     {
       label: 'Facebook',
