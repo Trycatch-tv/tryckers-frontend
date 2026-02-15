@@ -7,6 +7,9 @@ import {
   UpdatePostDto,
   VotePostResponse,
 } from '../interfaces/post';
+import { environment } from 'src/environments/environment';
+
+const baseUrl = environment.baseUrl;
 
 const baseUrl = environment.baseUrl;
 
@@ -18,28 +21,49 @@ export class PostsService {
 
   async createPost(postData: CreatePostDto): Promise<Post | null> {
     const result = await this.http
-      .post<Post>(`${baseUrl}/posts`, postData)
+
+      .post<Post>(`${baseUrl}/posts`, postData, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+
       .toPromise();
     return result ?? null;
   }
 
   async updatePost(postData: UpdatePostDto): Promise<Post | null> {
     const result = await this.http
-      .put<Post>(`${baseUrl}/posts`, postData)
+      .put<Post>(`${baseUrl}/posts`, postData, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+
       .toPromise();
     return result ?? null;
   }
 
   async getPostsByUserId(userId: string): Promise<Post[]> {
     const result = await this.http
-      .get<Post[]>(`${baseUrl}/users/${userId}/posts`)
+      .get<Post[]>(`${baseUrl}/users/${userId}/posts`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+
       .toPromise();
     return result ?? [];
   }
 
   async getPostById(postId: string): Promise<Post | null> {
     const result = await this.http
-      .get<Post>(`${baseUrl}/posts/${postId}`)
+      .get<Post>(`${baseUrl}/posts/${postId}`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
+
       .toPromise();
     return result ?? null;
   }
@@ -47,7 +71,13 @@ export class PostsService {
   async deletePost(postId: string): Promise<boolean> {
     try {
       await this.http
-        .delete(`${baseUrl}/posts/${postId}`)
+
+        .delete(`${baseUrl}/posts/${postId}`, {
+          headers: {
+            Authorization: `Bearer ${this.getAuthToken()}`,
+          },
+        })
+
         .toPromise();
       return true;
     } catch (error) {

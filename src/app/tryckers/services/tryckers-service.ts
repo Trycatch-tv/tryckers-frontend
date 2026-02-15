@@ -13,14 +13,25 @@ export class TryckersService {
 
   async getTryckers(): Promise<Trycker[]> {
     const result = await this.http
-      .get<Trycker[]>(`${baseUrl}/users`)
+      .get<Trycker[]>(`${baseUrl}/users`, {
+        headers: {
+          Authorization: `Bearer ${this.getAuthToken()}`,
+        },
+      })
       .toPromise();
     return result ?? [];
   }
 
   async getTryckerByUsername(username: string): Promise<Trycker | null> {
     const result = await this.http
-      .get<TryckerProfileResponse>(`${baseUrl}/perfil/${username}`)
+      .get<TryckerProfileResponse>(
+        `${baseUrl}/perfil/${username}`,
+        {
+          headers: {
+            Authorization: `Bearer ${this.getAuthToken()}`,
+          },
+        },
+      )
       .toPromise();
     return result?.user ?? null;
   }
