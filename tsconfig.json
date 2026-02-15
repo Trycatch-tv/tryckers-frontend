@@ -12,6 +12,9 @@
       "@tryckers/*": [
         "./src/app/tryckers/*"
       ],
+      "@shared/*": [
+        "./src/app/shared/*"
+      ]
     },
     "strict": true,
     "noImplicitOverride": true,

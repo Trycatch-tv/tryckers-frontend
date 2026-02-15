@@ -1,6 +1,6 @@
 import { User } from '@auth/interfaces';
 
-export type PostType = 'article' | 'video' | 'project';
+export type PostType = 'regular' | 'story' | 'video';
 export type PostStatus = 'draft' | 'published';
 
 export interface Post {
@@ -9,7 +9,7 @@ export interface Post {
   content: string;
   image: string | null;
   type: PostType;
-  tags: string;
+  tags: string | string[];
   status: PostStatus;
   user_id: string;
   created_at: Date;
@@ -24,13 +24,20 @@ export interface CreatePostDto {
   content: string;
   type: PostType;
   image: string;
-  tags: string;
+  tags: string[];
   status: PostStatus;
-  user_id: string | null;
+  user_id: string;
 }
 
-export interface UpdatePostDto extends Partial<CreatePostDto> {
+export interface UpdatePostDto {
   id: string;
+  title?: string;
+  content?: string;
+  type?: PostType;
+  image?: string;
+  tags?: string[];
+  status?: PostStatus;
+  user_id?: string;
 }
 
 export interface VotePostResponse {

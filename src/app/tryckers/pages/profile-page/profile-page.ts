@@ -15,6 +15,7 @@ import {
   UpdatePostDto,
 } from 'src/app/post/interfaces/post';
 import { PostsService } from 'src/app/post/services/posts.service';
+import { NotificationService } from 'src/app/shared/services/notification.service';
 
 import { RouterModule } from '@angular/router';
 
@@ -51,6 +52,7 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
 export default class ProfilePage implements OnInit {
   tryckersService = inject(TryckersService);
   postsService = inject(PostsService);
+  private notificationService = inject(NotificationService);
 
   username: string = '';
   user: TryckerWithParsedInterests | null = null;
@@ -62,7 +64,7 @@ export default class ProfilePage implements OnInit {
     id: undefined,
     title: '',
     content: '',
-    type: 'article' as PostType,
+    type: 'regular' as PostType,
     image: '',
     tags: '',
     status: 'draft' as PostStatus,
@@ -70,9 +72,9 @@ export default class ProfilePage implements OnInit {
   };
 
   postTypes = [
-    { label: 'Artículo', value: 'article' },
+    { label: 'Regular', value: 'regular' },
+    { label: 'Historia', value: 'story' },
     { label: 'Video', value: 'video' },
-    { label: 'Proyecto', value: 'project' },
   ];
 
   info = {
@@ -105,7 +107,7 @@ export default class ProfilePage implements OnInit {
   }
 
   async getPostByID(postId: string) {
-    alert(postId);
+    this.notificationService.info(`Cargando post: ${postId}`);
     // const post = await this.postsService.getPostById(postId);
     // return post;
   }
@@ -117,12 +119,12 @@ export default class ProfilePage implements OnInit {
     if (confirmed) {
       const result = await this.postsService.deletePost(postId);
       if (result) {
-        alert('Publicación eliminada exitosamente.');
+        this.notificationService.success('Publicación eliminada exitosamente.');
         if (this.user) {
           this.getUserPosts(this.user.id);
         }
       } else {
-        alert('Error al eliminar la publicación. Inténtalo de nuevo.');
+        this.notificationService.error('Error al eliminar la publicación. Inténtalo de nuevo.');
       }
     }
   }
@@ -150,7 +152,7 @@ export default class ProfilePage implements OnInit {
         content: post.content,
         type: post.type,
         image: post.image ?? '',
-        tags: post.tags,
+        tags: Array.isArray(post.tags) ? post.tags.join(', ') : post.tags ?? '',
         status: post.status,
         user_id: post.user_id,
       };
@@ -167,7 +169,7 @@ export default class ProfilePage implements OnInit {
       id: undefined,
       title: '',
       content: '',
-      type: 'article' as PostType,
+      type: 'regular' as PostType,
       image: '',
       tags: '',
       status: 'draft' as PostStatus,
@@ -185,12 +187,12 @@ export default class ProfilePage implements OnInit {
 
   async createPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      alert('Por favor, completa todos los campos requeridos.');
+      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
       return;
     }
 
     if (!this.user) {
-      alert('Error: No se encontró el usuario.');
+      this.notificationService.error('Error: No se encontró el usuario.');
       return;
     }
 
@@ -200,30 +202,33 @@ export default class ProfilePage implements OnInit {
         content: this.newPost.content,
         type: this.newPost.type,
         image: this.newPost.image,
-        tags: this.newPost.tags,
+        tags: this.newPost.tags
+          .split(',')
+          .map((tag) => tag.trim())
+          .filter(Boolean),
         status: this.newPost.status,
         user_id: this.user.id,
       };
       await this.postsService.createPost(postData);
 
-      alert('¡Publicación creada exitosamente!');
+      this.notificationService.success('¡Publicación creada exitosamente!');
       this.closePostModal();
 
       // Refresh profile data to show new post
       await this.getProfileData();
     } catch (error) {
-      alert('Error al crear la publicación. Inténtalo de nuevo.');
+      // El interceptor ya maneja el error, solo cerramos el modal si es necesario
     }
   }
 
   async editPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      alert('Por favor, completa todos los campos requeridos.');
+      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
       return;
     }
 
     if (!this.newPost.id) {
-      alert('Error: No se encontró el ID de la publicación.');
+      this.notificationService.error('Error: No se encontró el ID de la publicación.');
       return;
     }
 
@@ -234,17 +239,20 @@ export default class ProfilePage implements OnInit {
         content: this.newPost.content,
         type: this.newPost.type,
         image: this.newPost.image,
-        tags: this.newPost.tags,
+        tags: this.newPost.tags
+          .split(',')
+          .map((tag) => tag.trim())
+          .filter(Boolean),
         status: this.newPost.status,
-        user_id: this.newPost.user_id,
+        user_id: this.newPost.user_id ?? undefined,
       };
       await this.postsService.updatePost(updateData);
-      alert('¡Publicación actualizada exitosamente!');
+      this.notificationService.success('¡Publicación actualizada exitosamente!');
       this.closePostModal();
       // Refresh profile data to show updated post
       await this.getProfileData();
     } catch (error) {
-      alert('Error al actualizar la publicación. Inténtalo de nuevo.');
+      // El interceptor ya maneja el error
     }
   }
 
@@ -261,14 +269,17 @@ export default class ProfilePage implements OnInit {
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);
-      alert('Error al votar la publicación. Inténtalo de nuevo.');
+      this.notificationService.error('Error al votar la publicación. Inténtalo de nuevo.');
     }
   }
 
   // TODO: Pendiente de mover a un utilitario común
-  toArray(value: string | null | undefined): string[] {
-    if (!value || typeof value !== 'string') {
+  toArray(value: string | string[] | null | undefined): string[] {
+    if (!value) {
       return [];
+    }
+    if (Array.isArray(value)) {
+      return value.map((s) => s.trim()).filter(Boolean);
     }
     return value
       .split(',')

@@ -11,14 +11,6 @@ const baseUrl = environment.baseUrl;
 export class TryckersService {
   private http = inject(HttpClient);
 
-  getAuthToken(): string | null {
-    const token = localStorage.getItem('token');
-    if (!token) {
-      return null;
-    }
-    return token;
-  }
-
   async getTryckers(): Promise<Trycker[]> {
     const result = await this.http
       .get<Trycker[]>(`${baseUrl}/users`, {
