@@ -1,6 +1,5 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ReactiveFormsModule, FormsModule } from '@angular/forms';
-import { provideRouter } from '@angular/router';
 import { RegisterPageComponent } from './register-page.component';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
@@ -8,6 +7,7 @@ import { of, throwError } from 'rxjs';
 import { AuthStore } from '../../store/auth-store';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { setupTestBedWithRouter } from '../../../../test-helpers';
 
 describe('RegisterPageComponent', () => {
   let component: RegisterPageComponent;
@@ -18,17 +18,19 @@ describe('RegisterPageComponent', () => {
 
   beforeEach(async () => {
     authServiceMock = jasmine.createSpyObj('AuthService', ['register']);
-    routerMock = jasmine.createSpyObj('Router', ['navigate', 'navigateByUrl']);
     authStoreMock = {
       setUser: jasmine.createSpy('setUser'),
       setToken: jasmine.createSpy('setToken'),
       isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(false),
     };
 
+    const { providers, routerSpy } = setupTestBedWithRouter();
+    routerMock = routerSpy;
+
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, FormsModule, RegisterPageComponent],
       providers: [
-        provideRouter([]),
+        ...providers,
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: AuthService, useValue: authServiceMock },

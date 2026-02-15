@@ -1,0 +1,375 @@
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+chunk-GOZ2XEOF.js                                                 | -                                                              |   2.29 MB | 
+polyfills.js                                                      | polyfills                                                      |   1.04 MB | 
+chunk-EGFA4LHA.js                                                 | -                                                              | 366.55 kB | 
+chunk-QA4AQNT4.js                                                 | -                                                              | 256.87 kB | 
+chunk-BUIVIFSW.js                                                 | -                                                              | 243.17 kB | 
+chunk-CJ5I4Q66.js                                                 | -                                                              | 198.93 kB | 
+spec-app-tryckers-pages-profile-page-profile-page.spec.js         | spec-app-tryckers-pages-profile-page-profile-page.spec         | 114.27 kB | 
+chunk-4OS2MQMV.js                                                 | -                                                              | 106.20 kB | 
+chunk-VQ3Z6T6R.js                                                 | -                                                              |  96.79 kB | 
+spec-app-components-header-header.component.spec.js               | spec-app-components-header-header.component.spec               |  86.22 kB | 
+jasmine-cleanup-1.js                                              | jasmine-cleanup-1                                              |  67.24 kB | 
+chunk-Y5REIDXG.js                                                 | -                                                              |  43.98 kB | 
+chunk-TCZPLJPI.js                                                 | -                                                              |  33.65 kB | 
+styles.css                                                        | styles                                                         |  27.96 kB | 
+test_main.js                                                      | test_main                                                      |  22.28 kB | 
+spec-app-auth-pages-register-page-register-page.component.spec.js | spec-app-auth-pages-register-page-register-page.component.spec |  19.87 kB | 
+spec-app-components-footer-footer.component.spec.js               | spec-app-components-footer-footer.component.spec               |  17.19 kB | 
+spec-app-auth-pages-login-page-login-page.component.spec.js       | spec-app-auth-pages-login-page-login-page.component.spec       |  14.54 kB | 
+chunk-IOZ4B6FD.js                                                 | -                                                              |  14.46 kB | 
+chunk-NQMZS7UD.js                                                 | -                                                              |  12.98 kB | 
+chunk-XMWZZST3.js                                                 | -                                                              |  12.50 kB | 
+spec-app-post-pages-post-post.spec.js                             | spec-app-post-pages-post-post.spec                             |  11.19 kB | 
+chunk-O6DBRW7H.js                                                 | -                                                              |  10.69 kB | 
+chunk-7AM54Y6Q.js                                                 | -                                                              |   7.33 kB | 
+spec-app-pages-tryckers-page-tryckers-page.component.spec.js      | spec-app-pages-tryckers-page-tryckers-page.component.spec      |   7.06 kB | 
+chunk-QACKJHM2.js                                                 | -                                                              |   5.11 kB | 
+spec-app-post-services-posts.service.spec.js                      | spec-app-post-services-posts.service.spec                      |   4.21 kB | 
+chunk-YUSN7RDD.js                                                 | -                                                              |   3.46 kB | 
+chunk-EYN4U7UI.js                                                 | -                                                              |   3.20 kB | 
+spec-app-pages-auth-login-login.spec.js                           | spec-app-pages-auth-login-login.spec                           |   3.08 kB | 
+spec-app-auth-services-auth.service.spec.js                       | spec-app-auth-services-auth.service.spec                       |   2.50 kB | 
+chunk-V6FC2DIM.js                                                 | -                                                              |   2.42 kB | 
+spec-app-app.spec.js                                              | spec-app-app.spec                                              |   2.22 kB | 
+spec-app-tryckers-pages-dashboard-page-dashboard-page.spec.js     | spec-app-tryckers-pages-dashboard-page-dashboard-page.spec     |   2.11 kB | 
+chunk-O4YUQ2C6.js                                                 | -                                                              |   1.74 kB | 
+chunk-T7H644MG.js                                                 | -                                                              |   1.53 kB | 
+spec-app-tryckers-services-tryckers-service.spec.js               | spec-app-tryckers-services-tryckers-service.spec               | 920 bytes | 
+jasmine-cleanup-0.js                                              | jasmine-cleanup-0                                              | 659 bytes | 
+chunk-YB5ADCFH.js                                                 | -                                                              | 360 bytes | 
+
+                                                                  | Initial total                                                  |   5.15 MB
+
+Application bundle generation complete. [13.630 seconds] - 2026-02-15T21:27:47.659Z
+
+[32m15 02 2026 16:27:48.229:INFO [karma-server]: [39mKarma v6.4.4 server started at http://localhost:9877/
+[32m15 02 2026 16:27:48.234:INFO [launcher]: [39mLaunching browsers ChromeHeadless with concurrency unlimited
+[32m15 02 2026 16:27:48.242:INFO [launcher]: [39mStarting browser ChromeHeadless
+[32m15 02 2026 16:27:52.200:INFO [Chrome Headless 143.0.0.0 (Linux 0.0.0)]: [39mConnected on socket gPFmbKasHhoHzshSAAAB with id 72149451
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 0 of 62[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 1 of 62[32m SUCCESS[39m (0 secs / 0.017 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 2 of 62[32m SUCCESS[39m (0 secs / 0.022 secs)
+[1A[2KLOG: [36m'Attempting registration with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 2 of 62[32m SUCCESS[39m (0 secs / 0.022 secs)
+LOG: 'Attempting registration with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 3 of 62[32m SUCCESS[39m (0 secs / 0.031 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 4 of 62[32m SUCCESS[39m (0 secs / 0.034 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 5 of 62[32m SUCCESS[39m (0 secs / 0.037 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 6 of 62[32m SUCCESS[39m (0 secs / 0.042 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 7 of 62[32m SUCCESS[39m (0 secs / 0.116 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 8 of 62[32m SUCCESS[39m (0 secs / 0.184 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 9 of 62[32m SUCCESS[39m (0 secs / 0.218 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 10 of 62[32m SUCCESS[39m (0 secs / 0.273 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 11 of 62[32m SUCCESS[39m (0 secs / 0.312 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 12 of 62[32m SUCCESS[39m (0 secs / 0.356 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 13 of 62[32m SUCCESS[39m (0 secs / 0.367 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 14 of 62[32m SUCCESS[39m (0 secs / 0.371 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 15 of 62[32m SUCCESS[39m (0 secs / 0.377 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 16 of 62[32m SUCCESS[39m (0 secs / 0.444 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 17 of 62[32m SUCCESS[39m (0 secs / 0.494 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 18 of 62[32m SUCCESS[39m (0 secs / 0.547 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 19 of 62[32m SUCCESS[39m (0 secs / 0.589 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 20 of 62[32m SUCCESS[39m (0 secs / 0.763 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 21 of 62[32m SUCCESS[39m (0 secs / 0.811 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 22 of 62[32m SUCCESS[39m (0 secs / 0.818 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 23 of 62[32m SUCCESS[39m (0 secs / 0.824 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 24 of 62[32m SUCCESS[39m (0 secs / 0.829 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 24 of 62[32m SUCCESS[39m (0 secs / 0.829 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', false
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 25 of 62[32m SUCCESS[39m (0 secs / 0.886 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 25 of 62[32m SUCCESS[39m (0 secs / 0.886 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', false
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 26 of 62[32m SUCCESS[39m (0 secs / 0.9 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 27 of 62[32m SUCCESS[39m (0 secs / 0.91 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 28 of 62[32m SUCCESS[39m (0 secs / 0.916 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 28 of 62[32m SUCCESS[39m (0 secs / 0.916 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', true
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Form valid:', true
+[1A[2KLOG: [36m'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}
+[1A[2KLOG: [36m'Registration response:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Registration response:', true
+[1A[2KLOG: [36m'Registration successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[32m SUCCESS[39m (0 secs / 0.927 secs)
+LOG: 'Registration successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 30 of 62[32m SUCCESS[39m (0 secs / 0.998 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Form valid:', true
+[1A[2KLOG: [36m'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}
+[1A[2KLOG: [36m'Registration response:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Registration response:', true
+[1A[2KLOG: [36m'Registration successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[32m SUCCESS[39m (0 secs / 1.011 secs)
+LOG: 'Registration successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Form valid:', true
+[1A[2KLOG: [36m'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com', password: 'password123'}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}
+[1A[2KLOG: [36m'Registration response:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Registration response:', true
+[1A[2KLOG: [36m'Registration successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[32m SUCCESS[39m (0 secs / 1.027 secs)
+LOG: 'Registration successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 33 of 62[32m SUCCESS[39m (0 secs / 1.041 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 34 of 62[32m SUCCESS[39m (0 secs / 1.055 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+LOG: 'Form valid:', true
+[1A[2KLOG: [36m'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'existing@example.com', password: 'password123'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+LOG: 'Form values:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'existing@example.com', password: 'password123'}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'existing@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+LOG: 'Sending registration request with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'existing@example.com'}
+[1A[2KERROR: [36m'Registration error:', Error: Email already exists
+Error: Email already exists
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.spec.ts:106:24
+    at _Observable.init [as _subscribe] (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/observable/throwError.js:5:51)
+    at _Observable._trySubscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:37:25)
+    at http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:31:30
+    at errorContext (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/util/errorContext.js:19:9)
+    at _Observable.subscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:22:9)
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:90:12
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at RegisterPageComponent2.<anonymous> (http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:87:13)
+    at Generator.next (<anonymous>)[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+ERROR: 'Registration error:', Error: Email already exists
+Error: Email already exists
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.spec.ts:106:24
+    at _Observable.init [as _subscribe] (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/observable/throwError.js:5:51)
+    at _Observable._trySubscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:37:25)
+    at http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:31:30
+    at errorContext (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/util/errorContext.js:19:9)
+    at _Observable.subscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:22:9)
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:90:12
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at RegisterPageComponent2.<anonymous> (http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:87:13)
+    at Generator.next (<anonymous>)
+[1A[2KERROR: [36m'Registration failed:', Error: Email already exists
+Error: Email already exists
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.spec.ts:106:24
+    at _Observable.init [as _subscribe] (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/observable/throwError.js:5:51)
+    at _Observable._trySubscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:37:25)
+    at http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:31:30
+    at errorContext (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/util/errorContext.js:19:9)
+    at _Observable.subscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:22:9)
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:90:12
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at RegisterPageComponent2.<anonymous> (http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:87:13)
+    at Generator.next (<anonymous>)[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[32m SUCCESS[39m (0 secs / 1.069 secs)
+ERROR: 'Registration failed:', Error: Email already exists
+Error: Email already exists
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.spec.ts:106:24
+    at _Observable.init [as _subscribe] (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/observable/throwError.js:5:51)
+    at _Observable._trySubscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:37:25)
+    at http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:31:30
+    at errorContext (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/util/errorContext.js:19:9)
+    at _Observable.subscribe (http://localhost:9877/base/node_modules/.pnpm/rxjs@7.8.2/node_modules/rxjs/dist/esm/internal/Observable.js:22:9)
+    at http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:90:12
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at RegisterPageComponent2.<anonymous> (http://localhost:9877/base/src/app/auth/pages/register-page/register-page.component.ts:87:13)
+    at Generator.next (<anonymous>)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 36 of 62[32m SUCCESS[39m (0 secs / 1.601 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 37 of 62[32m SUCCESS[39m (0 secs / 1.612 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 38 of 62[32m SUCCESS[39m (0 secs / 1.62 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 39 of 62[32m SUCCESS[39m (0 secs / 1.628 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'Form valid:', false
+[1A[2KLOG: [36m'Form values:', Object{name: '', username: '', country: '', email: '', password: ''}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'Form values:', Object{name: '', username: '', country: '', email: '', password: ''}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Form is invalid'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'Form is invalid'
+[1A[2KLOG: [36m'name errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'name errors:', Object{required: true}
+[1A[2KLOG: [36m'username errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'username errors:', Object{required: true}
+[1A[2KLOG: [36m'country errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'country errors:', Object{required: true}
+[1A[2KLOG: [36m'email errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'email errors:', Object{required: true}
+[1A[2KLOG: [36m'password errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[32m SUCCESS[39m (0 secs / 1.637 secs)
+LOG: 'password errors:', Object{required: true}
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 41 of 62[32m SUCCESS[39m (0 secs / 1.647 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+[1A[2KLOG: [36m'Form submitted'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'Form submitted'
+[1A[2KLOG: [36m'Form valid:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'Form valid:', false
+[1A[2KLOG: [36m'Form values:', Object{name: '', username: '', country: '', email: '', password: ''}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'Form values:', Object{name: '', username: '', country: '', email: '', password: ''}
+[1A[2KLOG: [36m'Form errors:', null[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'Form errors:', null
+[1A[2KLOG: [36m'Form is invalid'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'Form is invalid'
+[1A[2KLOG: [36m'name errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'name errors:', Object{required: true}
+[1A[2KLOG: [36m'username errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'username errors:', Object{required: true}
+[1A[2KLOG: [36m'country errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'country errors:', Object{required: true}
+[1A[2KLOG: [36m'email errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'email errors:', Object{required: true}
+[1A[2KLOG: [36m'password errors:', Object{required: true}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[32m SUCCESS[39m (0 secs / 1.655 secs)
+LOG: 'password errors:', Object{required: true}
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 43 of 62[32m SUCCESS[39m (0 secs / 1.665 secs)
+[1A[2KLOG: [36m'Login successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 43 of 62[32m SUCCESS[39m (0 secs / 1.665 secs)
+LOG: 'Login successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 44 of 62[32m SUCCESS[39m (0 secs / 1.686 secs)
+[1A[2KLOG: [36m'Login successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 44 of 62[32m SUCCESS[39m (0 secs / 1.686 secs)
+LOG: 'Login successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 45 of 62[32m SUCCESS[39m (0 secs / 1.694 secs)
+[1A[2KERROR: [36m'Login failed:', Error: Error
+Error: Error
+    at http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:149:56
+    at Generator.next (<anonymous>)
+    at http://localhost:9877/base/chunk-V6FC2DIM.js:60:61
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at __async (http://localhost:9877/base/chunk-V6FC2DIM.js:44:10)
+    at UserContext.<anonymous> (http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:148:74)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:398:28)
+    at _ProxyZoneSpec.onInvoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:397:34)
+    at ZoneImpl.run (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:113:43)[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 45 of 62[32m SUCCESS[39m (0 secs / 1.694 secs)
+ERROR: 'Login failed:', Error: Error
+Error: Error
+    at http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:149:56
+    at Generator.next (<anonymous>)
+    at http://localhost:9877/base/chunk-V6FC2DIM.js:60:61
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at __async (http://localhost:9877/base/chunk-V6FC2DIM.js:44:10)
+    at UserContext.<anonymous> (http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:148:74)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:398:28)
+    at _ProxyZoneSpec.onInvoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:397:34)
+    at ZoneImpl.run (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:113:43)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 46 of 62[32m SUCCESS[39m (0 secs / 1.703 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 47 of 62[32m SUCCESS[39m (0 secs / 1.709 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 48 of 62[32m SUCCESS[39m (0 secs / 1.717 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 49 of 62[32m SUCCESS[39m (0 secs / 1.724 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 50 of 62[32m SUCCESS[39m (0 secs / 1.729 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 51 of 62[32m SUCCESS[39m (0 secs / 1.734 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 52 of 62[32m SUCCESS[39m (0 secs / 1.74 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 53 of 62[32m SUCCESS[39m (0 secs / 1.748 secs)
+[1A[2KLOG: [36m'Login successful, redirecting to home'[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 53 of 62[32m SUCCESS[39m (0 secs / 1.748 secs)
+LOG: 'Login successful, redirecting to home'
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 54 of 62[32m SUCCESS[39m (0 secs / 1.755 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 55 of 62[32m SUCCESS[39m (0 secs / 1.764 secs)
+[1A[2KERROR: [36mError: Invalid credentials
+Error: Invalid credentials
+    at http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:82:56
+    at Generator.next (<anonymous>)
+    at http://localhost:9877/base/chunk-V6FC2DIM.js:60:61
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at __async (http://localhost:9877/base/chunk-V6FC2DIM.js:44:10)
+    at UserContext.<anonymous> (http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:81:64)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:398:28)
+    at _ProxyZoneSpec.onInvoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:397:34)
+    at ZoneImpl.run (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:113:43)[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 55 of 62[32m SUCCESS[39m (0 secs / 1.764 secs)
+ERROR: Error: Invalid credentials
+Error: Invalid credentials
+    at http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:82:56
+    at Generator.next (<anonymous>)
+    at http://localhost:9877/base/chunk-V6FC2DIM.js:60:61
+    at new ZoneAwarePromise (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:2701:25)
+    at __async (http://localhost:9877/base/chunk-V6FC2DIM.js:44:10)
+    at UserContext.<anonymous> (http://localhost:9877/base/src/app/auth/pages/login-page/login-page.component.spec.ts:81:64)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:398:28)
+    at _ProxyZoneSpec.onInvoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+    at _ZoneDelegate.invoke (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:397:34)
+    at ZoneImpl.run (http://localhost:9877/base/node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:113:43)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 56 of 62[32m SUCCESS[39m (0 secs / 1.768 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 57 of 62[32m SUCCESS[39m (0 secs / 1.771 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 58 of 62[32m SUCCESS[39m (0 secs / 1.773 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 59 of 62[32m SUCCESS[39m (0 secs / 1.776 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 60 of 62[32m SUCCESS[39m (0 secs / 1.778 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 61 of 62[32m SUCCESS[39m (0 secs / 1.78 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 62 of 62[32m SUCCESS[39m (0 secs / 1.781 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 62 of 62[32m SUCCESS[39m (1.949 secs / 1.781 secs)
+[32mTOTAL: 62 SUCCESS[39m

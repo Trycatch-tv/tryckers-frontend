@@ -1,10 +1,9 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { DashboardPage } from './dashboard-page';
-import { of } from 'rxjs';
+import { setupTestBedWithRouter } from '../../../../test-helpers';
 
 describe('DashboardPage', () => {
   let component: DashboardPage;
@@ -15,10 +14,12 @@ describe('DashboardPage', () => {
     tryckersServiceMock = jasmine.createSpyObj('TryckersService', ['getTryckers']);
     tryckersServiceMock.getTryckers.and.returnValue(Promise.resolve([]));
 
+    const { providers } = setupTestBedWithRouter();
+
     await TestBed.configureTestingModule({
       imports: [DashboardPage],
       providers: [
-        provideRouter([]),
+        ...providers,
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: TryckersService, useValue: tryckersServiceMock }

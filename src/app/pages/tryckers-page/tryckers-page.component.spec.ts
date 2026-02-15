@@ -1,9 +1,11 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { RouterTestingModule } from '@angular/router/testing';
 import { of } from 'rxjs';
 import TryckersPageComponent from './tryckers-page.component';
 import { TryckersService } from '../../tryckers/services/tryckers-service';
 import { AuthStore } from '../../auth/store/auth-store';
+import { setupTestBedWithRouter } from '../../../test-helpers';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting } from '@angular/common/http/testing';
 
 describe('TryckersPageComponent', () => {
   let component: TryckersPageComponent;
@@ -22,9 +24,14 @@ describe('TryckersPageComponent', () => {
       isLoggedIn: jasmine.createSpy('isLoggedIn').and.returnValue(false),
     };
 
+    const { providers } = setupTestBedWithRouter();
+
     await TestBed.configureTestingModule({
-      imports: [RouterTestingModule, TryckersPageComponent],
+      imports: [TryckersPageComponent],
       providers: [
+        ...providers,
+        provideHttpClient(),
+        provideHttpClientTesting(),
         { provide: TryckersService, useValue: tryckersServiceSpy },
         { provide: AuthStore, useValue: authStoreMock },
       ],

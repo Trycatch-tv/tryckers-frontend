@@ -1,7 +1,7 @@
 import { ComponentFixture, TestBed } from '@angular/core/testing';
-import { provideRouter } from '@angular/router';
 import { HeaderComponent } from './header.component';
 import { Router } from '@angular/router';
+import { setupTestBedWithRouter } from '../../../test-helpers';
 
 describe('HeaderComponent', () => {
   let component: HeaderComponent;
@@ -9,17 +9,14 @@ describe('HeaderComponent', () => {
   let router: jasmine.SpyObj<Router>;
 
   beforeEach(async () => {
-    const routerSpy = jasmine.createSpyObj('Router', ['navigate']);
+    const { providers, routerSpy } = setupTestBedWithRouter();
 
     await TestBed.configureTestingModule({
       imports: [HeaderComponent],
-      providers: [
-        provideRouter([]),
-        { provide: Router, useValue: routerSpy },
-      ],
+      providers: providers
     }).compileComponents();
 
-    router = TestBed.inject(Router) as jasmine.SpyObj<Router>;
+    router = routerSpy;
 
     fixture = TestBed.createComponent(HeaderComponent);
     component = fixture.componentInstance;
@@ -31,7 +28,7 @@ describe('HeaderComponent', () => {
   });
 
   it('should render header element', () => {
-    const headerElement = fixture.nativeElement.querySelector('app-header');
+    const headerElement = fixture.nativeElement.querySelector('.card');
     expect(headerElement).toBeTruthy();
   });
 

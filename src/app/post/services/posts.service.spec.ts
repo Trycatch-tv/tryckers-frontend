@@ -1,5 +1,6 @@
 import { TestBed } from '@angular/core/testing';
-import { HttpClientTestingModule, HttpTestingController } from '@angular/common/http/testing';
+import { provideHttpClient } from '@angular/common/http';
+import { provideHttpClientTesting, HttpTestingController } from '@angular/common/http/testing';
 import { PostsService } from './posts.service';
 import { Post, CreatePostDto } from '../interfaces/post';
 import { environment } from 'src/environments/environment';
@@ -10,8 +11,11 @@ describe('PostsService', () => {
 
   beforeEach(() => {
     TestBed.configureTestingModule({
-      imports: [HttpClientTestingModule],
-      providers: [PostsService],
+      providers: [
+        PostsService,
+        provideHttpClient(),
+        provideHttpClientTesting()
+      ],
     });
     service = TestBed.inject(PostsService);
     httpMock = TestBed.inject(HttpTestingController);

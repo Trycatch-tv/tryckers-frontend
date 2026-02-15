@@ -1,0 +1,471 @@
+❯ Building...
+✔ Building...
+Initial chunk files                                               | Names                                                          |  Raw size
+chunk-JOTI5IRW.js                                                 | -                                                              |   2.29 MB | 
+polyfills.js                                                      | polyfills                                                      |   1.04 MB | 
+chunk-32XXRHUI.js                                                 | -                                                              | 366.55 kB | 
+chunk-SIU2FMTX.js                                                 | -                                                              | 255.23 kB | 
+chunk-G22CVRHN.js                                                 | -                                                              | 243.17 kB | 
+chunk-34WXDYVF.js                                                 | -                                                              | 198.93 kB | 
+spec-app-tryckers-pages-profile-page-profile-page.spec.js         | spec-app-tryckers-pages-profile-page-profile-page.spec         | 114.27 kB | 
+chunk-QWZTSFBX.js                                                 | -                                                              | 106.20 kB | 
+chunk-6YJAFZ5O.js                                                 | -                                                              |  96.79 kB | 
+spec-app-components-header-header.component.spec.js               | spec-app-components-header-header.component.spec               |  86.22 kB | 
+jasmine-cleanup-1.js                                              | jasmine-cleanup-1                                              |  67.24 kB | 
+chunk-FR57NJQD.js                                                 | -                                                              |  43.98 kB | 
+chunk-QURMKGOO.js                                                 | -                                                              |  33.65 kB | 
+styles.css                                                        | styles                                                         |  27.96 kB | 
+test_main.js                                                      | test_main                                                      |  22.28 kB | 
+spec-app-auth-pages-register-page-register-page.component.spec.js | spec-app-auth-pages-register-page-register-page.component.spec |  19.87 kB | 
+spec-app-components-footer-footer.component.spec.js               | spec-app-components-footer-footer.component.spec               |  17.19 kB | 
+spec-app-auth-pages-login-page-login-page.component.spec.js       | spec-app-auth-pages-login-page-login-page.component.spec       |  14.54 kB | 
+chunk-G53W3WYA.js                                                 | -                                                              |  14.46 kB | 
+chunk-EYKV35DK.js                                                 | -                                                              |  12.98 kB | 
+chunk-QQHF4RKY.js                                                 | -                                                              |  12.52 kB | 
+spec-app-post-pages-post-post.spec.js                             | spec-app-post-pages-post-post.spec                             |  11.19 kB | 
+chunk-FIX7NTTU.js                                                 | -                                                              |  10.69 kB | 
+chunk-FHULRE72.js                                                 | -                                                              |   7.33 kB | 
+spec-app-pages-tryckers-page-tryckers-page.component.spec.js      | spec-app-pages-tryckers-page-tryckers-page.component.spec      |   7.06 kB | 
+chunk-ZKYKDGVE.js                                                 | -                                                              |   5.11 kB | 
+spec-app-post-services-posts.service.spec.js                      | spec-app-post-services-posts.service.spec                      |   4.10 kB | 
+chunk-VUB4XJ2W.js                                                 | -                                                              |   3.46 kB | 
+chunk-MBTGDREI.js                                                 | -                                                              |   3.20 kB | 
+spec-app-pages-auth-login-login.spec.js                           | spec-app-pages-auth-login-login.spec                           |   3.08 kB | 
+chunk-V6FC2DIM.js                                                 | -                                                              |   2.42 kB | 
+spec-app-auth-services-auth.service.spec.js                       | spec-app-auth-services-auth.service.spec                       |   2.40 kB | 
+spec-app-app.spec.js                                              | spec-app-app.spec                                              |   2.22 kB | 
+spec-app-tryckers-pages-dashboard-page-dashboard-page.spec.js     | spec-app-tryckers-pages-dashboard-page-dashboard-page.spec     |   2.11 kB | 
+chunk-ICXVVD5E.js                                                 | -                                                              |   1.74 kB | 
+chunk-T7H644MG.js                                                 | -                                                              |   1.53 kB | 
+spec-app-tryckers-services-tryckers-service.spec.js               | spec-app-tryckers-services-tryckers-service.spec               | 814 bytes | 
+jasmine-cleanup-0.js                                              | jasmine-cleanup-0                                              | 659 bytes | 
+chunk-YB5ADCFH.js                                                 | -                                                              | 360 bytes | 
+
+                                                                  | Initial total                                                  |   5.15 MB
+
+Application bundle generation complete. [7.164 seconds] - 2026-02-15T21:16:08.582Z
+
+[32m15 02 2026 16:16:08.900:INFO [karma-server]: [39mKarma v6.4.4 server started at http://localhost:9877/
+[32m15 02 2026 16:16:08.902:INFO [launcher]: [39mLaunching browsers ChromeHeadless with concurrency unlimited
+[32m15 02 2026 16:16:08.916:INFO [launcher]: [39mStarting browser ChromeHeadless
+[32m15 02 2026 16:16:12.867:INFO [Chrome Headless 143.0.0.0 (Linux 0.0.0)]: [39mConnected on socket 01oHenAHT924ztGQAAAB with id 80980485
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 0 of 62[32m SUCCESS[39m (0 secs / 0 secs)
+[1A[2KLOG: [36m'Attempting registration with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 0 of 62[32m SUCCESS[39m (0 secs / 0 secs)
+LOG: 'Attempting registration with:', Object{name: 'Test User', username: 'testuser', country: 'US', email: 'test@example.com'}
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 1 of 62[32m SUCCESS[39m (0 secs / 0.03 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 2 of 62[32m SUCCESS[39m (0 secs / 0.038 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 3 of 62[32m SUCCESS[39m (0 secs / 0.043 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 4 of 62[32m SUCCESS[39m (0 secs / 0.049 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 5 of 62[32m SUCCESS[39m (0 secs / 0.057 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 6 of 62[32m SUCCESS[39m (0 secs / 0.063 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should mark all fields as touched on invalid submit FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 7 of 62[31m (1 FAILED)[39m (0 secs / 0.706 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should have empty form on initialization FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 8 of 62[31m (2 FAILED)[39m (0 secs / 0.725 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should set isPosting to false after submission FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 9 of 62[31m (3 FAILED)[39m (0 secs / 0.742 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should set hasError on invalid form submit FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 10 of 62[31m (4 FAILED)[39m (0 secs / 0.757 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should mark form as invalid when empty FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 11 of 62[31m (5 FAILED)[39m (0 secs / 0.781 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should validate password minimum length FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 12 of 62[31m (6 FAILED)[39m (0 secs / 0.799 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should create FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 13 of 62[31m (7 FAILED)[39m (0 secs / 0.817 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should validate email format FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 14 of 62[31m (8 FAILED)[39m (0 secs / 0.83 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should initialize register form with required fields FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 15 of 62[31m (9 FAILED)[39m (0 secs / 0.849 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should validate username minimum length FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 16 of 62[31m (10 FAILED)[39m (0 secs / 0.863 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should validate name minimum length FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 17 of 62[31m (11 FAILED)[39m (0 secs / 0.879 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should call authService.register on form submit FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 18 of 62[31m (12 FAILED)[39m (0 secs / 0.894 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should navigate to home on successful registration FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 19 of 62[31m (13 FAILED)[39m (0 secs / 0.917 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) RegisterPageComponent should set hasError signal on registration failure FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at RegisterPageComponent2_Template (ng:///RegisterPageComponent2.js:92:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 20 of 62[31m (14 FAILED)[39m (0 secs / 0.931 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 21 of 62[31m (14 FAILED)[39m (0 secs / 0.975 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 22 of 62[31m (14 FAILED)[39m (0 secs / 0.978 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 23 of 62[31m (14 FAILED)[39m (0 secs / 0.981 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 24 of 62[31m (14 FAILED)[39m (0 secs / 0.989 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 25 of 62[31m (14 FAILED)[39m (0 secs / 0.993 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 26 of 62[31m (14 FAILED)[39m (0 secs / 1.001 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 27 of 62[31m (14 FAILED)[39m (0 secs / 1.004 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 28 of 62[31m (14 FAILED)[39m (0 secs / 1.007 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 29 of 62[31m (14 FAILED)[39m (0 secs / 1.011 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 30 of 62[31m (14 FAILED)[39m (0 secs / 1.014 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 31 of 62[31m (14 FAILED)[39m (0 secs / 1.02 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 32 of 62[31m (14 FAILED)[39m (0 secs / 1.138 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 33 of 62[31m (14 FAILED)[39m (0 secs / 1.177 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 34 of 62[31m (14 FAILED)[39m (0 secs / 1.22 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 35 of 62[31m (14 FAILED)[39m (0 secs / 1.252 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 36 of 62[31m (14 FAILED)[39m (0 secs / 1.277 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should set isPosting to false after failed submission FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 37 of 62[31m (15 FAILED)[39m (0 secs / 1.306 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should initialize login form with email and password controls FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 38 of 62[31m (16 FAILED)[39m (0 secs / 1.315 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should call authStore.login on form submit FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 39 of 62[31m (17 FAILED)[39m (0 secs / 1.322 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should navigate to home on successful login FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 40 of 62[31m (18 FAILED)[39m (0 secs / 1.333 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should validate password minimum length FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 41 of 62[31m (19 FAILED)[39m (0 secs / 1.344 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should mark form as invalid when empty FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 42 of 62[31m (20 FAILED)[39m (0 secs / 1.362 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should set hasError on invalid form submit FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 43 of 62[31m (21 FAILED)[39m (0 secs / 1.372 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should set isPosting to false after successful submission FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 44 of 62[31m (22 FAILED)[39m (0 secs / 1.38 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should validate email format FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 45 of 62[31m (23 FAILED)[39m (0 secs / 1.389 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should create FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 46 of 62[31m (24 FAILED)[39m (0 secs / 1.398 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should set hasError signal on login failure FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 47 of 62[31m (25 FAILED)[39m (0 secs / 1.408 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) LoginPageComponent should have empty form on initialization FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at selectIndexInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7186:17)
+	    at ɵɵadvance (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:7169:5)
+	    at LoginPageComponent2_Template (ng:///LoginPageComponent2.js:63:9)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 48 of 62[31m (26 FAILED)[39m (0 secs / 1.417 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 49 of 62[31m (26 FAILED)[39m (0 secs / 1.432 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', true[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 49 of 62[31m (26 FAILED)[39m (0 secs / 1.432 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', true
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 50 of 62[31m (26 FAILED)[39m (0 secs / 1.438 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 50 of 62[31m (26 FAILED)[39m (0 secs / 1.438 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', false
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) TryckersPageComponent should display welcome message when user is not logged in FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10176:21)
+	    at detectChangesInView (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10381:9)
+	    at detectChangesInViewIfAttached (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10341:5)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 51 of 62[31m (27 FAILED)[39m (0 secs / 1.449 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 52 of 62[31m (27 FAILED)[39m (0 secs / 1.455 secs)
+[1A[2KLOG: [36m'TryckersPage initialized, isLoggedIn:', false[39m
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 52 of 62[31m (27 FAILED)[39m (0 secs / 1.455 secs)
+LOG: 'TryckersPage initialized, isLoggedIn:', false
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) TryckersPageComponent should have login and register links when user is not logged in FAILED[39m
+	TypeError: this.router.serializeUrl is not a function
+	    at _RouterLink.updateHref (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:360:70)
+	    at _RouterLink.ngOnChanges (node_modules/.pnpm/@angular+router@20.3.16_@angular+common@20.3.16_@angular+core@20.3.16_@angular+compiler_42f5f94a217d7197f43f1a56309c342c/node_modules/@angular/router/fesm2022/router_module.mjs:290:18)
+	    at _RouterLink.rememberChangeHistoryAndInvokeOnChangesHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:594:14)
+	    at callHookInternal (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:860:14)
+	    at callHook (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:891:9)
+	    at callHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:841:17)
+	    at executeInitAndCheckHooks (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:791:9)
+	    at refreshView (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10176:21)
+	    at detectChangesInView (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10381:9)
+	    at detectChangesInViewIfAttached (node_modules/.pnpm/@angular+core@20.3.16_@angular+compiler@20.3.16_rxjs@7.8.2_zone.js@0.15.1/node_modules/@angular/core/fesm2022/debug_node.mjs:10341:5)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 53 of 62[31m (28 FAILED)[39m (0 secs / 1.466 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 54 of 62[31m (28 FAILED)[39m (0 secs / 1.476 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 55 of 62[31m (28 FAILED)[39m (0 secs / 1.48 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 56 of 62[31m (28 FAILED)[39m (0 secs / 1.505 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 57 of 62[31m (28 FAILED)[39m (0 secs / 1.615 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 58 of 62[31m (28 FAILED)[39m (0 secs / 1.662 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 59 of 62[31m (28 FAILED)[39m (0 secs / 1.709 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 60 of 62[31m (28 FAILED)[39m (0 secs / 1.746 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 61 of 62[31m (28 FAILED)[39m (0 secs / 1.779 secs)
+[1A[2K[31mChrome Headless 143.0.0.0 (Linux 0.0.0) HeaderComponent should render header element FAILED[39m
+	Expected null to be truthy.
+	    at <Jasmine>
+	    at UserContext.<anonymous> (src/app/components/header/header.component.spec.ts:32:27)
+	    at _ZoneDelegate.invoke (node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:398:28)
+	    at _ProxyZoneSpec.onInvoke (node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone-testing.js:2132:39)
+	    at _ZoneDelegate.invoke (node_modules/.pnpm/zone.js@0.15.1/node_modules/zone.js/fesm2015/zone.js:397:34)
+Chrome Headless 143.0.0.0 (Linux 0.0.0): Executed 62 of 62[31m (29 FAILED)[39m (0 secs / 1.813 secs)
+[1A[2KChrome Headless 143.0.0.0 (Linux 0.0.0): Executed 62 of 62[31m (29 FAILED)[39m (2.017 secs / 1.813 secs)
+[31mTOTAL: 29 FAILED, 33 SUCCESS[39m

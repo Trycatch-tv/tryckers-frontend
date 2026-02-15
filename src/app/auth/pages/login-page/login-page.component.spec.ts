@@ -1,12 +1,12 @@
 import { ComponentFixture, TestBed, fakeAsync, tick } from '@angular/core/testing';
 import { ReactiveFormsModule } from '@angular/forms';
-import { provideRouter } from '@angular/router';
 import { LoginPageComponent } from './login-page.component';
 import { AuthStore } from '../../store/auth-store';
 import { AuthService } from '../../services/auth.service';
 import { Router } from '@angular/router';
 import { provideHttpClient } from '@angular/common/http';
 import { provideHttpClientTesting } from '@angular/common/http/testing';
+import { setupTestBedWithRouter } from '../../../../test-helpers';
 
 describe('LoginPageComponent', () => {
   let component: LoginPageComponent;
@@ -22,16 +22,16 @@ describe('LoginPageComponent', () => {
       token: jasmine.createSpy('token').and.returnValue(''),
     };
 
-    routerMock = jasmine.createSpyObj('Router', ['navigate', 'navigateByUrl']);
+    const { providers, routerSpy } = setupTestBedWithRouter();
+    routerMock = routerSpy;
 
     await TestBed.configureTestingModule({
       imports: [ReactiveFormsModule, LoginPageComponent],
       providers: [
-        provideRouter([]),
+        ...providers,
         provideHttpClient(),
         provideHttpClientTesting(),
         { provide: AuthStore, useValue: authStoreMock },
-        { provide: Router, useValue: routerMock },
         AuthService,
       ],
     }).compileComponents();
