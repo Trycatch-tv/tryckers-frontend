@@ -9,3 +9,6 @@ export * from './interaction';
 
 // Common interfaces and types
 export * from './common';
+
+// Error interfaces and types
+export * from './error';

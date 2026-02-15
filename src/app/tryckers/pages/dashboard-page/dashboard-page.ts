@@ -1,5 +1,6 @@
 import { Component, inject, OnInit } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
+import { NotificationService } from '@shared/services/notification.service';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { CardModule } from 'primeng/card';
@@ -17,6 +18,7 @@ export class DashboardPage implements OnInit {
 
   private tryckersService = inject(TryckersService);
   private router = inject(Router);
+  private notificationService = inject(NotificationService);
 
   async ngOnInit(): Promise<void> {
     try {
@@ -24,6 +26,7 @@ export class DashboardPage implements OnInit {
       this.tryckers = await this.tryckersService.getTryckers();
     } catch (error) {
       console.error('Error loading tryckers:', error);
+      this.notificationService.error('Error al cargar los tryckers.');
       // Fallback data en caso de error
       this.tryckers = [];
     } finally {

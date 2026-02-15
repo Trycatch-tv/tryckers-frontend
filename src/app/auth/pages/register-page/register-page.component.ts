@@ -8,6 +8,7 @@ import {
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
+import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-register-page',
@@ -32,6 +33,7 @@ export class RegisterPageComponent {
 
   authService = inject(AuthService);
   authStore = inject(AuthStore);
+  private notificationService = inject(NotificationService);
 
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -61,6 +63,7 @@ export class RegisterPageComponent {
       });
 
       this.hasError.set(true);
+      this.notificationService.warning('Por favor, completa todos los campos correctamente.');
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);
@@ -91,7 +94,7 @@ export class RegisterPageComponent {
             next: (isAuthenticated) => {
               console.log('Registration response:', isAuthenticated);
               if (isAuthenticated) {
-                console.log('Registration successful, redirecting to home');
+                this.notificationService.success('¡Registro exitoso! Bienvenido.');
                 this.router.navigateByUrl('/');
                 resolve();
               } else {
