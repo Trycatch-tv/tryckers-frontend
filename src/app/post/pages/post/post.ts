@@ -1,6 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { NotificationService } from '@shared/services/notification.service';
 import { Post as PostInterface } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
 
@@ -14,6 +15,7 @@ import { PostsService } from '../../services/posts.service';
 export class Post implements OnInit {
   private route = inject(ActivatedRoute);
   private postsService = inject(PostsService);
+  private notificationService = inject(NotificationService);
 
   loading = true;
   error: string | null = null;
@@ -47,8 +49,11 @@ export class Post implements OnInit {
     }
   }
 
-  toArray(tags?: string): string[] {
+  toArray(tags?: string | string[]): string[] {
     if (!tags) return [];
+    if (Array.isArray(tags)) {
+      return tags.map((t) => t.trim()).filter(Boolean);
+    }
     return tags
       .split(',')
       .map((t) => t.trim())
@@ -91,6 +96,7 @@ export class Post implements OnInit {
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);
+      this.notificationService.error('Error al votar la publicación.');
     }
   }
 }
