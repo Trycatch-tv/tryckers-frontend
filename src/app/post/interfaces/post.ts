@@ -15,8 +15,11 @@ export interface Post {
   created_at: Date;
   updated_at: Date;
   user?: User;
+  author?: { id: string; username: string };
   votes_count?: number;
+  comments_count?: number;
   user_vote?: 0 | 1 | null;
+  is_edited?: boolean;
 }
 
 export interface CreatePostDto {

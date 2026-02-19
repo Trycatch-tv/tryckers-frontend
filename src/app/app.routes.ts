@@ -22,6 +22,11 @@ export const routes: Routes = [
           import('./pages/tryckers-page/tryckers-page.component'),
       },
       {
+        path: 'cartelera',
+        loadComponent: () =>
+          import('./post/pages/cartelera-page/cartelera-page'),
+      },
+      {
         path: 'profile/:username',
         loadComponent: () =>
           import('./tryckers/pages/profile-page/profile-page'),
