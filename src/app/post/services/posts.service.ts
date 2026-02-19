@@ -46,9 +46,7 @@ export class PostsService {
 
   async deletePost(postId: string): Promise<boolean> {
     try {
-      await this.http
-        .delete(`${baseUrl}/posts/${postId}`)
-        .toPromise();
+      await this.http.delete(`${baseUrl}/posts/${postId}`).toPromise();
       return true;
     } catch (error) {
       console.error('Error deleting post:', error);
@@ -61,11 +59,17 @@ export class PostsService {
     voteType: 0 | 1,
   ): Promise<VotePostResponse | null> {
     const result = await this.http
-      .post<VotePostResponse>(
-        `${baseUrl}/posts/${postId}/vote`,
-        { vote: voteType },
-      )
+      .post<VotePostResponse>(`${baseUrl}/posts/${postId}/vote`, {
+        vote: voteType,
+      })
       .toPromise();
     return result ?? null;
+  }
+
+  async getCartelera(): Promise<Post[]> {
+    const result = await this.http
+      .get<Post[]>(`${baseUrl}/cartelera`)
+      .toPromise();
+    return result ?? [];
   }
 }
