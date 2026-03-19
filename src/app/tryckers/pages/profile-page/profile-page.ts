@@ -57,6 +57,9 @@ export default class ProfilePage implements OnInit {
   username: string = '';
   user: TryckerWithParsedInterests | null = null;
   userPosts: Post[] = [];
+  loadingProfile = true;
+  loadingPosts = false;
+  errorMessage: string | null = null;
 
   // Modal properties
   showPostModal: boolean = false;
@@ -89,21 +92,50 @@ export default class ProfilePage implements OnInit {
   }
 
   async getProfileData() {
-    const userData = await this.tryckersService.getTryckerByUsername(
-      this.username,
-    );
-    if (userData) {
+    try {
+      this.loadingProfile = true;
+      this.errorMessage = null;
+
+      const userData = await this.tryckersService.getTryckerByUsername(
+        this.username,
+      );
+
+      if (!userData) {
+        this.user = null;
+        this.userPosts = [];
+        this.errorMessage = 'No se encontró el perfil solicitado.';
+        return;
+      }
+
       this.user = {
         ...userData,
         interests: userData.interests ? userData.interests.split(',') : [],
       };
-      this.getUserPosts(this.user.id);
+      await this.getUserPosts(this.user.id);
+    } catch (error) {
+      console.error('Error loading profile data:', error);
+      this.user = null;
+      this.userPosts = [];
+      this.errorMessage = 'No se pudo cargar el perfil. Inténtalo nuevamente.';
+    } finally {
+      this.loadingProfile = false;
     }
   }
 
   async getUserPosts(userId: string) {
-    const posts = await this.postsService.getPostsByUserId(userId);
-    this.userPosts = posts;
+    try {
+      this.loadingPosts = true;
+      const posts = await this.postsService.getPostsByUserId(userId);
+      this.userPosts = posts;
+    } catch (error) {
+      console.error('Error loading user posts:', error);
+      this.userPosts = [];
+      this.notificationService.error(
+        'No se pudieron cargar las publicaciones del perfil.',
+      );
+    } finally {
+      this.loadingPosts = false;
+    }
   }
 
   async getPostByID(postId: string) {
@@ -121,18 +153,20 @@ export default class ProfilePage implements OnInit {
       if (result) {
         this.notificationService.success('Publicación eliminada exitosamente.');
         if (this.user) {
-          this.getUserPosts(this.user.id);
+          await this.getUserPosts(this.user.id);
         }
       } else {
-        this.notificationService.error('Error al eliminar la publicación. Inténtalo de nuevo.');
+        this.notificationService.error(
+          'Error al eliminar la publicación. Inténtalo de nuevo.',
+        );
       }
     }
   }
 
   ngOnInit() {
-    this.getProfileData();
+    void this.getProfileData();
     if (this.isEditing && this.newPost.id) {
-      this.getPostByID(this.newPost.id);
+      void this.getPostByID(this.newPost.id);
     }
   }
 
@@ -152,7 +186,9 @@ export default class ProfilePage implements OnInit {
         content: post.content,
         type: post.type,
         image: post.image ?? '',
-        tags: Array.isArray(post.tags) ? post.tags.join(', ') : post.tags ?? '',
+        tags: Array.isArray(post.tags)
+          ? post.tags.join(', ')
+          : (post.tags ?? ''),
         status: post.status,
         user_id: post.user_id,
       };
@@ -187,7 +223,9 @@ export default class ProfilePage implements OnInit {
 
   async createPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
+      this.notificationService.warning(
+        'Por favor, completa todos los campos requeridos.',
+      );
       return;
     }
 
@@ -217,18 +255,24 @@ export default class ProfilePage implements OnInit {
       // Refresh profile data to show new post
       await this.getProfileData();
     } catch (error) {
-      // El interceptor ya maneja el error, solo cerramos el modal si es necesario
+      this.notificationService.error(
+        'No se pudo crear la publicación. Inténtalo nuevamente.',
+      );
     }
   }
 
   async editPost() {
     if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
+      this.notificationService.warning(
+        'Por favor, completa todos los campos requeridos.',
+      );
       return;
     }
 
     if (!this.newPost.id) {
-      this.notificationService.error('Error: No se encontró el ID de la publicación.');
+      this.notificationService.error(
+        'Error: No se encontró el ID de la publicación.',
+      );
       return;
     }
 
@@ -247,12 +291,16 @@ export default class ProfilePage implements OnInit {
         user_id: this.newPost.user_id ?? undefined,
       };
       await this.postsService.updatePost(updateData);
-      this.notificationService.success('¡Publicación actualizada exitosamente!');
+      this.notificationService.success(
+        '¡Publicación actualizada exitosamente!',
+      );
       this.closePostModal();
       // Refresh profile data to show updated post
       await this.getProfileData();
     } catch (error) {
-      // El interceptor ya maneja el error
+      this.notificationService.error(
+        'No se pudo actualizar la publicación. Inténtalo nuevamente.',
+      );
     }
   }
 
@@ -265,11 +313,15 @@ export default class ProfilePage implements OnInit {
       if (result && this.user) {
         // Refrescar todos los posts del usuario
         await this.getUserPosts(this.user.id);
-        // Notificación eliminada
+        this.notificationService.success(
+          finalVoteType === 1 ? 'Voto registrado.' : 'Voto removido.',
+        );
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);
-      this.notificationService.error('Error al votar la publicación. Inténtalo de nuevo.');
+      this.notificationService.error(
+        'Error al votar la publicación. Inténtalo de nuevo.',
+      );
     }
   }
 

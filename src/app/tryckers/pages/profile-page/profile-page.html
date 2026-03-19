@@ -1,3 +1,27 @@
+@if (loadingProfile) {
+<div class="flex items-center justify-center min-h-[420px]">
+  <div class="text-center">
+    <div
+      class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"
+    ></div>
+    <p class="text-gray-500">Cargando perfil...</p>
+  </div>
+</div>
+} @else if (errorMessage) {
+<div class="flex items-center justify-center min-h-[420px] px-4">
+  <div class="text-center max-w-lg">
+    <div class="text-5xl mb-4">⚠️</div>
+    <h2 class="text-xl font-semibold text-gray-800 mb-2">{{ errorMessage }}</h2>
+    <button
+      type="button"
+      class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-2 px-5 rounded-lg transition-colors duration-200"
+      (click)="getProfileData()"
+    >
+      Reintentar
+    </button>
+  </div>
+</div>
+} @else if (user) {
 <div class="profile-container">
   <!-- Header Section -->
   <div class="profile-header">
@@ -108,7 +132,21 @@
 
       <!-- title, content, image, tags, user.name, user.profile_picture -->
       <!-- Content Card -->
-      @for (post of userPosts; track post.id) {
+      @if (loadingPosts) {
+      <div class="text-center py-16 text-gray-500">
+        Cargando publicaciones...
+      </div>
+      } @else if (userPosts.length === 0) {
+      <div class="text-center py-16">
+        <div class="text-5xl mb-4">📝</div>
+        <h3 class="text-xl font-semibold text-gray-700 mb-2">
+          Aún no hay publicaciones
+        </h3>
+        <p class="text-gray-500">
+          Crea la primera publicación para comenzar a compartir.
+        </p>
+      </div>
+      } @else { @for (post of userPosts; track post.id) {
       <div class="content-card">
         <div class="card-image">
           <img [src]="post.image || 'post-default.jpg'" alt="Post Image" />
@@ -157,7 +195,7 @@
           </button>
         </div>
       </div>
-      }
+      } }
     </div>
   </div>
 
@@ -283,3 +321,4 @@
     </ng-template>
   </p-dialog>
 </div>
+}

@@ -3,6 +3,7 @@ import { Component, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
+import { NotificationService } from '@shared/services/notification.service';
 
 @Component({
   selector: 'app-header',
@@ -13,6 +14,7 @@ import { AuthStore } from '@auth/store/auth-store';
 export class HeaderComponent {
   authService = inject(AuthService);
   authStore = inject(AuthStore);
+  notificationService = inject(NotificationService);
   router = inject(Router);
   dropdownOpen = signal(false);
   isDarkMode = signal(false);
@@ -52,6 +54,7 @@ export class HeaderComponent {
 
   logout() {
     this.authStore.logout();
+    this.notificationService.info('Sesión cerrada correctamente.');
     this.router.navigate(['/home']);
   }
 

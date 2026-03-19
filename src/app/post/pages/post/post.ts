@@ -38,6 +38,7 @@ export class Post implements OnInit {
   async loadPost(postId: string): Promise<void> {
     try {
       this.loading = true;
+      this.error = null;
       this.post = await this.postsService.getPostById(postId);
       if (!this.post) {
         this.error = 'No se encontró la publicación.';
@@ -67,9 +68,7 @@ export class Post implements OnInit {
       const currentVote = this.post.user_vote;
       const currentVotesCount = this.post.votes_count ?? 0;
       const newVoteType = currentVote === 1 ? 0 : 1;
-      console.log('Enviando voto:', { postId, currentVote, newVoteType });
       const result = await this.postsService.votePost(postId, newVoteType);
-      console.log('Respuesta del backend:', result);
       if (result) {
         // Si el backend devuelve user_vote lo usamos, sino usamos el valor calculado
         const updatedUserVote =
@@ -92,7 +91,9 @@ export class Post implements OnInit {
           user_vote: updatedUserVote,
           votes_count: updatedVotesCount,
         };
-        console.log('Post actualizado:', this.post);
+        this.notificationService.success(
+          newVoteType === 1 ? 'Voto registrado.' : 'Voto removido.',
+        );
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);
