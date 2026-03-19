@@ -1,11 +1,13 @@
 import { Routes } from '@angular/router';
+import { AuthenticatedGuard } from './auth/guards/authenticated.guard';
+import { NotAuthenticatedGuard } from './auth/guards/not-authenticated.guard';
 import { MainLayoutComponent } from './shared/layouts/main-layout.component';
 
 export const routes: Routes = [
   {
     path: 'auth',
     loadChildren: () => import('./auth/auth.routes'),
-    // canMatch: [NotAuthenticatedGuard], // Temporarily disabled
+    canMatch: [NotAuthenticatedGuard],
   },
   {
     path: '',
@@ -23,26 +25,29 @@ export const routes: Routes = [
       },
       {
         path: 'cartelera',
+        canMatch: [AuthenticatedGuard],
         loadComponent: () =>
           import('./post/pages/cartelera-page/cartelera-page'),
       },
       {
         path: 'profile/:username',
+        canMatch: [AuthenticatedGuard],
         loadComponent: () =>
           import('./tryckers/pages/profile-page/profile-page'),
       },
       {
         path: 'perfil/:username',
-        loadComponent: () =>
-          import('./tryckers/pages/profile-page/profile-page'),
+        redirectTo: 'profile/:username',
+        pathMatch: 'full',
       },
       {
         path: 'perfil/:username/post/:id',
-        loadComponent: () =>
-          import('./post/pages/post/post').then((m) => m.Post),
+        redirectTo: 'profile/:username/post/:id',
+        pathMatch: 'full',
       },
       {
         path: 'profile/:username/post/:id',
+        canMatch: [AuthenticatedGuard],
         loadComponent: () =>
           import('./post/pages/post/post').then((m) => m.Post),
       },
