@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, signal } from '@angular/core';
-import { RouterLink } from '@angular/router';
+import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 
@@ -13,6 +13,7 @@ import { AuthStore } from '@auth/store/auth-store';
 export class HeaderComponent {
   authService = inject(AuthService);
   authStore = inject(AuthStore);
+  router = inject(Router);
   dropdownOpen = signal(false);
   isDarkMode = signal(false);
 
@@ -50,8 +51,8 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.authService.logout();
     this.authStore.logout();
+    this.router.navigate(['/home']);
   }
 
   toggleDropdown() {
