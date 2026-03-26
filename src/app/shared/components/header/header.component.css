@@ -1,6 +1,6 @@
 .header {
-        background: white;
-        border-bottom: 1px solid #e0e0e0;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
         position: sticky;
         top: 0;
         z-index: 100;
@@ -48,13 +48,13 @@
       }
 
       .nav-link {
-        color: #666;
+        color: var(--ui-text-muted);
         text-decoration: none;
         font-weight: 500;
       }
 
       .nav-link:hover {
-        color: #333;
+        color: var(--ui-text);
       }
 
       .header-actions {
@@ -72,9 +72,9 @@
 
       .theme-toggle {
         padding: 8px 12px;
-        border: 1px solid #ccc;
-        background: white;
-        border-radius: 4px;
+        border: 1px solid var(--ui-border-strong);
+        background: var(--ui-bg);
+        border-radius: var(--ui-radius-sm);
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
@@ -101,7 +101,7 @@
       .btn {
         padding: 8px 16px;
         border: none;
-        border-radius: 4px;
+        border-radius: var(--ui-radius-sm);
         font-weight: 500;
         cursor: pointer;
         text-decoration: none;
@@ -109,9 +109,9 @@
       }
 
       .btn-outline {
-        background: white;
-        color: #333;
-        border: 1px solid #ccc;
+        background: var(--ui-bg);
+        color: var(--ui-text);
+        border: 1px solid var(--ui-border-strong);
       }
 
       .btn-outline:hover {
@@ -119,12 +119,12 @@
       }
 
       .btn-primary {
-        background: #007bff;
+        background: var(--ui-primary);
         color: white;
       }
 
       .btn-primary:hover {
-        background: #0056b3;
+        background: var(--ui-primary-hover);
       }
 
       .user-menu {
@@ -136,9 +136,9 @@
         align-items: center;
         gap: 8px;
         padding: 8px 12px;
-        border: 1px solid #ccc;
-        background: white;
-        border-radius: 4px;
+        border: 1px solid var(--ui-border-strong);
+        background: var(--ui-bg);
+        border-radius: var(--ui-radius-sm);
         cursor: pointer;
       }
 
@@ -154,9 +154,9 @@
         right: 0;
         top: 100%;
         margin-top: 4px;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        background: var(--ui-bg);
+        border: 1px solid var(--ui-border-strong);
+        border-radius: var(--ui-radius-sm);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         min-width: 160px;
       }
@@ -169,7 +169,7 @@
       }
 
       .dropdown-item:hover {
-        background: #f5f5f5;
+        background: var(--ui-bg-muted);
       }
 
       .dropdown-button {

@@ -13,11 +13,11 @@
   grid-template-columns: 56px 1fr auto;
   gap: 16px;
   align-items: flex-start;
-  background: #fff;
-  border: 1px solid #e5e7eb;
-  border-radius: 14px;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
   padding: 18px;
-  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+  box-shadow: var(--ui-shadow-sm);
 }
 
 .skeleton-card .votes-panel {
@@ -132,31 +132,32 @@
 }
 
 .action-chip {
-  border: 1px solid #d1d5db;
-  background: #fff;
-  color: #374151;
+  border: 1px solid var(--ui-border-strong);
+  background: var(--ui-bg);
+  color: var(--ui-text);
   border-radius: 999px;
   padding: 7px 13px;
   font-size: 13px;
   font-weight: 600;
   text-decoration: none;
   cursor: pointer;
+  transition: background var(--ui-transition), border-color var(--ui-transition), color var(--ui-transition);
 }
 
 .action-chip:hover {
   border-color: #9ca3af;
-  background: #f9fafb;
+  background: var(--ui-bg-muted);
 }
 
 .action-chip.primary {
-  background: #2563eb;
+  background: var(--ui-primary);
   color: #fff;
-  border-color: #2563eb;
+  border-color: var(--ui-primary);
 }
 
 .action-chip.primary:hover {
-  background: #1d4ed8;
-  border-color: #1d4ed8;
+  background: var(--ui-primary-hover);
+  border-color: var(--ui-primary-hover);
 }
 
 .post-title-link:focus-visible,

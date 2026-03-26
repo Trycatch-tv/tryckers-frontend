@@ -9,6 +9,29 @@
 @import "primeicons/primeicons.css";
 
 /* Global styles */
+:root {
+  --ui-bg: #ffffff;
+  --ui-bg-muted: #f8fafc;
+  --ui-border: #e5e7eb;
+  --ui-border-strong: #d1d5db;
+  --ui-text: #111827;
+  --ui-text-muted: #6b7280;
+  --ui-primary: #2563eb;
+  --ui-primary-hover: #1d4ed8;
+  --ui-success-bg: #ecfdf5;
+  --ui-success-border: #10b981;
+  --ui-success-text: #065f46;
+  --ui-danger-bg: #fef2f2;
+  --ui-danger-border: #ef4444;
+  --ui-danger-text: #991b1b;
+  --ui-radius-sm: 8px;
+  --ui-radius-md: 12px;
+  --ui-radius-lg: 16px;
+  --ui-shadow-sm: 0 4px 10px rgba(15, 23, 42, 0.06);
+  --ui-shadow-md: 0 10px 24px rgba(15, 23, 42, 0.08);
+  --ui-transition: 0.2s ease;
+}
+
 html, body {
   height: 100%;
   margin: 0;
@@ -29,6 +52,64 @@ textarea:focus-visible,
 [tabindex]:focus-visible {
   outline: 3px solid #2563eb;
   outline-offset: 2px;
+}
+
+.ui-card {
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.ui-btn {
+  border: 1px solid var(--ui-border-strong);
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  border-radius: var(--ui-radius-sm);
+  padding: 0.5rem 0.9rem;
+  min-height: 38px;
+  font-weight: 600;
+  text-decoration: none;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.4rem;
+  cursor: pointer;
+  transition: background var(--ui-transition), border-color var(--ui-transition), color var(--ui-transition), transform var(--ui-transition);
+}
+
+.ui-btn:hover {
+  background: var(--ui-bg-muted);
+  border-color: #9ca3af;
+}
+
+.ui-btn-primary {
+  background: var(--ui-primary);
+  color: #fff;
+  border-color: var(--ui-primary);
+}
+
+.ui-btn-primary:hover {
+  background: var(--ui-primary-hover);
+  border-color: var(--ui-primary-hover);
+}
+
+.ui-btn-danger {
+  background: var(--ui-danger-bg);
+  color: var(--ui-danger-text);
+  border-color: var(--ui-danger-border);
+}
+
+.ui-chip {
+  border-radius: 999px;
+  padding: 0.38rem 0.75rem;
+  font-size: 0.78rem;
+  font-weight: 600;
+}
+
+.ui-meta {
+  color: var(--ui-text-muted);
+  font-size: 0.82rem;
 }
 
 .skeleton {
@@ -71,6 +152,22 @@ body.dark-theme,
 .dark-theme {
   background-color: #121212;
   color: #e0e0e0;
+}
+
+.dark-theme .ui-card {
+  background: #1f1f1f;
+  border-color: #333;
+}
+
+.dark-theme .ui-btn {
+  background: #242424;
+  color: #f1f5f9;
+  border-color: #3f3f46;
+}
+
+.dark-theme .ui-btn:hover {
+  background: #2c2c2c;
+  border-color: #52525b;
 }
 
 .dark-theme input,
