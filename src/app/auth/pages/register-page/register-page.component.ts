@@ -18,12 +18,6 @@ import { NotificationService } from '@shared/services/notification.service';
   styleUrl: './register-page.component.css',
 })
 export class RegisterPageComponent {
-  name = signal<string>('');
-  username = signal<string>('');
-  email = signal<string>('');
-  value = signal<string>('');
-  password = signal<string>('');
-
   selectedCountry: string | null = null;
 
   fb = inject(FormBuilder);
@@ -44,26 +38,14 @@ export class RegisterPageComponent {
   });
 
   async onSubmit() {
-    console.log('Form submitted');
-    console.log('Form valid:', this.registerForm.valid);
-    console.log('Form values:', this.registerForm.value);
-    console.log('Form errors:', this.registerForm.errors);
-
     // Marcar todos los campos como touched para mostrar errores
     this.registerForm.markAllAsTouched();
 
     if (this.registerForm.invalid) {
-      console.log('Form is invalid');
-      // Log specific field errors
-      Object.keys(this.registerForm.controls).forEach((key) => {
-        const control = this.registerForm.get(key);
-        if (control?.errors) {
-          console.log(`${key} errors:`, control.errors);
-        }
-      });
-
       this.hasError.set(true);
-      this.notificationService.warning('Por favor, completa todos los campos correctamente.');
+      this.notificationService.warning(
+        'Revisa los campos resaltados para continuar.',
+      );
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);
@@ -79,42 +61,84 @@ export class RegisterPageComponent {
       password = '',
     } = this.registerForm.value;
 
-    console.log('Sending registration request with:', {
-      name,
-      username,
-      country,
-      email,
-    });
-
     try {
       await new Promise<void>((resolve, reject) => {
         this.authService
           .register(name!, username!, country!, email!, password!)
           .subscribe({
             next: (isAuthenticated) => {
-              console.log('Registration response:', isAuthenticated);
               if (isAuthenticated) {
-                this.notificationService.success('¡Registro exitoso! Bienvenido.');
-                this.router.navigateByUrl('/');
+                this.notificationService.success(
+                  '¡Registro exitoso! Bienvenido.',
+                );
+                this.router.navigateByUrl('/home');
                 resolve();
               } else {
                 reject(new Error('Registration failed'));
               }
             },
             error: (error) => {
-              console.error('Registration error:', error);
               reject(error);
             },
           });
       });
     } catch (error) {
-      console.error('Registration failed:', error);
       this.hasError.set(true);
+      this.notificationService.error(
+        'No pudimos crear tu cuenta. Revisa tus datos e intentalo nuevamente.',
+      );
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);
     } finally {
       this.isPosting.set(false);
     }
+  }
+
+  isFieldInvalid(
+    fieldName: 'name' | 'username' | 'country' | 'email' | 'password',
+  ): boolean {
+    const field = this.registerForm.get(fieldName);
+    return !!field && field.invalid && (field.dirty || field.touched);
+  }
+
+  getFieldError(
+    fieldName: 'name' | 'username' | 'country' | 'email' | 'password',
+  ): string | null {
+    const field = this.registerForm.get(fieldName);
+    if (!field || !field.errors || !(field.dirty || field.touched)) {
+      return null;
+    }
+
+    if (field.errors['required']) {
+      const labels = {
+        name: 'El nombre completo',
+        username: 'El nombre de usuario',
+        country: 'El pais',
+        email: 'El correo',
+        password: 'La contraseña',
+      };
+      return `${labels[fieldName]} es obligatorio.`;
+    }
+
+    if (field.errors['minlength']) {
+      const minLength = field.errors['minlength'].requiredLength;
+      if (fieldName === 'name') {
+        return `El nombre debe tener al menos ${minLength} caracteres.`;
+      }
+      if (fieldName === 'username') {
+        return `El usuario debe tener al menos ${minLength} caracteres.`;
+      }
+      if (fieldName === 'password') {
+        return `La contraseña debe tener al menos ${minLength} caracteres.`;
+      }
+      return `Este campo debe tener al menos ${minLength} caracteres.`;
+    }
+
+    if (fieldName === 'email' && field.errors['email']) {
+      return 'Ingresa un correo valido (ejemplo@correo.com).';
+    }
+
+    return null;
   }
 }

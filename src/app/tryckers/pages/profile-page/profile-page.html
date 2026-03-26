@@ -234,9 +234,15 @@
           id="postTitle"
           pInputText
           [(ngModel)]="newPost.title"
+          #postTitleModel="ngModel"
           placeholder="Ingresa el título de tu publicación"
           class="form-input"
+          [class.ng-invalid]="isPostFieldInvalid('title')"
         />
+        @if ((postSubmitAttempted || postTitleModel.touched ||
+        !!newPost.content.trim()) && getPostFieldError('title')) {
+        <small class="text-red-600">{{ getPostFieldError('title') }}</small>
+        }
       </div>
 
       <!-- Content -->
@@ -245,10 +251,16 @@
         <textarea
           id="postContent"
           [(ngModel)]="newPost.content"
+          #postContentModel="ngModel"
           placeholder="Escribe el contenido de tu publicación..."
           rows="6"
           class="form-textarea"
+          [class.ng-invalid]="isPostFieldInvalid('content')"
         ></textarea>
+        @if ((postSubmitAttempted || postContentModel.touched ||
+        !!newPost.title.trim()) && getPostFieldError('content')) {
+        <small class="text-red-600">{{ getPostFieldError('content') }}</small>
+        }
       </div>
 
       <!-- Image -->
@@ -308,16 +320,26 @@
           icon="pi pi-times"
           (onClick)="closePostModal()"
           [text]="true"
+          [disabled]="isSavingPost"
         >
         </p-button>
         <p-button
-          label="{{ info.buttonLabel }}"
+          [label]="isSavingPost ? 'Guardando...' : info.buttonLabel"
           icon="pi pi-check"
           (onClick)="savePost()"
-          [disabled]="!newPost.title.trim() || !newPost.content.trim()"
+          [disabled]="isSavingPost || !!getPostFieldError('title') || !!getPostFieldError('content')"
         >
         </p-button>
       </div>
+      @if (!isSavingPost && (!!getPostFieldError('title') ||
+      !!getPostFieldError('content'))) {
+      <div class="mt-2">
+        <small class="text-red-600">
+          No puedes continuar: {{ getPostFieldError('title') ||
+          getPostFieldError('content') }}
+        </small>
+      </div>
+      }
     </ng-template>
   </p-dialog>
 </div>

@@ -41,10 +41,12 @@ export class LoginPageComponent implements OnInit {
   }
 
   async onSubmit() {
+    this.loginForm.markAllAsTouched();
+
     if (this.loginForm.invalid) {
       this.hasError.set(true);
       this.notificationService.warning(
-        'Por favor, completa todos los campos correctamente.',
+        'Revisa los campos resaltados para continuar.',
       );
       setTimeout(() => {
         this.hasError.set(false);
@@ -88,5 +90,33 @@ export class LoginPageComponent implements OnInit {
     }
 
     return returnUrl;
+  }
+
+  isFieldInvalid(fieldName: 'email' | 'password'): boolean {
+    const field = this.loginForm.get(fieldName);
+    return !!field && field.invalid && (field.dirty || field.touched);
+  }
+
+  getFieldError(fieldName: 'email' | 'password'): string | null {
+    const field = this.loginForm.get(fieldName);
+    if (!field || !field.errors || !(field.dirty || field.touched)) {
+      return null;
+    }
+
+    if (field.errors['required']) {
+      return fieldName === 'email'
+        ? 'El correo es obligatorio.'
+        : 'La contraseña es obligatoria.';
+    }
+
+    if (fieldName === 'email' && field.errors['email']) {
+      return 'Ingresa un correo valido (ejemplo@correo.com).';
+    }
+
+    if (fieldName === 'password' && field.errors['minlength']) {
+      return 'La contraseña debe tener al menos 6 caracteres.';
+    }
+
+    return null;
   }
 }

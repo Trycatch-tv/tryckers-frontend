@@ -86,6 +86,8 @@ export default class ProfilePage implements OnInit {
   };
 
   isEditing = false;
+  isSavingPost = false;
+  postSubmitAttempted = false;
 
   constructor(private route: ActivatedRoute) {
     this.username = this.route.snapshot.paramMap.get('username')!;
@@ -172,9 +174,9 @@ export default class ProfilePage implements OnInit {
 
   // Modal methods
   openPostModal(isEditing: boolean = false, post: Post | null = null) {
-    console.log(post);
     this.showPostModal = true;
     this.isEditing = isEditing;
+    this.postSubmitAttempted = false;
     this.info.header =
       '' + (isEditing ? 'Editar' : 'Crear Nueva') + ' Publicación';
     this.info.buttonLabel = isEditing ? 'Guardar Cambios' : 'Crear Publicación';
@@ -197,6 +199,8 @@ export default class ProfilePage implements OnInit {
 
   closePostModal() {
     this.showPostModal = false;
+    this.postSubmitAttempted = false;
+    this.isSavingPost = false;
     this.resetPostForm();
   }
 
@@ -214,21 +218,79 @@ export default class ProfilePage implements OnInit {
   }
 
   async savePost() {
+    this.postSubmitAttempted = true;
+
+    if (!this.isPostFormValid()) {
+      this.notificationService.warning(this.getPostFormErrorMessage());
+      return;
+    }
+
+    this.isSavingPost = true;
+
     if (this.isEditing) {
       await this.editPost();
     } else {
       await this.createPost();
     }
+
+    this.isSavingPost = false;
+  }
+
+  isPostFieldInvalid(fieldName: 'title' | 'content'): boolean {
+    if (!this.postSubmitAttempted && fieldName === 'title') {
+      return (
+        this.newPost.title.trim().length > 0 &&
+        this.newPost.title.trim().length < 5
+      );
+    }
+
+    if (!this.postSubmitAttempted && fieldName === 'content') {
+      return (
+        this.newPost.content.trim().length > 0 &&
+        this.newPost.content.trim().length < 20
+      );
+    }
+
+    return this.postSubmitAttempted && !!this.getPostFieldError(fieldName);
+  }
+
+  getPostFieldError(fieldName: 'title' | 'content'): string | null {
+    if (fieldName === 'title') {
+      const title = this.newPost.title.trim();
+      if (!title) {
+        return 'El titulo es obligatorio.';
+      }
+      if (title.length < 5) {
+        return 'El titulo debe tener al menos 5 caracteres.';
+      }
+      return null;
+    }
+
+    const content = this.newPost.content.trim();
+    if (!content) {
+      return 'El contenido es obligatorio.';
+    }
+    if (content.length < 20) {
+      return 'El contenido debe tener al menos 20 caracteres para ser claro.';
+    }
+    return null;
+  }
+
+  private isPostFormValid(): boolean {
+    return (
+      !this.getPostFieldError('title') && !this.getPostFieldError('content')
+    );
+  }
+
+  private getPostFormErrorMessage(): string {
+    return (
+      this.getPostFieldError('title') ||
+      this.getPostFieldError('content') ||
+      'Revisa los campos del formulario.'
+    );
   }
 
   async createPost() {
-    if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning(
-        'Por favor, completa todos los campos requeridos.',
-      );
-      return;
-    }
-
     if (!this.user) {
       this.notificationService.error('Error: No se encontró el usuario.');
       return;
@@ -262,13 +324,6 @@ export default class ProfilePage implements OnInit {
   }
 
   async editPost() {
-    if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning(
-        'Por favor, completa todos los campos requeridos.',
-      );
-      return;
-    }
-
     if (!this.newPost.id) {
       this.notificationService.error(
         'Error: No se encontró el ID de la publicación.',

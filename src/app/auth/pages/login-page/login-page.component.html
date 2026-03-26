@@ -17,7 +17,11 @@
             formControlName="email"
             placeholder="Email"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('email')"
           />
+          @if (getFieldError("email")) {
+            <small class="text-red-600">{{ getFieldError("email") }}</small>
+          }
         </div>
 
         <div class="form-group">
@@ -26,7 +30,11 @@
             formControlName="password"
             placeholder="Password"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('password')"
           />
+          @if (getFieldError("password")) {
+            <small class="text-red-600">{{ getFieldError("password") }}</small>
+          }
         </div>
 
         <button type="submit" class="submit-btn" [disabled]="isPosting()">
@@ -58,6 +66,6 @@
 
 @if (hasError()) {
   <div class="error-alert">
-    <span>❌ Please check your credentials</span>
+    <span>❌ No pudimos iniciar sesión. Verifica tu correo y contraseña.</span>
   </div>
 }
