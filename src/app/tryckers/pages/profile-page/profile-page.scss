@@ -473,6 +473,14 @@
   background: #f8f9fa;
 }
 
+.action-btn:focus-visible,
+.like-btn:focus-visible,
+.create-btn:focus-visible,
+.social-link:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
 .action-btn.primary {
   background: #D32F2F;
   border-color: #D32F2F;
@@ -788,6 +796,11 @@
     justify-content: center;
     align-items: center;
     gap: 10px;
+  }
+
+  .action-btn,
+  .like-btn {
+    min-height: 40px;
   }
   
   .content-header {

@@ -147,9 +147,15 @@
         </p>
       </div>
       } @else { @for (post of userPosts; track post.id) {
-      <div class="content-card">
+      <article
+        class="content-card"
+        [attr.aria-label]="'Publicación: ' + (post.title || 'sin título')"
+      >
         <div class="card-image">
-          <img [src]="post.image || 'post-default.jpg'" alt="Post Image" />
+          <img
+            [src]="post.image || 'post-default.jpg'"
+            [alt]="'Imagen de portada de ' + (post.title || 'publicación')"
+          />
         </div>
         <div class="card-content">
           <h3>{{ post.title || 'Título' }}</h3>
@@ -171,6 +177,7 @@
             class="action-btn"
             title="Editar"
             (click)="openPostModal(true, post)"
+            [attr.aria-label]="'Editar publicación ' + (post.title || '')"
           >
             Editar
           </button>
@@ -179,6 +186,7 @@
             class="action-btn"
             title="Eliminar"
             (click)="deletePost(post.id)"
+            [attr.aria-label]="'Eliminar publicación ' + (post.title || '')"
           >
             Eliminar
           </button>
@@ -187,6 +195,7 @@
             title="Leer"
             [routerLink]="['/profile', user?.username, 'post', post.id]"
             [queryParams]="{ from: 'profile' }"
+            [attr.aria-label]="'Leer publicación ' + (post.title || '')"
           >
             Leer post
           </a>
@@ -195,12 +204,13 @@
             [class.voted]="post.user_vote === 1"
             title="Upvote"
             (click)="votePost(post.id)"
+            [attr.aria-label]="(post.user_vote === 1 ? 'Quitar voto de ' : 'Votar publicación ') + (post.title || '')"
           >
             <span>👍 {{ post.user_vote === 1 ? 'Quitar voto' : 'Votar' }}</span>
             <span class="vote-count">{{ post.votes_count ?? 0 }} votos</span>
           </button>
         </div>
-      </div>
+      </article>
       } }
     </div>
   </div>

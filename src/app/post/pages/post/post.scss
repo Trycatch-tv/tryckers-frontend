@@ -140,6 +140,12 @@
 	border-color: #d1d5db;
 }
 
+.vote-btn:focus-visible,
+.post-action-link:focus-visible {
+	outline: 3px solid #2563eb;
+	outline-offset: 2px;
+}
+
 .vote-btn.voted.upvote {
 	background: #ecfdf5;
 	border-color: #10b981;
@@ -211,5 +217,14 @@
 
 	.post-submeta {
 		flex-wrap: wrap;
+	}
+
+	.post-actions {
+		width: 100%;
+	}
+
+	.vote-btn,
+	.post-action-link {
+		min-height: 40px;
 	}
 }

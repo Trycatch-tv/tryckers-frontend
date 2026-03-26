@@ -26,7 +26,10 @@
   </header>
 
   <figure class="post-hero" *ngIf="post?.image">
-    <img [src]="post.image" [alt]="post?.title || 'Imagen de la publicación'" />
+    <img
+      [src]="post.image"
+      [alt]="'Imagen de portada de ' + (post?.title || 'la publicación')"
+    />
   </figure>
 
   <article class="post-content">
@@ -41,6 +44,7 @@
         [class.voted]="post?.user_vote === 1"
         title="Upvote"
         (click)="votePost(post.id)"
+        [attr.aria-label]="(post?.user_vote === 1 ? 'Quitar voto de ' : 'Votar ') + post?.title"
       >
         <span>👍 {{ post?.user_vote === 1 ? 'Quitar voto' : 'Votar' }}</span>
         <span class="vote-count">{{ post?.votes_count ?? 0 }} votos</span>
@@ -51,10 +55,15 @@
           username || post?.author?.username || post?.user?.username || ''
         ]"
         class="post-action-link"
+        [attr.aria-label]="'Ir al perfil del autor de ' + post?.title"
       >
         Ver perfil autor
       </a>
-      <a [routerLink]="backCommands" class="post-action-link secondary">
+      <a
+        [routerLink]="backCommands"
+        class="post-action-link secondary"
+        [attr.aria-label]="backLabel"
+      >
         {{ backLabel }}
       </a>
     </div>
@@ -62,6 +71,10 @@
 </div>
 
 <ng-template #stateBlock>
-  <div class="state" *ngIf="loading">Cargando publicación...</div>
-  <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+  <div class="state" *ngIf="loading" role="status" aria-live="polite">
+    Cargando publicación...
+  </div>
+  <div class="state error" *ngIf="!loading && error" role="alert">
+    {{ error }}
+  </div>
 </ng-template>

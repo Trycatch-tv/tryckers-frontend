@@ -44,9 +44,17 @@
     </p>
   </div>
   } @else {
-  <div class="cartelera-grid">
+  <div
+    class="cartelera-grid"
+    role="list"
+    aria-label="Ranking semanal de publicaciones"
+  >
     @for (post of posts; track post.id; let i = $index) {
-    <article class="ranking-card">
+    <article
+      class="ranking-card"
+      role="listitem"
+      [attr.aria-label]="'Puesto ' + (i + 1) + ': ' + post.title"
+    >
       <!-- Ranking number -->
       <div
         class="ranking-badge"
@@ -74,6 +82,7 @@
           ]"
           [queryParams]="{ from: 'cartelera' }"
           class="post-title-link"
+          [attr.aria-label]="'Abrir publicación ' + post.title"
         >
           {{ post.title }}
         </a>
@@ -100,6 +109,7 @@
             class="action-chip vote"
             [class.voted]="post.user_vote === 1"
             (click)="votePost(post.id)"
+            [attr.aria-label]="(post.user_vote === 1 ? 'Quitar voto a ' : 'Votar publicación ') + post.title"
           >
             👍 {{ post.user_vote === 1 ? 'Quitar voto' : 'Votar' }}
           </button>
@@ -112,12 +122,14 @@
             ]"
             [queryParams]="{ from: 'cartelera' }"
             class="action-chip primary"
+            [attr.aria-label]="'Leer publicación ' + post.title"
           >
             Leer post
           </a>
           <a
             [routerLink]="['/profile', post.author?.username || 'unknown']"
             class="action-chip"
+            [attr.aria-label]="'Ver perfil de ' + (post.author?.username || 'autor')"
           >
             Ver perfil
           </a>

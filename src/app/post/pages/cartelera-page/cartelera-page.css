@@ -125,6 +125,13 @@
   border-color: #1d4ed8;
 }
 
+.post-title-link:focus-visible,
+.metadata-link:focus-visible,
+.action-chip:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
 .action-chip.vote.voted {
   background: #ecfdf5;
   border-color: #10b981;
@@ -155,6 +162,20 @@
 @media (max-width: 768px) {
   .ranking-card {
     grid-template-columns: 1fr;
+  }
+
+  .ranking-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .post-actions-row {
+    gap: 8px;
+  }
+
+  .action-chip {
+    min-height: 38px;
   }
 
   .votes-panel {

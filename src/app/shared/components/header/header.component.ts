@@ -1,5 +1,5 @@
 import { CommonModule } from '@angular/common';
-import { Component, inject, signal } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
@@ -17,6 +17,7 @@ export class HeaderComponent {
   notificationService = inject(NotificationService);
   router = inject(Router);
   dropdownOpen = signal(false);
+  mobileMenuOpen = signal(false);
   isDarkMode = signal(false);
 
   constructor() {
@@ -62,7 +63,24 @@ export class HeaderComponent {
     this.dropdownOpen.set(!this.dropdownOpen());
   }
 
+  toggleMobileMenu() {
+    this.mobileMenuOpen.set(!this.mobileMenuOpen());
+    if (this.mobileMenuOpen()) {
+      this.dropdownOpen.set(false);
+    }
+  }
+
   closeDropdown() {
     this.dropdownOpen.set(false);
+  }
+
+  closeMobileMenu() {
+    this.mobileMenuOpen.set(false);
+  }
+
+  @HostListener('document:keydown.escape')
+  onEscapeKey(): void {
+    this.closeDropdown();
+    this.closeMobileMenu();
   }
 }

@@ -13,11 +13,22 @@ html, body {
   height: 100%;
   margin: 0;
   font-family: system-ui, -apple-system, sans-serif;
+  line-height: 1.5;
   box-sizing: border-box;
 }
 
 *, *::before, *::after {
   box-sizing: border-box;
+}
+
+a:focus-visible,
+button:focus-visible,
+input:focus-visible,
+select:focus-visible,
+textarea:focus-visible,
+[tabindex]:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
 }
 
 /* PrimeNG specific overrides to work with Tailwind */

@@ -30,6 +30,18 @@
         opacity: 0.8;
       }
 
+      .mobile-menu-toggle {
+        display: none;
+        border: 1px solid #d1d5db;
+        background: #fff;
+        color: #111827;
+        border-radius: 8px;
+        min-width: 40px;
+        min-height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
       .nav {
         display: flex;
         gap: 32px;
@@ -168,9 +180,61 @@
         cursor: pointer;
       }
 
+      .logo-link:focus-visible,
+      .nav-link:focus-visible,
+      .theme-toggle:focus-visible,
+      .btn:focus-visible,
+      .user-button:focus-visible,
+      .dropdown-item:focus-visible,
+      .mobile-menu-toggle:focus-visible {
+        outline: 3px solid #2563eb;
+        outline-offset: 2px;
+      }
+
       @media (max-width: 768px) {
+        .mobile-menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          order: 2;
+        }
+
+        .header-content {
+          height: auto;
+          min-height: 60px;
+          flex-wrap: wrap;
+          row-gap: 10px;
+          padding: 10px 0;
+        }
+
         .nav {
           display: none;
+          width: 100%;
+          order: 4;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .nav.nav-open {
+          display: flex;
+        }
+
+        .header-actions {
+          display: none;
+          width: 100%;
+          order: 5;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 10px;
+        }
+
+        .header-actions.actions-open {
+          display: flex;
+        }
+
+        .btn {
+          flex: 1 1 auto;
+          min-height: 40px;
         }
 
         .search-container {
@@ -185,8 +249,15 @@
       /* Dark Theme Styles */
       :host-context(.dark-theme) .header,
       .dark-theme .header {
-        background: #575656;
+        background: #222222;
         border-bottom-color: #333;
+      }
+
+      :host-context(.dark-theme) .mobile-menu-toggle,
+      .dark-theme .mobile-menu-toggle {
+        background: #2f2f2f;
+        border-color: #555;
+        color: #f8fafc;
       }
 
       :host-context(.dark-theme) .logo-link,
