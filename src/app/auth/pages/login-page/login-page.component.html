@@ -4,6 +4,11 @@
     <div class="form-content">
       <h1>Welcome back!</h1>
       <p>Log in to access your account</p>
+      @if (returnUrl()) {
+        <p class="text-sm" style="color: #1e40af">
+          Debes iniciar sesión para continuar.
+        </p>
+      }
 
       <form [formGroup]="loginForm" (ngSubmit)="onSubmit()">
         <div class="form-group">

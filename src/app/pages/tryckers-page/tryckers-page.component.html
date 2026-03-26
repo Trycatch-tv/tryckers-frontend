@@ -28,6 +28,18 @@
           Registrarse
         </a>
       </div>
+      <div class="mt-6">
+        <p class="text-sm text-gray-500 mb-2">
+          ¿Quieres ver la cartelera semanal? Requiere inicio de sesión.
+        </p>
+        <a
+          [routerLink]="['/auth/login']"
+          [queryParams]="{ returnUrl: '/cartelera' }"
+          class="text-blue-700 hover:text-blue-900 underline font-medium"
+        >
+          Iniciar sesión para ir a Cartelera
+        </a>
+      </div>
     </div>
   </div>
 }
