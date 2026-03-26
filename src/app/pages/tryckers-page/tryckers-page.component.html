@@ -1,5 +1,41 @@
 @if (authStore.isLoggedIn()) {
-  <app-dashboard-page />
+  @defer (on viewport) {
+    <app-dashboard-page />
+  } @placeholder {
+    <div class="p-6">
+      <div
+        class="skeleton"
+        style="height: 48px; width: 280px; margin-bottom: 20px"
+      ></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+          <div class="border border-gray-200 rounded-lg p-5 bg-white">
+            <div
+              class="skeleton"
+              style="
+                height: 72px;
+                width: 72px;
+                border-radius: 999px;
+                margin: 0 auto 12px;
+              "
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 16px; width: 60%; margin: 0 auto 8px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 12px; width: 75%; margin: 0 auto 6px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 12px; width: 50%; margin: 0 auto"
+            ></div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 } @else {
   <div
     class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-8"

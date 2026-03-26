@@ -29,6 +29,9 @@
     <img
       [src]="post.image"
       [alt]="'Imagen de portada de ' + (post?.title || 'la publicación')"
+      width="1280"
+      height="720"
+      decoding="async"
     />
   </figure>
 
@@ -71,8 +74,18 @@
 </div>
 
 <ng-template #stateBlock>
-  <div class="state" *ngIf="loading" role="status" aria-live="polite">
-    Cargando publicación...
+  <div
+    class="post-page post-skeleton"
+    *ngIf="loading"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="skeleton skeleton-meta"></div>
+    <div class="skeleton skeleton-heading"></div>
+    <div class="skeleton skeleton-submeta"></div>
+    <div class="skeleton skeleton-hero"></div>
+    <div class="skeleton skeleton-paragraph"></div>
+    <div class="skeleton skeleton-paragraph short"></div>
   </div>
   <div class="state error" *ngIf="!loading && error" role="alert">
     {{ error }}

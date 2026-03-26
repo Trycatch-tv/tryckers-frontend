@@ -16,9 +16,6 @@ export default class TryckersPageComponent implements OnInit {
   readonly authStore = inject(AuthStore);
 
   ngOnInit() {
-    console.log(
-      'TryckersPage initialized, isLoggedIn:',
-      this.authStore.isLoggedIn(),
-    );
+    // No-op
   }
 }

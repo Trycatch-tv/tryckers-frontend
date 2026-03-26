@@ -1,11 +1,24 @@
 <!-- Loading state -->
 @if (loading) {
-<div class="flex items-center justify-center min-h-[400px]">
-  <div class="text-center">
-    <div
-      class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"
-    ></div>
-    <p class="text-gray-500">Cargando cartelera...</p>
+<div class="container mx-auto px-4 pb-8">
+  <div class="cartelera-grid" aria-hidden="true">
+    @for (item of [1, 2, 3, 4]; track item) {
+    <div class="ranking-card skeleton-card">
+      <div class="ranking-badge skeleton"></div>
+      <div class="ranking-content">
+        <div class="skeleton skeleton-title"></div>
+        <div class="skeleton skeleton-text"></div>
+        <div class="skeleton skeleton-text short"></div>
+        <div class="post-actions-row">
+          <div class="skeleton skeleton-chip"></div>
+          <div class="skeleton skeleton-chip"></div>
+        </div>
+      </div>
+      <div class="votes-panel">
+        <div class="skeleton skeleton-vote"></div>
+      </div>
+    </div>
+    }
   </div>
 </div>
 } @else {

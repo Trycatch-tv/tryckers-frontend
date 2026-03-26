@@ -20,6 +20,40 @@
   box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
 }
 
+.skeleton-card .votes-panel {
+  background: transparent;
+  border-color: transparent;
+}
+
+.skeleton-title {
+  height: 18px;
+  width: 72%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text {
+  height: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.short {
+  width: 55%;
+  margin-bottom: 14px;
+}
+
+.skeleton-chip {
+  height: 34px;
+  width: 105px;
+  border-radius: 999px;
+}
+
+.skeleton-vote {
+  height: 38px;
+  width: 54px;
+  margin: 0 auto;
+}
+
 .ranking-badge {
   width: 42px;
   height: 42px;

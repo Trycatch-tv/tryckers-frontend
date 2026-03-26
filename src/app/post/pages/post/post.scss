@@ -91,6 +91,40 @@
 	display: block;
 	object-fit: cover;
 	max-height: 420px;
+	aspect-ratio: 16 / 9;
+}
+
+.post-skeleton {
+	pointer-events: none;
+}
+
+.skeleton-meta {
+	height: 24px;
+	width: 180px;
+}
+
+.skeleton-heading {
+	height: 42px;
+	width: 75%;
+}
+
+.skeleton-submeta {
+	height: 16px;
+	width: 45%;
+}
+
+.skeleton-hero {
+	height: 320px;
+	border-radius: 14px;
+}
+
+.skeleton-paragraph {
+	height: 14px;
+	width: 100%;
+}
+
+.skeleton-paragraph.short {
+	width: 70%;
 }
 
 .post-content {

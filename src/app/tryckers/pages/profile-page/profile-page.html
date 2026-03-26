@@ -1,10 +1,58 @@
 @if (loadingProfile) {
-<div class="flex items-center justify-center min-h-[420px]">
-  <div class="text-center">
-    <div
-      class="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"
-    ></div>
-    <p class="text-gray-500">Cargando perfil...</p>
+<div class="profile-container" aria-hidden="true">
+  <div class="profile-header">
+    <div class="profile-info">
+      <div class="profile-avatar skeleton"></div>
+      <div class="profile-basic" style="width: 100%">
+        <div
+          class="skeleton"
+          style="height: 28px; width: 45%; margin-bottom: 10px"
+        ></div>
+        <div
+          class="skeleton"
+          style="height: 16px; width: 32%; margin-bottom: 10px"
+        ></div>
+        <div
+          class="skeleton"
+          style="height: 16px; width: 58%; margin-bottom: 10px"
+        ></div>
+        <div class="skeleton" style="height: 72px; width: 100%"></div>
+      </div>
+    </div>
+  </div>
+  <div class="profile-content">
+    <div class="profile-sidebar">
+      <div class="profile-stats">
+        @for (item of [1,2,3,4,5,6]; track item) {
+        <div
+          class="skeleton"
+          style="height: 54px; width: 100%; margin-bottom: 10px"
+        ></div>
+        }
+      </div>
+    </div>
+    <div class="profile-main">
+      @for (item of [1,2,3]; track item) {
+      <div class="content-card">
+        <div class="card-image skeleton" style="height: 140px"></div>
+        <div class="card-content">
+          <div
+            class="skeleton"
+            style="height: 20px; width: 70%; margin-bottom: 8px"
+          ></div>
+          <div
+            class="skeleton"
+            style="height: 14px; width: 100%; margin-bottom: 6px"
+          ></div>
+          <div
+            class="skeleton"
+            style="height: 14px; width: 85%; margin-bottom: 10px"
+          ></div>
+          <div class="skeleton" style="height: 12px; width: 45%"></div>
+        </div>
+      </div>
+      }
+    </div>
   </div>
 </div>
 } @else if (errorMessage) {
@@ -30,6 +78,9 @@
         <img
           [src]="user?.profile_picture || 'avatar-default.svg'"
           [alt]="user?.name"
+          width="80"
+          height="80"
+          decoding="async"
         />
       </div>
       <div class="profile-basic">
@@ -133,8 +184,27 @@
       <!-- title, content, image, tags, user.name, user.profile_picture -->
       <!-- Content Card -->
       @if (loadingPosts) {
-      <div class="text-center py-16 text-gray-500">
-        Cargando publicaciones...
+      <div class="profile-posts-skeleton" aria-hidden="true">
+        @for (item of [1,2,3]; track item) {
+        <div class="content-card">
+          <div class="card-image skeleton" style="height: 140px"></div>
+          <div class="card-content">
+            <div
+              class="skeleton"
+              style="height: 18px; width: 60%; margin-bottom: 10px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 14px; width: 100%; margin-bottom: 6px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 14px; width: 86%; margin-bottom: 12px"
+            ></div>
+            <div class="skeleton" style="height: 12px; width: 50%"></div>
+          </div>
+        </div>
+        }
       </div>
       } @else if (userPosts.length === 0) {
       <div class="text-center py-16">
@@ -155,6 +225,10 @@
           <img
             [src]="post.image || 'post-default.jpg'"
             [alt]="'Imagen de portada de ' + (post.title || 'publicación')"
+            loading="lazy"
+            decoding="async"
+            width="200"
+            height="140"
           />
         </div>
         <div class="card-content">
