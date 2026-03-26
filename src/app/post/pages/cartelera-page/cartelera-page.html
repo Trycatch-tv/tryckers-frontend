@@ -96,6 +96,7 @@
           [queryParams]="{ from: 'cartelera' }"
           class="post-title-link"
           [attr.aria-label]="'Abrir publicación ' + post.title"
+          (click)="trackPostClick(post.id, i + 1, 'title')"
         >
           {{ post.title }}
         </a>
@@ -136,6 +137,7 @@
             [queryParams]="{ from: 'cartelera' }"
             class="action-chip primary"
             [attr.aria-label]="'Leer publicación ' + post.title"
+            (click)="trackPostClick(post.id, i + 1, 'read_button')"
           >
             Leer post
           </a>

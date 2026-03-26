@@ -16,6 +16,7 @@ import {
 } from 'src/app/post/interfaces/post';
 import { PostsService } from 'src/app/post/services/posts.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UxMetricsService } from 'src/app/shared/services/ux-metrics.service';
 
 import { RouterModule } from '@angular/router';
 
@@ -53,6 +54,7 @@ export default class ProfilePage implements OnInit {
   tryckersService = inject(TryckersService);
   postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   username: string = '';
   user: TryckerWithParsedInterests | null = null;
@@ -95,6 +97,7 @@ export default class ProfilePage implements OnInit {
 
   async getProfileData() {
     try {
+      this.uxMetrics.startTiming('profile-load');
       this.loadingProfile = true;
       this.errorMessage = null;
 
@@ -114,11 +117,17 @@ export default class ProfilePage implements OnInit {
         interests: userData.interests ? userData.interests.split(',') : [],
       };
       await this.getUserPosts(this.user.id);
+      this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
+        success: true,
+      });
     } catch (error) {
       console.error('Error loading profile data:', error);
       this.user = null;
       this.userPosts = [];
       this.errorMessage = 'No se pudo cargar el perfil. Inténtalo nuevamente.';
+      this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
+        success: false,
+      });
     } finally {
       this.loadingProfile = false;
     }
@@ -297,6 +306,8 @@ export default class ProfilePage implements OnInit {
     }
 
     try {
+      this.uxMetrics.track('post_create_attempt');
+      this.uxMetrics.startTiming('post-create-submit');
       const postData: CreatePostDto = {
         title: this.newPost.title,
         content: this.newPost.content,
@@ -310,6 +321,14 @@ export default class ProfilePage implements OnInit {
         user_id: this.user.id,
       };
       await this.postsService.createPost(postData);
+      this.uxMetrics.track('post_create_success');
+      this.uxMetrics.endTiming(
+        'post-create-submit',
+        'perceived_post_create_submit',
+        {
+          success: true,
+        },
+      );
 
       this.notificationService.success('¡Publicación creada exitosamente!');
       this.closePostModal();
@@ -317,6 +336,14 @@ export default class ProfilePage implements OnInit {
       // Refresh profile data to show new post
       await this.getProfileData();
     } catch (error) {
+      this.uxMetrics.track('post_create_failure');
+      this.uxMetrics.endTiming(
+        'post-create-submit',
+        'perceived_post_create_submit',
+        {
+          success: false,
+        },
+      );
       this.notificationService.error(
         'No se pudo crear la publicación. Inténtalo nuevamente.',
       );

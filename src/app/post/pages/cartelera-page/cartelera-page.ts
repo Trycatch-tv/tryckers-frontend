@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NotificationService } from '@shared/services/notification.service';
+import { UxMetricsService } from '@shared/services/ux-metrics.service';
 import { Post } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
 
@@ -19,6 +20,7 @@ export default class CarteleraPage implements OnInit {
 
   private postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   async ngOnInit(): Promise<void> {
     await this.loadCartelera();
@@ -26,18 +28,41 @@ export default class CarteleraPage implements OnInit {
 
   async loadCartelera(): Promise<void> {
     try {
+      this.uxMetrics.startTiming('cartelera-load');
       this.loading = true;
       this.errorMessage = null;
       this.posts = await this.postsService.getCartelera();
       this.posts.sort((a, b) => (b.votes_count ?? 0) - (a.votes_count ?? 0));
+      this.uxMetrics.track('cartelera_impression', {
+        postsCount: this.posts.length,
+      });
+      this.uxMetrics.endTiming('cartelera-load', 'perceived_cartelera_load', {
+        success: true,
+        postsCount: this.posts.length,
+      });
     } catch (error) {
       console.error('Error loading cartelera:', error);
       this.posts = [];
       this.errorMessage =
         'No se pudo cargar la cartelera. Inténtalo nuevamente.';
+      this.uxMetrics.endTiming('cartelera-load', 'perceived_cartelera_load', {
+        success: false,
+      });
     } finally {
       this.loading = false;
     }
+  }
+
+  trackPostClick(
+    postId: string,
+    position: number,
+    source: 'title' | 'read_button',
+  ): void {
+    this.uxMetrics.track('cartelera_post_click', {
+      postId,
+      position,
+      source,
+    });
   }
 
   async votePost(postId: string): Promise<void> {

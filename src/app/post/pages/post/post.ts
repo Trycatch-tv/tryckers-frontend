@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NotificationService } from '@shared/services/notification.service';
+import { UxMetricsService } from '@shared/services/ux-metrics.service';
 import { Post as PostInterface } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
 
@@ -16,6 +17,7 @@ export class Post implements OnInit {
   private route = inject(ActivatedRoute);
   private postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   loading = true;
   error: string | null = null;
@@ -51,14 +53,27 @@ export class Post implements OnInit {
 
   async loadPost(postId: string): Promise<void> {
     try {
+      this.uxMetrics.startTiming('post-load');
       this.loading = true;
       this.error = null;
       this.post = await this.postsService.getPostById(postId);
       if (!this.post) {
         this.error = 'No se encontró la publicación.';
+        this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+          success: false,
+          reason: 'not_found',
+        });
+      } else {
+        this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+          success: true,
+        });
       }
     } catch (err) {
       this.error = 'Error al cargar la publicación.';
+      this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+        success: false,
+        reason: 'error',
+      });
     } finally {
       this.loading = false;
     }

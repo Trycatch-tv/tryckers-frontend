@@ -9,6 +9,7 @@ import { Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 import { NotificationService } from '@shared/services/notification.service';
+import { UxMetricsService } from '@shared/services/ux-metrics.service';
 
 @Component({
   selector: 'app-register-page',
@@ -28,6 +29,7 @@ export class RegisterPageComponent {
   authService = inject(AuthService);
   authStore = inject(AuthStore);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
@@ -38,10 +40,12 @@ export class RegisterPageComponent {
   });
 
   async onSubmit() {
+    this.uxMetrics.track('register_submit_attempt');
     // Marcar todos los campos como touched para mostrar errores
     this.registerForm.markAllAsTouched();
 
     if (this.registerForm.invalid) {
+      this.uxMetrics.track('register_validation_error');
       this.hasError.set(true);
       this.notificationService.warning(
         'Revisa los campos resaltados para continuar.',
@@ -53,6 +57,7 @@ export class RegisterPageComponent {
     }
 
     this.isPosting.set(true);
+    this.uxMetrics.startTiming('register-submit');
     const {
       name = '',
       username = '',
@@ -68,6 +73,14 @@ export class RegisterPageComponent {
           .subscribe({
             next: (isAuthenticated) => {
               if (isAuthenticated) {
+                this.uxMetrics.track('register_success');
+                this.uxMetrics.endTiming(
+                  'register-submit',
+                  'perceived_register_submit',
+                  {
+                    success: true,
+                  },
+                );
                 this.notificationService.success(
                   '¡Registro exitoso! Bienvenido.',
                 );
@@ -83,6 +96,10 @@ export class RegisterPageComponent {
           });
       });
     } catch (error) {
+      this.uxMetrics.track('register_failure');
+      this.uxMetrics.endTiming('register-submit', 'perceived_register_submit', {
+        success: false,
+      });
       this.hasError.set(true);
       this.notificationService.error(
         'No pudimos crear tu cuenta. Revisa tus datos e intentalo nuevamente.',

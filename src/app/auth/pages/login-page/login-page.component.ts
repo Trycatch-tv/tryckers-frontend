@@ -1,9 +1,10 @@
-import { Component, inject, OnInit, signal } from '@angular/core';
+import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 import { NotificationService } from '@shared/services/notification.service';
+import { UxMetricsService } from '@shared/services/ux-metrics.service';
 
 @Component({
   selector: 'app-login-page',
@@ -12,7 +13,7 @@ import { NotificationService } from '@shared/services/notification.service';
   templateUrl: './login-page.component.html',
   styleUrl: './login-page.component.css',
 })
-export class LoginPageComponent implements OnInit {
+export class LoginPageComponent implements OnInit, OnDestroy {
   fb = inject(FormBuilder);
   hasError = signal(false);
   isPosting = signal(false);
@@ -23,6 +24,9 @@ export class LoginPageComponent implements OnInit {
   authService = inject(AuthService);
   authStore = inject(AuthStore);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
+  private loginSuccess = false;
+  private hasSubmitAttempt = false;
 
   loginForm = this.fb.group({
     email: ['', [Validators.required, Validators.email]],
@@ -30,6 +34,7 @@ export class LoginPageComponent implements OnInit {
   });
 
   ngOnInit(): void {
+    this.uxMetrics.track('login_view');
     const safeReturnUrl = this.getSafeReturnUrl(
       this.route.snapshot.queryParamMap.get('returnUrl'),
     );
@@ -40,10 +45,20 @@ export class LoginPageComponent implements OnInit {
     }
   }
 
+  ngOnDestroy(): void {
+    if (!this.loginSuccess) {
+      this.uxMetrics.track('login_abandon', {
+        hasSubmitAttempt: this.hasSubmitAttempt,
+      });
+    }
+  }
+
   async onSubmit() {
     this.loginForm.markAllAsTouched();
+    this.hasSubmitAttempt = true;
 
     if (this.loginForm.invalid) {
+      this.uxMetrics.track('login_validation_error');
       this.hasError.set(true);
       this.notificationService.warning(
         'Revisa los campos resaltados para continuar.',
@@ -55,16 +70,26 @@ export class LoginPageComponent implements OnInit {
     }
 
     this.isPosting.set(true);
+    this.uxMetrics.startTiming('login-submit');
     const { email = '', password = '' } = this.loginForm.value;
 
     try {
       await this.authStore.login(email!, password!);
       this.isPosting.set(false);
+      this.loginSuccess = true;
+      this.uxMetrics.track('login_success');
+      this.uxMetrics.endTiming('login-submit', 'perceived_login_submit', {
+        success: true,
+      });
       this.notificationService.success('¡Inicio de sesión exitoso!');
       this.router.navigateByUrl(this.returnUrl() ?? '/home');
     } catch (error) {
       console.error('Login failed:', error);
       this.isPosting.set(false);
+      this.uxMetrics.track('login_failure');
+      this.uxMetrics.endTiming('login-submit', 'perceived_login_submit', {
+        success: false,
+      });
       this.hasError.set(true);
       this.notificationService.error(
         'No pudimos iniciar sesión. Verifica tus credenciales.',
