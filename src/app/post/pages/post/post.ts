@@ -21,10 +21,24 @@ export class Post implements OnInit {
   error: string | null = null;
   post: PostInterface | null = null;
   username: string | null = null;
+  backLabel = 'Volver al perfil';
+  backCommands: string[] = ['/home'];
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username');
     const postId = this.route.snapshot.paramMap.get('id');
+    const from = this.route.snapshot.queryParamMap.get('from');
+
+    if (from === 'cartelera') {
+      this.backLabel = 'Volver a cartelera';
+      this.backCommands = ['/cartelera'];
+    } else if (this.username) {
+      this.backLabel = 'Volver al perfil';
+      this.backCommands = ['/profile', this.username];
+    } else {
+      this.backLabel = 'Volver al inicio';
+      this.backCommands = ['/home'];
+    }
 
     if (!postId) {
       this.error = 'No se encontró el identificador de la publicación.';

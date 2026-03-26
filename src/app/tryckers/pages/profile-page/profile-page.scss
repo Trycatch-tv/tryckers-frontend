@@ -363,6 +363,15 @@
   margin-top: 8px;
 }
 
+.card-meta-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  color: #6b7280;
+  font-size: 12px;
+  font-weight: 500;
+}
+
 .post-tag {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
   color: white;

@@ -359,7 +359,7 @@ export default class ProfilePage implements OnInit {
     }
   }
 
-  async votePost(postId: string, voteType: 0 | 1) {
+  async votePost(postId: string) {
     try {
       const post = this.userPosts.find((p) => p.id === postId);
       const currentVote = post?.user_vote;

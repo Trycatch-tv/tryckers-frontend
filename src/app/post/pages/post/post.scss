@@ -109,7 +109,7 @@
 
 .post-footer {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-start;
 	align-items: center;
 	margin-top: 12px;
 	flex-wrap: wrap;
@@ -119,6 +119,7 @@
 .post-actions {
 	display: flex;
 	gap: 12px;
+	flex-wrap: wrap;
 }
 
 .vote-btn {
@@ -155,17 +156,31 @@
 	font-weight: 600;
 }
 
-.back-link {
-	color: #2563eb;
+.post-action-link {
+	color: #1f2937;
 	font-weight: 600;
 	text-decoration: none;
 	display: inline-flex;
 	align-items: center;
-	gap: 6px;
+	padding: 8px 14px;
+	border-radius: 8px;
+	border: 1px solid #d1d5db;
 }
 
-.back-link:hover {
-	text-decoration: underline;
+.post-action-link:hover {
+	background: #f9fafb;
+	border-color: #9ca3af;
+}
+
+.post-action-link.secondary {
+	color: #1d4ed8;
+	border-color: #bfdbfe;
+	background: #eff6ff;
+}
+
+.post-action-link.secondary:hover {
+	background: #dbeafe;
+	border-color: #93c5fd;
 }
 
 .state {

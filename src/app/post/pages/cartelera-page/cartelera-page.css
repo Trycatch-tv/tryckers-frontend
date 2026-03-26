@@ -2,3 +2,162 @@
   border-bottom: 1px solid #e5e7eb;
   margin-bottom: 1rem;
 }
+
+.cartelera-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.ranking-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 16px;
+  align-items: flex-start;
+  background: #fff;
+  border: 1px solid #e5e7eb;
+  border-radius: 14px;
+  padding: 18px;
+  box-shadow: 0 8px 22px rgba(15, 23, 42, 0.05);
+}
+
+.ranking-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.ranking-badge.gold {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.ranking-badge.silver {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.ranking-badge.bronze {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.ranking-badge.default {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.ranking-content {
+  min-width: 0;
+}
+
+.post-title-link {
+  color: #111827;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.post-title-link:hover {
+  color: #1d4ed8;
+}
+
+.post-preview {
+  margin: 8px 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.post-metadata-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.metadata-link {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.metadata-link:hover {
+  text-decoration: underline;
+}
+
+.post-actions-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.action-chip {
+  border: 1px solid #d1d5db;
+  background: #fff;
+  color: #374151;
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+
+.action-chip:hover {
+  border-color: #9ca3af;
+  background: #f9fafb;
+}
+
+.action-chip.primary {
+  background: #2563eb;
+  color: #fff;
+  border-color: #2563eb;
+}
+
+.action-chip.primary:hover {
+  background: #1d4ed8;
+  border-color: #1d4ed8;
+}
+
+.action-chip.vote.voted {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.votes-panel {
+  min-width: 74px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.votes-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.votes-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .ranking-card {
+    grid-template-columns: 1fr;
+  }
+
+  .votes-panel {
+    justify-self: start;
+  }
+}

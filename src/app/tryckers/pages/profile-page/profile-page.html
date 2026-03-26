@@ -154,6 +154,11 @@
         <div class="card-content">
           <h3>{{ post.title || 'Título' }}</h3>
           <p class="card-description">{{ textPreview(post.content) }}</p>
+          <div class="card-meta-row">
+            <span>{{ post.created_at | date: 'd MMM yyyy' }}</span>
+            <span>{{ post.comments_count ?? 0 }} comentarios</span>
+            <span>{{ post.votes_count ?? 0 }} votos</span>
+          </div>
           <!-- tags -->
           <div class="card-tags">
             <span class="post-tag" *ngFor="let tag of toArray(post.tags)">
@@ -167,7 +172,7 @@
             title="Editar"
             (click)="openPostModal(true, post)"
           >
-            ✏️
+            Editar
           </button>
           <!-- TODO: Que solo pueda ser eliminado por el autor o el admin -->
           <button
@@ -175,23 +180,24 @@
             title="Eliminar"
             (click)="deletePost(post.id)"
           >
-            🗑️
+            Eliminar
           </button>
           <a
             class="action-btn primary read-btn"
             title="Leer"
             [routerLink]="['/profile', user?.username, 'post', post.id]"
+            [queryParams]="{ from: 'profile' }"
           >
-            📖
+            Leer post
           </a>
           <button
             class="like-btn"
             [class.voted]="post.user_vote === 1"
             title="Upvote"
-            (click)="votePost(post.id, post.user_vote === 1 ? 0 : 1)"
+            (click)="votePost(post.id)"
           >
-            <span>👍</span>
-            <span class="vote-count">{{ post.votes_count ?? 0 }}</span>
+            <span>👍 {{ post.user_vote === 1 ? 'Quitar voto' : 'Votar' }}</span>
+            <span class="vote-count">{{ post.votes_count ?? 0 }} votos</span>
           </button>
         </div>
       </div>

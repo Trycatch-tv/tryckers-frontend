@@ -42,19 +42,22 @@
         title="Upvote"
         (click)="votePost(post.id)"
       >
-        <span>👍</span>
-        <span class="vote-count">{{ post?.votes_count ?? 0 }}</span>
+        <span>👍 {{ post?.user_vote === 1 ? 'Quitar voto' : 'Votar' }}</span>
+        <span class="vote-count">{{ post?.votes_count ?? 0 }} votos</span>
       </button>
+      <a
+        [routerLink]="[
+          '/profile',
+          username || post?.author?.username || post?.user?.username || ''
+        ]"
+        class="post-action-link"
+      >
+        Ver perfil autor
+      </a>
+      <a [routerLink]="backCommands" class="post-action-link secondary">
+        {{ backLabel }}
+      </a>
     </div>
-    <a
-      [routerLink]="[
-        '/profile',
-        username || post?.author?.username || post?.user?.username || ''
-      ]"
-      class="back-link"
-    >
-      ← Volver al perfil
-    </a>
   </footer>
 </div>
 
