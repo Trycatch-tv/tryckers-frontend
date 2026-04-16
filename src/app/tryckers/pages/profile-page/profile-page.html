@@ -222,7 +222,7 @@
         </p>
         }
       </div>
-      } @else { @for (post of userPosts; track post.id) {
+      } @else { @for (post of paginatedPosts; track post.id) {
       <article
         class="content-card"
         [attr.aria-label]="'Publicación: ' + (post.title || 'sin título')"
@@ -293,7 +293,40 @@
           </button>
         </div>
       </article>
-      } }
+      } } @if (userPosts.length > pageSize) {
+      <div
+        class="pagination-bar"
+        style="
+          display: flex;
+          align-items: center;
+          justify-content: space-between;
+          gap: 12px;
+          flex-wrap: wrap;
+          margin-top: 8px;
+        "
+      >
+        <button
+          type="button"
+          class="ui-btn"
+          (click)="previousPage()"
+          [disabled]="currentPage === 1"
+        >
+          Anterior
+        </button>
+        <span class="ui-meta"
+          >{{ visiblePostRangeLabel }} | Página {{ currentPage }} de {{
+          totalPages }}</span
+        >
+        <button
+          type="button"
+          class="ui-btn ui-btn-primary"
+          (click)="nextPage()"
+          [disabled]="currentPage === totalPages"
+        >
+          Siguiente
+        </button>
+      </div>
+      }
     </div>
   </div>
 

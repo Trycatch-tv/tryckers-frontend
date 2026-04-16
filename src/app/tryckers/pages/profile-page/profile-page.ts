@@ -1,7 +1,7 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@auth/store/auth-store';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
@@ -53,6 +53,7 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
 })
 export default class ProfilePage implements OnInit {
   private authStore = inject(AuthStore);
+  private router = inject(Router);
   tryckersService = inject(TryckersService);
   postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
@@ -61,6 +62,8 @@ export default class ProfilePage implements OnInit {
   username: string = '';
   user: TryckerWithParsedInterests | null = null;
   userPosts: Post[] = [];
+  currentPage = 1;
+  readonly pageSize = 3;
   loadingProfile = true;
   loadingPosts = false;
   errorMessage: string | null = null;
@@ -95,6 +98,9 @@ export default class ProfilePage implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.username = this.route.snapshot.paramMap.get('username')!;
+    this.currentPage = this.parsePage(
+      this.route.snapshot.queryParamMap.get('page'),
+    );
   }
 
   get isOwnProfile(): boolean {
@@ -110,6 +116,15 @@ export default class ProfilePage implements OnInit {
       !!viewedUsername &&
       currentUsername === viewedUsername
     );
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.userPosts.length / this.pageSize));
+  }
+
+  get paginatedPosts(): Post[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.userPosts.slice(startIndex, startIndex + this.pageSize);
   }
 
   async getProfileData() {
@@ -134,6 +149,7 @@ export default class ProfilePage implements OnInit {
         interests: userData.interests ? userData.interests.split(',') : [],
       };
       await this.getUserPosts(this.user.id);
+      this.ensureValidPage();
       this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
         success: true,
       });
@@ -155,6 +171,7 @@ export default class ProfilePage implements OnInit {
       this.loadingPosts = true;
       const posts = await this.postsService.getPostsByUserId(userId);
       this.userPosts = posts;
+      this.ensureValidPage();
     } catch (error) {
       console.error('Error loading user posts:', error);
       this.userPosts = [];
@@ -203,6 +220,24 @@ export default class ProfilePage implements OnInit {
     if (this.isEditing && this.newPost.id) {
       void this.getPostByID(this.newPost.id);
     }
+  }
+
+  previousPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  nextPage(): void {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  goToPage(page: number): void {
+    const nextPage = this.clampPage(page);
+    if (nextPage === this.currentPage) {
+      return;
+    }
+
+    this.currentPage = nextPage;
+    void this.syncPageQueryParam(nextPage);
   }
 
   // Modal methods
@@ -470,7 +505,49 @@ export default class ProfilePage implements OnInit {
     return content.length > 200 ? content.substring(0, 200) + '...' : content;
   }
 
+  get visiblePostRangeLabel(): string {
+    if (this.userPosts.length === 0) {
+      return '0 publicaciones';
+    }
+
+    const start = (this.currentPage - 1) * this.pageSize + 1;
+    const end = Math.min(
+      this.currentPage * this.pageSize,
+      this.userPosts.length,
+    );
+    return `Mostrando ${start}-${end} de ${this.userPosts.length}`;
+  }
+
   private normalizeUsername(value: string | null | undefined): string {
     return (value ?? '').trim().toLowerCase();
+  }
+
+  private parsePage(rawPage: string | null): number {
+    const parsedPage = Number(rawPage);
+    if (!Number.isInteger(parsedPage) || parsedPage < 1) {
+      return 1;
+    }
+
+    return parsedPage;
+  }
+
+  private clampPage(page: number): number {
+    return Math.min(Math.max(1, page), this.totalPages);
+  }
+
+  private ensureValidPage(): void {
+    const validPage = this.clampPage(this.currentPage);
+    if (validPage !== this.currentPage) {
+      this.currentPage = validPage;
+      void this.syncPageQueryParam(validPage);
+    }
+  }
+
+  private async syncPageQueryParam(page: number): Promise<void> {
+    await this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    });
   }
 }
