@@ -1,41 +1,71 @@
 @if (authStore.isLoggedIn()) {
-  <app-dashboard-page />
+  @defer (on viewport) {
+    <app-dashboard-page />
+  } @placeholder {
+    <div class="p-6">
+      <div
+        class="skeleton"
+        style="height: 48px; width: 280px; margin-bottom: 20px"
+      ></div>
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+        @for (item of [1, 2, 3, 4, 5, 6]; track item) {
+          <div class="border border-gray-200 rounded-lg p-5 bg-white">
+            <div
+              class="skeleton"
+              style="
+                height: 72px;
+                width: 72px;
+                border-radius: 999px;
+                margin: 0 auto 12px;
+              "
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 16px; width: 60%; margin: 0 auto 8px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 12px; width: 75%; margin: 0 auto 6px"
+            ></div>
+            <div
+              class="skeleton"
+              style="height: 12px; width: 50%; margin: 0 auto"
+            ></div>
+          </div>
+        }
+      </div>
+    </div>
+  }
 } @else {
-  <div
-    class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-8"
-  >
-    <div class="max-w-2xl mx-auto text-center">
-      <h1
-        class="text-5xl font-bold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
-      >
-        Bienvenido a Tryckers
-      </h1>
-      <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+  <div class="landing-shell">
+    <div class="landing-hero">
+      <h1 class="landing-title">Bienvenido a Tryckers</h1>
+      <p class="landing-copy">
         La plataforma para desarrolladores. Inicia sesión para acceder a la
         comunidad y conectar con otros profesionales.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="landing-actions">
         <a
           routerLink="/auth/login"
-          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+          class="landing-button landing-button-primary"
         >
           Iniciar Sesión
         </a>
         <a
           routerLink="/auth/register"
-          class="bg-white hover:bg-gray-50 text-blue-600 font-semibold py-3 px-8 rounded-lg border-2 border-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+          class="landing-button landing-button-secondary"
         >
           Registrarse
         </a>
       </div>
-
-      <!-- Temporary link to test profile page -->
-      <div class="mt-6 text-center">
+      <div class="landing-note">
+        <p>¿Quieres ver la cartelera semanal? Requiere inicio de sesión.</p>
         <a
-          routerLink="/profile/testuser"
-          class="text-blue-600 hover:text-blue-800 underline text-sm"
+          [routerLink]="['/auth/login']"
+          [queryParams]="{ returnUrl: '/cartelera' }"
+          class="landing-link"
         >
-          Ver Perfil de Ejemplo (Probar Modal)
+          Iniciar sesión para ir a Cartelera
         </a>
       </div>
     </div>

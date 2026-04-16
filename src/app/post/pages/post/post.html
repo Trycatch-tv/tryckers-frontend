@@ -11,7 +11,9 @@
     </div>
     <h1 class="post-title">{{ post?.title }}</h1>
     <div class="post-submeta">
-      <span class="post-author">Por {{ post?.user?.name || 'Autor' }}</span>
+      <span class="post-author"
+        >Por {{ post?.author?.username || post?.user?.name || 'Autor' }}</span
+      >
       <span class="post-date" *ngIf="post?.created_at"
         >{{ post.created_at | date:'mediumDate' }}</span
       >
@@ -24,7 +26,13 @@
   </header>
 
   <figure class="post-hero" *ngIf="post?.image">
-    <img [src]="post.image" [alt]="post?.title || 'Imagen de la publicación'" />
+    <img
+      [src]="post.image"
+      [alt]="'Imagen de portada de ' + (post?.title || 'la publicación')"
+      width="1280"
+      height="720"
+      decoding="async"
+    />
   </figure>
 
   <article class="post-content">
@@ -39,21 +47,47 @@
         [class.voted]="post?.user_vote === 1"
         title="Upvote"
         (click)="votePost(post.id)"
+        [attr.aria-label]="(post?.user_vote === 1 ? 'Quitar voto de ' : 'Votar ') + post?.title"
       >
-        <span>👍</span>
-        <span class="vote-count">{{ post?.votes_count ?? 0 }}</span>
+        <span>👍 {{ post?.user_vote === 1 ? 'Quitar voto' : 'Votar' }}</span>
+        <span class="vote-count">{{ post?.votes_count ?? 0 }} votos</span>
       </button>
+      <a
+        [routerLink]="[
+          '/profile',
+          username || post?.author?.username || post?.user?.username || ''
+        ]"
+        class="post-action-link"
+        [attr.aria-label]="'Ir al perfil del autor de ' + post?.title"
+      >
+        Ver perfil autor
+      </a>
+      <a
+        [routerLink]="backCommands"
+        class="post-action-link secondary"
+        [attr.aria-label]="backLabel"
+      >
+        {{ backLabel }}
+      </a>
     </div>
-    <a
-      [routerLink]="['/profile', username || post?.user?.username || '']"
-      class="back-link"
-    >
-      ← Volver al perfil
-    </a>
   </footer>
 </div>
 
 <ng-template #stateBlock>
-  <div class="state" *ngIf="loading">Cargando publicación...</div>
-  <div class="state error" *ngIf="!loading && error">{{ error }}</div>
+  <div
+    class="post-page post-skeleton"
+    *ngIf="loading"
+    role="status"
+    aria-live="polite"
+  >
+    <div class="skeleton skeleton-meta"></div>
+    <div class="skeleton skeleton-heading"></div>
+    <div class="skeleton skeleton-submeta"></div>
+    <div class="skeleton skeleton-hero"></div>
+    <div class="skeleton skeleton-paragraph"></div>
+    <div class="skeleton skeleton-paragraph short"></div>
+  </div>
+  <div class="state error" *ngIf="!loading && error" role="alert">
+    {{ error }}
+  </div>
 </ng-template>

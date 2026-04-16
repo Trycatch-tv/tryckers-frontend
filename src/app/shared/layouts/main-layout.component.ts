@@ -40,8 +40,9 @@ import { HeaderComponent } from '../components/header/header.component';
         position: sticky;
         top: 0;
         z-index: 1000;
-        background: white;
-        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+        background: var(--ui-surface);
+        box-shadow: 0 2px 4px
+          color-mix(in srgb, var(--ui-text) 12%, transparent);
         width: 100%;
       }
 
@@ -51,7 +52,12 @@ import { HeaderComponent } from '../components/header/header.component';
         margin: 0;
         width: 100%;
         overflow-x: hidden;
-        background: #f8f9fa;
+        background: var(--ui-bg-muted);
+      }
+
+      :host-context(.dark-theme) .header-section {
+        background: var(--ui-surface-muted);
+        box-shadow: 0 2px 4px color-mix(in srgb, #000 45%, transparent);
       }
 
       .footer-section {
