@@ -1,6 +1,28 @@
 .page-header {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--ui-border);
   margin-bottom: 1rem;
+}
+
+.header-card {
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  box-shadow: var(--ui-shadow-sm);
+  padding: 1.25rem 1.4rem;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.95rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--ui-text);
+}
+
+.page-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--ui-text-muted);
+  font-size: 1.2rem;
 }
 
 .cartelera-grid {
@@ -195,6 +217,14 @@
 }
 
 @media (max-width: 768px) {
+  .page-title {
+    font-size: 1.55rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
   .ranking-card {
     grid-template-columns: 1fr;
   }
@@ -216,4 +246,21 @@
   .votes-panel {
     justify-self: start;
   }
+}
+
+.dark-theme .page-header {
+  border-bottom-color: var(--ui-border-strong);
+}
+
+.dark-theme .page-title {
+  color: #f8fafc;
+}
+
+.dark-theme .page-subtitle {
+  color: #cbd5e1;
+}
+
+.dark-theme .header-card {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
 }

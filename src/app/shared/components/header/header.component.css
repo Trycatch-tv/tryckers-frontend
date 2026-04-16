@@ -259,15 +259,15 @@
       /* Dark Theme Styles */
       :host-context(.dark-theme) .header,
       .dark-theme .header {
-        background: #222222;
-        border-bottom-color: #333;
+        background: var(--ui-surface-muted);
+        border-bottom-color: var(--ui-border);
       }
 
       :host-context(.dark-theme) .mobile-menu-toggle,
       .dark-theme .mobile-menu-toggle {
-        background: #2f2f2f;
-        border-color: #555;
-        color: #f8fafc;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .logo-link,
@@ -292,44 +292,44 @@
 
       :host-context(.dark-theme) .theme-toggle,
       .dark-theme .theme-toggle {
-        background: #333;
-        border-color: #555;
-        color: #fff;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .theme-toggle:hover,
       .dark-theme .theme-toggle:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .btn-outline,
       .dark-theme .btn-outline {
-        background: #333;
-        color: #fff;
-        border-color: #555;
+        background: var(--ui-surface);
+        color: var(--ui-text);
+        border-color: var(--ui-border);
       }
 
       :host-context(.dark-theme) .btn-outline:hover,
       .dark-theme .btn-outline:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .user-button,
       .dark-theme .user-button {
-        background: #333;
-        border-color: #555;
-        color: #fff;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .user-button:hover,
       .dark-theme .user-button:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .dropdown-menu,
       .dark-theme .dropdown-menu {
-        background: #333;
-        border-color: #555;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
       }
 
       :host-context(.dark-theme) .dropdown-item,
@@ -339,16 +339,16 @@
 
       :host-context(.dark-theme) .dropdown-item:hover,
       .dark-theme .dropdown-item:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .dropdown-item-active,
       .dark-theme .dropdown-item-active {
-        background: #444;
-        color: #fff;
+        background: var(--ui-bg-muted);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .avatar,
       .dark-theme .avatar {
-        background: #666;
+        background: var(--ui-border-strong);
       }

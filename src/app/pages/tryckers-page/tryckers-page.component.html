@@ -37,41 +37,33 @@
     </div>
   }
 } @else {
-  <div
-    class="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-100 flex items-center justify-center p-8"
-  >
-    <div class="max-w-2xl mx-auto text-center">
-      <h1
-        class="text-5xl font-bold text-gray-900 mb-6 bg-clip-text text-transparent bg-gradient-to-r from-blue-600 to-purple-600"
-      >
-        Bienvenido a Tryckers
-      </h1>
-      <p class="text-xl text-gray-600 mb-8 leading-relaxed">
+  <div class="landing-shell">
+    <div class="landing-hero">
+      <h1 class="landing-title">Bienvenido a Tryckers</h1>
+      <p class="landing-copy">
         La plataforma para desarrolladores. Inicia sesión para acceder a la
         comunidad y conectar con otros profesionales.
       </p>
-      <div class="flex flex-col sm:flex-row gap-4 justify-center">
+      <div class="landing-actions">
         <a
           routerLink="/auth/login"
-          class="bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-8 rounded-lg transition-colors duration-200 shadow-lg hover:shadow-xl"
+          class="landing-button landing-button-primary"
         >
           Iniciar Sesión
         </a>
         <a
           routerLink="/auth/register"
-          class="bg-white hover:bg-gray-50 text-blue-600 font-semibold py-3 px-8 rounded-lg border-2 border-blue-600 transition-colors duration-200 shadow-lg hover:shadow-xl"
+          class="landing-button landing-button-secondary"
         >
           Registrarse
         </a>
       </div>
-      <div class="mt-6">
-        <p class="text-sm text-gray-500 mb-2">
-          ¿Quieres ver la cartelera semanal? Requiere inicio de sesión.
-        </p>
+      <div class="landing-note">
+        <p>¿Quieres ver la cartelera semanal? Requiere inicio de sesión.</p>
         <a
           [routerLink]="['/auth/login']"
           [queryParams]="{ returnUrl: '/cartelera' }"
-          class="text-blue-700 hover:text-blue-900 underline font-medium"
+          class="landing-link"
         >
           Iniciar sesión para ir a Cartelera
         </a>

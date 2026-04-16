@@ -33,8 +33,8 @@
 }
 
 .page-header {
-  background: white;
-  border-bottom: 1px solid #e0e0e0;
+  background: var(--ui-surface);
+  border-bottom: 1px solid var(--ui-border);
   padding: 32px 0;
 }
 
@@ -47,13 +47,13 @@
 .page-header h1 {
   font-size: 48px;
   font-weight: bold;
-  color: #333;
+  color: var(--ui-text);
   margin: 0 0 8px 0;
 }
 
 .page-header p {
   font-size: 18px;
-  color: #666;
+  color: var(--ui-text-muted);
   margin: 0;
 }
 
@@ -89,7 +89,7 @@
   width: 80px;
   height: 80px;
   margin: 0 auto 16px;
-  border: 2px solid #ccc;
+  border: 2px solid var(--ui-border-strong);
   border-radius: 50%;
   display: flex;
   align-items: center;
@@ -100,10 +100,10 @@
 .avatar-pattern {
   width: 100%;
   height: 100%;
-  background: linear-gradient(45deg, #f0f0f0 25%, transparent 25%), 
-              linear-gradient(-45deg, #f0f0f0 25%, transparent 25%), 
-              linear-gradient(45deg, transparent 75%, #f0f0f0 75%), 
-              linear-gradient(-45deg, transparent 75%, #f0f0f0 75%);
+  background: linear-gradient(45deg, color-mix(in srgb, var(--ui-border) 70%, transparent) 25%, transparent 25%), 
+              linear-gradient(-45deg, color-mix(in srgb, var(--ui-border) 70%, transparent) 25%, transparent 25%), 
+              linear-gradient(45deg, transparent 75%, color-mix(in srgb, var(--ui-border) 70%, transparent) 75%), 
+              linear-gradient(-45deg, transparent 75%, color-mix(in srgb, var(--ui-border) 70%, transparent) 75%);
   background-size: 8px 8px;
   background-position: 0 0, 0 4px, 4px -4px, -4px 0px;
 }
@@ -111,18 +111,18 @@
 .user-info h3 {
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: var(--ui-text);
   margin: 0 0 8px 0;
 }
 
 .email {
-  color: #666;
+  color: var(--ui-text-muted);
   font-size: 14px;
   margin: 0 0 4px 0;
 }
 
 .country {
-  color: #999;
+  color: var(--ui-text-muted);
   font-size: 12px;
   margin: 0;
 }
@@ -170,12 +170,12 @@
 .empty-state h3 {
   font-size: 20px;
   font-weight: bold;
-  color: #333;
+  color: var(--ui-text);
   margin: 0 0 8px 0;
 }
 
 .empty-state p {
-  color: #666;
+  color: var(--ui-text-muted);
   margin: 0;
 }
 
