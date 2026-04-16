@@ -1,9 +1,20 @@
 <!-- Loading state -->
 @if (loading) {
 <div class="loading-container">
-  <div class="loading-content">
-    <div class="spinner"></div>
-    <p>Cargando tryckers...</p>
+  <div class="dashboard-skeleton-grid" aria-hidden="true">
+    @for (item of [1,2,3,4,5,6]; track item) {
+    <div class="user-card">
+      <div class="avatar skeleton"></div>
+      <div class="user-info">
+        <div class="skeleton skeleton-line md"></div>
+        <div class="skeleton skeleton-line"></div>
+        <div class="skeleton skeleton-line sm"></div>
+      </div>
+      <div class="card-actions">
+        <div class="skeleton skeleton-button"></div>
+      </div>
+    </div>
+    }
   </div>
 </div>
 } @else {

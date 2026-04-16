@@ -4,20 +4,38 @@
     <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a routerLink="/home" class="logo-link"> 👥Tryckers </a>
+        <a routerLink="/home" class="logo-link">Tryckers</a>
       </div>
+
+      <button
+        type="button"
+        class="mobile-menu-toggle"
+        (click)="toggleMobileMenu()"
+        [attr.aria-expanded]="mobileMenuOpen()"
+        aria-controls="main-nav"
+        aria-label="Abrir o cerrar menu de navegacion"
+      >
+        {{ mobileMenuOpen() ? "✕" : "☰" }}
+      </button>
 
       @if (authStore.isLoggedIn()) {
         <!-- Navigation -->
-        <nav class="nav">
-          <a routerLink="/cartelera" class="nav-link">Cartelera</a>
+        <nav id="main-nav" class="nav" [class.nav-open]="mobileMenuOpen()">
+          <a
+            routerLink="/cartelera"
+            class="nav-link"
+            routerLinkActive="nav-link-active"
+            (click)="closeMobileMenu()"
+            >Cartelera</a
+          >
         </nav>
       }
 
       <!-- Right side -->
-      <div class="header-actions">
+      <div class="header-actions" [class.actions-open]="mobileMenuOpen()">
         <!-- Theme toggle button -->
         <button
+          type="button"
           (click)="toggleTheme()"
           class="theme-toggle"
           [attr.aria-label]="
@@ -38,6 +56,8 @@
             type="button"
             routerLink="/auth/login"
             class="btn btn-outline"
+            (click)="closeMobileMenu()"
+            aria-label="Ir a iniciar sesion"
           >
             LOGIN
           </button>
@@ -45,15 +65,25 @@
             type="button"
             routerLink="/auth/register"
             class="btn btn-primary"
+            (click)="closeMobileMenu()"
+            aria-label="Ir a registro"
           >
-            SIGN UP
+            REGISTRO
           </button>
         </ng-container>
 
         <!-- User menu -->
         <ng-container *ngIf="authStore.isLoggedIn()">
           <div class="user-menu">
-            <button (click)="toggleDropdown()" class="user-button">
+            <button
+              type="button"
+              (click)="toggleDropdown()"
+              class="user-button"
+              [attr.aria-expanded]="dropdownOpen()"
+              aria-haspopup="menu"
+              aria-controls="user-dropdown"
+              aria-label="Abrir menu de usuario"
+            >
               <div class="avatar"></div>
               <span class="username">
                 {{ authStore.user()?.name || "Usuario" }}
@@ -65,26 +95,39 @@
 
             <!-- Dropdown menu -->
             @if (dropdownOpen()) {
-              <div class="dropdown-menu">
+              <div
+                id="user-dropdown"
+                class="dropdown-menu"
+                role="menu"
+                aria-label="Menu de usuario"
+              >
                 <a
-                  routerLink="/profile"
+                  [routerLink]="profileLink"
                   class="dropdown-item"
-                  (click)="closeDropdown()"
+                  routerLinkActive="dropdown-item-active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="closeDropdown(); closeMobileMenu()"
+                  role="menuitem"
                 >
-                  Profile
+                  Perfil
                 </a>
                 <a
                   routerLink="/settings"
                   class="dropdown-item"
-                  (click)="closeDropdown()"
+                  routerLinkActive="dropdown-item-active"
+                  [routerLinkActiveOptions]="{ exact: true }"
+                  (click)="closeDropdown(); closeMobileMenu()"
+                  role="menuitem"
                 >
-                  Settings
+                  Configuración
                 </a>
                 <button
-                  (click)="logout(); closeDropdown()"
+                  (click)="logout(); closeDropdown(); closeMobileMenu()"
                   class="dropdown-item dropdown-button"
+                  role="menuitem"
+                  aria-label="Cerrar sesion"
                 >
-                  Logout
+                  Cerrar sesión
                 </button>
               </div>
             }

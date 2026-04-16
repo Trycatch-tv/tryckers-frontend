@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { ActivatedRoute, RouterLink } from '@angular/router';
 import { NotificationService } from '@shared/services/notification.service';
+import { UxMetricsService } from '@shared/services/ux-metrics.service';
 import { Post as PostInterface } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
 
@@ -16,15 +17,30 @@ export class Post implements OnInit {
   private route = inject(ActivatedRoute);
   private postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   loading = true;
   error: string | null = null;
   post: PostInterface | null = null;
   username: string | null = null;
+  backLabel = 'Volver al perfil';
+  backCommands: string[] = ['/home'];
 
   ngOnInit(): void {
     this.username = this.route.snapshot.paramMap.get('username');
     const postId = this.route.snapshot.paramMap.get('id');
+    const from = this.route.snapshot.queryParamMap.get('from');
+
+    if (from === 'cartelera') {
+      this.backLabel = 'Volver a cartelera';
+      this.backCommands = ['/cartelera'];
+    } else if (this.username) {
+      this.backLabel = 'Volver al perfil';
+      this.backCommands = ['/profile', this.username];
+    } else {
+      this.backLabel = 'Volver al inicio';
+      this.backCommands = ['/home'];
+    }
 
     if (!postId) {
       this.error = 'No se encontró el identificador de la publicación.';
@@ -37,13 +53,27 @@ export class Post implements OnInit {
 
   async loadPost(postId: string): Promise<void> {
     try {
+      this.uxMetrics.startTiming('post-load');
       this.loading = true;
+      this.error = null;
       this.post = await this.postsService.getPostById(postId);
       if (!this.post) {
         this.error = 'No se encontró la publicación.';
+        this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+          success: false,
+          reason: 'not_found',
+        });
+      } else {
+        this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+          success: true,
+        });
       }
     } catch (err) {
       this.error = 'Error al cargar la publicación.';
+      this.uxMetrics.endTiming('post-load', 'perceived_post_load', {
+        success: false,
+        reason: 'error',
+      });
     } finally {
       this.loading = false;
     }
@@ -67,9 +97,7 @@ export class Post implements OnInit {
       const currentVote = this.post.user_vote;
       const currentVotesCount = this.post.votes_count ?? 0;
       const newVoteType = currentVote === 1 ? 0 : 1;
-      console.log('Enviando voto:', { postId, currentVote, newVoteType });
       const result = await this.postsService.votePost(postId, newVoteType);
-      console.log('Respuesta del backend:', result);
       if (result) {
         // Si el backend devuelve user_vote lo usamos, sino usamos el valor calculado
         const updatedUserVote =
@@ -92,7 +120,9 @@ export class Post implements OnInit {
           user_vote: updatedUserVote,
           votes_count: updatedVotesCount,
         };
-        console.log('Post actualizado:', this.post);
+        this.notificationService.success(
+          newVoteType === 1 ? 'Voto registrado.' : 'Voto removido.',
+        );
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);

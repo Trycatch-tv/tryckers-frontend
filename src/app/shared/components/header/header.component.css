@@ -1,6 +1,6 @@
 .header {
-        background: white;
-        border-bottom: 1px solid #e0e0e0;
+  background: var(--ui-bg);
+  border-bottom: 1px solid var(--ui-border);
         position: sticky;
         top: 0;
         z-index: 100;
@@ -30,19 +30,36 @@
         opacity: 0.8;
       }
 
+      .mobile-menu-toggle {
+        display: none;
+        border: 1px solid #d1d5db;
+        background: #fff;
+        color: #111827;
+        border-radius: 8px;
+        min-width: 40px;
+        min-height: 40px;
+        font-size: 18px;
+        cursor: pointer;
+      }
+
       .nav {
         display: flex;
         gap: 32px;
       }
 
       .nav-link {
-        color: #666;
+        color: var(--ui-text-muted);
         text-decoration: none;
         font-weight: 500;
       }
 
       .nav-link:hover {
-        color: #333;
+        color: var(--ui-text);
+      }
+
+      .nav-link-active {
+        color: var(--ui-text);
+        font-weight: 700;
       }
 
       .header-actions {
@@ -60,9 +77,9 @@
 
       .theme-toggle {
         padding: 8px 12px;
-        border: 1px solid #ccc;
-        background: white;
-        border-radius: 4px;
+        border: 1px solid var(--ui-border-strong);
+        background: var(--ui-bg);
+        border-radius: var(--ui-radius-sm);
         cursor: pointer;
         transition: all 0.3s ease;
         display: flex;
@@ -89,7 +106,7 @@
       .btn {
         padding: 8px 16px;
         border: none;
-        border-radius: 4px;
+        border-radius: var(--ui-radius-sm);
         font-weight: 500;
         cursor: pointer;
         text-decoration: none;
@@ -97,9 +114,9 @@
       }
 
       .btn-outline {
-        background: white;
-        color: #333;
-        border: 1px solid #ccc;
+        background: var(--ui-bg);
+        color: var(--ui-text);
+        border: 1px solid var(--ui-border-strong);
       }
 
       .btn-outline:hover {
@@ -107,12 +124,12 @@
       }
 
       .btn-primary {
-        background: #007bff;
+        background: var(--ui-primary);
         color: white;
       }
 
       .btn-primary:hover {
-        background: #0056b3;
+        background: var(--ui-primary-hover);
       }
 
       .user-menu {
@@ -124,9 +141,9 @@
         align-items: center;
         gap: 8px;
         padding: 8px 12px;
-        border: 1px solid #ccc;
-        background: white;
-        border-radius: 4px;
+        border: 1px solid var(--ui-border-strong);
+        background: var(--ui-bg);
+        border-radius: var(--ui-radius-sm);
         cursor: pointer;
       }
 
@@ -142,9 +159,9 @@
         right: 0;
         top: 100%;
         margin-top: 4px;
-        background: white;
-        border: 1px solid #ccc;
-        border-radius: 4px;
+        background: var(--ui-bg);
+        border: 1px solid var(--ui-border-strong);
+        border-radius: var(--ui-radius-sm);
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
         min-width: 160px;
       }
@@ -157,7 +174,12 @@
       }
 
       .dropdown-item:hover {
-        background: #f5f5f5;
+        background: var(--ui-bg-muted);
+      }
+
+      .dropdown-item-active {
+        background: var(--ui-bg-muted);
+        font-weight: 700;
       }
 
       .dropdown-button {
@@ -168,9 +190,61 @@
         cursor: pointer;
       }
 
+      .logo-link:focus-visible,
+      .nav-link:focus-visible,
+      .theme-toggle:focus-visible,
+      .btn:focus-visible,
+      .user-button:focus-visible,
+      .dropdown-item:focus-visible,
+      .mobile-menu-toggle:focus-visible {
+        outline: 3px solid #2563eb;
+        outline-offset: 2px;
+      }
+
       @media (max-width: 768px) {
+        .mobile-menu-toggle {
+          display: inline-flex;
+          align-items: center;
+          justify-content: center;
+          order: 2;
+        }
+
+        .header-content {
+          height: auto;
+          min-height: 60px;
+          flex-wrap: wrap;
+          row-gap: 10px;
+          padding: 10px 0;
+        }
+
         .nav {
           display: none;
+          width: 100%;
+          order: 4;
+          flex-direction: column;
+          gap: 8px;
+        }
+
+        .nav.nav-open {
+          display: flex;
+        }
+
+        .header-actions {
+          display: none;
+          width: 100%;
+          order: 5;
+          flex-wrap: wrap;
+          justify-content: flex-start;
+          gap: 10px;
+        }
+
+        .header-actions.actions-open {
+          display: flex;
+        }
+
+        .btn {
+          flex: 1 1 auto;
+          min-height: 40px;
         }
 
         .search-container {
@@ -185,8 +259,15 @@
       /* Dark Theme Styles */
       :host-context(.dark-theme) .header,
       .dark-theme .header {
-        background: #575656;
-        border-bottom-color: #333;
+        background: var(--ui-surface-muted);
+        border-bottom-color: var(--ui-border);
+      }
+
+      :host-context(.dark-theme) .mobile-menu-toggle,
+      .dark-theme .mobile-menu-toggle {
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .logo-link,
@@ -204,46 +285,51 @@
         color: #fff;
       }
 
+      :host-context(.dark-theme) .nav-link-active,
+      .dark-theme .nav-link-active {
+        color: #fff;
+      }
+
       :host-context(.dark-theme) .theme-toggle,
       .dark-theme .theme-toggle {
-        background: #333;
-        border-color: #555;
-        color: #fff;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .theme-toggle:hover,
       .dark-theme .theme-toggle:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .btn-outline,
       .dark-theme .btn-outline {
-        background: #333;
-        color: #fff;
-        border-color: #555;
+        background: var(--ui-surface);
+        color: var(--ui-text);
+        border-color: var(--ui-border);
       }
 
       :host-context(.dark-theme) .btn-outline:hover,
       .dark-theme .btn-outline:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .user-button,
       .dark-theme .user-button {
-        background: #333;
-        border-color: #555;
-        color: #fff;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .user-button:hover,
       .dark-theme .user-button:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
       }
 
       :host-context(.dark-theme) .dropdown-menu,
       .dark-theme .dropdown-menu {
-        background: #333;
-        border-color: #555;
+        background: var(--ui-surface);
+        border-color: var(--ui-border);
       }
 
       :host-context(.dark-theme) .dropdown-item,
@@ -253,10 +339,16 @@
 
       :host-context(.dark-theme) .dropdown-item:hover,
       .dark-theme .dropdown-item:hover {
-        background: #444;
+        background: var(--ui-bg-muted);
+      }
+
+      :host-context(.dark-theme) .dropdown-item-active,
+      .dark-theme .dropdown-item-active {
+        background: var(--ui-bg-muted);
+        color: var(--ui-text);
       }
 
       :host-context(.dark-theme) .avatar,
       .dark-theme .avatar {
-        background: #666;
+        background: var(--ui-border-strong);
       }

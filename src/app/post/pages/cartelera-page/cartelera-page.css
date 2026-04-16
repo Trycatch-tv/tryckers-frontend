@@ -1,4 +1,266 @@
 .page-header {
-  border-bottom: 1px solid #e5e7eb;
+  border-bottom: 1px solid var(--ui-border);
   margin-bottom: 1rem;
+}
+
+.header-card {
+  background: var(--ui-surface);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  box-shadow: var(--ui-shadow-sm);
+  padding: 1.25rem 1.4rem;
+}
+
+.page-title {
+  margin: 0;
+  font-size: 1.95rem;
+  line-height: 1.2;
+  font-weight: 800;
+  color: var(--ui-text);
+}
+
+.page-subtitle {
+  margin: 0.5rem 0 0;
+  color: var(--ui-text-muted);
+  font-size: 1.2rem;
+}
+
+.cartelera-grid {
+  display: grid;
+  gap: 14px;
+}
+
+.ranking-card {
+  display: grid;
+  grid-template-columns: 56px 1fr auto;
+  gap: 16px;
+  align-items: flex-start;
+  background: var(--ui-bg);
+  border: 1px solid var(--ui-border);
+  border-radius: var(--ui-radius-md);
+  padding: 18px;
+  box-shadow: var(--ui-shadow-sm);
+}
+
+.skeleton-card .votes-panel {
+  background: transparent;
+  border-color: transparent;
+}
+
+.skeleton-title {
+  height: 18px;
+  width: 72%;
+  margin-bottom: 12px;
+}
+
+.skeleton-text {
+  height: 12px;
+  width: 100%;
+  margin-bottom: 8px;
+}
+
+.skeleton-text.short {
+  width: 55%;
+  margin-bottom: 14px;
+}
+
+.skeleton-chip {
+  height: 34px;
+  width: 105px;
+  border-radius: 999px;
+}
+
+.skeleton-vote {
+  height: 38px;
+  width: 54px;
+  margin: 0 auto;
+}
+
+.ranking-badge {
+  width: 42px;
+  height: 42px;
+  border-radius: 999px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.ranking-badge.gold {
+  background: #fef3c7;
+  color: #b45309;
+}
+
+.ranking-badge.silver {
+  background: #e5e7eb;
+  color: #4b5563;
+}
+
+.ranking-badge.bronze {
+  background: #ffedd5;
+  color: #c2410c;
+}
+
+.ranking-badge.default {
+  background: #eff6ff;
+  color: #1d4ed8;
+}
+
+.ranking-content {
+  min-width: 0;
+}
+
+.post-title-link {
+  color: #111827;
+  text-decoration: none;
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.post-title-link:hover {
+  color: #1d4ed8;
+}
+
+.post-preview {
+  margin: 8px 0;
+  color: #4b5563;
+  line-height: 1.5;
+}
+
+.post-metadata-row {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+  color: #6b7280;
+  font-size: 13px;
+}
+
+.metadata-link {
+  color: #1d4ed8;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.metadata-link:hover {
+  text-decoration: underline;
+}
+
+.post-actions-row {
+  display: flex;
+  gap: 10px;
+  flex-wrap: wrap;
+  margin-top: 12px;
+}
+
+.action-chip {
+  border: 1px solid var(--ui-border-strong);
+  background: var(--ui-bg);
+  color: var(--ui-text);
+  border-radius: 999px;
+  padding: 7px 13px;
+  font-size: 13px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+  transition: background var(--ui-transition), border-color var(--ui-transition), color var(--ui-transition);
+}
+
+.action-chip:hover {
+  border-color: #9ca3af;
+  background: var(--ui-bg-muted);
+}
+
+.action-chip.primary {
+  background: var(--ui-primary);
+  color: #fff;
+  border-color: var(--ui-primary);
+}
+
+.action-chip.primary:hover {
+  background: var(--ui-primary-hover);
+  border-color: var(--ui-primary-hover);
+}
+
+.post-title-link:focus-visible,
+.metadata-link:focus-visible,
+.action-chip:focus-visible {
+  outline: 3px solid #2563eb;
+  outline-offset: 2px;
+}
+
+.action-chip.vote.voted {
+  background: #ecfdf5;
+  border-color: #10b981;
+  color: #065f46;
+}
+
+.votes-panel {
+  min-width: 74px;
+  text-align: center;
+  border-radius: 10px;
+  padding: 8px 10px;
+  background: #eff6ff;
+  color: #1d4ed8;
+  border: 1px solid #bfdbfe;
+}
+
+.votes-label {
+  display: block;
+  font-size: 11px;
+  text-transform: uppercase;
+}
+
+.votes-value {
+  font-size: 22px;
+  font-weight: 700;
+}
+
+@media (max-width: 768px) {
+  .page-title {
+    font-size: 1.55rem;
+  }
+
+  .page-subtitle {
+    font-size: 1rem;
+  }
+
+  .ranking-card {
+    grid-template-columns: 1fr;
+  }
+
+  .ranking-badge {
+    width: 38px;
+    height: 38px;
+    font-size: 14px;
+  }
+
+  .post-actions-row {
+    gap: 8px;
+  }
+
+  .action-chip {
+    min-height: 38px;
+  }
+
+  .votes-panel {
+    justify-self: start;
+  }
+}
+
+.dark-theme .page-header {
+  border-bottom-color: var(--ui-border-strong);
+}
+
+.dark-theme .page-title {
+  color: #f8fafc;
+}
+
+.dark-theme .page-subtitle {
+  color: #cbd5e1;
+}
+
+.dark-theme .header-card {
+  background: var(--ui-surface);
+  border-color: var(--ui-border);
 }

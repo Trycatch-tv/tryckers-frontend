@@ -1,10 +1,10 @@
 import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { ActivatedRoute, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
+import { AuthStore } from '@auth/store/auth-store';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
-import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import {
@@ -16,6 +16,7 @@ import {
 } from 'src/app/post/interfaces/post';
 import { PostsService } from 'src/app/post/services/posts.service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
+import { UxMetricsService } from 'src/app/shared/services/ux-metrics.service';
 
 import { RouterModule } from '@angular/router';
 
@@ -39,7 +40,6 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
   imports: [
     CommonModule,
     FormsModule,
-    ButtonModule,
     DialogModule,
     InputTextModule,
     RouterModule,
@@ -50,13 +50,21 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
   standalone: true,
 })
 export default class ProfilePage implements OnInit {
+  private authStore = inject(AuthStore);
+  private router = inject(Router);
   tryckersService = inject(TryckersService);
   postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
+  private uxMetrics = inject(UxMetricsService);
 
   username: string = '';
   user: TryckerWithParsedInterests | null = null;
   userPosts: Post[] = [];
+  currentPage = 1;
+  readonly pageSize = 3;
+  loadingProfile = true;
+  loadingPosts = false;
+  errorMessage: string | null = null;
 
   // Modal properties
   showPostModal: boolean = false;
@@ -83,27 +91,94 @@ export default class ProfilePage implements OnInit {
   };
 
   isEditing = false;
+  isSavingPost = false;
+  postSubmitAttempted = false;
 
   constructor(private route: ActivatedRoute) {
     this.username = this.route.snapshot.paramMap.get('username')!;
+    this.currentPage = this.parsePage(
+      this.route.snapshot.queryParamMap.get('page'),
+    );
+  }
+
+  get isOwnProfile(): boolean {
+    const currentUsername = this.normalizeUsername(
+      this.authStore.user()?.username,
+    );
+    const viewedUsername = this.normalizeUsername(
+      this.user?.username ?? this.username,
+    );
+
+    return (
+      !!currentUsername &&
+      !!viewedUsername &&
+      currentUsername === viewedUsername
+    );
+  }
+
+  get totalPages(): number {
+    return Math.max(1, Math.ceil(this.userPosts.length / this.pageSize));
+  }
+
+  get paginatedPosts(): Post[] {
+    const startIndex = (this.currentPage - 1) * this.pageSize;
+    return this.userPosts.slice(startIndex, startIndex + this.pageSize);
   }
 
   async getProfileData() {
-    const userData = await this.tryckersService.getTryckerByUsername(
-      this.username,
-    );
-    if (userData) {
+    try {
+      this.uxMetrics.startTiming('profile-load');
+      this.loadingProfile = true;
+      this.errorMessage = null;
+
+      const userData = await this.tryckersService.getTryckerByUsername(
+        this.username,
+      );
+
+      if (!userData) {
+        this.user = null;
+        this.userPosts = [];
+        this.errorMessage = 'No se encontró el perfil solicitado.';
+        return;
+      }
+
       this.user = {
         ...userData,
         interests: userData.interests ? userData.interests.split(',') : [],
       };
-      this.getUserPosts(this.user.id);
+      await this.getUserPosts(this.user.id);
+      this.ensureValidPage();
+      this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
+        success: true,
+      });
+    } catch (error) {
+      console.error('Error loading profile data:', error);
+      this.user = null;
+      this.userPosts = [];
+      this.errorMessage = 'No se pudo cargar el perfil. Inténtalo nuevamente.';
+      this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
+        success: false,
+      });
+    } finally {
+      this.loadingProfile = false;
     }
   }
 
   async getUserPosts(userId: string) {
-    const posts = await this.postsService.getPostsByUserId(userId);
-    this.userPosts = posts;
+    try {
+      this.loadingPosts = true;
+      const posts = await this.postsService.getPostsByUserId(userId);
+      this.userPosts = posts;
+      this.ensureValidPage();
+    } catch (error) {
+      console.error('Error loading user posts:', error);
+      this.userPosts = [];
+      this.notificationService.error(
+        'No se pudieron cargar las publicaciones del perfil.',
+      );
+    } finally {
+      this.loadingPosts = false;
+    }
   }
 
   async getPostByID(postId: string) {
@@ -113,6 +188,13 @@ export default class ProfilePage implements OnInit {
   }
 
   async deletePost(postId: string) {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes eliminar publicaciones de tu propio perfil.',
+      );
+      return;
+    }
+
     const confirmed = confirm(
       '¿Estás seguro de que deseas eliminar esta publicación? ',
     );
@@ -121,26 +203,53 @@ export default class ProfilePage implements OnInit {
       if (result) {
         this.notificationService.success('Publicación eliminada exitosamente.');
         if (this.user) {
-          this.getUserPosts(this.user.id);
+          await this.getUserPosts(this.user.id);
         }
       } else {
-        this.notificationService.error('Error al eliminar la publicación. Inténtalo de nuevo.');
+        this.notificationService.error(
+          'Error al eliminar la publicación. Inténtalo de nuevo.',
+        );
       }
     }
   }
 
   ngOnInit() {
-    this.getProfileData();
+    void this.getProfileData();
     if (this.isEditing && this.newPost.id) {
-      this.getPostByID(this.newPost.id);
+      void this.getPostByID(this.newPost.id);
     }
+  }
+
+  previousPage(): void {
+    this.goToPage(this.currentPage - 1);
+  }
+
+  nextPage(): void {
+    this.goToPage(this.currentPage + 1);
+  }
+
+  goToPage(page: number): void {
+    const nextPage = this.clampPage(page);
+    if (nextPage === this.currentPage) {
+      return;
+    }
+
+    this.currentPage = nextPage;
+    void this.syncPageQueryParam(nextPage);
   }
 
   // Modal methods
   openPostModal(isEditing: boolean = false, post: Post | null = null) {
-    console.log(post);
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes crear o editar publicaciones en tu propio perfil.',
+      );
+      return;
+    }
+
     this.showPostModal = true;
     this.isEditing = isEditing;
+    this.postSubmitAttempted = false;
     this.info.header =
       '' + (isEditing ? 'Editar' : 'Crear Nueva') + ' Publicación';
     this.info.buttonLabel = isEditing ? 'Guardar Cambios' : 'Crear Publicación';
@@ -152,7 +261,9 @@ export default class ProfilePage implements OnInit {
         content: post.content,
         type: post.type,
         image: post.image ?? '',
-        tags: Array.isArray(post.tags) ? post.tags.join(', ') : post.tags ?? '',
+        tags: Array.isArray(post.tags)
+          ? post.tags.join(', ')
+          : (post.tags ?? ''),
         status: post.status,
         user_id: post.user_id,
       };
@@ -161,6 +272,8 @@ export default class ProfilePage implements OnInit {
 
   closePostModal() {
     this.showPostModal = false;
+    this.postSubmitAttempted = false;
+    this.isSavingPost = false;
     this.resetPostForm();
   }
 
@@ -178,16 +291,83 @@ export default class ProfilePage implements OnInit {
   }
 
   async savePost() {
+    this.postSubmitAttempted = true;
+
+    if (!this.isPostFormValid()) {
+      this.notificationService.warning(this.getPostFormErrorMessage());
+      return;
+    }
+
+    this.isSavingPost = true;
+
     if (this.isEditing) {
       await this.editPost();
     } else {
       await this.createPost();
     }
+
+    this.isSavingPost = false;
+  }
+
+  isPostFieldInvalid(fieldName: 'title' | 'content'): boolean {
+    if (!this.postSubmitAttempted && fieldName === 'title') {
+      return (
+        this.newPost.title.trim().length > 0 &&
+        this.newPost.title.trim().length < 5
+      );
+    }
+
+    if (!this.postSubmitAttempted && fieldName === 'content') {
+      return (
+        this.newPost.content.trim().length > 0 &&
+        this.newPost.content.trim().length < 20
+      );
+    }
+
+    return this.postSubmitAttempted && !!this.getPostFieldError(fieldName);
+  }
+
+  getPostFieldError(fieldName: 'title' | 'content'): string | null {
+    if (fieldName === 'title') {
+      const title = this.newPost.title.trim();
+      if (!title) {
+        return 'El titulo es obligatorio.';
+      }
+      if (title.length < 5) {
+        return 'El titulo debe tener al menos 5 caracteres.';
+      }
+      return null;
+    }
+
+    const content = this.newPost.content.trim();
+    if (!content) {
+      return 'El contenido es obligatorio.';
+    }
+    if (content.length < 20) {
+      return 'El contenido debe tener al menos 20 caracteres para ser claro.';
+    }
+    return null;
+  }
+
+  private isPostFormValid(): boolean {
+    return (
+      !this.getPostFieldError('title') && !this.getPostFieldError('content')
+    );
+  }
+
+  private getPostFormErrorMessage(): string {
+    return (
+      this.getPostFieldError('title') ||
+      this.getPostFieldError('content') ||
+      'Revisa los campos del formulario.'
+    );
   }
 
   async createPost() {
-    if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes crear publicaciones en tu propio perfil.',
+      );
       return;
     }
 
@@ -197,6 +377,8 @@ export default class ProfilePage implements OnInit {
     }
 
     try {
+      this.uxMetrics.track('post_create_attempt');
+      this.uxMetrics.startTiming('post-create-submit');
       const postData: CreatePostDto = {
         title: this.newPost.title,
         content: this.newPost.content,
@@ -210,6 +392,14 @@ export default class ProfilePage implements OnInit {
         user_id: this.user.id,
       };
       await this.postsService.createPost(postData);
+      this.uxMetrics.track('post_create_success');
+      this.uxMetrics.endTiming(
+        'post-create-submit',
+        'perceived_post_create_submit',
+        {
+          success: true,
+        },
+      );
 
       this.notificationService.success('¡Publicación creada exitosamente!');
       this.closePostModal();
@@ -217,18 +407,32 @@ export default class ProfilePage implements OnInit {
       // Refresh profile data to show new post
       await this.getProfileData();
     } catch (error) {
-      // El interceptor ya maneja el error, solo cerramos el modal si es necesario
+      this.uxMetrics.track('post_create_failure');
+      this.uxMetrics.endTiming(
+        'post-create-submit',
+        'perceived_post_create_submit',
+        {
+          success: false,
+        },
+      );
+      this.notificationService.error(
+        'No se pudo crear la publicación. Inténtalo nuevamente.',
+      );
     }
   }
 
   async editPost() {
-    if (!this.newPost.title.trim() || !this.newPost.content.trim()) {
-      this.notificationService.warning('Por favor, completa todos los campos requeridos.');
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes editar publicaciones de tu propio perfil.',
+      );
       return;
     }
 
     if (!this.newPost.id) {
-      this.notificationService.error('Error: No se encontró el ID de la publicación.');
+      this.notificationService.error(
+        'Error: No se encontró el ID de la publicación.',
+      );
       return;
     }
 
@@ -247,16 +451,20 @@ export default class ProfilePage implements OnInit {
         user_id: this.newPost.user_id ?? undefined,
       };
       await this.postsService.updatePost(updateData);
-      this.notificationService.success('¡Publicación actualizada exitosamente!');
+      this.notificationService.success(
+        '¡Publicación actualizada exitosamente!',
+      );
       this.closePostModal();
       // Refresh profile data to show updated post
       await this.getProfileData();
     } catch (error) {
-      // El interceptor ya maneja el error
+      this.notificationService.error(
+        'No se pudo actualizar la publicación. Inténtalo nuevamente.',
+      );
     }
   }
 
-  async votePost(postId: string, voteType: 0 | 1) {
+  async votePost(postId: string) {
     try {
       const post = this.userPosts.find((p) => p.id === postId);
       const currentVote = post?.user_vote;
@@ -265,11 +473,15 @@ export default class ProfilePage implements OnInit {
       if (result && this.user) {
         // Refrescar todos los posts del usuario
         await this.getUserPosts(this.user.id);
-        // Notificación eliminada
+        this.notificationService.success(
+          finalVoteType === 1 ? 'Voto registrado.' : 'Voto removido.',
+        );
       }
     } catch (error) {
       console.error('Error al votar la publicación:', error);
-      this.notificationService.error('Error al votar la publicación. Inténtalo de nuevo.');
+      this.notificationService.error(
+        'Error al votar la publicación. Inténtalo de nuevo.',
+      );
     }
   }
 
@@ -289,5 +501,51 @@ export default class ProfilePage implements OnInit {
 
   textPreview(content: string): string {
     return content.length > 200 ? content.substring(0, 200) + '...' : content;
+  }
+
+  get visiblePostRangeLabel(): string {
+    if (this.userPosts.length === 0) {
+      return '0 publicaciones';
+    }
+
+    const start = (this.currentPage - 1) * this.pageSize + 1;
+    const end = Math.min(
+      this.currentPage * this.pageSize,
+      this.userPosts.length,
+    );
+    return `Mostrando ${start}-${end} de ${this.userPosts.length}`;
+  }
+
+  private normalizeUsername(value: string | null | undefined): string {
+    return (value ?? '').trim().toLowerCase();
+  }
+
+  private parsePage(rawPage: string | null): number {
+    const parsedPage = Number(rawPage);
+    if (!Number.isInteger(parsedPage) || parsedPage < 1) {
+      return 1;
+    }
+
+    return parsedPage;
+  }
+
+  private clampPage(page: number): number {
+    return Math.min(Math.max(1, page), this.totalPages);
+  }
+
+  private ensureValidPage(): void {
+    const validPage = this.clampPage(this.currentPage);
+    if (validPage !== this.currentPage) {
+      this.currentPage = validPage;
+      void this.syncPageQueryParam(validPage);
+    }
+  }
+
+  private async syncPageQueryParam(page: number): Promise<void> {
+    await this.router.navigate([], {
+      relativeTo: this.route,
+      queryParams: { page },
+      queryParamsHandling: 'merge',
+    });
   }
 }

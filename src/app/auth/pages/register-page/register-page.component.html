@@ -12,7 +12,11 @@
             formControlName="name"
             placeholder="Full Name"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('name')"
           />
+          @if (getFieldError("name")) {
+            <small class="text-red-600">{{ getFieldError("name") }}</small>
+          }
         </div>
 
         <div class="form-group">
@@ -21,7 +25,11 @@
             formControlName="username"
             placeholder="Username"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('username')"
           />
+          @if (getFieldError("username")) {
+            <small class="text-red-600">{{ getFieldError("username") }}</small>
+          }
         </div>
 
         <div class="form-group">
@@ -30,7 +38,11 @@
             formControlName="email"
             placeholder="Email"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('email')"
           />
+          @if (getFieldError("email")) {
+            <small class="text-red-600">{{ getFieldError("email") }}</small>
+          }
         </div>
 
         <div class="form-group">
@@ -43,6 +55,9 @@
             <option value="mexico">Mexico</option>
             <option value="spain">Spain</option>
           </select>
+          @if (getFieldError("country")) {
+            <small class="text-red-600">{{ getFieldError("country") }}</small>
+          }
         </div>
 
         <div class="form-group">
@@ -51,7 +66,11 @@
             formControlName="password"
             placeholder="Password"
             class="form-input"
+            [class.ng-invalid]="isFieldInvalid('password')"
           />
+          @if (getFieldError("password")) {
+            <small class="text-red-600">{{ getFieldError("password") }}</small>
+          }
         </div>
 
         <button type="submit" class="submit-btn" [disabled]="isPosting()">
@@ -80,8 +99,8 @@
 @if (hasError()) {
   <div class="error-alert">
     <span
-      >❌ Registration failed. Please check your information and try
-      again.</span
+      >❌ No pudimos crear tu cuenta. Revisa los datos e intentalo de
+      nuevo.</span
     >
   </div>
 }
