@@ -1,13 +1,19 @@
 import { CommonModule } from '@angular/common';
 import { Component, HostListener, inject, signal } from '@angular/core';
-import { Router, RouterLink } from '@angular/router';
+import {
+  NavigationEnd,
+  Router,
+  RouterLink,
+  RouterLinkActive,
+} from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 import { NotificationService } from '@shared/services/notification.service';
+import { filter } from 'rxjs';
 
 @Component({
   selector: 'app-header',
-  imports: [CommonModule, RouterLink],
+  imports: [CommonModule, RouterLink, RouterLinkActive],
   templateUrl: './header.component.html',
   styleUrl: './header.component.css',
 })
@@ -29,6 +35,21 @@ export class HeaderComponent {
     ) {
       this.enableDarkMode();
     }
+
+    this.router.events
+      .pipe(filter((event) => event instanceof NavigationEnd))
+      .subscribe(() => {
+        this.closeDropdown();
+        this.closeMobileMenu();
+      });
+  }
+
+  get profileLink(): string[] {
+    const username = this.authStore.user()?.username;
+    if (username) {
+      return ['/profile', username];
+    }
+    return ['/home'];
   }
 
   toggleTheme() {
@@ -56,6 +77,8 @@ export class HeaderComponent {
   logout() {
     this.authStore.logout();
     this.notificationService.info('Sesión cerrada correctamente.');
+    this.closeDropdown();
+    this.closeMobileMenu();
     this.router.navigate(['/home']);
   }
 
@@ -82,5 +105,17 @@ export class HeaderComponent {
   onEscapeKey(): void {
     this.closeDropdown();
     this.closeMobileMenu();
+  }
+
+  @HostListener('document:click', ['$event'])
+  onDocumentClick(event: MouseEvent): void {
+    const target = event.target as HTMLElement | null;
+    if (!target) {
+      return;
+    }
+
+    if (!target.closest('.user-menu')) {
+      this.closeDropdown();
+    }
   }
 }

@@ -51,6 +51,14 @@ export const routes: Routes = [
         loadComponent: () =>
           import('./post/pages/post/post').then((m) => m.Post),
       },
+      {
+        path: 'settings',
+        canMatch: [AuthenticatedGuard],
+        loadComponent: () =>
+          import('./pages/settings-page/settings-page.component').then(
+            (m) => m.default,
+          ),
+      },
     ],
   },
   {

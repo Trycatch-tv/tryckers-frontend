@@ -4,7 +4,7 @@
     <div class="header-content">
       <!-- Logo -->
       <div class="logo">
-        <a routerLink="/home" class="logo-link"> 👥Tryckers </a>
+        <a routerLink="/home" class="logo-link">Tryckers</a>
       </div>
 
       <button
@@ -24,6 +24,7 @@
           <a
             routerLink="/cartelera"
             class="nav-link"
+            routerLinkActive="nav-link-active"
             (click)="closeMobileMenu()"
             >Cartelera</a
           >
@@ -93,8 +94,10 @@
             @if (dropdownOpen()) {
               <div id="user-dropdown" class="dropdown-menu" role="menu">
                 <a
-                  routerLink="/profile"
+                  [routerLink]="profileLink"
                   class="dropdown-item"
+                  routerLinkActive="dropdown-item-active"
+                  [routerLinkActiveOptions]="{ exact: true }"
                   (click)="closeDropdown(); closeMobileMenu()"
                   role="menuitem"
                 >
@@ -103,6 +106,8 @@
                 <a
                   routerLink="/settings"
                   class="dropdown-item"
+                  routerLinkActive="dropdown-item-active"
+                  [routerLinkActiveOptions]="{ exact: true }"
                   (click)="closeDropdown(); closeMobileMenu()"
                   role="menuitem"
                 >
