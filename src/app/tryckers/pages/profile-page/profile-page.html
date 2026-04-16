@@ -212,9 +212,15 @@
         <h3 class="text-xl font-semibold text-gray-700 mb-2">
           Aún no hay publicaciones
         </h3>
+        @if (isOwnProfile) {
         <p class="text-gray-500">
           Crea la primera publicación para comenzar a compartir.
         </p>
+        } @else {
+        <p class="text-gray-500">
+          Este perfil todavía no tiene publicaciones para mostrar.
+        </p>
+        }
       </div>
       } @else { @for (post of userPosts; track post.id) {
       <article
@@ -247,6 +253,7 @@
           </div>
         </div>
         <div class="card-actions">
+          @if (isOwnProfile) {
           <button
             class="action-btn"
             title="Editar"
@@ -264,6 +271,7 @@
           >
             Eliminar
           </button>
+          }
           <a
             class="action-btn primary read-btn"
             title="Leer"
@@ -290,7 +298,9 @@
   </div>
 
   <!-- Floating Create Button -->
+  @if (isOwnProfile) {
   <button class="create-btn" (click)="openPostModal()">Crear</button>
+  }
 
   <!-- Create Post Modal -->
   <p-dialog

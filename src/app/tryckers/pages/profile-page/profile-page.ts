@@ -2,6 +2,7 @@ import { CommonModule } from '@angular/common';
 import { Component, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ActivatedRoute, RouterLink } from '@angular/router';
+import { AuthStore } from '@auth/store/auth-store';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { ButtonModule } from 'primeng/button';
@@ -51,6 +52,7 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
   standalone: true,
 })
 export default class ProfilePage implements OnInit {
+  private authStore = inject(AuthStore);
   tryckersService = inject(TryckersService);
   postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
@@ -93,6 +95,21 @@ export default class ProfilePage implements OnInit {
 
   constructor(private route: ActivatedRoute) {
     this.username = this.route.snapshot.paramMap.get('username')!;
+  }
+
+  get isOwnProfile(): boolean {
+    const currentUsername = this.normalizeUsername(
+      this.authStore.user()?.username,
+    );
+    const viewedUsername = this.normalizeUsername(
+      this.user?.username ?? this.username,
+    );
+
+    return (
+      !!currentUsername &&
+      !!viewedUsername &&
+      currentUsername === viewedUsername
+    );
   }
 
   async getProfileData() {
@@ -156,6 +173,13 @@ export default class ProfilePage implements OnInit {
   }
 
   async deletePost(postId: string) {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes eliminar publicaciones de tu propio perfil.',
+      );
+      return;
+    }
+
     const confirmed = confirm(
       '¿Estás seguro de que deseas eliminar esta publicación? ',
     );
@@ -183,6 +207,13 @@ export default class ProfilePage implements OnInit {
 
   // Modal methods
   openPostModal(isEditing: boolean = false, post: Post | null = null) {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes crear o editar publicaciones en tu propio perfil.',
+      );
+      return;
+    }
+
     this.showPostModal = true;
     this.isEditing = isEditing;
     this.postSubmitAttempted = false;
@@ -300,6 +331,13 @@ export default class ProfilePage implements OnInit {
   }
 
   async createPost() {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes crear publicaciones en tu propio perfil.',
+      );
+      return;
+    }
+
     if (!this.user) {
       this.notificationService.error('Error: No se encontró el usuario.');
       return;
@@ -351,6 +389,13 @@ export default class ProfilePage implements OnInit {
   }
 
   async editPost() {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes editar publicaciones de tu propio perfil.',
+      );
+      return;
+    }
+
     if (!this.newPost.id) {
       this.notificationService.error(
         'Error: No se encontró el ID de la publicación.',
@@ -423,5 +468,9 @@ export default class ProfilePage implements OnInit {
 
   textPreview(content: string): string {
     return content.length > 200 ? content.substring(0, 200) + '...' : content;
+  }
+
+  private normalizeUsername(value: string | null | undefined): string {
+    return (value ?? '').trim().toLowerCase();
   }
 }
