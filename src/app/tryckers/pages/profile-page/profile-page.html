@@ -97,7 +97,9 @@
             *ngIf="user?.github_url"
             [href]="user?.github_url"
             target="_blank"
+            rel="noopener noreferrer"
             class="social-link github"
+            [attr.aria-label]="'Abrir GitHub de ' + (user?.username || 'este usuario')"
           >
             <span>🐙 GitHub</span>
           </a>
@@ -105,7 +107,9 @@
             *ngIf="user?.linkedin_url"
             [href]="user?.linkedin_url"
             target="_blank"
+            rel="noopener noreferrer"
             class="social-link linkedin"
+            [attr.aria-label]="'Abrir LinkedIn de ' + (user?.username || 'este usuario')"
           >
             <span>💼 LinkedIn</span>
           </a>
@@ -177,7 +181,12 @@
       <div class="content-header">
         <div class="sort-options">
           {{ userPosts.length || 0 }} publicaciones
-          <button class="sort-btn">Populares / Más Recientes</button>
+          <span
+            class="sort-chip"
+            aria-label="Orden actual: populares y más recientes"
+          >
+            Populares / Más Recientes
+          </span>
         </div>
       </div>
 
@@ -294,8 +303,9 @@
         </div>
       </article>
       } } @if (userPosts.length > pageSize) {
-      <div
+      <nav
         class="pagination-bar"
+        aria-label="Paginación de publicaciones"
         style="
           display: flex;
           align-items: center;
@@ -310,10 +320,11 @@
           class="ui-btn"
           (click)="previousPage()"
           [disabled]="currentPage === 1"
+          aria-label="Ir a la página anterior"
         >
           Anterior
         </button>
-        <span class="ui-meta"
+        <span class="ui-meta" aria-live="polite"
           >{{ visiblePostRangeLabel }} | Página {{ currentPage }} de {{
           totalPages }}</span
         >
@@ -322,10 +333,11 @@
           class="ui-btn ui-btn-primary"
           (click)="nextPage()"
           [disabled]="currentPage === totalPages"
+          aria-label="Ir a la página siguiente"
         >
           Siguiente
         </button>
-      </div>
+      </nav>
       }
     </div>
   </div>
@@ -447,32 +459,33 @@
     </div>
 
     <ng-template pTemplate="footer">
-      <div class="modal-actions">
-        <p-button
-          label="Cancelar"
-          icon="pi pi-times"
-          (onClick)="closePostModal()"
-          [text]="true"
-          [disabled]="isSavingPost"
-        >
-        </p-button>
-        <p-button
-          [label]="isSavingPost ? 'Guardando...' : info.buttonLabel"
-          icon="pi pi-check"
-          (onClick)="savePost()"
-          [disabled]="isSavingPost || !!getPostFieldError('title') || !!getPostFieldError('content')"
-        >
-        </p-button>
-      </div>
-      @if (!isSavingPost && (!!getPostFieldError('title') ||
-      !!getPostFieldError('content'))) {
-      <div class="mt-2">
-        <small class="text-red-600">
+      <div class="modal-footer-content">
+        <div class="modal-actions">
+          <button
+            type="button"
+            class="ui-btn"
+            (click)="closePostModal()"
+            [disabled]="isSavingPost"
+          >
+            Cancelar
+          </button>
+          <button
+            type="button"
+            class="ui-btn ui-btn-primary"
+            (click)="savePost()"
+            [disabled]="isSavingPost || !!getPostFieldError('title') || !!getPostFieldError('content')"
+          >
+            {{ isSavingPost ? 'Guardando...' : info.buttonLabel }}
+          </button>
+        </div>
+        @if (!isSavingPost && (!!getPostFieldError('title') ||
+        !!getPostFieldError('content'))) {
+        <small class="text-red-600 modal-error">
           No puedes continuar: {{ getPostFieldError('title') ||
           getPostFieldError('content') }}
         </small>
+        }
       </div>
-      }
     </ng-template>
   </p-dialog>
 </div>

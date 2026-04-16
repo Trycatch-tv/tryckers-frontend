@@ -121,6 +121,22 @@ Criterios de aceptación:
 - Paginado funcional y estable.
 - Dark mode consistente en el alcance definido.
 
+Estado de implementación (abril 2026):
+- Completada.
+
+Checklist de cierre ejecutado:
+- Rutas validadas: `home`, `cartelera`, `profile propio`, `profile ajeno`, `post detalle`.
+- Header/dropdown: navegación funcional + cierre por navegación, escape y click fuera.
+- Perfil: acciones de edición/creación ocultas en perfil ajeno y visibles en perfil propio.
+- Paginado: navegación anterior/siguiente con límites y `query param page` persistente.
+- Dark mode: revisión de contraste y consistencia en header, home, perfil y cartelera.
+- Accesibilidad base aplicada: foco visible, atributos `aria` en controles críticos, enlaces externos con `rel="noopener noreferrer"`.
+
+Ajustes finales aplicados en QA:
+- Perfil: el control de orden quedó como etiqueta informativa (`sort-chip`) para evitar interacción sin acción.
+- Perfil: barra de paginado semántica (`nav`) con etiquetas y anuncio `aria-live`.
+- Header: botones de tema/usuario con `type="button"` y menú con `aria-haspopup`/`aria-label`.
+
 ## Priorización recomendada
 1. Dropdown navbar (Fase 1)
 2. Ocultar crear/editar en perfil ajeno (Fase 2)

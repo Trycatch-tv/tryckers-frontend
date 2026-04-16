@@ -19,7 +19,6 @@
 .social-link,
 .action-btn,
 .like-btn,
-.sort-btn,
 .create-btn {
   border: 1px solid var(--ui-border);
 }
@@ -66,8 +65,7 @@
 .profile-sidebar,
 .create-post-form,
 .card-content,
-.form-group,
-.modal-actions {
+.form-group {
   flex-direction: column;
 }
 
@@ -105,7 +103,7 @@
 .profile-biography p,
 .form-help,
 .preview-label,
-.sort-btn,
+.sort-chip,
 .stat-label,
 .card-meta-row,
 .action-btn,
@@ -145,7 +143,7 @@
 .social-link,
 .action-btn,
 .like-btn,
-.sort-btn,
+.sort-chip,
 .create-btn,
 .form-input,
 .form-textarea,
@@ -166,7 +164,6 @@
 }
 
 .social-link:hover,
-.sort-btn:hover,
 .action-btn:hover,
 .like-btn:hover {
   background: var(--ui-bg-muted);
@@ -234,10 +231,13 @@
   font-weight: 600;
 }
 
-.sort-btn {
+.sort-chip {
+  display: inline-flex;
+  align-items: center;
   padding: 8px 14px;
   background: var(--ui-bg);
-  cursor: pointer;
+  font-size: 12px;
+  font-weight: 600;
 }
 
 .profile-posts-skeleton {
@@ -326,12 +326,6 @@
   font-size: 12px;
   cursor: pointer;
   text-decoration: none;
-}
-
-.action-btn.primary {
-  background: #d32f2f;
-  border-color: #d32f2f;
-  color: #fff;
 }
 
 .read-btn {
@@ -433,17 +427,30 @@
 }
 
 .modal-actions {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
   gap: 12px;
   justify-content: flex-end;
   padding-top: 20px;
   border-top: 1px solid var(--ui-border);
 }
 
+.modal-footer-content {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.modal-error {
+  margin: 0;
+  text-align: right;
+}
+
 .action-btn:focus-visible,
 .like-btn:focus-visible,
 .create-btn:focus-visible,
 .social-link:focus-visible,
-.sort-btn:focus-visible,
 .form-input:focus-visible,
 .form-textarea:focus-visible,
 .form-select:focus-visible {
@@ -492,11 +499,6 @@
   }
 }
 
-.dark-theme .action-btn.primary {
-  background: #ef4444;
-  border-color: #ef4444;
-}
-
 .dark-theme .read-btn {
   background: var(--ui-primary);
   border-color: var(--ui-primary);
@@ -540,10 +542,20 @@
 
   .profile-info,
   .card-actions,
-  .content-header,
-  .modal-actions {
+  .content-header {
     flex-direction: column;
     align-items: stretch;
+  }
+
+  .modal-actions {
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-end;
+    flex-wrap: nowrap;
+  }
+
+  .modal-error {
+    text-align: left;
   }
 
   .card-actions {

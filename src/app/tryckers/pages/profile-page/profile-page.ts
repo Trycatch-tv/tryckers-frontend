@@ -5,7 +5,6 @@ import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthStore } from '@auth/store/auth-store';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
-import { ButtonModule } from 'primeng/button';
 import { DialogModule } from 'primeng/dialog';
 import { InputTextModule } from 'primeng/inputtext';
 import {
@@ -41,7 +40,6 @@ interface TryckerWithParsedInterests extends Omit<Trycker, 'interests'> {
   imports: [
     CommonModule,
     FormsModule,
-    ButtonModule,
     DialogModule,
     InputTextModule,
     RouterModule,

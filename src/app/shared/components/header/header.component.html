@@ -35,6 +35,7 @@
       <div class="header-actions" [class.actions-open]="mobileMenuOpen()">
         <!-- Theme toggle button -->
         <button
+          type="button"
           (click)="toggleTheme()"
           class="theme-toggle"
           [attr.aria-label]="
@@ -75,9 +76,11 @@
         <ng-container *ngIf="authStore.isLoggedIn()">
           <div class="user-menu">
             <button
+              type="button"
               (click)="toggleDropdown()"
               class="user-button"
               [attr.aria-expanded]="dropdownOpen()"
+              aria-haspopup="menu"
               aria-controls="user-dropdown"
               aria-label="Abrir menu de usuario"
             >
@@ -92,7 +95,12 @@
 
             <!-- Dropdown menu -->
             @if (dropdownOpen()) {
-              <div id="user-dropdown" class="dropdown-menu" role="menu">
+              <div
+                id="user-dropdown"
+                class="dropdown-menu"
+                role="menu"
+                aria-label="Menu de usuario"
+              >
                 <a
                   [routerLink]="profileLink"
                   class="dropdown-item"
