@@ -73,15 +73,73 @@
 <div class="profile-container">
   <!-- Header Section -->
   <div class="profile-header">
+    <div
+      class="profile-banner relative min-h-[220px] bg-cover bg-center"
+      [style.background-image]="bannerBackground"
+      role="img"
+      [attr.aria-label]="'Banner de ' + (user?.username || 'perfil')"
+    >
+      @if (isOwnProfile) {
+      <label
+        class="banner-upload inline-flex min-h-[34px] cursor-pointer items-center justify-center rounded-md border border-gray-200 bg-white/90 px-3 py-2 text-xs font-bold text-gray-900 shadow-sm"
+      >
+        <input
+          class="hidden"
+          type="file"
+          accept="image/jpeg,image/png,image/webp"
+          (change)="onBannerSelected($event)"
+          [disabled]="uploadingBanner"
+        />
+        <span>{{ uploadingBanner ? 'Subiendo banner...' : 'Cambiar banner' }}</span>
+      </label>
+      @if (user.banner_url) {
+      <button
+        type="button"
+        class="banner-remove inline-flex min-h-[34px] items-center justify-center rounded-md border border-gray-200 bg-white/90 px-3 py-2 text-xs font-bold text-gray-900 shadow-sm"
+        (click)="removeBanner()"
+        [disabled]="uploadingBanner"
+      >
+        Quitar banner
+      </button>
+      }
+      }
+    </div>
     <div class="profile-info">
-      <div class="profile-avatar">
+      <div class="profile-avatar-wrap">
+        <div class="profile-avatar">
         <img
-          [src]="user?.profile_picture || 'avatar-default.svg'"
+          [src]="avatarUrl"
           [alt]="user?.name"
           width="80"
           height="80"
           decoding="async"
         />
+          <span class="avatar-initials">{{ userInitials }}</span>
+        </div>
+        @if (isOwnProfile) {
+        <label
+          class="inline-flex min-h-[34px] cursor-pointer items-center justify-center rounded-md border border-gray-200 bg-white/90 px-3 py-2 text-xs font-bold text-gray-900 shadow-sm"
+        >
+          <input
+            class="hidden"
+            type="file"
+            accept="image/jpeg,image/png,image/webp"
+            (change)="onAvatarSelected($event)"
+            [disabled]="uploadingAvatar"
+          />
+          <span>{{ uploadingAvatar ? 'Subiendo...' : 'Cambiar avatar' }}</span>
+        </label>
+        @if (user.avatar_url || user.profile_picture) {
+        <button
+          type="button"
+          class="inline-flex min-h-[34px] items-center justify-center rounded-md border border-gray-200 bg-white/90 px-3 py-2 text-xs font-bold text-gray-900 shadow-sm"
+          (click)="removeAvatar()"
+          [disabled]="uploadingAvatar"
+        >
+          Quitar avatar
+        </button>
+        }
+        }
       </div>
       <div class="profile-basic">
         <h1 class="profile-name">{{ user?.name || 'Nombre' }}</h1>

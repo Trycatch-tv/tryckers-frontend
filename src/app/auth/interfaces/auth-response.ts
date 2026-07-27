@@ -19,6 +19,8 @@ export interface UserData {
   username: string;
   email: string;
   birth_date: null;
+  avatar_url?: string;
+  banner_url?: string;
   profile_picture: string;
   github_url: string;
   linkedin_url: string;

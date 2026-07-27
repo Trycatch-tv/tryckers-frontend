@@ -10,3 +10,7 @@ export interface TryckersResponse {
 export interface TryckerProfileResponse {
   user: Trycker;
 }
+
+export interface TryckerMediaResponse {
+  user: Trycker;
+}

@@ -65,6 +65,10 @@ export default class ProfilePage implements OnInit {
   loadingProfile = true;
   loadingPosts = false;
   errorMessage: string | null = null;
+  avatarPreviewUrl: string | null = null;
+  bannerPreviewUrl: string | null = null;
+  uploadingAvatar = false;
+  uploadingBanner = false;
 
   // Modal properties
   showPostModal: boolean = false;
@@ -125,6 +129,44 @@ export default class ProfilePage implements OnInit {
     return this.userPosts.slice(startIndex, startIndex + this.pageSize);
   }
 
+  get avatarUrl(): string {
+    return (
+      this.avatarPreviewUrl ||
+      this.tryckersService.mediaUrl(
+        this.user?.avatar_url || this.user?.profile_picture,
+      ) ||
+      'avatar-default.svg'
+    );
+  }
+
+  get bannerUrl(): string {
+    return (
+      this.bannerPreviewUrl ||
+      this.tryckersService.mediaUrl(this.user?.banner_url)
+    );
+  }
+
+  get bannerBackground(): string {
+    if (this.bannerUrl) {
+      return `linear-gradient(90deg, rgba(15, 23, 42, 0.58), rgba(15, 23, 42, 0.08)), url("${this.bannerUrl}")`;
+    }
+
+    const seed = this.user?.username || this.username || 'tryckers';
+    const hue = this.stringToHue(seed);
+    return `linear-gradient(135deg, hsl(${hue} 72% 42%), hsl(${(hue + 58) % 360} 70% 48%))`;
+  }
+
+  get userInitials(): string {
+    const source = this.user?.name || this.user?.username || 'T';
+    return source
+      .split(' ')
+      .map((part) => part.trim()[0])
+      .filter(Boolean)
+      .slice(0, 2)
+      .join('')
+      .toUpperCase();
+  }
+
   async getProfileData() {
     try {
       this.uxMetrics.startTiming('profile-load');
@@ -142,11 +184,8 @@ export default class ProfilePage implements OnInit {
         return;
       }
 
-      this.user = {
-        ...userData,
-        interests: userData.interests ? userData.interests.split(',') : [],
-      };
-      await this.getUserPosts(this.user.id);
+      this.setProfileUser(userData);
+      await this.getUserPosts(userData.id);
       this.ensureValidPage();
       this.uxMetrics.endTiming('profile-load', 'perceived_profile_load', {
         success: true,
@@ -485,6 +524,22 @@ export default class ProfilePage implements OnInit {
     }
   }
 
+  async onAvatarSelected(event: Event): Promise<void> {
+    await this.handleMediaSelected(event, 'avatar');
+  }
+
+  async onBannerSelected(event: Event): Promise<void> {
+    await this.handleMediaSelected(event, 'banner');
+  }
+
+  async removeAvatar(): Promise<void> {
+    await this.removeMedia('avatar');
+  }
+
+  async removeBanner(): Promise<void> {
+    await this.removeMedia('banner');
+  }
+
   // TODO: Pendiente de mover a un utilitario común
   toArray(value: string | string[] | null | undefined): string[] {
     if (!value) {
@@ -518,6 +573,161 @@ export default class ProfilePage implements OnInit {
 
   private normalizeUsername(value: string | null | undefined): string {
     return (value ?? '').trim().toLowerCase();
+  }
+
+  private async handleMediaSelected(
+    event: Event,
+    mediaType: 'avatar' | 'banner',
+  ): Promise<void> {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes actualizar los medios de tu propio perfil.',
+      );
+      return;
+    }
+
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+
+    if (!file || !this.validateMediaFile(file, mediaType)) {
+      return;
+    }
+
+    const previewUrl = URL.createObjectURL(file);
+    if (mediaType === 'avatar') {
+      this.revokePreview(this.avatarPreviewUrl);
+      this.avatarPreviewUrl = previewUrl;
+      this.uploadingAvatar = true;
+    } else {
+      this.revokePreview(this.bannerPreviewUrl);
+      this.bannerPreviewUrl = previewUrl;
+      this.uploadingBanner = true;
+    }
+
+    try {
+      const updatedUser =
+        mediaType === 'avatar'
+          ? await this.tryckersService.uploadAvatar(file)
+          : await this.tryckersService.uploadBanner(file);
+
+      if (!updatedUser) {
+        throw new Error('No se recibio usuario actualizado');
+      }
+
+      this.setProfileUser(updatedUser);
+      this.authStore.setUser(updatedUser);
+      this.notificationService.success(
+        mediaType === 'avatar'
+          ? 'Avatar actualizado correctamente.'
+          : 'Banner actualizado correctamente.',
+      );
+    } catch (error) {
+      console.error('Error uploading profile media:', error);
+      this.notificationService.error(
+        mediaType === 'avatar'
+          ? 'No se pudo actualizar el avatar.'
+          : 'No se pudo actualizar el banner.',
+      );
+    } finally {
+      if (mediaType === 'avatar') {
+        this.uploadingAvatar = false;
+        this.revokePreview(this.avatarPreviewUrl);
+        this.avatarPreviewUrl = null;
+      } else {
+        this.uploadingBanner = false;
+        this.revokePreview(this.bannerPreviewUrl);
+        this.bannerPreviewUrl = null;
+      }
+    }
+  }
+
+  private async removeMedia(mediaType: 'avatar' | 'banner'): Promise<void> {
+    if (!this.isOwnProfile) {
+      this.notificationService.warning(
+        'Solo puedes actualizar los medios de tu propio perfil.',
+      );
+      return;
+    }
+
+    if (mediaType === 'avatar') {
+      this.uploadingAvatar = true;
+    } else {
+      this.uploadingBanner = true;
+    }
+
+    try {
+      const updatedUser =
+        mediaType === 'avatar'
+          ? await this.tryckersService.removeAvatar()
+          : await this.tryckersService.removeBanner();
+
+      if (!updatedUser) {
+        throw new Error('No se recibio usuario actualizado');
+      }
+
+      this.setProfileUser(updatedUser);
+      this.authStore.setUser(updatedUser);
+      this.notificationService.success(
+        mediaType === 'avatar'
+          ? 'Avatar removido correctamente.'
+          : 'Banner removido correctamente.',
+      );
+    } catch (error) {
+      console.error('Error removing profile media:', error);
+      this.notificationService.error(
+        mediaType === 'avatar'
+          ? 'No se pudo remover el avatar.'
+          : 'No se pudo remover el banner.',
+      );
+    } finally {
+      if (mediaType === 'avatar') {
+        this.uploadingAvatar = false;
+      } else {
+        this.uploadingBanner = false;
+      }
+    }
+  }
+
+  private validateMediaFile(file: File, mediaType: 'avatar' | 'banner'): boolean {
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    const maxBytes = mediaType === 'avatar' ? 2 * 1024 * 1024 : 5 * 1024 * 1024;
+
+    if (!allowedTypes.includes(file.type)) {
+      this.notificationService.warning('Usa una imagen JPG, PNG o WEBP.');
+      return false;
+    }
+
+    if (file.size > maxBytes) {
+      this.notificationService.warning(
+        mediaType === 'avatar'
+          ? 'El avatar no puede superar 2 MB.'
+          : 'El banner no puede superar 5 MB.',
+      );
+      return false;
+    }
+
+    return true;
+  }
+
+  private setProfileUser(userData: Trycker): void {
+    this.user = {
+      ...userData,
+      interests: userData.interests ? userData.interests.split(',') : [],
+    };
+  }
+
+  private revokePreview(previewUrl: string | null): void {
+    if (previewUrl) {
+      URL.revokeObjectURL(previewUrl);
+    }
+  }
+
+  private stringToHue(value: string): number {
+    return Array.from(value).reduce(
+      (hash, char) => (hash * 31 + char.charCodeAt(0)) % 360,
+      0,
+    );
   }
 
   private parsePage(rawPage: string | null): number {
