@@ -1,0 +1,25 @@
+version: 1
+project:
+  name: "tryckers-frontend"
+  state: pre-ai
+  structure: multirepo
+  language: es
+  domains:
+    - auth
+    - profiles
+    - posts
+    - curation
+    - ui
+team:
+  size: small
+knowledge:
+  default_level: K2
+guard:
+  silent_without_ownership: true
+
+multirepo:
+  role: module
+  parent_system: tryckers
+
+module:
+  id: frontend

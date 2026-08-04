@@ -63,6 +63,14 @@ export class TryckersService {
     return result?.user ?? null;
   }
 
+  async updateProfile(data: Partial<Trycker>): Promise<Trycker | null> {
+    const result = await this.http
+      .put<TryckerProfileResponse>(`${baseUrl}/users/me`, data)
+      .toPromise();
+    return result?.user ?? null;
+  }
+
+
   mediaUrl(value: string | null | undefined): string {
     if (!value) {
       return '';

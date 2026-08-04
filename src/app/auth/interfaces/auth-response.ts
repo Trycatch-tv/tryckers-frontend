@@ -18,7 +18,7 @@ export interface UserData {
   name: string;
   username: string;
   email: string;
-  birth_date: null;
+  birth_date?: string | null;
   avatar_url?: string;
   banner_url?: string;
   profile_picture: string;

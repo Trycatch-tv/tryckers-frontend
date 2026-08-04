@@ -1,0 +1,300 @@
+{
+  "version": "1",
+  "generatedAt": "2026-08-04T03:52:29.568Z",
+  "project": {
+    "name": "tryckers-frontend",
+    "state": "pre-ai",
+    "teamSize": "small",
+    "structure": "multirepo",
+    "language": "Spanish"
+  },
+  "scan": {
+    "available": false,
+    "languages": [],
+    "frameworks": [],
+    "packageManagers": [],
+    "sourceDirectories": [],
+    "migrationDirectories": [],
+    "contractFiles": [],
+    "infrastructureFiles": []
+  },
+  "knowledge": {
+    "summary": "",
+    "roadmapSummary": "",
+    "inventoryAvailable": false,
+    "workItems": [],
+    "activeWorkItems": [],
+    "completedWorkItems": [],
+    "archivedWorkItems": [],
+    "allWorkItems": [],
+    "artifacts": []
+  },
+  "layers": [
+    {
+      "layer": "Business",
+      "status": "Not applicable",
+      "detected": []
+    },
+    {
+      "layer": "Product",
+      "status": "Not applicable",
+      "detected": []
+    },
+    {
+      "layer": "Tech",
+      "status": "Structured",
+      "detected": [
+        "ADR-001-signal-store-state-management.md",
+        "ADR-002-standalone-components-architecture.md",
+        "codebase.md",
+        "current-state.md",
+        "module-context.md"
+      ]
+    },
+    {
+      "layer": "Delivery",
+      "status": "Managed by core",
+      "detected": []
+    }
+  ],
+  "knowledgeQuality": {
+    "business": {
+      "status": "Not applicable",
+      "artifacts": {
+        "knowledge/business/business.md": "missing"
+      }
+    },
+    "product": {
+      "status": "Not applicable",
+      "artifacts": {
+        "knowledge/product/product.md": "missing",
+        "knowledge/product/capabilities.md": "missing"
+      }
+    },
+    "tech": {
+      "status": "Structured",
+      "artifacts": {
+        "knowledge/tech/codebase.md": "useful",
+        "knowledge/tech/current-state.md": "useful"
+      }
+    },
+    "delivery": {
+      "status": "Managed by core",
+      "artifacts": {
+        "knowledge/delivery/roadmap.md": "missing"
+      }
+    }
+  },
+  "roadmap": {
+    "present": false,
+    "initiatives": 0,
+    "work_item_candidates": 0,
+    "materialized_work_items": 0,
+    "remaining_work_item_candidates": 0,
+    "candidates": 0,
+    "materialized": 0,
+    "remaining": 0
+  },
+  "phase": {
+    "phase": "Ready for Core Orchestration",
+    "reasons": [
+      "Module repo — Tech layer ready",
+      "Business/Product managed by core"
+    ],
+    "recommendedAgents": [],
+    "nextStep": "Run `kaddo scan` to capture deterministic signals from the existing code.",
+    "llmInstructions": [
+      "This is a module repo. Business, Product, and Delivery are managed by the core repo.",
+      "Do not create business, product, roadmap or Work Items here."
+    ]
+  },
+  "nextStepRecommendation": {
+    "id": "scan",
+    "phase": "Discovery",
+    "label": "Run `kaddo scan` to capture deterministic signals from the existing code.",
+    "command": "kaddo scan",
+    "reason": "No scan baseline exists for this existing project yet."
+  },
+  "deliveryState": {
+    "phase": "Discovery",
+    "draft_work_items": 0,
+    "refined_draft_work_items": 0,
+    "refined_draft_ids": [],
+    "ready_work_items": 0,
+    "ready_work_item_ids": [],
+    "ready_multirepo_wi_ids": [],
+    "in_progress_work_items": 0,
+    "blocked_work_items": 0,
+    "total_work_items": 0,
+    "ownership_coverage": "0/0",
+    "remaining_work_item_candidates": 0,
+    "decision_candidates": 0,
+    "accepted_adrs": 2,
+    "adapters_installed": 0
+  },
+  "techDecisions": {
+    "status": "accepted-adrs",
+    "candidates": 0,
+    "adrs": 2,
+    "draft_adrs": 0,
+    "accepted_adrs": 2,
+    "candidate_list": [],
+    "candidates_source": null,
+    "candidates_legacy_location": false,
+    "candidates_both_exist": false
+  },
+  "techKnowledge": {
+    "core": {
+      "current-state.md": true,
+      "codebase.md": true
+    },
+    "decisions": {
+      "adrs": 2,
+      "dir": true
+    },
+    "discovery": {
+      "architecture-notes.md": false,
+      "decision-candidates.md": false,
+      "legacyLocation": false
+    }
+  },
+  "roadmapQuality": {
+    "initiatives": {
+      "total": 0,
+      "grounded": 0,
+      "with_related_domain": 0,
+      "with_related_capability": 0,
+      "with_source_signals": 0,
+      "needs_refinement": false,
+      "items": []
+    },
+    "work_item_candidates": {
+      "total": 0,
+      "with_source_initiative": 0,
+      "with_related_domain": 0,
+      "with_related_capability": 0
+    }
+  },
+  "installedAssets": {
+    "version": "3.68.0",
+    "agents": {
+      "total": 20,
+      "installed": 0,
+      "outdated": 0,
+      "unknown_version": 0,
+      "modified": 0
+    },
+    "skills": {
+      "total": 8,
+      "installed": 0,
+      "outdated": 0,
+      "unknown_version": 0,
+      "modified": 0
+    }
+  },
+  "workItemSummary": {
+    "total": 0,
+    "active": 0,
+    "draft": 0,
+    "ready": 0,
+    "in_progress": 0,
+    "blocked": 0,
+    "completed": 0,
+    "archived": 0,
+    "summary": "none"
+  },
+  "deliveryMix": {},
+  "external": [],
+  "graph": null,
+  "graphHints": null,
+  "skills": [],
+  "scanSignals": null,
+  "projectRoute": {
+    "type": "pre-ai",
+    "currentStep": "scan-repository",
+    "completed": 5,
+    "total": 7,
+    "progressPercent": 71,
+    "steps": [
+      {
+        "id": "enable-kaddo",
+        "label": "Enable Kaddo",
+        "status": "done",
+        "evidence": [
+          ".kaddo/config.yml"
+        ]
+      },
+      {
+        "id": "scan-repository",
+        "label": "Scan repository",
+        "status": "current",
+        "command": "kaddo scan"
+      },
+      {
+        "id": "refine-module-context",
+        "label": "Refine module context",
+        "status": "done",
+        "evidence": [
+          "knowledge/tech/module/module-context.md"
+        ]
+      },
+      {
+        "id": "describe-current-state",
+        "label": "Describe current state",
+        "status": "done",
+        "evidence": [
+          "knowledge/tech/current-state.md"
+        ]
+      },
+      {
+        "id": "map-codebase",
+        "label": "Map codebase",
+        "status": "done",
+        "evidence": [
+          "knowledge/tech/codebase.md"
+        ]
+      },
+      {
+        "id": "validate-module-knowledge",
+        "label": "Validate module knowledge",
+        "status": "next",
+        "command": "kaddo understand"
+      },
+      {
+        "id": "ready-for-core-orchestration",
+        "label": "Ready for core orchestration",
+        "status": "done"
+      }
+    ]
+  },
+  "metadataHealth": {
+    "findings": [],
+    "healthy": 2,
+    "drifted": 0
+  },
+  "mappedModules": [],
+  "moduleStatuses": {},
+  "affectedModuleContexts": {},
+  "isModuleRepo": true,
+  "missing": [
+    "Scan baseline missing. Run `kaddo scan` for better context.",
+    "No technical inventory found. Run `kaddo scan` to generate it."
+  ],
+  "handoff": {
+    "recommendedAgents": [],
+    "nextSteps": [
+      "Run `kaddo scan` to capture deterministic signals from the existing code."
+    ],
+    "instructions": [
+      "This is a module repo. Business, Product, and Delivery are managed by the core repo.",
+      "Do not create business, product, roadmap or Work Items here."
+    ],
+    "operatingRules": [
+      "**Never run `git commit`, `git push` or `git merge` without explicit human confirmation.**",
+      "Never push or merge automatically — ever. Suggest a Conventional Commit message and wait.",
+      "When implementing a Work Item, create a branch FIRST (per the project Git strategy, `.kaddo/git.yml`, default `feature/<id>-<slug>`). Never work directly on `main`.",
+      "After significant changes run `kaddo scan`, `kaddo owners suggest` and `kaddo guard`, and update the affected knowledge (ADR / capabilities / current-state).",
+      "Kaddo itself never calls an LLM and never runs git — every git action is the human’s."
+    ]
+  }
+}

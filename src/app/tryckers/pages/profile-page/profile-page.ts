@@ -167,6 +167,40 @@ export default class ProfilePage implements OnInit {
       .toUpperCase();
   }
 
+  get formattedBirthDate(): string | null {
+    if (!this.user?.birth_date) {
+      return null;
+    }
+
+    try {
+      const date = new Date(this.user.birth_date);
+      if (isNaN(date.getTime())) {
+        return null;
+      }
+
+      const day = date.getUTCDate();
+      const monthNames = [
+        'enero',
+        'febrero',
+        'marzo',
+        'abril',
+        'mayo',
+        'junio',
+        'julio',
+        'agosto',
+        'septiembre',
+        'octubre',
+        'noviembre',
+        'diciembre',
+      ];
+      const month = monthNames[date.getUTCMonth()];
+      return `${day} de ${month}`;
+    } catch {
+      return null;
+    }
+  }
+
+
   async getProfileData() {
     try {
       this.uxMetrics.startTiming('profile-load');
