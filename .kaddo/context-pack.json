@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "generatedAt": "2026-11-17T01:39:48.608Z",
+  "generatedAt": "2026-11-17T01:57:54.705Z",
   "project": {
     "name": "tryckers-frontend",
     "state": "pre-ai",
@@ -23,13 +23,15 @@
     "summary": "",
     "roadmapSummary": "",
     "inventoryAvailable": false,
-    "workItems": [
+    "workItems": [],
+    "activeWorkItems": [],
+    "completedWorkItems": [
       {
         "id": "WI-004",
         "type": "bugfix",
         "title": "Centralized Environment Configuration with Terraform",
-        "status": "ready",
-        "lifecycle": "ready",
+        "status": "completed",
+        "lifecycle": "completed",
         "knowledgeLevel": "",
         "domains": [
           "frontend",
@@ -41,43 +43,22 @@
           "type": "manual",
           "inferred": false
         },
+        "implementationStatus": "not-assessed",
+        "validationStatus": "not-assessed",
+        "releaseStatus": "not-assessed",
         "affectedModules": [
           "core"
         ]
       }
     ],
-    "activeWorkItems": [
-      {
-        "id": "WI-004",
-        "type": "bugfix",
-        "title": "Centralized Environment Configuration with Terraform",
-        "status": "ready",
-        "lifecycle": "ready",
-        "knowledgeLevel": "",
-        "domains": [
-          "frontend",
-          "backend",
-          "infrastructure",
-          "delivery"
-        ],
-        "source": {
-          "type": "manual",
-          "inferred": false
-        },
-        "affectedModules": [
-          "core"
-        ]
-      }
-    ],
-    "completedWorkItems": [],
     "archivedWorkItems": [],
     "allWorkItems": [
       {
         "id": "WI-004",
         "type": "bugfix",
         "title": "Centralized Environment Configuration with Terraform",
-        "status": "ready",
-        "lifecycle": "ready",
+        "status": "completed",
+        "lifecycle": "completed",
         "knowledgeLevel": "",
         "domains": [
           "frontend",
@@ -89,6 +70,9 @@
           "type": "manual",
           "inferred": false
         },
+        "implementationStatus": "not-assessed",
+        "validationStatus": "not-assessed",
+        "releaseStatus": "not-assessed",
         "affectedModules": [
           "core"
         ]
@@ -205,13 +189,9 @@
     "draft_work_items": 0,
     "refined_draft_work_items": 0,
     "refined_draft_ids": [],
-    "ready_work_items": 1,
-    "ready_work_item_ids": [
-      "WI-004"
-    ],
-    "ready_multirepo_wi_ids": [
-      "WI-004"
-    ],
+    "ready_work_items": 0,
+    "ready_work_item_ids": [],
+    "ready_multirepo_wi_ids": [],
     "in_progress_work_items": 0,
     "blocked_work_items": 0,
     "total_work_items": 1,
@@ -283,18 +263,16 @@
   },
   "workItemSummary": {
     "total": 1,
-    "active": 1,
+    "active": 0,
     "draft": 0,
-    "ready": 1,
+    "ready": 0,
     "in_progress": 0,
     "blocked": 0,
-    "completed": 0,
+    "completed": 1,
     "archived": 0,
-    "summary": "ready"
+    "summary": "completed-only"
   },
-  "deliveryMix": {
-    "bugfix": 1
-  },
+  "deliveryMix": {},
   "external": [],
   "graph": null,
   "graphHints": null,

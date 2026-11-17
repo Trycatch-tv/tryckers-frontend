@@ -34,7 +34,7 @@ Next step: Run `kaddo scan` to capture deterministic signals from the existing c
 
 - Phase: Discovery
 - Draft Work Items: 0
-- Ready Work Items: 1
+- Ready Work Items: 0
 - In-progress Work Items: 0
 - Ownership coverage: 1/1
 - Remaining Work Item candidates: 0
@@ -89,14 +89,7 @@ No roadmap baseline found.
 
 ## Active Work Items
 
-- WI-004 [bugfix] (ready) — Centralized Environment Configuration with Terraform · domains: frontend, backend, infrastructure, delivery
-  - Source: manual
-
-## Delivery Mix
-
-Active Work Items by type:
-
-- Bugfixs: 1
+No active work items found.
 
 ## Artifacts and Ownership
 
