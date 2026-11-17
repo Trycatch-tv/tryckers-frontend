@@ -23,9 +23,13 @@ try {
   process.exit(1);
 }
 
-if (parsedUrl.protocol !== 'https:') {
-  console.error(`[generate-environment] ERROR: API_BASE_URL must use HTTPS protocol in production. Received: "${apiBaseUrl}"`);
+if (parsedUrl.protocol !== 'https:' && parsedUrl.protocol !== 'http:') {
+  console.error(`[generate-environment] ERROR: API_BASE_URL must use HTTP or HTTPS protocol. Received: "${apiBaseUrl}"`);
   process.exit(1);
+}
+
+if (parsedUrl.protocol === 'http:') {
+  console.warn(`[generate-environment] WARNING: API_BASE_URL is using HTTP (${apiBaseUrl}). Note that browsers may block HTTP requests from HTTPS sites due to Mixed Content policies.`);
 }
 
 // Normalize base URL and preserve /api/v1 path
