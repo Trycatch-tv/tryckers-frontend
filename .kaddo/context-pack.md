@@ -14,6 +14,7 @@
 
 - Name: tryckers-frontend
 - State: pre-ai
+- Mode: standard
 - Team size: small
 - Structure: multirepo
 - Language: Spanish
@@ -33,9 +34,9 @@ Next step: Run `kaddo scan` to capture deterministic signals from the existing c
 
 - Phase: Discovery
 - Draft Work Items: 0
-- Ready Work Items: 0
+- Ready Work Items: 1
 - In-progress Work Items: 0
-- Ownership coverage: 0/0
+- Ownership coverage: 1/1
 - Remaining Work Item candidates: 0
 
 ## Next Step Recommendation
@@ -88,11 +89,18 @@ No roadmap baseline found.
 
 ## Active Work Items
 
-No active work items found.
+- WI-004 [bugfix] (ready) — Centralized Environment Configuration with Terraform · domains: frontend, backend, infrastructure, delivery
+  - Source: manual
+
+## Delivery Mix
+
+Active Work Items by type:
+
+- Bugfixs: 1
 
 ## Artifacts and Ownership
 
-No artifacts declare code ownership yet.
+- WI-004 [bugfix] owns: infra/**/*.tf, scripts/*.sh, docker-compose.prod.yml, src/cmd/main.go, src/internal/config/config.go, tryckers-frontend/src/environments/*.ts, tryckers-frontend/angular.json, tryckers-frontend/amplify.yml, tryckers-frontend/scripts/*.mjs
 
 ## Missing Context
 

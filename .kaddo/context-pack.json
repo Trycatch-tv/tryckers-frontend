@@ -1,9 +1,10 @@
 {
   "version": "1",
-  "generatedAt": "2026-08-04T03:52:29.568Z",
+  "generatedAt": "2026-11-17T01:39:48.608Z",
   "project": {
     "name": "tryckers-frontend",
     "state": "pre-ai",
+    "mode": "standard",
     "teamSize": "small",
     "structure": "multirepo",
     "language": "Spanish"
@@ -22,12 +23,96 @@
     "summary": "",
     "roadmapSummary": "",
     "inventoryAvailable": false,
-    "workItems": [],
-    "activeWorkItems": [],
+    "workItems": [
+      {
+        "id": "WI-004",
+        "type": "bugfix",
+        "title": "Centralized Environment Configuration with Terraform",
+        "status": "ready",
+        "lifecycle": "ready",
+        "knowledgeLevel": "",
+        "domains": [
+          "frontend",
+          "backend",
+          "infrastructure",
+          "delivery"
+        ],
+        "source": {
+          "type": "manual",
+          "inferred": false
+        },
+        "affectedModules": [
+          "core"
+        ]
+      }
+    ],
+    "activeWorkItems": [
+      {
+        "id": "WI-004",
+        "type": "bugfix",
+        "title": "Centralized Environment Configuration with Terraform",
+        "status": "ready",
+        "lifecycle": "ready",
+        "knowledgeLevel": "",
+        "domains": [
+          "frontend",
+          "backend",
+          "infrastructure",
+          "delivery"
+        ],
+        "source": {
+          "type": "manual",
+          "inferred": false
+        },
+        "affectedModules": [
+          "core"
+        ]
+      }
+    ],
     "completedWorkItems": [],
     "archivedWorkItems": [],
-    "allWorkItems": [],
-    "artifacts": []
+    "allWorkItems": [
+      {
+        "id": "WI-004",
+        "type": "bugfix",
+        "title": "Centralized Environment Configuration with Terraform",
+        "status": "ready",
+        "lifecycle": "ready",
+        "knowledgeLevel": "",
+        "domains": [
+          "frontend",
+          "backend",
+          "infrastructure",
+          "delivery"
+        ],
+        "source": {
+          "type": "manual",
+          "inferred": false
+        },
+        "affectedModules": [
+          "core"
+        ]
+      }
+    ],
+    "artifacts": [
+      {
+        "id": "WI-004",
+        "type": "bugfix",
+        "title": "Centralized Environment Configuration with Terraform",
+        "summary": "Centralizar en Terraform la configuración de las URLs públicas utilizadas por frontend y backend, garantizando que Amplify compile con API_BASE_URL HTTPS y el backend configure CORS con el origen de Amplify sin fallbacks inseguros a localhost en producción.",
+        "codeGlobs": [
+          "infra/**/*.tf",
+          "scripts/*.sh",
+          "docker-compose.prod.yml",
+          "src/cmd/main.go",
+          "src/internal/config/config.go",
+          "tryckers-frontend/src/environments/*.ts",
+          "tryckers-frontend/angular.json",
+          "tryckers-frontend/amplify.yml",
+          "tryckers-frontend/scripts/*.mjs"
+        ]
+      }
+    ]
   },
   "layers": [
     {
@@ -89,10 +174,10 @@
     "present": false,
     "initiatives": 0,
     "work_item_candidates": 0,
-    "materialized_work_items": 0,
+    "materialized_work_items": 1,
     "remaining_work_item_candidates": 0,
     "candidates": 0,
-    "materialized": 0,
+    "materialized": 1,
     "remaining": 0
   },
   "phase": {
@@ -120,13 +205,17 @@
     "draft_work_items": 0,
     "refined_draft_work_items": 0,
     "refined_draft_ids": [],
-    "ready_work_items": 0,
-    "ready_work_item_ids": [],
-    "ready_multirepo_wi_ids": [],
+    "ready_work_items": 1,
+    "ready_work_item_ids": [
+      "WI-004"
+    ],
+    "ready_multirepo_wi_ids": [
+      "WI-004"
+    ],
     "in_progress_work_items": 0,
     "blocked_work_items": 0,
-    "total_work_items": 0,
-    "ownership_coverage": "0/0",
+    "total_work_items": 1,
+    "ownership_coverage": "1/1",
     "remaining_work_item_candidates": 0,
     "decision_candidates": 0,
     "accepted_adrs": 2,
@@ -176,16 +265,16 @@
     }
   },
   "installedAssets": {
-    "version": "3.68.0",
+    "version": "3.135.0",
     "agents": {
-      "total": 20,
+      "total": 21,
       "installed": 0,
       "outdated": 0,
       "unknown_version": 0,
       "modified": 0
     },
     "skills": {
-      "total": 8,
+      "total": 12,
       "installed": 0,
       "outdated": 0,
       "unknown_version": 0,
@@ -193,17 +282,19 @@
     }
   },
   "workItemSummary": {
-    "total": 0,
-    "active": 0,
+    "total": 1,
+    "active": 1,
     "draft": 0,
-    "ready": 0,
+    "ready": 1,
     "in_progress": 0,
     "blocked": 0,
     "completed": 0,
     "archived": 0,
-    "summary": "none"
+    "summary": "ready"
   },
-  "deliveryMix": {},
+  "deliveryMix": {
+    "bugfix": 1
+  },
   "external": [],
   "graph": null,
   "graphHints": null,

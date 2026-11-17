@@ -4,6 +4,7 @@ frontend:
     preBuild:
       commands:
         - npm install --legacy-peer-deps
+        - node scripts/generate-environment.mjs
     build:
       commands:
         - npm run build

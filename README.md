@@ -26,6 +26,19 @@ For a complete list of available schematics (such as `components`, `directives`,
 ng generate --help
 ```
 
+## Environment Configuration
+
+Environment configuration is managed centrally:
+- **Local Development:** Default configuration in `src/environments/environment.ts` points to `http://localhost:8080/api/v1`.
+- **Production Build (AWS Amplify):** At build time, `scripts/generate-environment.mjs` reads `API_BASE_URL` provided by Amplify, validates HTTPS requirement, and creates `src/environments/environment.production.ts`. `angular.json` uses `fileReplacements` to substitute the configuration during `ng build --configuration production`.
+
+To build locally for production:
+```bash
+export API_BASE_URL="https://api.tryckers.com/api/v1"
+node scripts/generate-environment.mjs
+npm run build
+```
+
 ## Building
 
 To build the project run:
