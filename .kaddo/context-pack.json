@@ -1,6 +1,6 @@
 {
   "version": "1",
-  "generatedAt": "2026-11-17T02:42:27.549Z",
+  "generatedAt": "2026-11-18T04:08:39.913Z",
   "project": {
     "name": "tryckers-frontend",
     "state": "pre-ai",
@@ -49,6 +49,30 @@
         "affectedModules": [
           "core"
         ]
+      },
+      {
+        "id": "WI-005",
+        "type": "chore",
+        "title": "Custom Domains and DNS Management with Terraform",
+        "status": "completed",
+        "lifecycle": "completed",
+        "knowledgeLevel": "",
+        "domains": [
+          "infrastructure",
+          "frontend",
+          "backend",
+          "delivery"
+        ],
+        "source": {
+          "type": "manual",
+          "inferred": false
+        },
+        "implementationStatus": "not-assessed",
+        "validationStatus": "not-assessed",
+        "releaseStatus": "not-assessed",
+        "affectedModules": [
+          "core"
+        ]
       }
     ],
     "archivedWorkItems": [],
@@ -64,6 +88,30 @@
           "frontend",
           "backend",
           "infrastructure",
+          "delivery"
+        ],
+        "source": {
+          "type": "manual",
+          "inferred": false
+        },
+        "implementationStatus": "not-assessed",
+        "validationStatus": "not-assessed",
+        "releaseStatus": "not-assessed",
+        "affectedModules": [
+          "core"
+        ]
+      },
+      {
+        "id": "WI-005",
+        "type": "chore",
+        "title": "Custom Domains and DNS Management with Terraform",
+        "status": "completed",
+        "lifecycle": "completed",
+        "knowledgeLevel": "",
+        "domains": [
+          "infrastructure",
+          "frontend",
+          "backend",
           "delivery"
         ],
         "source": {
@@ -94,6 +142,23 @@
           "tryckers-frontend/angular.json",
           "tryckers-frontend/amplify.yml",
           "tryckers-frontend/scripts/*.mjs"
+        ]
+      },
+      {
+        "id": "WI-005",
+        "type": "chore",
+        "title": "Custom Domains and DNS Management with Terraform",
+        "summary": "Configurar dominios personalizados (tryckers.trycatch.tv y api.tryckers.trycatch.tv) mediante Terraform reutilizando la zona DNS existente en Netlify, AWS Amplify, ACM (us-east-1) y CloudFront, actualizando API_BASE_URL y CORS sin migrar DNS a Route 53 ni destruir recursos existentes.",
+        "codeGlobs": [
+          "infra/provider.tf",
+          "infra/variables.tf",
+          "infra/main.tf",
+          "infra/outputs.tf",
+          "infra/netlify-dns.tf",
+          "infra/amplify-domains.tf",
+          "infra/certificates.tf",
+          "infra/README.md",
+          "infra/terraform.tfvars.example"
         ]
       }
     ]
@@ -158,10 +223,10 @@
     "present": false,
     "initiatives": 0,
     "work_item_candidates": 0,
-    "materialized_work_items": 1,
+    "materialized_work_items": 2,
     "remaining_work_item_candidates": 0,
     "candidates": 0,
-    "materialized": 1,
+    "materialized": 2,
     "remaining": 0
   },
   "phase": {
@@ -194,8 +259,8 @@
     "ready_multirepo_wi_ids": [],
     "in_progress_work_items": 0,
     "blocked_work_items": 0,
-    "total_work_items": 1,
-    "ownership_coverage": "1/1",
+    "total_work_items": 2,
+    "ownership_coverage": "2/2",
     "remaining_work_item_candidates": 0,
     "decision_candidates": 0,
     "accepted_adrs": 2,
@@ -262,13 +327,13 @@
     }
   },
   "workItemSummary": {
-    "total": 1,
+    "total": 2,
     "active": 0,
     "draft": 0,
     "ready": 0,
     "in_progress": 0,
     "blocked": 0,
-    "completed": 1,
+    "completed": 2,
     "archived": 0,
     "summary": "completed-only"
   },

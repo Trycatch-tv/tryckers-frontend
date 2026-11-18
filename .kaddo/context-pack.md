@@ -36,7 +36,7 @@ Next step: Run `kaddo scan` to capture deterministic signals from the existing c
 - Draft Work Items: 0
 - Ready Work Items: 0
 - In-progress Work Items: 0
-- Ownership coverage: 1/1
+- Ownership coverage: 2/2
 - Remaining Work Item candidates: 0
 
 ## Next Step Recommendation
@@ -94,6 +94,7 @@ No active work items found.
 ## Artifacts and Ownership
 
 - WI-004 [bugfix] owns: infra/**/*.tf, scripts/*.sh, docker-compose.prod.yml, src/cmd/main.go, src/internal/config/config.go, tryckers-frontend/src/environments/*.ts, tryckers-frontend/angular.json, tryckers-frontend/amplify.yml, tryckers-frontend/scripts/*.mjs
+- WI-005 [chore] owns: infra/provider.tf, infra/variables.tf, infra/main.tf, infra/outputs.tf, infra/netlify-dns.tf, infra/amplify-domains.tf, infra/certificates.tf, infra/README.md, infra/terraform.tfvars.example
 
 ## Missing Context
 
