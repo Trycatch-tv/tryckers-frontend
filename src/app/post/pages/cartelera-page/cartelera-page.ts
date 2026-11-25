@@ -1,10 +1,18 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { NotificationService } from '@shared/services/notification.service';
 import { UxMetricsService } from '@shared/services/ux-metrics.service';
 import { Post } from '../../interfaces/post';
 import { PostsService } from '../../services/posts.service';
+
+export type CarteleraErrorType =
+  | 'auth'
+  | 'network'
+  | 'server'
+  | 'client'
+  | 'unknown';
 
 @Component({
   selector: 'app-cartelera-page',
@@ -17,6 +25,7 @@ export default class CarteleraPage implements OnInit {
   posts: Post[] = [];
   loading = true;
   errorMessage: string | null = null;
+  errorType: CarteleraErrorType | null = null;
 
   private postsService = inject(PostsService);
   private notificationService = inject(NotificationService);
@@ -27,12 +36,45 @@ export default class CarteleraPage implements OnInit {
   }
 
   async loadCartelera(): Promise<void> {
+    this.loading = true;
+    this.errorMessage = null;
+    this.errorType = null;
+    this.safeMetrics(() => this.uxMetrics.startTiming('cartelera-load'));
+
     try {
-      this.uxMetrics.startTiming('cartelera-load');
-      this.loading = true;
-      this.errorMessage = null;
-      this.posts = await this.postsService.getCartelera();
-      this.posts.sort((a, b) => (b.votes_count ?? 0) - (a.votes_count ?? 0));
+      const fetchedPosts = await this.postsService.getCartelera();
+      this.posts = [...fetchedPosts].sort(
+        (a, b) => (b.votes_count ?? 0) - (a.votes_count ?? 0),
+      );
+    } catch (error) {
+      const classified = this.classifyError(error);
+      this.posts = [];
+      this.errorType = classified.type;
+      this.errorMessage = classified.userMessage;
+
+      console.error('Error loading cartelera:', {
+        errorType: classified.type,
+        status: classified.status,
+      });
+
+      this.safeMetrics(() => {
+        this.uxMetrics.track('cartelera_load_error', {
+          errorType: classified.type,
+          status: classified.status,
+        });
+        this.uxMetrics.endTiming('cartelera-load', 'perceived_cartelera_load', {
+          success: false,
+          errorType: classified.type,
+          status: classified.status,
+        });
+      });
+      return;
+    } finally {
+      this.loading = false;
+    }
+
+    // Registrar telemetría fuera del try/catch de carga para que fallos secundarios no rompan la UI
+    this.safeMetrics(() => {
       this.uxMetrics.track('cartelera_impression', {
         postsCount: this.posts.length,
       });
@@ -40,17 +82,7 @@ export default class CarteleraPage implements OnInit {
         success: true,
         postsCount: this.posts.length,
       });
-    } catch (error) {
-      console.error('Error loading cartelera:', error);
-      this.posts = [];
-      this.errorMessage =
-        'No se pudo cargar la cartelera. Inténtalo nuevamente.';
-      this.uxMetrics.endTiming('cartelera-load', 'perceived_cartelera_load', {
-        success: false,
-      });
-    } finally {
-      this.loading = false;
-    }
+    });
   }
 
   trackPostClick(
@@ -58,11 +90,13 @@ export default class CarteleraPage implements OnInit {
     position: number,
     source: 'title' | 'read_button',
   ): void {
-    this.uxMetrics.track('cartelera_post_click', {
-      postId,
-      position,
-      source,
-    });
+    this.safeMetrics(() =>
+      this.uxMetrics.track('cartelera_post_click', {
+        postId,
+        position,
+        source,
+      }),
+    );
   }
 
   async votePost(postId: string): Promise<void> {
@@ -107,11 +141,68 @@ export default class CarteleraPage implements OnInit {
       );
     } catch (error) {
       console.error('Error voting post in cartelera:', error);
-      this.notificationService.error('Error al votar la publicación.');
+      if (!(error instanceof HttpErrorResponse)) {
+        this.notificationService.error('Error al votar la publicación.');
+      }
     }
   }
 
-  textPreview(content: string): string {
-    return content.length > 140 ? `${content.substring(0, 140)}...` : content;
+  textPreview(content: string | null | undefined): string {
+    const safeContent = content ?? '';
+    return safeContent.length > 140
+      ? `${safeContent.substring(0, 140)}...`
+      : safeContent;
+  }
+
+  private classifyError(error: unknown): {
+    type: CarteleraErrorType;
+    status: number | null;
+    userMessage: string;
+  } {
+    if (error instanceof HttpErrorResponse) {
+      if (error.status === 401) {
+        return {
+          type: 'auth',
+          status: 401,
+          userMessage:
+            'Tu sesión ha expirado. Inicia sesión nuevamente para ver la cartelera.',
+        };
+      }
+      if (error.status === 0) {
+        return {
+          type: 'network',
+          status: 0,
+          userMessage:
+            'No pudimos conectarnos con el servidor. Verifica tu conexión e inténtalo nuevamente.',
+        };
+      }
+      if (error.status >= 500) {
+        return {
+          type: 'server',
+          status: error.status,
+          userMessage:
+            'Ocurrió un problema temporal en el servidor. Inténtalo nuevamente en unos momentos.',
+        };
+      }
+      return {
+        type: 'client',
+        status: error.status,
+        userMessage: 'No se pudo cargar la cartelera. Inténtalo nuevamente.',
+      };
+    }
+
+    return {
+      type: 'unknown',
+      status: null,
+      userMessage: 'No se pudo cargar la cartelera. Inténtalo nuevamente.',
+    };
+  }
+
+  private safeMetrics(fn: () => void): void {
+    try {
+      fn();
+    } catch {
+      // Los errores de telemetría nunca deben interrumpir la experiencia principal
+    }
   }
 }

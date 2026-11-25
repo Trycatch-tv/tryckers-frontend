@@ -1,8 +1,10 @@
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnDestroy, OnInit, signal } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
+import { getSafeReturnUrl } from '@auth/utils/return-url';
 import { NotificationService } from '@shared/services/notification.service';
 import { UxMetricsService } from '@shared/services/ux-metrics.service';
 
@@ -35,7 +37,7 @@ export class LoginPageComponent implements OnInit, OnDestroy {
 
   ngOnInit(): void {
     this.uxMetrics.track('login_view');
-    const safeReturnUrl = this.getSafeReturnUrl(
+    const safeReturnUrl = getSafeReturnUrl(
       this.route.snapshot.queryParamMap.get('returnUrl'),
     );
     this.returnUrl.set(safeReturnUrl);
@@ -91,30 +93,16 @@ export class LoginPageComponent implements OnInit, OnDestroy {
         success: false,
       });
       this.hasError.set(true);
-      this.notificationService.error(
-        'No pudimos iniciar sesión. Verifica tus credenciales.',
-      );
-      // El interceptor ya muestra el mensaje de error HTTP
+      // Evitar notificación duplicada si errorInterceptor ya mostró el error HTTP
+      if (!(error instanceof HttpErrorResponse)) {
+        this.notificationService.error(
+          'No pudimos iniciar sesión. Verifica tus credenciales.',
+        );
+      }
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);
     }
-  }
-
-  private getSafeReturnUrl(returnUrl: string | null): string | null {
-    if (!returnUrl || !returnUrl.startsWith('/')) {
-      return null;
-    }
-
-    if (returnUrl.startsWith('//') || returnUrl.includes('://')) {
-      return null;
-    }
-
-    if (returnUrl.startsWith('/auth')) {
-      return null;
-    }
-
-    return returnUrl;
   }
 
   isFieldInvalid(fieldName: 'email' | 'password'): boolean {

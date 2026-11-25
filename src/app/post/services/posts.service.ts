@@ -1,5 +1,6 @@
 import { HttpClient } from '@angular/common/http';
 import { inject, Injectable } from '@angular/core';
+import { firstValueFrom } from 'rxjs';
 import { environment } from 'src/environments/environment';
 import {
   CreatePostDto,
@@ -67,9 +68,9 @@ export class PostsService {
   }
 
   async getCartelera(): Promise<Post[]> {
-    const result = await this.http
-      .get<Post[]>(`${baseUrl}/cartelera`)
-      .toPromise();
-    return result ?? [];
+    const result = await firstValueFrom(
+      this.http.get<Post[]>(`${baseUrl}/cartelera`),
+    );
+    return Array.isArray(result) ? result : [];
   }
 }

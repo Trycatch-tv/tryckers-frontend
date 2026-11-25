@@ -1,15 +1,18 @@
-import { Component, inject, signal } from '@angular/core';
+import { HttpErrorResponse } from '@angular/common/http';
+import { Component, inject, OnInit, signal } from '@angular/core';
 import {
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
   Validators,
 } from '@angular/forms';
-import { Router, RouterLink } from '@angular/router';
+import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
+import { getSafeReturnUrl } from '@auth/utils/return-url';
 import { NotificationService } from '@shared/services/notification.service';
 import { UxMetricsService } from '@shared/services/ux-metrics.service';
+import { firstValueFrom } from 'rxjs';
 
 @Component({
   selector: 'app-register-page',
@@ -18,13 +21,15 @@ import { UxMetricsService } from '@shared/services/ux-metrics.service';
   templateUrl: './register-page.component.html',
   styleUrl: './register-page.component.css',
 })
-export class RegisterPageComponent {
+export class RegisterPageComponent implements OnInit {
   selectedCountry: string | null = null;
 
   fb = inject(FormBuilder);
   hasError = signal(false);
   isPosting = signal(false);
   router = inject(Router);
+  route = inject(ActivatedRoute);
+  returnUrl = signal<string | null>(null);
 
   authService = inject(AuthService);
   authStore = inject(AuthStore);
@@ -39,7 +44,14 @@ export class RegisterPageComponent {
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
 
-  async onSubmit() {
+  ngOnInit(): void {
+    const safeReturnUrl = getSafeReturnUrl(
+      this.route.snapshot.queryParamMap.get('returnUrl'),
+    );
+    this.returnUrl.set(safeReturnUrl);
+  }
+
+  async onSubmit(): Promise<void> {
     this.uxMetrics.track('register_submit_attempt');
     // Marcar todos los campos como touched para mostrar errores
     this.registerForm.markAllAsTouched();
@@ -66,44 +78,63 @@ export class RegisterPageComponent {
       password = '',
     } = this.registerForm.value;
 
+    let registrationSucceeded = false;
+
     try {
-      await new Promise<void>((resolve, reject) => {
-        this.authService
-          .register(name!, username!, country!, email!, password!)
-          .subscribe({
-            next: (isAuthenticated) => {
-              if (isAuthenticated) {
-                this.uxMetrics.track('register_success');
-                this.uxMetrics.endTiming(
-                  'register-submit',
-                  'perceived_register_submit',
-                  {
-                    success: true,
-                  },
-                );
-                this.notificationService.success(
-                  '¡Registro exitoso! Bienvenido.',
-                );
-                this.router.navigateByUrl('/home');
-                resolve();
-              } else {
-                reject(new Error('Registration failed'));
-              }
-            },
-            error: (error) => {
-              reject(error);
-            },
-          });
+      await firstValueFrom(
+        this.authService.register(
+          name!,
+          username!,
+          country!,
+          email!,
+          password!,
+        ),
+      );
+      registrationSucceeded = true;
+
+      // Reutilizar el flujo de login existente para iniciar una sesión válida
+      await this.authStore.login(email!, password!);
+
+      this.uxMetrics.track('register_success');
+      this.uxMetrics.endTiming('register-submit', 'perceived_register_submit', {
+        success: true,
       });
+      this.notificationService.success('¡Registro exitoso! Bienvenido.');
+      await this.router.navigateByUrl(this.returnUrl() ?? '/home');
     } catch (error) {
+      if (registrationSucceeded) {
+        // La cuenta fue creada, pero falló el auto-login: limpiar cualquier estado parcial y redirigir a login
+        this.authStore.logout();
+        this.uxMetrics.track('register_autologin_failure');
+        this.uxMetrics.endTiming(
+          'register-submit',
+          'perceived_register_submit',
+          {
+            success: true,
+            autoLoginSuccess: false,
+          },
+        );
+        this.notificationService.info(
+          'Tu cuenta fue creada correctamente. Inicia sesión para continuar.',
+        );
+        const safeReturnUrl = this.returnUrl();
+        await this.router.navigate(['/auth/login'], {
+          queryParams: safeReturnUrl ? { returnUrl: safeReturnUrl } : undefined,
+        });
+        return;
+      }
+
       this.uxMetrics.track('register_failure');
       this.uxMetrics.endTiming('register-submit', 'perceived_register_submit', {
         success: false,
       });
       this.hasError.set(true);
-      this.notificationService.error(
-        'No pudimos crear tu cuenta. Revisa tus datos e intentalo nuevamente.',
-      );
+      // Evitar notificación duplicada si errorInterceptor ya mostró el error HTTP
+      if (!(error instanceof HttpErrorResponse)) {
+        this.notificationService.error(
+          'No pudimos crear tu cuenta. Revisa tus datos e intentalo nuevamente.',
+        );
+      }
       setTimeout(() => {
         this.hasError.set(false);
       }, 2000);

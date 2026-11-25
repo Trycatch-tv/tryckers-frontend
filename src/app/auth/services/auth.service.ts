@@ -1,4 +1,4 @@
-import { HttpClient, HttpErrorResponse } from '@angular/common/http';
+import { HttpClient } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   AuthResponse,
@@ -6,7 +6,7 @@ import {
   UserData,
 } from '@auth/interfaces/auth-response';
 import { User } from '@auth/interfaces/user';
-import { catchError, map, Observable, of, tap } from 'rxjs';
+import { catchError, Observable, of, tap } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
@@ -15,7 +15,6 @@ const baseUrl = environment.baseUrl;
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private _authStatus = signal<AuthStatus>('checking');
-  private _user = signal<User | null>(null);
   private __user = signal<UserData | null>(null);
   private _token = signal<string | null>(null);
   private _refreshToken = signal<string | null>(null);
@@ -25,10 +24,10 @@ export class AuthService {
     this.initializeAuth();
   }
 
-  private initializeAuth() {
-    const token = localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
-    const userDataString = localStorage.getItem('userData');
+  private initializeAuth(): void {
+    const token = this.safeGetItem('token');
+    const refreshToken = this.safeGetItem('refreshToken');
+    const userDataString = this.safeGetItem('userData');
 
     if (token) {
       this._token.set(token);
@@ -37,15 +36,16 @@ export class AuthService {
 
       if (userDataString && userDataString !== 'undefined') {
         try {
-          const userData = JSON.parse(userDataString);
+          const userData = JSON.parse(userDataString) as UserData;
           this.__user.set(userData);
         } catch (error) {
           console.error('Error parsing userData from localStorage:', error);
-          localStorage.removeItem('userData');
+          this.safeRemoveItem('userData');
         }
       }
     } else {
       this._authStatus.set('not-authenticated');
+      this.safeRemoveItem('isLoggedIn');
     }
   }
 
@@ -65,37 +65,25 @@ export class AuthService {
     });
   }
 
+  /**
+   * Registra un nuevo usuario en el backend.
+   * No establece estado de autenticación ni tokens en memoria; la sesión se inicia
+   * mediante el flujo de login existente (AuthStore.login).
+   */
   register(
     name: string,
     username: string,
     country: string,
     email: string,
     password: string,
-  ): Observable<boolean> {
-    console.log('Attempting registration with:', {
+  ): Observable<User> {
+    return this.http.post<User>(`${baseUrl}/register`, {
       name,
       username,
       country,
       email,
+      password,
     });
-    return this.http
-      .post<{ user: User }>(`${baseUrl}/register`, {
-        name,
-        username,
-        country,
-        email,
-        password,
-      })
-      .pipe(
-        tap((resp) => {
-          this._user.set(resp.user);
-          this._authStatus.set('authenticated');
-        }),
-        map(() => true),
-        catchError((error: HttpErrorResponse) => {
-          return this.handleAuthError(error);
-        }),
-      );
   }
 
   /**
@@ -128,33 +116,69 @@ export class AuthService {
   updateTokens(token: string, refreshToken: string): void {
     this._token.set(token);
     this._refreshToken.set(refreshToken);
-    this._authStatus.set('authenticated');
-    localStorage.setItem('token', token);
-    localStorage.setItem('refreshToken', refreshToken);
+    this._authStatus.set(token ? 'authenticated' : 'not-authenticated');
+    if (token) {
+      this.safeSetItem('token', token);
+      this.safeSetItem('refreshToken', refreshToken);
+      this.safeSetItem('isLoggedIn', 'true');
+    } else {
+      this.safeRemoveItem('token');
+      this.safeRemoveItem('refreshToken');
+      this.safeRemoveItem('isLoggedIn');
+    }
   }
 
   /**
    * Actualiza los datos del usuario en memoria y localStorage.
    */
-  setUserData(userData: UserData): void {
+  setUserData(userData: UserData | null): void {
     this.__user.set(userData);
-    localStorage.setItem('userData', JSON.stringify(userData));
+    if (userData) {
+      this.safeSetItem('userData', JSON.stringify(userData));
+    } else {
+      this.safeRemoveItem('userData');
+    }
   }
 
-  logout() {
+  logout(): void {
     this._authStatus.set('not-authenticated');
-    this._user.set(null);
     this.__user.set(null);
     this._token.set(null);
     this._refreshToken.set(null);
-    localStorage.removeItem('token');
-    localStorage.removeItem('refreshToken');
-    localStorage.removeItem('userData');
+    this.safeRemoveItem('token');
+    this.safeRemoveItem('refreshToken');
+    this.safeRemoveItem('userData');
+    this.safeRemoveItem('isLoggedIn');
   }
 
-  private handleAuthError(error: HttpErrorResponse): Observable<boolean> {
-    console.error('Authentication error:', error);
-    this.logout();
-    return of(false);
+  private safeGetItem(key: string): string | null {
+    try {
+      if (typeof localStorage === 'undefined') {
+        return null;
+      }
+      return localStorage.getItem(key);
+    } catch {
+      return null;
+    }
+  }
+
+  private safeSetItem(key: string, value: string): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(key, value);
+      }
+    } catch {
+      // Ignorar errores de cuota o almacenamiento restringido
+    }
+  }
+
+  private safeRemoveItem(key: string): void {
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem(key);
+      }
+    } catch {
+      // Ignorar errores de almacenamiento restringido
+    }
   }
 }

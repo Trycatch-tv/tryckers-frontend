@@ -8,6 +8,7 @@ import {
   withMethods,
   withState,
 } from '@ngrx/signals';
+import { firstValueFrom } from 'rxjs';
 
 type AuthState = {
   isLoggedIn: boolean;
@@ -16,22 +17,32 @@ type AuthState = {
   refreshToken: string;
 };
 
-// Función para cargar el estado inicial desde localStorage
+// Función para cargar el estado inicial desde localStorage de forma segura
 function loadInitialState(): AuthState {
-  if (typeof localStorage !== 'undefined') {
-    const token = localStorage.getItem('token');
-    const refreshToken = localStorage.getItem('refreshToken');
-    const userData = localStorage.getItem('userData');
+  try {
+    if (typeof localStorage !== 'undefined') {
+      const token = localStorage.getItem('token');
+      const refreshToken = localStorage.getItem('refreshToken');
+      const userDataString = localStorage.getItem('userData');
+      let parsedUser: UserData | null = null;
 
-    return {
-      isLoggedIn: !!token,
-      user:
-        userData && userData !== 'undefined'
-          ? (JSON.parse(userData) as UserData)
-          : null,
-      token: token || '',
-      refreshToken: refreshToken || '',
-    };
+      if (token && userDataString && userDataString !== 'undefined') {
+        try {
+          parsedUser = JSON.parse(userDataString) as UserData;
+        } catch {
+          localStorage.removeItem('userData');
+        }
+      }
+
+      return {
+        isLoggedIn: !!token,
+        user: token ? parsedUser : null,
+        token: token || '',
+        refreshToken: token ? refreshToken || '' : '',
+      };
+    }
+  } catch {
+    // Fallback limpio si localStorage no está disponible
   }
 
   return { isLoggedIn: false, user: null, token: '', refreshToken: '' };
@@ -43,49 +54,45 @@ export const AuthStore = signalStore(
     const authService = inject(AuthService);
     return {
       async login(email: string, password: string) {
-        try {
-          const response = await authService.login(email, password).toPromise();
-          if (!response) {
-            throw new Error('No response from server');
-          }
-
-          const newState: AuthState = {
-            isLoggedIn: !!response.user.token,
-            user: response.user.user_data,
-            token: response.user.token,
-            refreshToken: response.user.refresh_token || '',
-          };
-
-          // Sincronizar AuthService (para que el interceptor tenga el token)
-          authService.updateTokens(
-            response.user.token,
-            response.user.refresh_token || '',
-          );
-          authService.setUserData(response.user.user_data);
-
-          // Guardar en localStorage
-          localStorage.setItem('isLoggedIn', newState.isLoggedIn.toString());
-
-          patchState(store, newState);
-          return response;
-        } catch (error) {
-          throw error;
+        const response = await firstValueFrom(
+          authService.login(email, password),
+        );
+        if (!response?.user?.token) {
+          throw new Error('No valid session token returned from server');
         }
+
+        const newState: AuthState = {
+          isLoggedIn: true,
+          user: response.user.user_data,
+          token: response.user.token,
+          refreshToken: response.user.refresh_token || '',
+        };
+
+        // Sincronizar AuthService y localStorage
+        authService.updateTokens(newState.token, newState.refreshToken);
+        authService.setUserData(newState.user);
+
+        patchState(store, newState);
+        return response;
+      },
+      syncTokens(token: string, refreshToken: string) {
+        authService.updateTokens(token, refreshToken);
+        patchState(store, {
+          isLoggedIn: !!token,
+          token,
+          refreshToken,
+        });
       },
       setUser(user: UserData | null) {
+        authService.setUserData(user);
         patchState(store, { user });
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('userData', JSON.stringify(user));
-        }
       },
       setIsLoggedIn(isLoggedIn: boolean) {
         patchState(store, { isLoggedIn });
       },
       setToken(token: string) {
-        patchState(store, { token });
-        if (typeof localStorage !== 'undefined') {
-          localStorage.setItem('token', token);
-        }
+        authService.updateTokens(token, store.refreshToken());
+        patchState(store, { token, isLoggedIn: !!token });
       },
       logout() {
         authService.logout();
@@ -99,7 +106,7 @@ export const AuthStore = signalStore(
     };
   }),
   withHooks({
-    onInit(store) {
+    onInit() {
       // Estado inicial cargado desde localStorage
     },
   }),

@@ -1,6 +1,7 @@
 import { inject } from '@angular/core';
 import { CanMatchFn, Route, Router, UrlSegment } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
+import { getSafeReturnUrl } from '@auth/utils/return-url';
 
 function getSafeInternalReturnUrl(): string | null {
   if (typeof window === 'undefined') {
@@ -8,21 +9,7 @@ function getSafeInternalReturnUrl(): string | null {
   }
 
   const searchParams = new URLSearchParams(window.location.search);
-  const rawReturnUrl = searchParams.get('returnUrl');
-
-  if (!rawReturnUrl || !rawReturnUrl.startsWith('/')) {
-    return null;
-  }
-
-  if (rawReturnUrl.startsWith('//') || rawReturnUrl.includes('://')) {
-    return null;
-  }
-
-  if (rawReturnUrl.startsWith('/auth')) {
-    return null;
-  }
-
-  return rawReturnUrl;
+  return getSafeReturnUrl(searchParams.get('returnUrl'));
 }
 
 export const NotAuthenticatedGuard: CanMatchFn = async (

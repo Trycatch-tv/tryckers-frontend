@@ -184,7 +184,13 @@ export class UxMetricsService {
   clear(): void {
     this.events = [];
     this.pendingTimings.clear();
-    localStorage.removeItem(STORAGE_KEY);
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.removeItem(STORAGE_KEY);
+      }
+    } catch {
+      // Ignorar errores de almacenamiento al limpiar telemetría
+    }
   }
 
   private count(name: string): number {
@@ -225,6 +231,9 @@ export class UxMetricsService {
 
   private load(): void {
     try {
+      if (typeof localStorage === 'undefined') {
+        return;
+      }
       const raw = localStorage.getItem(STORAGE_KEY);
       if (!raw) {
         return;
@@ -239,7 +248,13 @@ export class UxMetricsService {
   }
 
   private save(): void {
-    localStorage.setItem(STORAGE_KEY, JSON.stringify(this.events));
+    try {
+      if (typeof localStorage !== 'undefined') {
+        localStorage.setItem(STORAGE_KEY, JSON.stringify(this.events));
+      }
+    } catch {
+      // Nunca interrumpir flujos principales por fallos de cuota o acceso a localStorage
+    }
   }
 
   private generateId(): string {
