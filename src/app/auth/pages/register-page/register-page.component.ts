@@ -1,18 +1,34 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { Component, inject, OnInit, signal } from '@angular/core';
 import {
+  AbstractControl,
   FormBuilder,
   FormsModule,
   ReactiveFormsModule,
+  ValidationErrors,
   Validators,
 } from '@angular/forms';
 import { ActivatedRoute, Router, RouterLink } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 import { getSafeReturnUrl } from '@auth/utils/return-url';
+import {
+  COUNTRIES,
+  isValidCanonicalCountry,
+} from '@shared/constants/countries';
 import { NotificationService } from '@shared/services/notification.service';
 import { UxMetricsService } from '@shared/services/ux-metrics.service';
 import { firstValueFrom } from 'rxjs';
+
+function validCountryValidator(
+  control: AbstractControl,
+): ValidationErrors | null {
+  const value = control.value as string | null | undefined;
+  if (!value) {
+    return null;
+  }
+  return isValidCanonicalCountry(value) ? null : { invalidCountry: true };
+}
 
 @Component({
   selector: 'app-register-page',
@@ -23,6 +39,7 @@ import { firstValueFrom } from 'rxjs';
 })
 export class RegisterPageComponent implements OnInit {
   selectedCountry: string | null = null;
+  readonly countries = COUNTRIES;
 
   fb = inject(FormBuilder);
   hasError = signal(false);
@@ -39,7 +56,7 @@ export class RegisterPageComponent implements OnInit {
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
     username: ['', [Validators.required, Validators.minLength(3)]],
-    country: ['', [Validators.required, Validators.minLength(2)]],
+    country: ['', [Validators.required, validCountryValidator]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
   });
@@ -181,6 +198,10 @@ export class RegisterPageComponent implements OnInit {
         return `La contraseña debe tener al menos ${minLength} caracteres.`;
       }
       return `Este campo debe tener al menos ${minLength} caracteres.`;
+    }
+
+    if (fieldName === 'country' && field.errors['invalidCountry']) {
+      return 'Selecciona un pais valido.';
     }
 
     if (fieldName === 'email' && field.errors['email']) {

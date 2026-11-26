@@ -1,9 +1,21 @@
 import { CommonModule } from '@angular/common';
+import { HttpErrorResponse } from '@angular/common/http';
 import { Component, effect, inject, OnInit } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { Router, RouterModule } from '@angular/router';
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
+import {
+  COUNTRIES,
+  isValidCanonicalCountry,
+  normalizeCountryValue,
+} from '@shared/constants/countries';
+import {
+  ApiError,
+  extractBackendErrorMessage,
+  extractFieldErrors,
+  formatFieldErrors,
+} from '@shared/interfaces/error';
 import { Trycker } from '@tryckers/interfaces';
 import { TryckersService } from '@tryckers/services/tryckers-service';
 import { NotificationService } from 'src/app/shared/services/notification.service';
@@ -137,9 +149,9 @@ interface ProfileFormState {
                   [(ngModel)]="formData.country"
                   class="w-full px-4 py-2.5 rounded-xl bg-slate-950/70 border border-slate-700/70 text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-blue-500/40 focus:border-blue-500 transition-all text-sm"
                 >
-                  <option value="" disabled>Selecciona tu país</option>
-                  <option *ngFor="let c of countries" [value]="c.code">
-                    {{ c.flag }} {{ c.name }} ({{ c.code }})
+                  <option value="">Sin especificar</option>
+                  <option *ngFor="let c of countries" [value]="c.value">
+                    {{ c.flag }} {{ c.label }}
                   </option>
                 </select>
               </div>
@@ -312,6 +324,15 @@ interface ProfileFormState {
             </div>
           </div>
 
+          @if (validationError) {
+            <div
+              role="alert"
+              class="p-4 rounded-xl bg-rose-500/10 border border-rose-500/30 text-rose-300 text-sm whitespace-pre-line"
+            >
+              {{ validationError }}
+            </div>
+          }
+
           <!-- Botones de Acción -->
           <div class="flex items-center justify-end gap-4 pt-2">
             <button
@@ -354,6 +375,7 @@ export default class SettingsPageComponent implements OnInit {
   private router = inject(Router);
 
   saving = false;
+  validationError: string | null = null;
   maxDate = new Date().toISOString().split('T')[0];
 
   formData: ProfileFormState = {
@@ -361,7 +383,7 @@ export default class SettingsPageComponent implements OnInit {
     birth_date: '',
     headline: '',
     bio: '',
-    country: 'CO',
+    country: '',
     seniority: 'Senior',
     english_level: 'B2',
     efset_score: '',
@@ -372,30 +394,7 @@ export default class SettingsPageComponent implements OnInit {
     pitch_video: '',
   };
 
-  countries = [
-    { code: 'AR', name: 'Argentina', flag: '🇦🇷' },
-    { code: 'BO', name: 'Bolivia', flag: '🇧🇴' },
-    { code: 'BR', name: 'Brasil', flag: '🇧🇷' },
-    { code: 'CL', name: 'Chile', flag: '🇨🇱' },
-    { code: 'CO', name: 'Colombia', flag: '🇨🇴' },
-    { code: 'CR', name: 'Costa Rica', flag: '🇨🇷' },
-    { code: 'CU', name: 'Cuba', flag: '🇨🇺' },
-    { code: 'DO', name: 'República Dominicana', flag: '🇩🇴' },
-    { code: 'EC', name: 'Ecuador', flag: '🇪🇨' },
-    { code: 'ES', name: 'España', flag: '🇪🇸' },
-    { code: 'GT', name: 'Guatemala', flag: '🇬🇹' },
-    { code: 'HN', name: 'Honduras', flag: '🇭🇳' },
-    { code: 'MX', name: 'México', flag: '🇲🇽' },
-    { code: 'NI', name: 'Nicaragua', flag: '🇳🇮' },
-    { code: 'PA', name: 'Panamá', flag: '🇵🇦' },
-    { code: 'PE', name: 'Perú', flag: '🇵🇪' },
-    { code: 'PY', name: 'Paraguay', flag: '🇵🇾' },
-    { code: 'SV', name: 'El Salvador', flag: '🇸🇻' },
-    { code: 'UY', name: 'Uruguay', flag: '🇺🇾' },
-    { code: 'VE', name: 'Venezuela', flag: '🇻🇪' },
-    { code: 'US', name: 'Estados Unidos', flag: '🇺🇸' },
-    { code: 'CA', name: 'Canadá', flag: '🇨🇦' },
-  ];
+  readonly countries = COUNTRIES;
 
   constructor() {
     effect(() => {
@@ -431,7 +430,7 @@ export default class SettingsPageComponent implements OnInit {
       birth_date: dateStr,
       headline: user.headline || '',
       bio: user.bio || '',
-      country: user.country || 'CO',
+      country: normalizeCountryValue(user.country),
       seniority: user.seniority || 'Senior',
       english_level: user.english_level || 'B2',
       efset_score: user.efset_score || '',
@@ -444,19 +443,28 @@ export default class SettingsPageComponent implements OnInit {
   }
 
   async saveProfile(): Promise<void> {
+    this.validationError = null;
+
     if (!this.formData.name.trim()) {
-      this.notificationService.warning('El nombre completo es obligatorio.');
+      this.validationError = 'El nombre completo es obligatorio.';
+      this.notificationService.warning(this.validationError);
       return;
     }
 
     if (this.formData.birth_date) {
       const selected = new Date(this.formData.birth_date);
       if (selected > new Date()) {
-        this.notificationService.warning(
-          'La fecha de nacimiento no puede ser futura.',
-        );
+        this.validationError = 'La fecha de nacimiento no puede ser futura.';
+        this.notificationService.warning(this.validationError);
         return;
       }
+    }
+
+    const selectedCountry = this.formData.country.trim();
+    if (selectedCountry && !isValidCanonicalCountry(selectedCountry)) {
+      this.validationError = 'El país seleccionado no es válido.';
+      this.notificationService.warning(this.validationError);
+      return;
     }
 
     this.saving = true;
@@ -466,7 +474,6 @@ export default class SettingsPageComponent implements OnInit {
         name: this.formData.name.trim(),
         headline: this.formData.headline.trim(),
         bio: this.formData.bio.trim(),
-        country: this.formData.country,
         seniority: this.formData.seniority,
         english_level: this.formData.english_level,
         efset_score: this.formData.efset_score.trim(),
@@ -476,6 +483,11 @@ export default class SettingsPageComponent implements OnInit {
         linkedin_url: this.formData.linkedin_url.trim(),
         pitch_video: this.formData.pitch_video.trim(),
       };
+
+      // Omitir country cuando no exista un valor canónico seleccionado
+      if (selectedCountry) {
+        payload.country = selectedCountry.toLowerCase();
+      }
 
       if (this.formData.birth_date) {
         // Enviar en formato ISO UTC
@@ -489,19 +501,37 @@ export default class SettingsPageComponent implements OnInit {
         this.authStore.setUser(updatedUser);
         this.authService.setUserData(updatedUser);
         this.notificationService.success(
-          'Perfil y fecha de cumpleaños guardados exitosamente.',
+          'Perfil guardado exitosamente.',
         );
       } else {
         this.notificationService.info('Perfil actualizado.');
       }
     } catch (error) {
       console.error('Error al actualizar perfil:', error);
-      this.notificationService.error(
-        'No se pudo actualizar el perfil. Revisa los datos ingresados.',
-      );
+      const specificMessage = this.extractSpecificErrorMessage(error);
+      this.validationError =
+        specificMessage ||
+        'No se pudo actualizar el perfil. Revisa los datos ingresados.';
+
+      // Evitar toast duplicado si errorInterceptor ya notificó el HttpErrorResponse
+      if (!(error instanceof HttpErrorResponse)) {
+        this.notificationService.error(this.validationError);
+      }
     } finally {
       this.saving = false;
     }
+  }
+
+  private extractSpecificErrorMessage(error: unknown): string | null {
+    if (!(error instanceof HttpErrorResponse)) {
+      return null;
+    }
+    const apiErr = error.error as ApiError | undefined;
+    const fieldErrors = extractFieldErrors(apiErr);
+    if (fieldErrors) {
+      return formatFieldErrors(fieldErrors);
+    }
+    return extractBackendErrorMessage(apiErr);
   }
 
   goBack(): void {

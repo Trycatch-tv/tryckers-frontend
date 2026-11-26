@@ -146,4 +146,36 @@ describe('RegisterPageComponent', () => {
     expect(notificationSpy.error).not.toHaveBeenCalled();
     expect(component.hasError()).toBeTrue();
   });
+
+  it('impide el registro sin país y muestra mensaje específico junto al campo (AC-01, AC-02)', async () => {
+    const component = setup();
+    component.registerForm.setValue({
+      name: 'Juan Perez',
+      username: 'juanp',
+      country: '',
+      email: 'juan@test.com',
+      password: 'password123',
+    });
+
+    await component.onSubmit();
+
+    expect(authServiceSpy.register).not.toHaveBeenCalled();
+    expect(component.getFieldError('country')).toBe('El pais es obligatorio.');
+  });
+
+  it('rechaza valores de país no canónicos (ej. CO) con mensaje específico', async () => {
+    const component = setup();
+    component.registerForm.setValue({
+      name: 'Juan Perez',
+      username: 'juanp',
+      country: 'CO',
+      email: 'juan@test.com',
+      password: 'password123',
+    });
+
+    await component.onSubmit();
+
+    expect(authServiceSpy.register).not.toHaveBeenCalled();
+    expect(component.getFieldError('country')).toBe('Selecciona un pais valido.');
+  });
 });
