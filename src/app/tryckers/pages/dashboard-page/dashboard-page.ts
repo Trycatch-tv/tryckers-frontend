@@ -34,6 +34,12 @@ export class DashboardPage implements OnInit {
     }
   }
 
+  avatarUrl(trycker: Trycker): string {
+    return this.tryckersService.mediaUrl(
+      trycker.avatar_url || trycker.profile_picture,
+    );
+  }
+
   viewProfile(trycker: Trycker): void {
     // Usar username si existe, si no usar el name como fallback
     const username =

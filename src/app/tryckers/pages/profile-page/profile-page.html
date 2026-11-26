@@ -484,27 +484,38 @@
       <div class="form-group">
         <label for="imagen" class="form-label">Imagen de Portada</label>
         <input
-          type="text"
+          type="file"
           id="imagen"
-          pInputText
-          [(ngModel)]="newPost.image"
-          placeholder="Ingresa la URL de la imagen"
+          accept="image/jpeg,image/png,image/webp"
+          (change)="onPostImageSelected($event)"
+          [disabled]="uploadingPostImage || isSavingPost"
           class="form-input"
         />
-        <small class="form-help"
-          >Ingresa la URL de la imagen (ej:
-          https://ejemplo.com/imagen.jpg)</small
-        >
+        <small class="form-help">
+          @if (uploadingPostImage) {
+            Subiendo imagen a S3...
+          } @else {
+            Formatos permitidos: JPG, PNG o WEBP (máx. 5 MB)
+          }
+        </small>
       </div>
 
       <!-- Preview of selected image -->
-      <div class="image-preview" *ngIf="newPost.image">
+      <div class="image-preview" *ngIf="postImagePreviewUrl">
         <p class="preview-label">Vista previa:</p>
         <img
-          [src]="newPost.image"
+          [src]="postImagePreviewUrl"
           alt="Vista previa"
           style="max-width: 100%; max-height: 200px; border-radius: 8px"
         />
+        <button
+          type="button"
+          class="ui-btn mt-2"
+          (click)="removePostImage()"
+          [disabled]="uploadingPostImage || isSavingPost"
+        >
+          Quitar imagen
+        </button>
       </div>
     </div>
 

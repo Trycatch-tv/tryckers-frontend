@@ -67,6 +67,19 @@ export class PostsService {
     return result ?? null;
   }
 
+  async uploadPostImage(
+    file: File,
+  ): Promise<{ object_key: string; url: string }> {
+    const formData = new FormData();
+    formData.append('file', file);
+    return firstValueFrom(
+      this.http.post<{ object_key: string; url: string }>(
+        `${baseUrl}/posts/image`,
+        formData,
+      ),
+    );
+  }
+
   async getCartelera(): Promise<Post[]> {
     const result = await firstValueFrom(
       this.http.get<Post[]>(`${baseUrl}/cartelera`),

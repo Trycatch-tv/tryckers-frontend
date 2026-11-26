@@ -76,14 +76,19 @@ export class TryckersService {
       return '';
     }
 
-    if (/^https?:\/\//i.test(value)) {
-      return value;
+    const trimmed = value.trim();
+    if (!trimmed || trimmed.startsWith('/uploads/')) {
+      return '';
     }
 
-    if (value.startsWith('/')) {
-      return new URL(value, baseUrl).origin + value;
+    if (/^https?:\/\//i.test(trimmed)) {
+      return trimmed;
     }
 
-    return value;
+    if (trimmed.startsWith('/media/')) {
+      return new URL(trimmed, baseUrl).origin + trimmed;
+    }
+
+    return '';
   }
 }

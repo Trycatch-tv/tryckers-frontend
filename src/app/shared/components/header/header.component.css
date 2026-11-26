@@ -154,6 +154,11 @@
         border-radius: 50%;
       }
 
+      .avatar-img {
+        object-fit: cover;
+        display: block;
+      }
+
       .dropdown-menu {
         position: absolute;
         right: 0;

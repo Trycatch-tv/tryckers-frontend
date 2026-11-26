@@ -9,6 +9,7 @@ import {
 import { AuthService } from '@auth/services/auth.service';
 import { AuthStore } from '@auth/store/auth-store';
 import { NotificationService } from '@shared/services/notification.service';
+import { TryckersService } from '@tryckers/services/tryckers-service';
 import { filter } from 'rxjs';
 
 @Component({
@@ -20,6 +21,7 @@ import { filter } from 'rxjs';
 export class HeaderComponent {
   authService = inject(AuthService);
   authStore = inject(AuthStore);
+  private tryckersService = inject(TryckersService);
   notificationService = inject(NotificationService);
   router = inject(Router);
   dropdownOpen = signal(false);
@@ -50,6 +52,13 @@ export class HeaderComponent {
       return ['/profile', username];
     }
     return ['/home'];
+  }
+
+  get userAvatarUrl(): string {
+    const user = this.authStore.user();
+    return this.tryckersService.mediaUrl(
+      user?.avatar_url || user?.profile_picture,
+    );
   }
 
   toggleTheme() {

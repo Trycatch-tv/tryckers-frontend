@@ -84,7 +84,15 @@
               aria-controls="user-dropdown"
               aria-label="Abrir menu de usuario"
             >
-              <div class="avatar"></div>
+              @if (userAvatarUrl) {
+                <img
+                  [src]="userAvatarUrl"
+                  [alt]="authStore.user()?.name || 'Avatar de usuario'"
+                  class="avatar avatar-img"
+                />
+              } @else {
+                <div class="avatar"></div>
+              }
               <span class="username">
                 {{ authStore.user()?.name || "Usuario" }}
               </span>

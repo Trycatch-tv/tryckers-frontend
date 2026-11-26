@@ -31,9 +31,18 @@
   <div class="users-grid">
     @for (trycker of tryckers; track trycker.id) {
     <div class="user-card" (click)="viewProfile(trycker)">
-      <!-- Avatar placeholder -->
+      <!-- Avatar -->
       <div class="avatar">
-        <div class="avatar-pattern"></div>
+        @if (avatarUrl(trycker)) {
+          <img
+            [src]="avatarUrl(trycker)"
+            [alt]="'Avatar de ' + (trycker.name || trycker.username || 'usuario')"
+            class="avatar-img"
+            loading="lazy"
+          />
+        } @else {
+          <div class="avatar-pattern"></div>
+        }
       </div>
 
       <!-- Información del usuario -->

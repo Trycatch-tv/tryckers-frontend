@@ -67,8 +67,11 @@ export default class ProfilePage implements OnInit {
   errorMessage: string | null = null;
   avatarPreviewUrl: string | null = null;
   bannerPreviewUrl: string | null = null;
+  postImagePreviewUrl: string | null = null;
   uploadingAvatar = false;
   uploadingBanner = false;
+  uploadingPostImage = false;
+  postImageChanged = false;
 
   // Modal properties
   showPostModal: boolean = false;
@@ -328,18 +331,23 @@ export default class ProfilePage implements OnInit {
     this.info.buttonLabel = isEditing ? 'Guardar Cambios' : 'Crear Publicación';
 
     if (isEditing && post) {
+      this.postImageChanged = false;
+      this.postImagePreviewUrl = this.tryckersService.mediaUrl(post.image) || null;
       this.newPost = {
         id: post.id,
         title: post.title,
         content: post.content,
         type: post.type,
-        image: post.image ?? '',
+        image: '',
         tags: Array.isArray(post.tags)
           ? post.tags.join(', ')
           : (post.tags ?? ''),
         status: post.status,
         user_id: post.user_id,
       };
+    } else {
+      this.postImageChanged = false;
+      this.postImagePreviewUrl = null;
     }
   }
 
@@ -351,6 +359,10 @@ export default class ProfilePage implements OnInit {
   }
 
   resetPostForm() {
+    this.revokePreview(this.postImagePreviewUrl);
+    this.postImagePreviewUrl = null;
+    this.uploadingPostImage = false;
+    this.postImageChanged = false;
     this.newPost = {
       id: undefined,
       title: '',
@@ -361,6 +373,60 @@ export default class ProfilePage implements OnInit {
       status: 'draft' as PostStatus,
       user_id: null,
     };
+  }
+
+  async onPostImageSelected(event: Event): Promise<void> {
+    const input = event.target as HTMLInputElement;
+    const file = input.files?.[0];
+    input.value = '';
+
+    if (!file) {
+      return;
+    }
+
+    const allowedTypes = ['image/jpeg', 'image/png', 'image/webp'];
+    if (!allowedTypes.includes(file.type)) {
+      this.notificationService.warning(
+        'Formato no permitido. Usa JPG, PNG o WEBP.',
+      );
+      return;
+    }
+
+    if (file.size > 5 * 1024 * 1024) {
+      this.notificationService.warning(
+        'La imagen de portada supera el tamaño máximo de 5 MB.',
+      );
+      return;
+    }
+
+    this.revokePreview(this.postImagePreviewUrl);
+    this.postImagePreviewUrl = URL.createObjectURL(file);
+    this.uploadingPostImage = true;
+
+    try {
+      const uploaded = await this.postsService.uploadPostImage(file);
+      this.newPost.image = uploaded.object_key;
+      this.postImageChanged = true;
+      this.revokePreview(this.postImagePreviewUrl);
+      this.postImagePreviewUrl =
+        this.tryckersService.mediaUrl(uploaded.url) || uploaded.url;
+      this.notificationService.success('Imagen de portada subida correctamente.');
+    } catch (error) {
+      console.error('Error uploading post image:', error);
+      this.revokePreview(this.postImagePreviewUrl);
+      this.postImagePreviewUrl = null;
+      this.newPost.image = '';
+      this.notificationService.error('No se pudo subir la imagen de portada.');
+    } finally {
+      this.uploadingPostImage = false;
+    }
+  }
+
+  removePostImage(): void {
+    this.revokePreview(this.postImagePreviewUrl);
+    this.postImagePreviewUrl = null;
+    this.newPost.image = '';
+    this.postImageChanged = true;
   }
 
   async savePost() {
@@ -515,7 +581,7 @@ export default class ProfilePage implements OnInit {
         title: this.newPost.title,
         content: this.newPost.content,
         type: this.newPost.type,
-        image: this.newPost.image,
+        ...(this.postImageChanged ? { image: this.newPost.image } : {}),
         tags: this.newPost.tags
           .split(',')
           .map((tag) => tag.trim())
