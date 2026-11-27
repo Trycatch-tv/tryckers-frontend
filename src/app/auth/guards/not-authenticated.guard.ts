@@ -20,8 +20,10 @@ export const NotAuthenticatedGuard: CanMatchFn = async (
 
   const router = inject(Router);
 
-  // Consider the user authenticated if there's a token (simple, synchronous check)
-  const isAuthenticated = !!authService.token();
+  authService.syncFromStorage();
+
+  // Consider the user authenticated if there's an active or recoverable session
+  const isAuthenticated = authService.hasRecoverableSession();
 
   // If already authenticated, prevent access to /auth/* and redirect to home
   if (isAuthenticated) {

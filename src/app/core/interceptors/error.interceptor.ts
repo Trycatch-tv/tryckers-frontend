@@ -23,6 +23,7 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
       // No mostrar notificación si es un error de autenticación en login/register
       const isAuthEndpoint =
         req.url.includes('/login') || req.url.includes('/register');
+      const isRefreshEndpoint = req.url.includes('/refresh-token');
 
       // Manejar errores específicos
       switch (error.status) {
@@ -38,6 +39,9 @@ export const errorInterceptor: HttpInterceptorFn = (req, next) => {
           break;
 
         case 400: {
+          if (isRefreshEndpoint) {
+            break;
+          }
           const apiErr400 = error.error as ApiError | undefined;
           const fieldErrors400 = extractFieldErrors(apiErr400);
 
