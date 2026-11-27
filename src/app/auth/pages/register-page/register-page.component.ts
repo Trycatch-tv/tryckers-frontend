@@ -30,6 +30,16 @@ function validCountryValidator(
   return isValidCanonicalCountry(value) ? null : { invalidCountry: true };
 }
 
+function noWhitespaceValidator(
+  control: AbstractControl,
+): ValidationErrors | null {
+  const value = control.value as string | null | undefined;
+  if (!value) {
+    return null;
+  }
+  return /\s/.test(value) ? { whitespace: true } : null;
+}
+
 @Component({
   selector: 'app-register-page',
   standalone: true,
@@ -55,7 +65,7 @@ export class RegisterPageComponent implements OnInit {
 
   registerForm = this.fb.group({
     name: ['', [Validators.required, Validators.minLength(5)]],
-    username: ['', [Validators.required, Validators.minLength(3)]],
+    username: ['', [Validators.required, Validators.minLength(3), noWhitespaceValidator]],
     country: ['', [Validators.required, validCountryValidator]],
     email: ['', [Validators.required, Validators.email]],
     password: ['', [Validators.required, Validators.minLength(6)]],
@@ -198,6 +208,10 @@ export class RegisterPageComponent implements OnInit {
         return `La contraseña debe tener al menos ${minLength} caracteres.`;
       }
       return `Este campo debe tener al menos ${minLength} caracteres.`;
+    }
+
+    if (fieldName === 'username' && field.errors['whitespace']) {
+      return 'El usuario no puede contener espacios en blanco.';
     }
 
     if (fieldName === 'country' && field.errors['invalidCountry']) {

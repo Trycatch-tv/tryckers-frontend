@@ -178,4 +178,22 @@ describe('RegisterPageComponent', () => {
     expect(authServiceSpy.register).not.toHaveBeenCalled();
     expect(component.getFieldError('country')).toBe('Selecciona un pais valido.');
   });
+
+  it('impide el registro cuando el username contiene espacios en blanco', async () => {
+    const component = setup();
+    component.registerForm.setValue({
+      name: 'Juan Perez',
+      username: 'juan perez',
+      country: 'colombia',
+      email: 'juan@test.com',
+      password: 'password123',
+    });
+
+    await component.onSubmit();
+
+    expect(authServiceSpy.register).not.toHaveBeenCalled();
+    expect(component.getFieldError('username')).toBe(
+      'El usuario no puede contener espacios en blanco.',
+    );
+  });
 });
