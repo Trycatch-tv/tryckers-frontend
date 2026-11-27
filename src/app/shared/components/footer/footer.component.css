@@ -96,14 +96,36 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  gap: 16px;
   padding-top: 24px;
-  border-top: 1px solid #e9ecef;
+  border-top: 1px solid var(--ui-border);
+}
+
+.footer-meta {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px 14px;
 }
 
 .copyright {
   color: var(--ui-text-muted);
   font-size: 14px;
   margin: 0;
+}
+
+.app-version {
+  display: inline-flex;
+  align-items: center;
+  padding: 2px 8px;
+  border-radius: 999px;
+  border: 1px solid var(--ui-border);
+  background: var(--ui-bg);
+  color: var(--ui-text-muted);
+  font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: 0.01em;
 }
 
 /* Social Links */
@@ -189,6 +211,10 @@
     flex-direction: column;
     gap: 16px;
     text-align: center;
+  }
+
+  .footer-meta {
+    justify-content: center;
   }
   
   .social-links {
