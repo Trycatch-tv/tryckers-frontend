@@ -1,4 +1,4 @@
-import { HttpClient } from '@angular/common/http';
+import { HttpClient, HttpErrorResponse } from '@angular/common/http';
 import { computed, inject, Injectable, signal } from '@angular/core';
 import {
   AuthResponse,
@@ -6,11 +6,17 @@ import {
   UserData,
 } from '@auth/interfaces/auth-response';
 import { User } from '@auth/interfaces/user';
-import { catchError, Observable, of, tap } from 'rxjs';
+import { Observable, Subject, tap, throwError } from 'rxjs';
 import { environment } from 'src/environments/environment';
 
 type AuthStatus = 'checking' | 'authenticated' | 'not-authenticated';
 const baseUrl = environment.baseUrl;
+const AUTH_STORAGE_KEYS = new Set([
+  'token',
+  'refreshToken',
+  'userData',
+  'isLoggedIn',
+]);
 
 @Injectable({ providedIn: 'root' })
 export class AuthService {
@@ -18,20 +24,40 @@ export class AuthService {
   private __user = signal<UserData | null>(null);
   private _token = signal<string | null>(null);
   private _refreshToken = signal<string | null>(null);
+  private _storageSync = new Subject<void>();
   private http = inject(HttpClient);
 
+  readonly storageSynced$ = this._storageSync.asObservable();
+
   constructor() {
-    this.initializeAuth();
+    this.syncFromStorage();
+    this.bindStorageListener();
   }
 
-  private initializeAuth(): void {
+  private bindStorageListener(): void {
+    if (typeof window === 'undefined') {
+      return;
+    }
+
+    window.addEventListener('storage', (event: StorageEvent) => {
+      if (event.key === null || AUTH_STORAGE_KEYS.has(event.key)) {
+        this.syncFromStorage();
+        this._storageSync.next();
+      }
+    });
+  }
+
+  /**
+   * Reconcilia el estado en memoria con localStorage (inicio, recarga o cambios desde otra pestaña).
+   */
+  syncFromStorage(): void {
     const token = this.safeGetItem('token');
     const refreshToken = this.safeGetItem('refreshToken');
     const userDataString = this.safeGetItem('userData');
 
-    if (token) {
-      this._token.set(token);
-      this._refreshToken.set(refreshToken);
+    if (token || refreshToken) {
+      this._token.set(token || null);
+      this._refreshToken.set(refreshToken || null);
       this._authStatus.set('authenticated');
 
       if (userDataString && userDataString !== 'undefined') {
@@ -40,10 +66,16 @@ export class AuthService {
           this.__user.set(userData);
         } catch (error) {
           console.error('Error parsing userData from localStorage:', error);
+          this.__user.set(null);
           this.safeRemoveItem('userData');
         }
+      } else {
+        this.__user.set(null);
       }
     } else {
+      this._token.set(null);
+      this._refreshToken.set(null);
+      this.__user.set(null);
       this._authStatus.set('not-authenticated');
       this.safeRemoveItem('isLoggedIn');
     }
@@ -52,9 +84,12 @@ export class AuthService {
   user = computed(() => this.__user());
   token = computed(() => this._token());
   refreshTokenValue = computed(() => this._refreshToken());
+  hasRecoverableSession = computed(
+    () => !!(this._token() || this._refreshToken()),
+  );
   authStatus = computed<AuthStatus>(() => {
     if (this._authStatus() === 'checking') return 'checking';
-    if (this._token()) return 'authenticated';
+    if (this._token() || this._refreshToken()) return 'authenticated';
     return 'not-authenticated';
   });
 
@@ -88,11 +123,21 @@ export class AuthService {
 
   /**
    * Refresca el access token usando el refresh token almacenado.
+   * Propaga el error HTTP al llamador para distinguir fallos definitivos (401/400)
+   * de errores transitorios de red o servidor (0, 5xx) sin destruir prematuramente la sesión.
    */
-  doRefreshToken(): Observable<RefreshTokenResponse | null> {
-    const currentRefreshToken = this._refreshToken();
+  doRefreshToken(): Observable<RefreshTokenResponse> {
+    const currentRefreshToken =
+      this._refreshToken() || this.safeGetItem('refreshToken');
     if (!currentRefreshToken) {
-      return of(null);
+      return throwError(
+        () =>
+          new HttpErrorResponse({
+            status: 401,
+            statusText: 'Unauthorized',
+            error: { error: 'refresh token missing' },
+          }),
+      );
     }
 
     return this.http
@@ -101,11 +146,12 @@ export class AuthService {
       })
       .pipe(
         tap((response) => {
-          this.updateTokens(response.token, response.refresh_token);
-        }),
-        catchError(() => {
-          this.logout();
-          return of(null);
+          if (response?.token) {
+            this.updateTokens(
+              response.token,
+              response.refresh_token || currentRefreshToken,
+            );
+          }
         }),
       );
   }

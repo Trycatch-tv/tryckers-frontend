@@ -26,7 +26,8 @@ function loadInitialState(): AuthState {
       const userDataString = localStorage.getItem('userData');
       let parsedUser: UserData | null = null;
 
-      if (token && userDataString && userDataString !== 'undefined') {
+      const hasSession = !!(token || refreshToken);
+      if (hasSession && userDataString && userDataString !== 'undefined') {
         try {
           parsedUser = JSON.parse(userDataString) as UserData;
         } catch {
@@ -35,10 +36,10 @@ function loadInitialState(): AuthState {
       }
 
       return {
-        isLoggedIn: !!token,
-        user: token ? parsedUser : null,
+        isLoggedIn: hasSession,
+        user: hasSession ? parsedUser : null,
         token: token || '',
-        refreshToken: token ? refreshToken || '' : '',
+        refreshToken: hasSession ? refreshToken || '' : '',
       };
     }
   } catch {
@@ -106,8 +107,19 @@ export const AuthStore = signalStore(
     };
   }),
   withHooks({
-    onInit() {
-      // Estado inicial cargado desde localStorage
+    onInit(store) {
+      const authService = inject(AuthService);
+      authService.storageSynced$.subscribe(() => {
+        const token = authService.token() || '';
+        const refreshToken = authService.refreshTokenValue() || '';
+        const user = authService.user();
+        patchState(store, {
+          isLoggedIn: !!(token || refreshToken),
+          user,
+          token,
+          refreshToken,
+        });
+      });
     },
   }),
 );
