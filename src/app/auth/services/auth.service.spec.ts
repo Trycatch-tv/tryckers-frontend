@@ -73,4 +73,45 @@ describe('AuthService', () => {
     expect(localStorage.getItem('userData')).toBeNull();
     expect(localStorage.getItem('isLoggedIn')).toBeNull();
   });
+
+  it('doRefreshToken() propaga errores transitorios (503) sin cerrar la sesión', () => {
+    service.updateTokens('access-123', 'refresh-456');
+
+    let receivedStatus = 0;
+    service.doRefreshToken().subscribe({
+      error: (err) => {
+        receivedStatus = err.status;
+      },
+    });
+
+    const req = httpMock.expectOne(`${environment.baseUrl}/refresh-token`);
+    req.flush(
+      { error: 'unavailable' },
+      { status: 503, statusText: 'Service Unavailable' },
+    );
+
+    expect(receivedStatus).toBe(503);
+    expect(service.token()).toBe('access-123');
+    expect(service.refreshTokenValue()).toBe('refresh-456');
+    expect(localStorage.getItem('token')).toBe('access-123');
+  });
+
+  it('syncFromStorage() sincroniza cambios de otra pestaña incluyendo logout', () => {
+    localStorage.setItem('token', 'tab-token');
+    localStorage.setItem('refreshToken', 'tab-refresh');
+
+    window.dispatchEvent(new StorageEvent('storage', { key: 'token' }));
+
+    expect(service.token()).toBe('tab-token');
+    expect(service.refreshTokenValue()).toBe('tab-refresh');
+    expect(service.authStatus()).toBe('authenticated');
+
+    localStorage.removeItem('token');
+    localStorage.removeItem('refreshToken');
+    window.dispatchEvent(new StorageEvent('storage', { key: 'token' }));
+
+    expect(service.token()).toBeNull();
+    expect(service.refreshTokenValue()).toBeNull();
+    expect(service.authStatus()).toBe('not-authenticated');
+  });
 });
