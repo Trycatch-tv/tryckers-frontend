@@ -44,9 +44,18 @@
 
       <!-- Footer Bottom -->
       <div class="footer-bottom">
-        <p class="copyright">
-          © {{ currentYear }} Tryckers. Todos los derechos reservados.
-        </p>
+        <div class="footer-meta">
+          <p class="copyright">
+            © {{ currentYear }} Tryckers. Todos los derechos reservados.
+          </p>
+          <span
+            class="app-version"
+            [attr.aria-label]="'Versión desplegada ' + versionLabel"
+            [title]="'Versión ' + versionLabel"
+          >
+            {{ versionLabel }}
+          </span>
+        </div>
         <div class="social-links">
           <a href="#" class="social-link" aria-label="GitHub">
             <i class="fab fa-github"></i>
