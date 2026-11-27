@@ -41,9 +41,11 @@ export class DashboardPage implements OnInit {
   }
 
   viewProfile(trycker: Trycker): void {
-    // Usar username si existe, si no usar el name como fallback
+    // Usar username si existe, si no usar el name sin espacios como fallback
     const username =
-      trycker.name?.toLowerCase().replace(/\\s+/g, '') || trycker.id;
+      trycker.username?.trim().toLowerCase() ||
+      trycker.name?.toLowerCase().replace(/\s+/g, '') ||
+      trycker.id;
     this.router.navigate(['/profile', username]);
   }
 }
